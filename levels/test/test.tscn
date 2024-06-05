@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cev3s1xhlwawm"]
+[gd_scene load_steps=22 format=3 uid="uid://cev3s1xhlwawm"]
 
 [ext_resource type="PackedScene" uid="uid://bq0nj4jxvfwxj" path="res://levels/test/lab.glb" id="1_21dd0"]
 [ext_resource type="Script" path="res://levels/test/Player.gd" id="2_hsit1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://components/health.gd" id="3_33erp"]
 [ext_resource type="Script" path="res://levels/test/3dportal.gd" id="5_562rn"]
 [ext_resource type="Texture2D" uid="uid://b07y6rac21ql6" path="res://Box.png" id="6_6xyvm"]
+[ext_resource type="PackedScene" uid="uid://cumsefovmr5rn" path="res://levels/level_bounds.tscn" id="7_vvmpa"]
 
 [sub_resource type="Environment" id="Environment_d5low"]
 background_energy_multiplier = 0.0
@@ -18,8 +19,9 @@ sdfgi_cascades = 2
 sdfgi_min_cell_size = 0.1
 sdfgi_y_scale = 0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mchok"]
-size = Vector3(0.875916, 1, 0.995605)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_idk1l"]
+height = 0.875
+radius = 0.291114
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rv1bj"]
 atlas = ExtResource("2_jkspd")
@@ -113,19 +115,20 @@ collision_mask = 3
 script = ExtResource("2_hsit1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0345764, 0, -0.494873)
-shape = SubResource("BoxShape3D_mchok")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438, 0)
+shape = SubResource("CylinderShape3D_idk1l")
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="Player"]
-offset = Vector2(0, 8)
+offset = Vector2(0, 3)
 pixel_size = 0.0655
 billboard = 1
 double_sided = false
 no_depth_test = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_l8546")
-frame = 1
-frame_progress = 0.695512
+autoplay = "default"
+frame = 2
+frame_progress = 0.491916
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767171, 0)
@@ -144,6 +147,8 @@ far = 150.0
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_33erp")
+health = 3
+max_health = 3
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -237,6 +242,8 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="rightPortal/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000220299, 0, 0)
 shape = SubResource("BoxShape3D_hone4")
+
+[node name="LevelBounds" parent="." instance=ExtResource("7_vvmpa")]
 
 [connection signal="body_entered" from="leftPortal/Area3D" to="leftPortal" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="rightPortal/Area3D" to="rightPortal" method="_on_area_3d_body_entered"]
