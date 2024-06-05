@@ -1,0 +1,174 @@
+[gd_scene load_steps=15 format=3 uid="uid://cev3s1xhlwawm"]
+
+[ext_resource type="PackedScene" uid="uid://bq0nj4jxvfwxj" path="res://levels/test/lab.glb" id="1_21dd0"]
+[ext_resource type="Texture2D" uid="uid://c7jwgi0y7tj2m" path="res://levels/test/Player16x16.png" id="2_jkspd"]
+[ext_resource type="Script" path="res://components/health.gd" id="3_33erp"]
+
+[sub_resource type="Environment" id="Environment_d5low"]
+background_energy_multiplier = 0.0
+ambient_light_energy = 0.0
+tonemap_mode = 3
+sdfgi_enabled = true
+sdfgi_read_sky_light = false
+sdfgi_bounce_feedback = 0.7
+sdfgi_cascades = 2
+sdfgi_min_cell_size = 0.1
+sdfgi_y_scale = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv1bj"]
+atlas = ExtResource("2_jkspd")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bud8v"]
+atlas = ExtResource("2_jkspd")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7bo6"]
+atlas = ExtResource("2_jkspd")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqrek"]
+atlas = ExtResource("2_jkspd")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7iiy"]
+atlas = ExtResource("2_jkspd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikkig"]
+atlas = ExtResource("2_jkspd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsdjk"]
+atlas = ExtResource("2_jkspd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfyxv"]
+atlas = ExtResource("2_jkspd")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l8546"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rv1bj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bud8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7bo6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqrek")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7iiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikkig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsdjk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vfyxv")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_85xhj"]
+radius = 0.4
+height = 1.405
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Columns_001" parent="." instance=ExtResource("1_21dd0")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d5low")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.858, 0, 1.8)
+offset = Vector2(0, 8)
+pixel_size = 0.0655
+billboard = 1
+double_sided = false
+no_depth_test = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_l8546")
+frame = 1
+frame_progress = 0.695512
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767171, 0)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_85xhj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.72473, 1.90104)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.07169, 3.725, 1.901)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.072, 3.725, 1.901)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.72473, -2.81405)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.07169, 3.725, -2.81409)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.072, 3.725, -2.81409)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Camera3D2" type="Camera3D" parent="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 119.495, 0)
+fov = 3.8
+size = 9.37
+near = 110.0
+far = 150.0
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_33erp")
