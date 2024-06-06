@@ -29,13 +29,13 @@ func is_active() -> bool:
 ## [br]
 ## Should not be called while the State is already active. DO NOT override.
 ## Instead, override [method _enter].
-func enter() -> void:
+func enter(data=null) -> void:
 	_active = true
-	_enter()
+	_enter(data)
 	entered.emit()
 
 
-func _enter() -> void:
+func _enter(_data) -> void:
 	push_error("unimplemented")
 
 
@@ -45,11 +45,11 @@ func _ready() -> void:
 	set_process_input(false)
 
 
-func exit(exit_signal: Signal) -> void:
+func exit(exit_signal: Signal, data=null) -> void:
 	_active = false
 	set_process(false)
 	set_physics_process(false)
 	set_process_input(false)
 	await get_tree().process_frame
-	exit_signal.emit()
+	exit_signal.emit(data)
 	exited.emit()

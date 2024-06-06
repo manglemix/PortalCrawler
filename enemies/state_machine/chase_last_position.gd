@@ -8,9 +8,9 @@ signal lost_player
 @export var chase_speed := 0.9
 
 
-func _enter() -> void:
+func _enter(data) -> void:
 	set_physics_process(true)
-	set_navigation_target(player.global_position)
+	set_navigation_target(data)
 
 
 func _physics_process(_delta: float) -> void:

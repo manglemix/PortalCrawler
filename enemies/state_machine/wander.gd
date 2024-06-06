@@ -7,7 +7,7 @@ signal player_spotted
 @export var wander_speed := 0.75
 
 
-func _enter() -> void:
+func _enter(_data) -> void:
 	set_physics_process(true)
 	_random_target()
 

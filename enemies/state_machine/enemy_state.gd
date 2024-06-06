@@ -64,14 +64,14 @@ func set_enemy(enemy: Enemy) -> void:
 	_enemy = enemy
 
 
-func enter() -> void:
+func enter(data=null) -> void:
 	navigation.velocity_computed.connect(set_linear_velocity)
-	super()
+	super(data)
 
 
-func exit(exit_signal: Signal) -> void:
+func exit(exit_signal: Signal, data=null) -> void:
 	navigation.velocity_computed.disconnect(set_linear_velocity)
-	super(exit_signal)
+	super(exit_signal, data)
 
 
 func set_navigation_target(target_position: Vector3) -> void:
