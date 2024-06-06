@@ -15,6 +15,9 @@ extends Node
 ## have its [method enter] method be called.
 
 
+signal entered
+signal exited
+
 var _active := false
 
 
@@ -29,6 +32,7 @@ func is_active() -> bool:
 func enter() -> void:
 	_active = true
 	_enter()
+	entered.emit()
 
 
 func _enter() -> void:
@@ -48,3 +52,4 @@ func exit(exit_signal: Signal) -> void:
 	set_process_input(false)
 	await get_tree().process_frame
 	exit_signal.emit()
+	exited.emit()

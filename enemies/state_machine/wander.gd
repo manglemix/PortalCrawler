@@ -7,7 +7,6 @@ signal player_spotted
 @export var wander_speed := 0.75
 
 
-
 func _enter() -> void:
 	set_physics_process(true)
 	_random_target()

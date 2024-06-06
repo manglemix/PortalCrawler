@@ -9,7 +9,7 @@ var player: CharacterBody3D
 
 var _enemy: Enemy
 var _raycast: RayCast3D
-var _last_nav_target_time: int
+var _last_nav_target_time := -MIN_NAV_RETARGET_DURATION
 
 var linear_velocity: Vector3:
 	set = set_linear_velocity, get = get_linear_velocity
@@ -82,7 +82,11 @@ func set_navigation_target(target_position: Vector3) -> void:
 
 
 func navigate_to_next_path_position(speed: float) -> void:
-	navigation.velocity = (navigation.get_next_path_position() - global_transform.origin).slide(Vector3.UP).normalized() * speed
+	var next_pos := navigation.get_next_path_position()
+	next_pos.y = global_transform.origin.y
+	navigation.velocity = (next_pos - global_transform.origin).normalized() * speed
+	if next_pos.distance_squared_to(global_transform.origin) > 0.05:
+		global_transform = global_transform.looking_at(next_pos)
 
 
 func is_player_in_sight() -> bool:

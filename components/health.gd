@@ -45,6 +45,8 @@ func change_health(change: int):
 
 
 static func get_health_component(node: Node) -> Health:
+	if node == null:
+		return null
 	return node.get_node_or_null("Health")
 
 

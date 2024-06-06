@@ -23,6 +23,8 @@ func damage_once(damage: int):
 
 
 static func get_damageable_component(node: Node) -> Damageable:
+	if node == null:
+		return null
 	return node.get_node_or_null("Damageable")
 
 
