@@ -11,12 +11,17 @@ func _ready() -> void:
 		await get_tree().physics_frame
 		await get_tree().physics_frame
 	if state_machine != null:
-		for state in state_machine.get_enemy_states():
-			state.set_enemy(self)
-			state.set_navigation(navigation)
+		state_machine.set_enemy(self)
+		if navigation != null:
+			state_machine.set_navigation(navigation)
 		if !state_machine.enter_on_ready:
 			state_machine.enter()
 
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
+
+
+func set_player(player: CharacterBody3D) -> void:
+	if state_machine != null:
+		state_machine.set_player(player)

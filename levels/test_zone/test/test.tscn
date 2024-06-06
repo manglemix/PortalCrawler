@@ -1,11 +1,23 @@
-[gd_scene load_steps=19 format=3 uid="uid://cev3s1xhlwawm"]
+[gd_scene load_steps=23 format=3 uid="uid://cev3s1xhlwawm"]
 
 [ext_resource type="PackedScene" uid="uid://bq0nj4jxvfwxj" path="res://levels/test_zone/test/lab.glb" id="1_21dd0"]
 [ext_resource type="Script" path="res://levels/test_zone/test/Player.gd" id="2_hsit1"]
 [ext_resource type="Texture2D" uid="uid://c7jwgi0y7tj2m" path="res://levels/test_zone/test/Player16x16.png" id="2_jkspd"]
+[ext_resource type="Script" path="res://levels/test_zone/test/3dportal.gd" id="5_562rn"]
 [ext_resource type="Texture2D" uid="uid://b07y6rac21ql6" path="res://Box.png" id="6_6xyvm"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="7_vvmpa"]
 [ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/test_zone/test01/test01.tscn" id="8_q26nv"]
+
+[sub_resource type="GDScript" id="GDScript_5qmyw"]
+script/source = "extends Node3D
+
+
+func _ready() -> void:
+	await get_tree().create_timer(2.0).timeout
+	for child in get_children():
+		if child is Enemy:
+			child.set_player($Player)
+"
 
 [sub_resource type="Environment" id="Environment_d5low"]
 background_energy_multiplier = 0.0
@@ -95,7 +107,14 @@ animations = [{
 radius = 0.4
 height = 1.405
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_2rly3"]
+size = Vector3(0.589149, 1, 3.16699)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hone4"]
+size = Vector3(0.13418, 1, 3.13953)
+
 [node name="Test" type="Node3D"]
+script = SubResource("GDScript_5qmyw")
 
 [node name="Columns_001" parent="." instance=ExtResource("1_21dd0")]
 
@@ -113,6 +132,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438, 0)
 shape = SubResource("CylinderShape3D_idk1l")
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="Player"]
+sorting_offset = 50.0
 offset = Vector2(-0.5, 3)
 pixel_size = 0.0655
 billboard = 1
@@ -131,10 +151,10 @@ mesh = SubResource("CapsuleMesh_85xhj")
 
 [node name="RayCast3D" type="RayCast3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-target_position = Vector3(1, 0.1, 0)
+target_position = Vector3(1, 1, 1)
 
 [node name="Sprite3D" type="Sprite3D" parent="Player/RayCast3D"]
-transform = Transform3D(0.75, 0, 0, 0, 0.25, 0, 0, 0, 1, 0.3, 1, 0)
+transform = Transform3D(0.24, 0, 0, 0, 2, 0, 0, 0, 1, 0.25, 1, 0.25)
 billboard = 1
 texture = ExtResource("6_6xyvm")
 
@@ -198,6 +218,54 @@ light_bake_mode = 1
 shadow_enabled = true
 omni_range = 7.5
 
+[node name="leftPortal" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03189, 0, 1.26029)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_562rn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="leftPortal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.270318, 0, 0.00439453)
+shape = SubResource("BoxShape3D_2rly3")
+
+[node name="Sprite3D" type="Sprite3D" parent="leftPortal"]
+transform = Transform3D(2, 0, 0, 0, 10, 0, 0, 0, 3, -0.255563, 0, 0)
+modulate = Color(0, 1, 1, 1)
+billboard = 1
+texture = ExtResource("6_6xyvm")
+
+[node name="Area3D" type="Area3D" parent="leftPortal"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="leftPortal/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+shape = SubResource("BoxShape3D_hone4")
+
+[node name="rightPortal" type="StaticBody3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.05077, 0, -1.36695)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_562rn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rightPortal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.273916, 0, 0.00439453)
+shape = SubResource("BoxShape3D_2rly3")
+
+[node name="Sprite3D" type="Sprite3D" parent="rightPortal"]
+transform = Transform3D(2, 0, 0, 0, 10, 0, 0, 0, 3, -0.255563, 0, 0)
+modulate = Color(1, 0.709804, 0, 1)
+billboard = 1
+texture = ExtResource("6_6xyvm")
+
+[node name="Area3D" type="Area3D" parent="rightPortal"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rightPortal/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+shape = SubResource("BoxShape3D_hone4")
+
 [node name="LevelBounds" parent="." instance=ExtResource("7_vvmpa")]
 
 [node name="Test01" parent="." instance=ExtResource("8_q26nv")]
@@ -211,3 +279,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.990949, 0, 1.50121)
 
 [node name="Test04" parent="." instance=ExtResource("8_q26nv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0660002, 0, 0.927438)
+
+[connection signal="body_entered" from="leftPortal/Area3D" to="leftPortal" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="rightPortal/Area3D" to="rightPortal" method="_on_area_3d_body_entered"]

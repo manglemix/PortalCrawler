@@ -7,3 +7,4 @@ extends NavigationAgent3D
 
 func _ready() -> void:
 	set_navigation_map(NavigationServer3D.get_maps()[index])
+	avoidance_priority = randf()

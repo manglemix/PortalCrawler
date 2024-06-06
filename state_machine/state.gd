@@ -46,4 +46,5 @@ func exit(exit_signal: Signal) -> void:
 	set_process(false)
 	set_physics_process(false)
 	set_process_input(false)
+	await get_tree().process_frame
 	exit_signal.emit()

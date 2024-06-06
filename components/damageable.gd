@@ -5,7 +5,6 @@ extends Node
 
 signal damaged(health_change: int)
 
-
 @export var damage_multiplier := 1.0
 
 func _get_configuration_warnings() -> PackedStringArray:
