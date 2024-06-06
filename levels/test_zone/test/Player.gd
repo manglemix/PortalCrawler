@@ -1,15 +1,28 @@
 extends CharacterBody3D
 
+
 # How fast the player moves in meters per second.
 @export var speed = 5
 
 @onready var first = true
 
+
+
 @onready var ray = $RayCast3D
 
-@onready var left = true
+var portal = preload("res://portal.tscn")
+
+var firstPortal
+var secondPortal
+
+@onready var firstplaced = false
+@onready var secondplaced = false
+
 
 var target_velocity = Vector3.ZERO
+
+func _ready():
+	name = "Player"
 
 func get_input():
 	# We create a local variable to store the input direction.
@@ -17,15 +30,44 @@ func get_input():
 	if Input.is_action_just_pressed("shoot"):
 		var rayvector = Vector3.ZERO
 		if (ray.is_colliding()):
+			var newportal = portal.instantiate()
+			if (!firstplaced):
+				firstPortal = newportal
+				firstplaced = true
+			elif (!secondplaced):
+				secondPortal = newportal
+				secondplaced = true
+				secondPortal._set_partner(firstPortal)
+				firstPortal._set_partner(secondPortal)
+			else:
+				firstPortal.queue_free()
+				firstPortal = secondPortal
+				secondPortal = newportal
+				secondPortal._set_partner(firstPortal)
+				firstPortal._set_partner(secondPortal)
+			
 			rayvector = ray.get_collision_normal()
+			var xposition = ray.get_collision_point()
+			
+			get_tree().root.get_child(0).add_child(newportal)
+			
+			newportal.set_global_position(xposition)
+			
 			if (rayvector.x > .7):
-				print("left")
+				newportal.update_direction('l')
 			elif (rayvector.x < -.7):
-				print("right")
+				newportal.set_rotation_degrees(Vector3(0, 180, 0))
+				newportal.update_direction('r')
 			elif (rayvector.z > .7):
-				print("up")
+				newportal.set_rotation_degrees(Vector3(0, -90, 0))
+				newportal.set_global_position(Vector3(xposition.x, xposition.y, xposition.z))
+				newportal.update_direction('u')
 			elif (rayvector.z < -.7):
-				print("down")
+				newportal.set_rotation_degrees(Vector3(0, 90, 0))
+				newportal.set_global_position(Vector3(xposition.x, xposition.y, xposition.z))
+				newportal.update_direction('d')
+				
+			newportal.update_position()
 			print(rayvector)
 		else:
 			print("no collision")
@@ -35,19 +77,15 @@ func get_input():
 	# We check for each move input and update the direction accordingly.
 	if Input.is_action_pressed("right"):
 		direction.x += 1
-		if (!left):
-			ray.rotate_y(PI)
-			left = true
+		ray.set_rotation_degrees(Vector3(0, 0, 0))
 	if Input.is_action_pressed("left"):
 		direction.x -= 1
-		if (left):
-			left = false
-			ray.rotate_y(PI)
+		ray.set_rotation_degrees(Vector3(0, 180, 0))
 	if Input.is_action_pressed("down"):
-		# Notice how we are working with the vector's x and z axes.
-		# In 3D, the XZ plane is the ground plane.
+		ray.set_rotation_degrees(Vector3(0, -90, 0))
 		direction.z += 1
 	if Input.is_action_pressed("up"):
+		ray.set_rotation_degrees(Vector3(0, 90, 0))
 		direction.z -= 1
 		
 	if direction != Vector3.ZERO:
@@ -61,11 +99,8 @@ func get_input():
 	velocity = target_velocity
 
 func _physics_process(_delta):
-	if (first):
-		get_parent().get_node("leftPortal")._set_partner(get_parent().get_node("rightPortal"))
-		get_parent().get_node("rightPortal")._set_partner(get_parent().get_node("leftPortal"))
-		first = false
-	
+
 	
 	get_input()
 	move_and_slide()
+	
