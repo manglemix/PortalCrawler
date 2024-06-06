@@ -22,6 +22,8 @@ func _post_import(scene: Node) -> Object:
 				nav_region.navigation_mesh = NavigationMesh.new()
 				nav_region.navigation_mesh.agent_radius = enemy_radii[i]
 				nav_region.name = "OverlappingNavAgent"
+				nav_region.navigation_mesh.cell_size = ProjectSettings.get_setting("navigation/3d/default_cell_size")
+				nav_region.navigation_mesh.cell_height = ProjectSettings.get_setting("navigation/3d/default_cell_height")
 				scene.add_child(nav_region, true)
 				nav_region.owner = scene
 				NavigationServer3D.bake_from_source_geometry_data(nav_region.navigation_mesh, geom_data)

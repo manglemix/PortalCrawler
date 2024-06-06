@@ -10,16 +10,14 @@ signal player_entered
 func _enter() -> void:
 	set_physics_process(true)
 	_random_target()
-	navigation.velocity_computed.connect(
-		func(safe_velocity: Vector3):
-			velocity_computed.emit(safe_velocity)
-	)
+	navigation.velocity_computed.connect(set_linear_velocity)
 
 
 @warning_ignore("shadowed_variable")
 func set_player(player: CharacterBody3D) -> void:
 	super(player)
 	if player != null:
+		navigation.velocity_computed.disconnect(set_linear_velocity)
 		await get_tree().process_frame
 		player_entered.emit()
 
@@ -31,4 +29,4 @@ func _random_target() -> void:
 func _physics_process(_delta: float) -> void:
 	if navigation.is_navigation_finished():
 		_random_target()
-	navigation.velocity = global_transform.origin.direction_to(navigation.get_next_path_position()) * wander_speed
+	navigation.velocity = (navigation.get_next_path_position() - global_transform.origin).slide(Vector3.UP).normalized() * wander_speed

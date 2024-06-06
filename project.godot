@@ -51,7 +51,12 @@ up={
 
 [navigation]
 
+3d/default_cell_size=0.1
 baking/enemy_radii=PackedFloat32Array(0.4, 0.45)
+
+[physics]
+
+3d/physics_engine="JoltPhysics3D"
 
 [rendering]
 

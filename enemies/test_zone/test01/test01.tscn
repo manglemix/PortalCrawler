@@ -21,10 +21,11 @@ animations = [{
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
 height = 0.8
-radius = 0.373498
+radius = 0.315262
 
 [node name="Test01" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine")]
 collision_layer = 4
+axis_lock_linear_y = true
 script = ExtResource("1_vnqx7")
 navigation = NodePath("NavigationAgent3D")
 state_machine = NodePath("EnemyStateMachine")
@@ -51,7 +52,14 @@ max_health = 2
 script = ExtResource("4_4fuy7")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.3
+target_desired_distance = 0.3
+path_height_offset = 0.5
+path_max_distance = 0.61
+path_metadata_flags = 0
 avoidance_enabled = true
+neighbor_distance = 10.0
+max_speed = 1.0
 debug_enabled = true
 script = ExtResource("5_6xoju")
 
