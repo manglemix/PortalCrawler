@@ -3,6 +3,9 @@ class_name EnemyStateMachine
 extends StateMachine
 
 
+var _enemy: Enemy
+
+
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := super()
 	
@@ -18,3 +21,19 @@ func get_enemy_states() -> Array[EnemyState]:
 	for child in get_children():
 		states.append(child)
 	return states
+
+
+func set_player(player: CharacterBody3D) -> void:
+	for state in get_enemy_states():
+		state.set_player(player)
+
+
+func set_enemy(enemy: Enemy) -> void:
+	_enemy = enemy
+	for state in get_enemy_states():
+		state.set_enemy(enemy)
+
+
+func set_navigation(navigation: NavigationAgent3D) -> void:
+	for state in get_enemy_states():
+		state.set_navigation(navigation)

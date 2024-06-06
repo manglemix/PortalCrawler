@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bawgcpe4clkdo"]
+[gd_scene load_steps=12 format=3 uid="uid://bawgcpe4clkdo"]
 
 [ext_resource type="Texture2D" uid="uid://fsayj6mk34o4" path="res://icon.svg" id="1_vjdyu"]
 [ext_resource type="Script" path="res://enemies/test_zone/test01/enemy.gd" id="1_vnqx7"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://scripts/nav/overlapping_nav_agent_3d.gd" id="5_6xoju"]
 [ext_resource type="Script" path="res://enemies/state_machine/enemy_state_machine.gd" id="5_37b4f"]
 [ext_resource type="Script" path="res://enemies/state_machine/wander.gd" id="6_brwbg"]
+[ext_resource type="Script" path="res://enemies/state_machine/chase_line_of_sight.gd" id="8_0b8kw"]
+[ext_resource type="Script" path="res://enemies/state_machine/chase_last_position.gd" id="9_scf73"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3hm6u"]
 animations = [{
@@ -68,3 +70,14 @@ script = ExtResource("5_37b4f")
 
 [node name="Wander" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("6_brwbg")
+
+[node name="ChaseLineOfSight" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("8_0b8kw")
+
+[node name="ChaseLastPosition" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("9_scf73")
+
+[connection signal="player_spotted" from="EnemyStateMachine/Wander" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
+[connection signal="lost_player" from="EnemyStateMachine/ChaseLineOfSight" to="EnemyStateMachine/ChaseLastPosition" method="enter"]
+[connection signal="lost_player" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/Wander" method="enter"]
+[connection signal="player_spotted" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]

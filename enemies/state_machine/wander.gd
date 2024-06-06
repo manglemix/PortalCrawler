@@ -2,31 +2,25 @@ class_name Wander
 extends EnemyState
 
 
-signal player_entered
+signal player_spotted
 
 @export var wander_speed := 0.75
+
 
 
 func _enter() -> void:
 	set_physics_process(true)
 	_random_target()
-	navigation.velocity_computed.connect(set_linear_velocity)
-
-
-@warning_ignore("shadowed_variable")
-func set_player(player: CharacterBody3D) -> void:
-	super(player)
-	if player != null:
-		navigation.velocity_computed.disconnect(set_linear_velocity)
-		await get_tree().process_frame
-		player_entered.emit()
 
 
 func _random_target() -> void:
-	navigation.target_position = global_transform.origin + Vector3.RIGHT.rotated(Vector3.UP, randf() * TAU) * randf_range(2.0, 7.0)
+	set_navigation_target(global_transform.origin + Vector3.RIGHT.rotated(Vector3.UP, randf() * TAU) * randf_range(2.0, 7.0))
 
 
 func _physics_process(_delta: float) -> void:
+	if is_player_in_sight():
+		exit(player_spotted)
+		return
 	if navigation.is_navigation_finished():
 		_random_target()
-	navigation.velocity = (navigation.get_next_path_position() - global_transform.origin).slide(Vector3.UP).normalized() * wander_speed
+	navigate_to_next_path_position(wander_speed)
