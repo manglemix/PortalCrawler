@@ -24,6 +24,7 @@ height = 0.8
 radius = 0.373498
 
 [node name="Test01" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine")]
+collision_layer = 4
 script = ExtResource("1_vnqx7")
 navigation = NodePath("NavigationAgent3D")
 state_machine = NodePath("EnemyStateMachine")

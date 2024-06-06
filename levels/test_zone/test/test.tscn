@@ -110,8 +110,7 @@ size = Vector3(0.13418, 1, 3.13953)
 environment = SubResource("Environment_d5low")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
 script = ExtResource("2_hsit1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -242,6 +241,15 @@ shape = SubResource("BoxShape3D_hone4")
 
 [node name="Test01" parent="." instance=ExtResource("8_q26nv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.725, 0, -1.025)
+
+[node name="Test02" parent="." instance=ExtResource("8_q26nv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.872835, 0, 0)
+
+[node name="Test03" parent="." instance=ExtResource("8_q26nv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.990949, 0, 1.50121)
+
+[node name="Test04" parent="." instance=ExtResource("8_q26nv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0660002, 0, 0.927438)
 
 [connection signal="body_entered" from="leftPortal/Area3D" to="leftPortal" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="rightPortal/Area3D" to="rightPortal" method="_on_area_3d_body_entered"]

@@ -43,6 +43,12 @@ up={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Enemy"
+
 [navigation]
 
 baking/enemy_radii=PackedFloat32Array(0.4, 0.45)
