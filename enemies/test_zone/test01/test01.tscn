@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bawgcpe4clkdo"]
+[gd_scene load_steps=10 format=3 uid="uid://bawgcpe4clkdo"]
 
 [ext_resource type="Texture2D" uid="uid://fsayj6mk34o4" path="res://icon.svg" id="1_vjdyu"]
 [ext_resource type="Script" path="res://enemies/test_zone/test01/enemy.gd" id="1_vnqx7"]
 [ext_resource type="Script" path="res://components/health.gd" id="3_rqnin"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="4_4fuy7"]
+[ext_resource type="Script" path="res://scripts/nav/overlapping_nav_agent_3d.gd" id="5_6xoju"]
 [ext_resource type="Script" path="res://enemies/state_machine/enemy_state_machine.gd" id="5_37b4f"]
 [ext_resource type="Script" path="res://enemies/state_machine/wander.gd" id="6_brwbg"]
 
@@ -28,8 +29,12 @@ navigation = NodePath("NavigationAgent3D")
 state_machine = NodePath("EnemyStateMachine")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 offset = Vector2(0, 48)
 billboard = 1
+double_sided = false
+no_depth_test = true
+texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_3hm6u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -47,6 +52,7 @@ script = ExtResource("4_4fuy7")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
 debug_enabled = true
+script = ExtResource("5_6xoju")
 
 [node name="EnemyStateMachine" type="Node" parent="."]
 script = ExtResource("5_37b4f")

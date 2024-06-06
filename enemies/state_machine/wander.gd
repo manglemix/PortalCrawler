@@ -4,7 +4,7 @@ extends EnemyState
 
 signal player_entered
 
-@export var wander_speed := 1.0
+@export var wander_speed := 0.75
 
 
 func _enter() -> void:
@@ -25,7 +25,7 @@ func set_player(player: CharacterBody3D) -> void:
 
 
 func _random_target() -> void:
-	navigation.target_position = global_transform.origin + Vector3.RIGHT.rotated(Vector3.UP, randf() * TAU) * randf_range(1.0, 4.0)
+	navigation.target_position = global_transform.origin + Vector3.RIGHT.rotated(Vector3.UP, randf() * TAU) * randf_range(2.0, 7.0)
 
 
 func _physics_process(_delta: float) -> void:

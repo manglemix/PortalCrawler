@@ -43,6 +43,10 @@ up={
 ]
 }
 
+[navigation]
+
+baking/enemy_radii=PackedFloat32Array(0.4, 0.45)
+
 [rendering]
 
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
