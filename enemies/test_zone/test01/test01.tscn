@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://bawgcpe4clkdo"]
+
+[ext_resource type="Texture2D" uid="uid://fsayj6mk34o4" path="res://icon.svg" id="1_vjdyu"]
+[ext_resource type="Script" path="res://enemies/test_zone/test01/enemy.gd" id="1_vnqx7"]
+[ext_resource type="Script" path="res://components/health.gd" id="3_rqnin"]
+[ext_resource type="Script" path="res://components/damageable.gd" id="4_4fuy7"]
+[ext_resource type="Script" path="res://enemies/state_machine/enemy_state_machine.gd" id="5_37b4f"]
+[ext_resource type="Script" path="res://enemies/state_machine/wander.gd" id="6_brwbg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3hm6u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vjdyu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
+height = 0.8
+radius = 0.373498
+
+[node name="Test01" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine")]
+script = ExtResource("1_vnqx7")
+navigation = NodePath("NavigationAgent3D")
+state_machine = NodePath("EnemyStateMachine")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+offset = Vector2(0, 48)
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_3hm6u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("CylinderShape3D_vtf4t")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_rqnin")
+health = 2
+max_health = 2
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("4_4fuy7")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="EnemyStateMachine" type="Node" parent="."]
+script = ExtResource("5_37b4f")
+
+[node name="Wander" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("6_brwbg")

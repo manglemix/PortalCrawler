@@ -9,7 +9,7 @@ extends CharacterBody3D
 
 var target_velocity = Vector3.ZERO
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if (first):
 		get_parent().get_node("leftPortal")._set_partner(get_parent().get_node("rightPortal"))
 		get_parent().get_node("rightPortal")._set_partner(get_parent().get_node("leftPortal"))

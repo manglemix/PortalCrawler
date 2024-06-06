@@ -23,8 +23,12 @@ func damage_once(damage: int):
 	damaged.emit(roundi(damage * damage_multiplier))
 
 
-func damage_node_once(node: Node, damage: int):
-	var damageable: Damageable = node.get_node_or_null("Damageable")
+static func get_damageable_component(node: Node) -> Damageable:
+	return node.get_node_or_null("Damageable")
+
+
+static func damage_node_once(node: Node, damage: int):
+	var damageable := get_damageable_component(node)
 	if damageable == null:
 		return
 	damageable.damage_once(damage)

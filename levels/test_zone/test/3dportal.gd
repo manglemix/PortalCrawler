@@ -14,12 +14,7 @@ func _ready():
 	print(cZOffset)
 	print(cXOffset)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
-
-	
 func _set_partner(partner):
 	p = partner
 

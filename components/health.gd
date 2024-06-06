@@ -44,15 +44,19 @@ func change_health(change: int):
 	health += change
 
 
+static func get_health_component(node: Node) -> Health:
+	return node.get_node_or_null("Health")
+
+
 static func set_node_health(node: Node, new_health: int):
-	var health: Health = node.get_node_or_null("Health")
-	if health == null:
+	var health_node := get_health_component(node)
+	if health_node == null:
 		return
-	health.set_health(new_health)
+	health_node.set_health(new_health)
 
 
 static func change_node_health(node: Node, change: int):
-	var health: Health = node.get_node_or_null("Health")
-	if health == null:
+	var health_node := get_health_component(node)
+	if health_node == null:
 		return
-	health.change_health(change)
+	health_node.change_health(change)
