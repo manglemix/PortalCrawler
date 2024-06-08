@@ -5,6 +5,7 @@ extends EnemyState
 signal player_spotted
 
 @export var wander_speed := 0.75
+@export var fov := 100.0
 
 
 func _enter(_data) -> void:
@@ -17,7 +18,7 @@ func _random_target() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if is_player_in_sight():
+	if is_player_in_sight(deg_to_rad(fov), 0.5):
 		exit(player_spotted)
 		return
 	if navigation.is_navigation_finished():

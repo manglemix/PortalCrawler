@@ -6,6 +6,7 @@ signal player_spotted
 signal lost_player
 
 @export var chase_speed := 0.9
+@export var fov := 180.0
 
 
 func _enter(data) -> void:
@@ -14,7 +15,7 @@ func _enter(data) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if is_player_in_sight():
+	if is_player_in_sight(deg_to_rad(fov), 0.5):
 		exit(player_spotted)
 		return
 	

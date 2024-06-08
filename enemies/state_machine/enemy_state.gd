@@ -89,12 +89,15 @@ func navigate_to_next_path_position(speed: float) -> void:
 		global_transform = global_transform.looking_at(next_pos)
 
 
-func is_player_in_sight() -> bool:
+## fov is in radians
+func is_player_in_sight(fov: float, min_radius: float) -> bool:
 	if player == null:
 		return false
 	_raycast.global_transform = _enemy.global_transform
 	_raycast.global_position.y = 0.1
 	_raycast.target_position = _raycast.to_local(player.global_position)
 	_raycast.target_position.y = 0.1
+	if _raycast.target_position.length() <= min_radius:
+		return true
 	_raycast.force_raycast_update()
-	return _raycast.get_collider() == player
+	return _raycast.get_collider() == player && _raycast.target_position.angle_to(Vector3.FORWARD) < fov / 2.0

@@ -19,7 +19,7 @@ func _ready() -> void:
 
 
 func damage_once(damage: int):
-	damaged.emit(roundi(damage * damage_multiplier))
+	damaged.emit(roundi(- damage * damage_multiplier))
 
 
 static func get_damageable_component(node: Node) -> Damageable:

@@ -1,9 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://cev3s1xhlwawm"]
+[gd_scene load_steps=23 format=3 uid="uid://cev3s1xhlwawm"]
 
 [ext_resource type="PackedScene" uid="uid://bq0nj4jxvfwxj" path="res://levels/test_zone/test/lab.glb" id="1_21dd0"]
 [ext_resource type="Script" path="res://levels/test_zone/test/Player.gd" id="2_hsit1"]
 [ext_resource type="Texture2D" uid="uid://c7jwgi0y7tj2m" path="res://levels/test_zone/test/Player16x16.png" id="2_jkspd"]
+[ext_resource type="Script" path="res://components/shake.gd" id="5_2c5yi"]
+[ext_resource type="Script" path="res://components/damageable.gd" id="5_eva76"]
 [ext_resource type="Texture2D" uid="uid://b07y6rac21ql6" path="res://Box.png" id="6_6xyvm"]
+[ext_resource type="Script" path="res://components/health.gd" id="6_o318g"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="7_vvmpa"]
 [ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/test_zone/test01/test01.tscn" id="8_q26nv"]
 
@@ -16,6 +19,10 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Enemy:
 			child.set_player($Player)
+
+
+func _on_player_died() -> void:
+	get_tree().change_scene_to_file(scene_file_path)
 "
 
 [sub_resource type="Environment" id="Environment_d5low"]
@@ -151,6 +158,12 @@ transform = Transform3D(0.24, 0, 0, 0, 2, 0, 0, 0, 1, 0.25, 1, 0.25)
 billboard = 1
 texture = ExtResource("6_6xyvm")
 
+[node name="Damageable" type="Node" parent="Player"]
+script = ExtResource("5_eva76")
+
+[node name="Health" type="Node" parent="Player"]
+script = ExtResource("6_o318g")
+
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
@@ -160,6 +173,11 @@ fov = 3.8
 size = 9.37
 near = 110.0
 far = 150.0
+
+[node name="Shake" type="Node" parent="Marker3D/Camera3D2"]
+script = ExtResource("5_2c5yi")
+use_accessibility = true
+z_scale = 0.0
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -224,3 +242,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.990949, 0, 1.50121)
 
 [node name="Test04" parent="." instance=ExtResource("8_q26nv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0660002, 0, 0.927438)
+
+[connection signal="damaged" from="Player/Damageable" to="Player" method="_on_damaged"]
+[connection signal="damaged" from="Player/Damageable" to="Player/Health" method="change_health"]
+[connection signal="died" from="Player/Health" to="." method="_on_player_died"]
+[connection signal="translate_3d" from="Marker3D/Camera3D2/Shake" to="Marker3D/Camera3D2" method="translate"]

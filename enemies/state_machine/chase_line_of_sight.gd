@@ -5,6 +5,7 @@ extends EnemyState
 signal lost_player(last_position: Vector3)
 
 @export var chase_speed := 0.9
+@export var fov := 180.0
 
 var _last_position: Vector3
 
@@ -15,7 +16,7 @@ func _enter(_data) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if is_player_in_sight():
+	if is_player_in_sight(deg_to_rad(fov), 0.5):
 		_last_position = player.global_position
 		set_navigation_target(_last_position)
 	else:

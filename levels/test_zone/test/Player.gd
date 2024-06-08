@@ -99,8 +99,10 @@ func get_input():
 	velocity = target_velocity
 
 func _physics_process(_delta):
-
-	
 	get_input()
 	move_and_slide()
 	
+
+
+func _on_damaged(_health_change: int) -> void:
+	Shake.shake_node(get_viewport().get_camera_3d(), 0.25, 0.2, 5)
