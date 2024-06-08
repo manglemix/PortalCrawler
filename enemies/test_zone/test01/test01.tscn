@@ -27,7 +27,7 @@ animations = [{
 height = 0.8
 radius = 0.315262
 
-[node name="Test01" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine")]
+[node name="Test01" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
 collision_layer = 4
 axis_lock_linear_y = true
 script = ExtResource("1_vnqx7")
