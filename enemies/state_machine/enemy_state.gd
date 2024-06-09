@@ -2,7 +2,7 @@ class_name EnemyState
 extends State
 
 
-const MIN_NAV_RETARGET_DURATION := 500
+const MIN_NAV_RETARGET_DURATION := 200
 
 var navigation: NavigationAgent3D
 var player: CharacterBody3D

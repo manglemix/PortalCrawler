@@ -1,7 +1,7 @@
 class_name BasicProjectile
 extends CharacterBody3D
 
-@export var speed := 2.5
+@export var speed := 4.5
 
 
 func _physics_process(delta: float) -> void:

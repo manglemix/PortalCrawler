@@ -16,7 +16,7 @@ func _enter(_data) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if is_player_in_sight(deg_to_rad(fov), 0.5):
+	if is_player_in_sight(deg_to_rad(fov), 1.5):
 		_last_position = player.global_position
 		set_navigation_target(_last_position)
 	else:

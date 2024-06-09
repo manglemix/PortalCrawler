@@ -1,5 +1,6 @@
+@tool
 class_name StagedSpawner
-extends Marker3D
+extends Spawner
 
 
 signal stage_finished
@@ -13,7 +14,15 @@ var index := 0
 var _finished := false
 
 
+func _get_configuration_warnings() -> PackedStringArray:
+	if spawn_group == &"Enemies" && !get_groups().has("EnemySpawners"):
+		return ["If spawn_group is Enemies, spawner must be in EnemySpawners group"]
+	return []
+
+
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	spawn()
 
 
@@ -30,6 +39,7 @@ func spawn() -> void:
 	
 	if scene == null:
 		await get_tree().process_frame
+		@warning_ignore("confusable_local_declaration")
 		var node := get_tree().get_first_node_in_group(spawn_group)
 		if node == null:
 			stage_finished.emit()
@@ -40,10 +50,16 @@ func spawn() -> void:
 	
 	var node := scene.instantiate()
 	node.tree_exited.connect(on_spawned_free)
+	node.tree_entered.connect(
+		func():
+			spawned.emit(node)
+	)
 	add_child(node)
 
 
 func on_spawned_free() -> void:
+	if !is_inside_tree():
+		return
 	var node := get_tree().get_first_node_in_group(spawn_group)
 	if node == null:
 		stage_finished.emit()

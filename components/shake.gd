@@ -71,6 +71,7 @@ static func get_shake_component(node: Node) -> Shake:
 
 
 static func shake_node(node: Node, duration: float, amplitude: float, points: int) -> void:
+	@warning_ignore("shadowed_variable")
 	var shake_node := get_shake_component(node)
 	if shake_node == null:
 		return

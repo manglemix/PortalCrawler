@@ -1,3 +1,4 @@
+@tool
 class_name Enemy
 extends CharacterBody3D
 
@@ -6,7 +7,15 @@ extends CharacterBody3D
 @export var state_machine: EnemyStateMachine
 
 
+func _get_configuration_warnings() -> PackedStringArray:
+	if !get_groups().has("Enemies"):
+		return ["Must be in Enemies group"]
+	return []
+
+
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	if navigation != null:
 		await get_tree().physics_frame
 		await get_tree().physics_frame

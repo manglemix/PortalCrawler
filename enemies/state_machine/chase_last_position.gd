@@ -15,7 +15,7 @@ func _enter(data) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if is_player_in_sight(deg_to_rad(fov), 0.5):
+	if is_player_in_sight(deg_to_rad(fov), 1.5):
 		exit(player_spotted)
 		return
 	
