@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://enemies/state_machine/chase_line_of_sight.gd" id="8_0b8kw"]
 [ext_resource type="Script" path="res://enemies/state_machine/chase_last_position.gd" id="9_scf73"]
 [ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="10_ef2k6"]
-[ext_resource type="PackedScene" uid="uid://dtli40mqu3tt0" path="res://enemies/projectiles/basic.tscn" id="11_umulk"]
+[ext_resource type="PackedScene" uid="uid://jr7h7x8hwhpb" path="res://enemies/projectiles/laser01.tscn" id="11_mseqg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3hm6u"]
 animations = [{
@@ -64,7 +64,6 @@ path_metadata_flags = 0
 avoidance_enabled = true
 neighbor_distance = 10.0
 max_speed = 1.0
-debug_enabled = true
 script = ExtResource("5_6xoju")
 
 [node name="EnemyStateMachine" type="Node" parent="."]
@@ -84,7 +83,7 @@ script = ExtResource("9_scf73")
 [node name="ProjectileSpawner" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.526207, 0)
 script = ExtResource("10_ef2k6")
-projectile = ExtResource("11_umulk")
+projectile = ExtResource("11_mseqg")
 
 [connection signal="player_spotted" from="EnemyStateMachine/Wander" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
 [connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="start"]
