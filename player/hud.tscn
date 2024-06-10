@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpg817r11rxxe"]
+
+[ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
+
+[sub_resource type="GDScript" id="GDScript_w8sf7"]
+script/source = "extends HBoxContainer
+
+
+const FULL: Texture2D = preload(\"res://player/Health indicator (full).webp\")
+const EMPTY: Texture2D = preload(\"res://player/Health indicator (empty).webp\")
+
+
+func _on_max_health_changed(new_max_health: int) -> void:
+	if new_max_health >= get_child_count():
+		for _i in range(new_max_health - get_child_count()):
+			var indicator := TextureRect.new()
+			indicator.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			indicator.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+			add_child(indicator)
+	else:
+		for _i in range(new_max_health, get_child_count()):
+			get_child(new_max_health).queue_free()
+
+
+func _on_health_changed(new_health: int) -> void:
+	for i in range(0, new_health):
+		get_child(i).texture = FULL
+	for i in range(new_health, get_child_count()):
+		get_child(i).texture = EMPTY
+"
+
+[sub_resource type="Theme" id="Theme_hcktf"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 90.0
+theme_override_constants/separation = 10
+script = SubResource("GDScript_w8sf7")
+
+[node name="TextureRect" type="TextureRect" parent="HealthBar"]
+texture_filter = 1
+layout_mode = 2
+theme = SubResource("Theme_hcktf")
+texture = ExtResource("1_h1oyn")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="HealthBar"]
+texture_filter = 1
+layout_mode = 2
+theme = SubResource("Theme_hcktf")
+texture = ExtResource("1_h1oyn")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="HealthBar"]
+texture_filter = 1
+layout_mode = 2
+theme = SubResource("Theme_hcktf")
+texture = ExtResource("1_h1oyn")
+expand_mode = 2

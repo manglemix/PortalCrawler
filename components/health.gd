@@ -3,6 +3,8 @@ class_name Health
 extends Node
 
 
+signal max_health_changed(new_max_health: int)
+signal health_changed(new_health: int)
 signal died
 
 
@@ -26,6 +28,7 @@ func _ready() -> void:
 
 func set_health(new_health: int):
 	health = clampi(new_health, 0, max_health)
+	health_changed.emit(health)
 	if health == 0:
 		died.emit()
 
@@ -36,8 +39,10 @@ func set_max_health(new_max_health: int):
 	else:
 		max_health = new_max_health
 	
+	max_health_changed.emit(max_health)
 	if max_health < health:
 		health = max_health
+		health_changed.emit(health)
 
 
 func change_health(change: int):
