@@ -1,26 +1,13 @@
-[gd_scene load_steps=52 format=3 uid="uid://cev3s1xhlwawm"]
+[gd_scene load_steps=12 format=3 uid="uid://cev3s1xhlwawm"]
 
 [ext_resource type="PackedScene" uid="uid://bq0nj4jxvfwxj" path="res://levels/test_zone/test/lab.glb" id="1_21dd0"]
-[ext_resource type="Script" path="res://levels/test_zone/test/Player.gd" id="2_hsit1"]
-[ext_resource type="Texture2D" uid="uid://dkp3x6ddu7ss7" path="res://player/idle_down.png" id="3_iovq7"]
-[ext_resource type="Texture2D" uid="uid://dj405nyai54no" path="res://player/idle_right.png" id="4_l478j"]
+[ext_resource type="PackedScene" uid="uid://bqa1jm5brrlgo" path="res://player/player.tscn" id="2_1kftd"]
 [ext_resource type="Script" path="res://components/shake.gd" id="5_2c5yi"]
-[ext_resource type="Script" path="res://components/damageable.gd" id="5_eva76"]
-[ext_resource type="Texture2D" uid="uid://dvrhq7tumu50h" path="res://player/idle_up.png" id="5_mjuxc"]
-[ext_resource type="Texture2D" uid="uid://b07y6rac21ql6" path="res://Box.png" id="6_6xyvm"]
-[ext_resource type="Script" path="res://components/health.gd" id="6_o318g"]
-[ext_resource type="Texture2D" uid="uid://dtm8uuakak7b1" path="res://player/swing_down.png" id="6_r5jro"]
-[ext_resource type="Texture2D" uid="uid://cdtajyfxgyton" path="res://player/swing_right.png" id="7_ihink"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="7_vvmpa"]
 [ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/test_zone/test01/test01.tscn" id="8_q26nv"]
-[ext_resource type="Texture2D" uid="uid://b6rtqu6upm1e1" path="res://player/swing_up.png" id="8_r7fdx"]
-[ext_resource type="Texture2D" uid="uid://b8dti74fbsh54" path="res://player/walk_down.png" id="9_ax8py"]
 [ext_resource type="Script" path="res://scripts/difficulty_range.gd" id="9_fo3a6"]
 [ext_resource type="Script" path="res://enemies/spawners/staged_spawner.gd" id="9_mlbfb"]
-[ext_resource type="Texture2D" uid="uid://cqljyt5be7bbr" path="res://player/walk_right.png" id="10_0nvup"]
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="10_2jmtd"]
-[ext_resource type="Script" path="res://scripts/character_sprite.gd" id="11_5g5ch"]
-[ext_resource type="Texture2D" uid="uid://cfbmloeajlf44" path="res://player/walk_up.png" id="11_ualtg"]
 [ext_resource type="PackedScene" uid="uid://cpg817r11rxxe" path="res://player/hud.tscn" id="22_cpw8v"]
 
 [sub_resource type="GDScript" id="GDScript_5qmyw"]
@@ -60,230 +47,6 @@ sdfgi_cascades = 2
 sdfgi_min_cell_size = 0.1
 sdfgi_y_scale = 0
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_idk1l"]
-height = 0.875
-radius = 0.291114
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wkfg2"]
-atlas = ExtResource("3_iovq7")
-region = Rect2(0, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8sfl5"]
-atlas = ExtResource("3_iovq7")
-region = Rect2(80, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ky7xu"]
-atlas = ExtResource("4_l478j")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ak5fe"]
-atlas = ExtResource("4_l478j")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ox6o"]
-atlas = ExtResource("5_mjuxc")
-region = Rect2(0, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_16wi0"]
-atlas = ExtResource("5_mjuxc")
-region = Rect2(80, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lv8rf"]
-atlas = ExtResource("6_r5jro")
-region = Rect2(0, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jief5"]
-atlas = ExtResource("6_r5jro")
-region = Rect2(90, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hpxj2"]
-atlas = ExtResource("6_r5jro")
-region = Rect2(180, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3bebc"]
-atlas = ExtResource("6_r5jro")
-region = Rect2(270, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p6pcy"]
-atlas = ExtResource("7_ihink")
-region = Rect2(0, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b6aa5"]
-atlas = ExtResource("7_ihink")
-region = Rect2(90, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q7nqy"]
-atlas = ExtResource("7_ihink")
-region = Rect2(180, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_71muc"]
-atlas = ExtResource("7_ihink")
-region = Rect2(270, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jk76o"]
-atlas = ExtResource("8_r7fdx")
-region = Rect2(0, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lygl2"]
-atlas = ExtResource("8_r7fdx")
-region = Rect2(90, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_goimp"]
-atlas = ExtResource("8_r7fdx")
-region = Rect2(180, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fb6qk"]
-atlas = ExtResource("8_r7fdx")
-region = Rect2(270, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6f0y7"]
-atlas = ExtResource("9_ax8py")
-region = Rect2(0, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iswmm"]
-atlas = ExtResource("9_ax8py")
-region = Rect2(80, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_41h2f"]
-atlas = ExtResource("10_0nvup")
-region = Rect2(0, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p58yu"]
-atlas = ExtResource("10_0nvup")
-region = Rect2(90, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bdeur"]
-atlas = ExtResource("11_ualtg")
-region = Rect2(0, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_npcoe"]
-atlas = ExtResource("11_ualtg")
-region = Rect2(80, 0, 80, 80)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_l8546"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wkfg2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8sfl5")
-}],
-"loop": true,
-"name": &"idle_down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ky7xu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ak5fe")
-}],
-"loop": true,
-"name": &"idle_right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6ox6o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_16wi0")
-}],
-"loop": true,
-"name": &"idle_up",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lv8rf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jief5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hpxj2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3bebc")
-}],
-"loop": true,
-"name": &"swing_down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p6pcy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b6aa5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q7nqy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_71muc")
-}],
-"loop": true,
-"name": &"swing_right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jk76o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lygl2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_goimp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fb6qk")
-}],
-"loop": true,
-"name": &"swing_up",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6f0y7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iswmm")
-}],
-"loop": true,
-"name": &"walk_down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_41h2f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p58yu")
-}],
-"loop": true,
-"name": &"walk_right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bdeur")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_npcoe")
-}],
-"loop": true,
-"name": &"walk_up",
-"speed": 5.0
-}]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_85xhj"]
-radius = 0.4
-height = 1.405
-
 [node name="Test" type="Node3D"]
 script = SubResource("GDScript_5qmyw")
 
@@ -292,51 +55,7 @@ script = SubResource("GDScript_5qmyw")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_d5low")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.498811)
-collision_layer = 2
-axis_lock_linear_y = true
-script = ExtResource("2_hsit1")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438, 0)
-shape = SubResource("CylinderShape3D_idk1l")
-
-[node name="RayCast3D" type="RayCast3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-target_position = Vector3(1, 1, 1)
-
-[node name="Sprite3D" type="Sprite3D" parent="Player/RayCast3D"]
-transform = Transform3D(0.24, 0, 0, 0, 2, 0, 0, 0, 1, 0.25, 1, 0.25)
-billboard = 1
-texture = ExtResource("6_6xyvm")
-
-[node name="Damageable" type="Node" parent="Player"]
-script = ExtResource("5_eva76")
-
-[node name="Health" type="Node" parent="Player"]
-script = ExtResource("6_o318g")
-health = 3
-max_health = 3
-
-[node name="CharacterSprite" type="AnimatedSprite3D" parent="Player"]
-sorting_offset = 50.0
-offset = Vector2(0, 8)
-pixel_size = 0.025
-billboard = 1
-double_sided = false
-no_depth_test = true
-texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_l8546")
-animation = &"idle_up"
-autoplay = "idle_down"
-frame_progress = 0.358234
-script = ExtResource("11_5g5ch")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/CharacterSprite"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767171, 0)
-cast_shadow = 3
-mesh = SubResource("CapsuleMesh_85xhj")
+[node name="Player" parent="." instance=ExtResource("2_1kftd")]
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -435,8 +154,6 @@ scenes = Array[PackedScene]([null, ExtResource("8_q26nv")])
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("22_cpw8v")]
 
-[connection signal="damaged" from="Player/Damageable" to="Player" method="_on_damaged"]
-[connection signal="damaged" from="Player/Damageable" to="Player/Health" method="change_health"]
 [connection signal="died" from="Player/Health" to="." method="_on_player_died"]
 [connection signal="health_changed" from="Player/Health" to="CanvasLayer/HUD/HealthBar" method="_on_health_changed"]
 [connection signal="max_health_changed" from="Player/Health" to="CanvasLayer/HUD/HealthBar" method="_on_max_health_changed"]
@@ -447,4 +164,5 @@ scenes = Array[PackedScene]([null, ExtResource("8_q26nv")])
 [connection signal="finished" from="DifficultyRange/StagedSpawner3" to="DifficultyRange/SignalBarrier" method="receive"]
 [connection signal="finished" from="DifficultyRange/StagedSpawner4" to="DifficultyRange/SignalBarrier" method="receive"]
 
+[editable path="Player"]
 [editable path="CanvasLayer/HUD"]
