@@ -59,6 +59,10 @@ func _physics_process(_delta):
 
 func _on_damaged(_health_change: int) -> void:
 	Shake.shake_node(get_viewport().get_camera_3d(), 0.25, 0.2, 5)
+
+
+func _on_died() -> void:
+	set_physics_process(false)
 	
 	
 # function that creates the portals when the player presses the button to do so

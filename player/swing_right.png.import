@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cdtajyfxgyton"
-path.s3tc="res://.godot/imported/swing_right.png-9076b7f34a89def7810bec22e6c2e25c.s3tc.ctex"
+path="res://.godot/imported/swing_right.png-9076b7f34a89def7810bec22e6c2e25c.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://player/swing_right.png"
-dest_files=["res://.godot/imported/swing_right.png-9076b7f34a89def7810bec22e6c2e25c.s3tc.ctex"]
+dest_files=["res://.godot/imported/swing_right.png-9076b7f34a89def7810bec22e6c2e25c.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

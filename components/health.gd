@@ -7,6 +7,8 @@ signal max_health_changed(new_max_health: int)
 signal health_changed(new_health: int)
 signal died
 
+var _died := false
+
 
 @export var health := 10:
 	set = set_health
@@ -30,7 +32,9 @@ func set_health(new_health: int):
 	health = clampi(new_health, 0, max_health)
 	health_changed.emit(health)
 	if health == 0:
-		died.emit()
+		if not _died:
+			died.emit()
+			_died = true
 
 
 func set_max_health(new_max_health: int):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://bqa1jm5brrlgo"]
+[gd_scene load_steps=45 format=3 uid="uid://bqa1jm5brrlgo"]
 
 [ext_resource type="Script" path="res://levels/test_zone/test/Player.gd" id="1_6wtmb"]
 [ext_resource type="Texture2D" uid="uid://b07y6rac21ql6" path="res://Box.png" id="2_lwvw8"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="3_3cd08"]
 [ext_resource type="Script" path="res://components/health.gd" id="4_uht5j"]
+[ext_resource type="Texture2D" uid="uid://dpwa7fyrac2by" path="res://player/death.png" id="5_hqsdh"]
 [ext_resource type="Texture2D" uid="uid://dkp3x6ddu7ss7" path="res://player/idle_down.png" id="5_pmwpd"]
 [ext_resource type="Texture2D" uid="uid://dj405nyai54no" path="res://player/idle_right.png" id="6_4rvem"]
 [ext_resource type="Texture2D" uid="uid://dvrhq7tumu50h" path="res://player/idle_up.png" id="7_nq67i"]
@@ -18,6 +19,14 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_idk1l"]
 height = 0.875
 radius = 0.291114
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2moq2"]
+atlas = ExtResource("5_hqsdh")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4m7u"]
+atlas = ExtResource("5_hqsdh")
+region = Rect2(80, 0, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wkfg2"]
 atlas = ExtResource("5_pmwpd")
@@ -117,6 +126,17 @@ region = Rect2(80, 0, 80, 80)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l8546"]
 animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_2moq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4m7u")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wkfg2")
@@ -276,9 +296,9 @@ double_sided = false
 no_depth_test = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_l8546")
-animation = &"idle_up"
+animation = &"death"
 autoplay = "idle_down"
-frame_progress = 0.714121
+frame_progress = 0.358234
 script = ExtResource("14_g7fv3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterSprite"]
@@ -288,3 +308,5 @@ mesh = SubResource("CapsuleMesh_85xhj")
 
 [connection signal="damaged" from="Damageable" to="." method="_on_damaged"]
 [connection signal="damaged" from="Damageable" to="Health" method="change_health"]
+[connection signal="died" from="Health" to="." method="_on_died"]
+[connection signal="died" from="Health" to="CharacterSprite" method="die"]

@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtm8uuakak7b1"
-path="res://.godot/imported/swing_down.png-953789a5dc67b4de579fb24051fe0e9b.ctex"
+uid="uid://dpwa7fyrac2by"
+path.s3tc="res://.godot/imported/death.png-8b99c76317cd299864d33d17d2ac4009.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://player/swing_down.png"
-dest_files=["res://.godot/imported/swing_down.png-953789a5dc67b4de579fb24051fe0e9b.ctex"]
+source_file="res://player/death.png"
+dest_files=["res://.godot/imported/death.png-8b99c76317cd299864d33d17d2ac4009.s3tc.ctex"]
 
 [params]
 
-compress/mode=3
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

@@ -29,6 +29,7 @@ func _ready() -> void:
 
 
 func _on_player_died() -> void:
+	await get_tree().create_timer(3, false).timeout
 	get_tree().change_scene_to_file(scene_file_path)
 
 
@@ -56,6 +57,9 @@ script = SubResource("GDScript_5qmyw")
 environment = SubResource("Environment_d5low")
 
 [node name="Player" parent="." instance=ExtResource("2_1kftd")]
+
+[node name="CharacterSprite" parent="Player" index="4"]
+animation = &"walk_up"
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

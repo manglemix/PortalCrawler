@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6rtqu6upm1e1"
-path.s3tc="res://.godot/imported/swing_up.png-4efd06788230f76d6028719278d21916.s3tc.ctex"
+path="res://.godot/imported/swing_up.png-4efd06788230f76d6028719278d21916.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://player/swing_up.png"
-dest_files=["res://.godot/imported/swing_up.png-4efd06788230f76d6028719278d21916.s3tc.ctex"]
+dest_files=["res://.godot/imported/swing_up.png-4efd06788230f76d6028719278d21916.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

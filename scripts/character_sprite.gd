@@ -2,6 +2,7 @@
 class_name CharacterSprite
 extends AnimatedSprite3D
 
+@export var death = &"death"
 
 @export_group("Idle Animations")
 @export var idle_down := &"idle_down"
@@ -14,10 +15,16 @@ extends AnimatedSprite3D
 @export var walk_up := &"walk_up"
 
 
+
 func _get_configuration_warnings() -> PackedStringArray:
 	if not get_parent() is CharacterBody3D:
 		return ["Parent must be a CharacterBody3D"]
 	return []
+
+
+func _ready() -> void:
+	if Engine.is_editor_hint():
+		set_process(false)
 
 
 func _process(_delta: float) -> void:
@@ -59,3 +66,8 @@ func _process(_delta: float) -> void:
 	
 	if animation != new_anim:
 		play(new_anim)
+
+
+func die() -> void:
+	set_process(false)
+	play(death)
