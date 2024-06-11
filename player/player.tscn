@@ -255,6 +255,7 @@ target_position = Vector3(1, 1, 1)
 
 [node name="Sprite3D" type="Sprite3D" parent="RayCast3D"]
 transform = Transform3D(0.24, 0, 0, 0, 2, 0, 0, 0, 1, 0.25, 1, 0.25)
+visible = false
 billboard = 1
 texture = ExtResource("2_lwvw8")
 
@@ -277,7 +278,7 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_l8546")
 animation = &"idle_up"
 autoplay = "idle_down"
-frame_progress = 0.358234
+frame_progress = 0.714121
 script = ExtResource("14_g7fv3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterSprite"]

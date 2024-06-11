@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bw3oputqb3oe7"]
 
-[ext_resource type="Script" path="res://levels/test_zone/test/3dportal.gd" id="1_liu56"]
-[ext_resource type="Texture2D" uid="uid://b07y6rac21ql6" path="res://Box.png" id="2_yaeil"]
+[ext_resource type="Script" path="res://levels/test_zone/test/3dportal.gd" id="1_nd3fr"]
+[ext_resource type="Texture2D" uid="uid://b07y6rac21ql6" path="res://Box.png" id="2_oy1n2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2rly3"]
 size = Vector3(0.272837, 1, 0.955749)
@@ -13,7 +13,7 @@ size = Vector3(0.242358, 1, 0.933747)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03189, 0, 1.26029)
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_liu56")
+script = ExtResource("1_nd3fr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.112162, 0, 0.00289834)
@@ -22,7 +22,7 @@ shape = SubResource("BoxShape3D_2rly3")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, -0.095, 0, 0)
 modulate = Color(0, 1, 1, 1)
-texture = ExtResource("2_yaeil")
+texture = ExtResource("2_oy1n2")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
