@@ -93,7 +93,7 @@ func _create_portal():
 		var xposition = ray.get_collision_point()
 		
 		# place the new portal at the correct position
-		get_tree().root.get_child(0).add_child(newportal)
+		get_tree().current_scene.add_child(newportal)
 		newportal.set_global_position(xposition)
 		
 		# rotate the portal correctly and make sure it knows what way it's facing (for later use)
