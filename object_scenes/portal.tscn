@@ -20,7 +20,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.112162, 0, 0.00289834)
 shape = SubResource("BoxShape3D_2rly3")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(5.93428e-08, 0.178802, -0.983885, -8.6014e-08, -0.983885, -0.178802, -1, 9.52385e-08, -4.3007e-08, -0.095, 0, 0)
+transform = Transform3D(6.80889e-08, 0.281638, -0.959521, -7.92709e-08, -0.959521, -0.281638, -1, 9.52385e-08, -4.3007e-08, -0.147489, 0.101801, 0)
 pixel_size = 0.048
 no_depth_test = true
 texture_filter = 0
