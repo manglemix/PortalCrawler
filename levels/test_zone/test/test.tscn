@@ -60,7 +60,9 @@ environment = SubResource("Environment_d5low")
 
 [node name="CharacterSprite" parent="Player" index="4"]
 animation = &"walk_up"
-frame_progress = 0.0
+attack_down = null
+attack_right = null
+attack_up = null
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

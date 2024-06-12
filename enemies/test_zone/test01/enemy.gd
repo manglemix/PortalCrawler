@@ -50,6 +50,6 @@ func _on_flash_timer_timeout():
 	$AnimatedSprite3D.modulate = Color.WHITE
 
 
-func _on_health_health_changed(new_health):
+func _on_health_health_changed(_new_health):
 	$FlashTimer.start()
 	$AnimatedSprite3D.modulate = Color.RED

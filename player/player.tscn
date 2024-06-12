@@ -170,53 +170,53 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_lv8rf")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_jief5")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_hpxj2")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_3bebc")
 }],
-"loop": true,
+"loop": false,
 "name": &"swing_down",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_p6pcy")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_b6aa5")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_q7nqy")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_71muc")
 }],
-"loop": true,
+"loop": false,
 "name": &"swing_right",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_jk76o")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_lygl2")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_goimp")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_fb6qk")
 }],
-"loop": true,
+"loop": false,
 "name": &"swing_up",
 "speed": 5.0
 }, {
@@ -294,9 +294,12 @@ double_sided = false
 no_depth_test = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_l8546")
-animation = &"swing_up"
+animation = &"swing_down"
 autoplay = "idle_down"
 script = ExtResource("14_g7fv3")
+attack_down = null
+attack_right = null
+attack_up = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterSprite"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767171, 0)

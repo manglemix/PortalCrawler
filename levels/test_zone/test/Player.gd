@@ -22,7 +22,7 @@ func _ready():
 	name = "Player"
 
 # all input from the player is handled here
-func _input(event):
+func _input(_event):
 	var direction = Vector3.ZERO
 	
 	# shooting portals
@@ -31,8 +31,12 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("attack"):
 		if ($Cooldown.is_stopped()):
+			var camera := get_viewport().get_camera_3d()
+			var mouse_pos := camera.project_position(get_viewport().get_mouse_position(), camera.global_position.y)
+			mouse_pos.y = global_position.y
+			look_at(mouse_pos)
+			$CharacterSprite.attack()
 			$Windup.start()
-		
 		
 	# movement
 	if Input.is_action_pressed("right"):
@@ -115,8 +119,6 @@ func _create_portal():
 		# make sure the portal updates its stored position
 		newportal.update_position()
 
-
-	
 
 func _on_windup_timeout():
 	if (!AttackArea.has_overlapping_bodies()):

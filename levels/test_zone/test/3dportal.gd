@@ -28,7 +28,7 @@ func _set_partner(partner):
 	p = partner
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# if there is no partner then no work is needed, return
 	if(p == null):
 			return
