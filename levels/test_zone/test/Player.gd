@@ -5,6 +5,7 @@ extends CharacterBody3D
 
 # stored nodes/scenes for easy reference
 @onready var ray = $RayCast3D
+@onready var AttackArea = $AttackArea
 var portal = preload("res://object_scenes/portal.tscn")
 
 # these are some simple flags for the portal placement code
@@ -28,21 +29,22 @@ func _input(event):
 	if Input.is_action_just_pressed("shoot"):
 		_create_portal()
 	
+	if Input.is_action_just_pressed("attack"):
+		if ($Cooldown.is_stopped()):
+			$Windup.start()
+		
+		
 	# movement
 	if Input.is_action_pressed("right"):
 		direction.x += 1
-		ray.set_rotation_degrees(Vector3(0, 0, 0))
 		rotation.y = - PI / 2
 	if Input.is_action_pressed("left"):
 		direction.x -= 1
-		ray.set_rotation_degrees(Vector3(0, 0, 180))
 		rotation.y = PI / 2
 	if Input.is_action_pressed("down"):
-		ray.set_rotation_degrees(Vector3(0, 0, -90))
 		direction.z += 1
 		rotation.y = PI
 	if Input.is_action_pressed("up"):
-		ray.set_rotation_degrees(Vector3(0, 0, 90))
 		direction.z -= 1
 		rotation.y = 0.0
 		
@@ -112,3 +114,14 @@ func _create_portal():
 			newportal.update_direction('d')
 		# make sure the portal updates its stored position
 		newportal.update_position()
+
+
+	
+
+func _on_windup_timeout():
+	if (!AttackArea.has_overlapping_bodies()):
+		return
+	var bodies = AttackArea.get_overlapping_bodies()
+	for body in bodies:
+		Damageable.damage_node_once(body, 1)
+	$Cooldown.start()

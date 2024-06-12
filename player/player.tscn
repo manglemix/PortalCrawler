@@ -1,7 +1,6 @@
 [gd_scene load_steps=45 format=3 uid="uid://bqa1jm5brrlgo"]
 
 [ext_resource type="Script" path="res://levels/test_zone/test/Player.gd" id="1_6wtmb"]
-[ext_resource type="Texture2D" uid="uid://b07y6rac21ql6" path="res://Box.png" id="2_lwvw8"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="3_3cd08"]
 [ext_resource type="Script" path="res://components/health.gd" id="4_uht5j"]
 [ext_resource type="Texture2D" uid="uid://dpwa7fyrac2by" path="res://player/death.png" id="5_hqsdh"]
@@ -259,6 +258,9 @@ animations = [{
 radius = 0.4
 height = 1.405
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5fal6"]
+size = Vector3(1, 1, 1.04498)
+
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.498811)
 collision_layer = 2
@@ -272,12 +274,6 @@ shape = SubResource("CylinderShape3D_idk1l")
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 target_position = Vector3(0, 0, -15)
-
-[node name="Sprite3D" type="Sprite3D" parent="RayCast3D"]
-transform = Transform3D(0.24, 0, 0, 0, 2, 0, 0, 0, 1, 0.25, 1, 0.25)
-visible = false
-billboard = 1
-texture = ExtResource("2_lwvw8")
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("3_3cd08")
@@ -298,9 +294,8 @@ double_sided = false
 no_depth_test = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_l8546")
-animation = &"death"
+animation = &"swing_up"
 autoplay = "idle_down"
-frame_progress = 0.358234
 script = ExtResource("14_g7fv3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterSprite"]
@@ -308,7 +303,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767171, 0)
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_85xhj")
 
+[node name="AttackArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.429935, -0.738922)
+shape = SubResource("BoxShape3D_5fal6")
+
+[node name="Windup" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="damaged" from="Damageable" to="." method="_on_damaged"]
 [connection signal="damaged" from="Damageable" to="Health" method="change_health"]
 [connection signal="died" from="Health" to="." method="_on_died"]
 [connection signal="died" from="Health" to="CharacterSprite" method="die"]
+[connection signal="timeout" from="Windup" to="." method="_on_windup_timeout"]

@@ -95,6 +95,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.526207, 0)
 script = ExtResource("10_ef2k6")
 projectile = ExtResource("11_mseqg")
 
+[node name="FlashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="died" from="Health" to="." method="_on_died"]
+[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
+[connection signal="damaged" from="Damageable" to="Health" method="change_health"]
 [connection signal="player_spotted" from="EnemyStateMachine/Wander" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
 [connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="start"]
 [connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="stop"]
@@ -102,3 +109,4 @@ projectile = ExtResource("11_mseqg")
 [connection signal="lost_player" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/Wander" method="enter"]
 [connection signal="player_spotted" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
 [connection signal="timeout" from="AttackTimer" to="ProjectileSpawner" method="spawn"]
+[connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]

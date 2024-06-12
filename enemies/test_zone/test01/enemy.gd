@@ -39,3 +39,17 @@ func set_player(player: CharacterBody3D) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("kill_all"):
 		queue_free()
+		
+
+
+func _on_died():
+	queue_free()
+
+
+func _on_flash_timer_timeout():
+	$AnimatedSprite3D.modulate = Color.WHITE
+
+
+func _on_health_health_changed(new_health):
+	$FlashTimer.start()
+	$AnimatedSprite3D.modulate = Color.RED
