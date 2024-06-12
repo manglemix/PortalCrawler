@@ -271,7 +271,7 @@ shape = SubResource("CylinderShape3D_idk1l")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-target_position = Vector3(1, 1, 1)
+target_position = Vector3(0, 0, -15)
 
 [node name="Sprite3D" type="Sprite3D" parent="RayCast3D"]
 transform = Transform3D(0.24, 0, 0, 0, 2, 0, 0, 0, 1, 0.25, 1, 0.25)

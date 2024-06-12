@@ -58,6 +58,9 @@ environment = SubResource("Environment_d5low")
 
 [node name="Player" parent="." instance=ExtResource("2_1kftd")]
 
+[node name="Sprite3D" parent="Player/RayCast3D" index="0"]
+visible = true
+
 [node name="CharacterSprite" parent="Player" index="4"]
 animation = &"walk_up"
 frame_progress = 0.0

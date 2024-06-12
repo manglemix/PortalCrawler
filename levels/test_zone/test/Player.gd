@@ -35,14 +35,14 @@ func _input(event):
 		rotation.y = - PI / 2
 	if Input.is_action_pressed("left"):
 		direction.x -= 1
-		ray.set_rotation_degrees(Vector3(0, 180, 0))
+		ray.set_rotation_degrees(Vector3(0, 0, 180))
 		rotation.y = PI / 2
 	if Input.is_action_pressed("down"):
-		ray.set_rotation_degrees(Vector3(0, -90, 0))
+		ray.set_rotation_degrees(Vector3(0, 0, -90))
 		direction.z += 1
 		rotation.y = PI
 	if Input.is_action_pressed("up"):
-		ray.set_rotation_degrees(Vector3(0, 90, 0))
+		ray.set_rotation_degrees(Vector3(0, 0, 90))
 		direction.z -= 1
 		rotation.y = 0.0
 		
