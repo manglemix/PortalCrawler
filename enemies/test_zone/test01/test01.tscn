@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bawgcpe4clkdo"]
+[gd_scene load_steps=15 format=3 uid="uid://bawgcpe4clkdo"]
 
 [ext_resource type="Script" path="res://enemies/test_zone/test01/enemy.gd" id="1_vnqx7"]
 [ext_resource type="Texture2D" uid="uid://cirgyej8vtrrl" path="res://enemies/test_zone/test01/wizard.png" id="2_tv2w5"]
@@ -23,6 +23,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fhpkm"]
+radius = 0.4
+height = 1.405
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
 height = 0.8
 radius = 0.315262
@@ -42,6 +46,12 @@ double_sided = false
 no_depth_test = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_3hm6u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatedSprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767171, 0)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_fhpkm")
+skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
