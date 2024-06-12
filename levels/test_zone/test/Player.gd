@@ -41,16 +41,20 @@ func _input(_event):
 	# movement
 	if Input.is_action_pressed("right"):
 		direction.x += 1
-		rotation.y = - PI / 2
+		if $Windup.is_stopped():
+			rotation.y = - PI / 2
 	if Input.is_action_pressed("left"):
 		direction.x -= 1
-		rotation.y = PI / 2
+		if $Windup.is_stopped():
+			rotation.y = PI / 2
 	if Input.is_action_pressed("down"):
 		direction.z += 1
-		rotation.y = PI
+		if $Windup.is_stopped():
+			rotation.y = PI
 	if Input.is_action_pressed("up"):
 		direction.z -= 1
-		rotation.y = 0.0
+		if $Windup.is_stopped():
+			rotation.y = 0.0
 		
 	# applying movement
 	if direction != Vector3.ZERO:
