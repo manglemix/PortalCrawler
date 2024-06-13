@@ -12,6 +12,7 @@ var portal = preload("res://object_scenes/portal.tscn")
 @onready var firstplaced = false
 @onready var secondplaced = false
 
+@onready var next = false
 # general vars
 var firstPortal
 var secondPortal
@@ -84,16 +85,24 @@ func _create_portal():
 		var newportal = portal.instantiate()
 		if (!firstplaced):
 			firstPortal = newportal
+			firstPortal.get_node("Sprite3D").modulate = Color.BLUE
 			firstplaced = true
 		elif (!secondplaced):
 			secondPortal = newportal
 			secondplaced = true
+			secondPortal.get_node("Sprite3D").modulate = Color.HOT_PINK
 			secondPortal._set_partner(firstPortal)
 			firstPortal._set_partner(secondPortal)
 		else:
 			firstPortal.queue_free()
 			firstPortal = secondPortal
 			secondPortal = newportal
+			if (!next):
+				secondPortal.get_node("Sprite3D").modulate = Color.BLUE
+				next = true
+			else:
+				secondPortal.get_node("Sprite3D").modulate = Color.HOT_PINK
+				next = false
 			secondPortal._set_partner(firstPortal)
 			firstPortal._set_partner(secondPortal)
 		
