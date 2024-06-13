@@ -35,7 +35,7 @@ func _input(_event):
 			var mouse_pos := camera.project_position(get_viewport().get_mouse_position(), camera.global_position.y)
 			mouse_pos.y = global_position.y
 			look_at(mouse_pos)
-			$CharacterSprite.attack()
+			$Billboard/CharacterSprite.attack()
 			$Windup.start()
 		
 	# movement
