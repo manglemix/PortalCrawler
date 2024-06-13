@@ -1,9 +1,9 @@
-@tool
 class_name CharacterSprite
 extends AnimatedSprite3D
 
 enum Direction { LEFT, RIGHT, UP, DOWN }
 
+@export var character: CharacterBody3D
 @export var death = &"death"
 
 @export_group("Idle Animations")
@@ -17,27 +17,16 @@ enum Direction { LEFT, RIGHT, UP, DOWN }
 @export var walk_up := &"walk_up"
 
 @export_group("Attack Animations")
-@export var attack_down := &"swing_down"
-@export var attack_right := &"swing_right"
-@export var attack_up := &"swing_up"
+@export var attack_down := &"attack_down"
+@export var attack_right := &"attack_right"
+@export var attack_up := &"attack_up"
 
 var _dying := false
 
 
-func _get_configuration_warnings() -> PackedStringArray:
-	if not get_parent() is CharacterBody3D:
-		return ["Parent must be a CharacterBody3D"]
-	return []
-
-
-func _ready() -> void:
-	if Engine.is_editor_hint():
-		set_process(false)
-
-
 func _process(_delta: float) -> void:
 	var new_anim: StringName
-	var linear_velocity: Vector3 = get_parent().velocity
+	var linear_velocity: Vector3 = character.velocity
 	
 	if linear_velocity.length() <= 0.05:
 		match get_direction():

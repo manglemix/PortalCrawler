@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bawgcpe4clkdo"]
+[gd_scene load_steps=16 format=3 uid="uid://bawgcpe4clkdo"]
 
 [ext_resource type="Script" path="res://enemies/test_zone/test01/enemy.gd" id="1_vnqx7"]
 [ext_resource type="Texture2D" uid="uid://cirgyej8vtrrl" path="res://enemies/test_zone/test01/wizard.png" id="2_tv2w5"]
@@ -11,6 +11,15 @@
 [ext_resource type="Script" path="res://enemies/state_machine/chase_last_position.gd" id="9_scf73"]
 [ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="10_ef2k6"]
 [ext_resource type="PackedScene" uid="uid://jr7h7x8hwhpb" path="res://enemies/projectiles/laser01.tscn" id="11_mseqg"]
+[ext_resource type="Script" path="res://scripts/billboard.gd" id="12_25l4f"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
+height = 0.8
+radius = 0.315262
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fhpkm"]
+radius = 0.4
+height = 1.405
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3hm6u"]
 animations = [{
@@ -23,35 +32,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_fhpkm"]
-radius = 0.4
-height = 1.405
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
-height = 0.8
-radius = 0.315262
-
 [node name="Test01" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
 collision_layer = 4
 axis_lock_linear_y = true
 script = ExtResource("1_vnqx7")
 navigation = NodePath("NavigationAgent3D")
 state_machine = NodePath("EnemyStateMachine")
-
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-offset = Vector2(0, 30)
-pixel_size = 0.02
-billboard = 1
-double_sided = false
-no_depth_test = true
-texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_3hm6u")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatedSprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767171, 0)
-cast_shadow = 3
-mesh = SubResource("CapsuleMesh_fhpkm")
-skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -90,14 +76,32 @@ script = ExtResource("9_scf73")
 
 [node name="AttackTimer" type="Timer" parent="."]
 
-[node name="ProjectileSpawner" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.526207, 0)
-script = ExtResource("10_ef2k6")
-projectile = ExtResource("11_mseqg")
-
 [node name="FlashTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.767171, 0)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_fhpkm")
+
+[node name="Billboard" type="Node3D" parent="."]
+top_level = true
+script = ExtResource("12_25l4f")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Billboard"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+offset = Vector2(0, 30)
+pixel_size = 0.02
+double_sided = false
+no_depth_test = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_3hm6u")
+
+[node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.779502, 0.671496, -0.238492)
+script = ExtResource("10_ef2k6")
+projectile = ExtResource("11_mseqg")
 
 [connection signal="died" from="Health" to="." method="_on_died"]
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
@@ -106,7 +110,8 @@ one_shot = true
 [connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="start"]
 [connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="stop"]
 [connection signal="lost_player" from="EnemyStateMachine/ChaseLineOfSight" to="EnemyStateMachine/ChaseLastPosition" method="enter"]
+[connection signal="player_position" from="EnemyStateMachine/ChaseLineOfSight" to="Billboard/ProjectileSpawner" method="aim_at"]
 [connection signal="lost_player" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/Wander" method="enter"]
 [connection signal="player_spotted" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
-[connection signal="timeout" from="AttackTimer" to="ProjectileSpawner" method="spawn"]
+[connection signal="timeout" from="AttackTimer" to="Billboard/ProjectileSpawner" method="spawn"]
 [connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]
