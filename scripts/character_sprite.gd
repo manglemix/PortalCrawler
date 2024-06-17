@@ -63,7 +63,7 @@ func _process(_delta: float) -> void:
 
 
 func get_direction() -> Direction:
-	var forward_3d: Vector3 = -global_basis.z
+	var forward_3d: Vector3 = -character.global_basis.z
 	var forward := Vector2(forward_3d.x, forward_3d.z).normalized()
 	var angle := forward.angle()
 	if - PI / 4 < angle and angle < PI / 4:
