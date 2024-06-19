@@ -12,6 +12,7 @@ script = ExtResource("1_n7l26")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_sq72s")
+disabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 light_color = Color(1, 0.172549, 0.180392, 1)
@@ -22,4 +23,5 @@ transform = Transform3D(-1.09278e-08, 0.25, 1.09278e-08, 0, -1.09278e-08, 0.25, 
 pixel_size = 0.04
 no_depth_test = true
 texture_filter = 0
+render_priority = 10
 texture = ExtResource("2_bhph3")

@@ -329,9 +329,11 @@ script = ExtResource("14_g7fv3")
 character = NodePath("../..")
 
 [node name="RayDelay" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="damaged" from="Damageable" to="." method="_on_damaged"]
 [connection signal="damaged" from="Damageable" to="Health" method="change_health"]
 [connection signal="died" from="Health" to="." method="_on_died"]
 [connection signal="died" from="Health" to="Billboard/CharacterSprite" method="die"]
 [connection signal="timeout" from="Windup" to="." method="_on_windup_timeout"]
+[connection signal="timeout" from="RayDelay" to="." method="_on_ray_delay_timeout"]

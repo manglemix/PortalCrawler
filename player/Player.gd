@@ -6,6 +6,7 @@ extends CharacterBody3D
 
 # stored nodes/scenes for easy reference
 @onready var ray = $MainRay
+@onready var raydelay = $RayDelay
 @onready var AttackArea = $AttackArea
 
 var portal = preload("res://object_scenes/portal.tscn")
@@ -15,12 +16,16 @@ var purpleP = preload("res://player/purple portal.webp")
 
 var storedTexture
 
-
 # these are some simple flags for the portal placement code
 @onready var firstplaced = false
 @onready var secondplaced = false
 
 @onready var next = false
+
+var storedNormal
+var storedPosition
+var storedCollider
+
 # general vars
 var firstPortal
 var secondPortal
@@ -38,14 +43,18 @@ func _input(_event):
 	
 	# shooting portals
 	if Input.is_action_just_pressed("shoot"):
-		if (ray.is_colliding()):
+		if (ray.is_colliding() && raydelay.is_stopped()):
 			var value = ray.get_collider().position.distance_to(position)
 			var bullet = p_bullet.instantiate()
 			get_tree().current_scene.add_child(bullet)
 			bullet.set_global_position(position)
+			bullet.position.y += 2
 			bullet.rotation.y = rotation.y
-			_create_portal()
-	
+			raydelay.set_wait_time(value / bullet.speed)
+			raydelay.start()
+			storedCollider = ray.get_collider()
+			storedNormal = ray.get_collision_normal()
+			storedPosition = ray.get_collision_point()
 	if Input.is_action_just_pressed("delete_p"):
 		if (!firstplaced && !secondplaced):
 			return
@@ -119,7 +128,7 @@ func _on_died() -> void:
 # should be handled by the player script when possible
 func _create_portal():
 	
-	var hitobject = ray.get_collider()
+	var hitobject = storedCollider
 	
 	if (hitobject.name.begins_with("portal")):
 		adjusting = true
@@ -130,8 +139,8 @@ func _create_portal():
 	
 	# get the position to spawn the portal at
 	var rayvector = Vector3.ZERO
-	rayvector = ray.get_collision_normal()
-	var xposition = ray.get_collision_point()
+	rayvector = storedNormal
+	var xposition = storedPosition
 	
 	# place the new portal at the correct position
 	get_tree().current_scene.add_child(newportal)
@@ -216,3 +225,7 @@ func _on_windup_timeout():
 	for body in bodies:
 		Damageable.damage_node_once(body, 1)
 	$Cooldown.start()
+
+
+func _on_ray_delay_timeout():
+	_create_portal()
