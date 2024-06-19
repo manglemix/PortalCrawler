@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ce1ouvngdq8h5"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_0fj1p"]
+[ext_resource type="PackedScene" uid="uid://cvkxr44q05aed" path="res://levels/special/intro/intro.tscn" id="1_bxhde"]
+[ext_resource type="PackedScene" uid="uid://bqa1jm5brrlgo" path="res://player/player.tscn" id="2_dxy41"]
+[ext_resource type="Script" path="res://components/shake.gd" id="3_shpt0"]
+[ext_resource type="PackedScene" uid="uid://cpg817r11rxxe" path="res://player/hud.tscn" id="4_8eyle"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_0fj1p")
+
+[node name="Intro" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_bxhde")]
+player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_dxy41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74032, 0, -0.0123425)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Camera3D2" type="Camera3D" parent="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 119.495, 0)
+current = true
+fov = 3.8
+size = 9.37
+near = 110.0
+far = 150.0
+
+[node name="Shake" type="Node" parent="Marker3D/Camera3D2"]
+script = ExtResource("3_shpt0")
+use_accessibility = true
+z_scale = 0.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("4_8eyle")]
+player = NodePath("../../Player")
+
+[connection signal="translate_3d" from="Marker3D/Camera3D2/Shake" to="Marker3D/Camera3D2" method="translate"]

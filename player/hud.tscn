@@ -1,6 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=5 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
+
+[sub_resource type="GDScript" id="GDScript_fp6gk"]
+script/source = "extends Control
+
+
+@export var player: Player
+
+
+func _ready() -> void:
+	propagate_call(\"set_player\", [player])
+"
 
 [sub_resource type="GDScript" id="GDScript_w8sf7"]
 script/source = "extends HBoxContainer
@@ -10,23 +21,27 @@ const FULL: Texture2D = preload(\"res://player/Health indicator (full).webp\")
 const EMPTY: Texture2D = preload(\"res://player/Health indicator (empty).webp\")
 
 
-func _on_max_health_changed(new_max_health: int) -> void:
-	if new_max_health >= get_child_count():
-		for _i in range(new_max_health - get_child_count()):
-			var indicator := TextureRect.new()
-			indicator.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-			indicator.expand_mode = TextureRect.EXPAND_FIT_WIDTH
-			add_child(indicator)
-	else:
-		for _i in range(new_max_health, get_child_count()):
-			get_child(new_max_health).queue_free()
-
-
-func _on_health_changed(new_health: int) -> void:
-	for i in range(0, new_health):
-		get_child(i).texture = FULL
-	for i in range(new_health, get_child_count()):
-		get_child(i).texture = EMPTY
+func set_player(player: Player) -> void:
+	var health := Health.get_health_component(player)
+	health.health_changed.connect(
+		func(new_health: int):
+			for i in range(0, new_health):
+				get_child(i).texture = FULL
+			for i in range(new_health, get_child_count()):
+				get_child(i).texture = EMPTY
+	)
+	health.max_health_changed.connect(
+		func(new_max_health: int):
+			if new_max_health >= get_child_count():
+				for _i in range(new_max_health - get_child_count()):
+					var indicator := TextureRect.new()
+					indicator.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+					indicator.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+					add_child(indicator)
+			else:
+				for _i in range(new_max_health, get_child_count()):
+					get_child(new_max_health).queue_free()
+	)
 "
 
 [sub_resource type="Theme" id="Theme_hcktf"]
@@ -38,6 +53,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_fp6gk")
 
 [node name="HealthBar" type="HBoxContainer" parent="."]
 layout_mode = 1

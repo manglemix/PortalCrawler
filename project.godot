@@ -15,7 +15,7 @@ camera_shake=1.0
 [application]
 
 config/name="PortalCrawler"
-run/main_scene="res://levels/test_zone/test/test.tscn"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -84,3 +84,5 @@ baking/enemy_radii=PackedFloat32Array(0.4, 0.45)
 [rendering]
 
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_environment="res://levels/default_env.tres"

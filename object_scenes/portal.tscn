@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bw3oputqb3oe7"]
 
-[ext_resource type="Script" path="res://levels/test_zone/test/3dportal.gd" id="1_nd3fr"]
+[ext_resource type="Script" path="res://player/3dportal.gd" id="1_wibcx"]
 [ext_resource type="Texture2D" uid="uid://cjpgxljfsw7ho" path="res://player/yellow portal.webp" id="2_tbh02"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2rly3"]
@@ -13,7 +13,7 @@ size = Vector3(0.242358, 1, 0.933747)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03189, 0, 1.26029)
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_nd3fr")
+script = ExtResource("1_wibcx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.112162, 0, 0.00289834)

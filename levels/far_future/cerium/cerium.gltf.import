@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bq0nj4jxvfwxj"
-path="res://.godot/imported/lab.glb-e81c394ed18047cfc968079259e241e4.scn"
+uid="uid://b4b167iws1oba"
+path="res://.godot/imported/cerium.gltf-a09031da57bdda0ec1ae58f66a966a4a.scn"
 
 [deps]
 
-source_file="res://levels/test_zone/test/lab.glb"
-dest_files=["res://.godot/imported/lab.glb-e81c394ed18047cfc968079259e241e4.scn"]
+source_file="res://levels/far_future/cerium/cerium.gltf"
+dest_files=["res://.godot/imported/cerium.gltf-a09031da57bdda0ec1ae58f66a966a4a.scn"]
 
 [params]
 
@@ -29,15 +29,6 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path="res://scripts/import_level.gd"
-_subresources={
-"nodes": {
-"PATH:Cube_001": {
-"physics/shape_type": 1
-},
-"PATH:Cube_003": {
-"physics/shape_type": 1
-}
-}
-}
+_subresources={}
 gltf/naming_version=1
-gltf/embedded_image_handling=2
+gltf/embedded_image_handling=1

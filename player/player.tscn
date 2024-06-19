@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://bqa1jm5brrlgo"]
 
-[ext_resource type="Script" path="res://levels/test_zone/test/Player.gd" id="1_6wtmb"]
+[ext_resource type="Script" path="res://player/Player.gd" id="1_ynmwp"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="3_3cd08"]
 [ext_resource type="Script" path="res://scripts/billboard.gd" id="4_7s1tg"]
 [ext_resource type="Script" path="res://components/health.gd" id="4_uht5j"]
@@ -265,7 +265,7 @@ animations = [{
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 axis_lock_linear_y = true
-script = ExtResource("1_6wtmb")
+script = ExtResource("1_ynmwp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438, 0)

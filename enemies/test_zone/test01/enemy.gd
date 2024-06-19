@@ -15,6 +15,8 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
+		set_physics_process(false)
+		set_process_input(false)
 		return
 	if navigation != null:
 		await get_tree().physics_frame
@@ -31,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func set_player(player: CharacterBody3D) -> void:
+func set_player(player: Player) -> void:
 	if state_machine != null:
 		state_machine.set_player(player)
 

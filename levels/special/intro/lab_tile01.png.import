@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7jwgi0y7tj2m"
-path.s3tc="res://.godot/imported/Player16x16.png-4890341e8dbae056429561f82dfd8971.s3tc.ctex"
+uid="uid://dyqhxeor708sg"
+path.s3tc="res://.godot/imported/lab_tile01.png-7eb722d7af37ed0aaf9249075d93d629.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://levels/test_zone/test/Player16x16.png"
-dest_files=["res://.godot/imported/Player16x16.png-4890341e8dbae056429561f82dfd8971.s3tc.ctex"]
+source_file="res://levels/special/intro/lab_tile01.png"
+dest_files=["res://.godot/imported/lab_tile01.png-7eb722d7af37ed0aaf9249075d93d629.s3tc.ctex"]
 
 [params]
 

@@ -7,7 +7,7 @@ func _post_import(scene: Node) -> Object:
 	tree.root.add_child(scene)
 	
 	for child in scene.get_children():
-		if child.name == "NavMesh":
+		if child.name.begins_with("NavMesh"):
 			var mesh_inst: MeshInstance3D = child
 			print_debug("Processing NavMesh from %s" % get_source_file())
 			mesh_inst.owner = null
