@@ -34,6 +34,7 @@ z_scale = 0.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("4_8eyle")]
+mouse_filter = 1
 player = NodePath("../../Player")
 
 [connection signal="translate_3d" from="Marker3D/Camera3D2/Shake" to="Marker3D/Camera3D2" method="translate"]

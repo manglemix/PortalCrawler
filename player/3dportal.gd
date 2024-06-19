@@ -1,14 +1,20 @@
 extends StaticBody3D
 
-
 # some nodes for easy access later
-@onready var collider = $Area3D
+@onready var collider = $PortalArea
 @onready var cooldown = $cooldown
+
+@onready var leftray = $LeftChecker
+@onready var rightray = $RightChecker
 
 # holds the portals partner for easy reference
 var p
 var facing
 
+@onready var deletable = false
+
+func _ready():
+	name = "portal"
 # obviously could grab these values without storing them, but for
 # code readability and performance we store them after they are updated 1 time
 var cZOffset
@@ -19,6 +25,12 @@ var cXOffset
 func update_position():
 	cZOffset = self.get_global_position().z
 	cXOffset = self.get_global_position().x
+	leftray.force_raycast_update()
+	rightray.force_raycast_update()
+	if (!leftray.is_colliding() || !rightray.is_colliding()):
+		return false
+	else:
+		return true
 func update_direction(direction):
 	facing = direction
 
@@ -26,7 +38,6 @@ func update_direction(direction):
 # new portals
 func _set_partner(partner):
 	p = partner
-
 
 func _physics_process(_delta):
 	# if there is no partner then no work is needed, return
@@ -56,3 +67,15 @@ func check_velocity(velocity):
 	if (facing == 'd'):
 		return velocity.z > 0
 
+
+
+
+
+func _on_mouse_area_mouse_entered():
+	print("detected")
+	deletable = true
+
+
+func _on_mouse_area_mouse_exited():
+	print("left")
+	deletable = false

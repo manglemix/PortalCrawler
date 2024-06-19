@@ -1,22 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://bw3oputqb3oe7"]
+[gd_scene load_steps=6 format=3 uid="uid://bw3oputqb3oe7"]
 
 [ext_resource type="Script" path="res://player/3dportal.gd" id="1_wibcx"]
 [ext_resource type="Texture2D" uid="uid://cjpgxljfsw7ho" path="res://player/yellow portal.webp" id="2_tbh02"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2rly3"]
-size = Vector3(0.272837, 1, 0.955749)
+size = Vector3(0.273, 1, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hone4"]
-size = Vector3(0.242358, 1, 0.933747)
+size = Vector3(0.224753, 1, 0.933747)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_plgn0"]
+height = 6.0
+radius = 1.0
 
 [node name="portal" type="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03189, 0, 1.26029)
-collision_layer = 0
 collision_mask = 2
+input_ray_pickable = false
 script = ExtResource("1_wibcx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.112162, 0, 0.00289834)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.112162, 0, -0.0075599)
 shape = SubResource("BoxShape3D_2rly3")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -26,16 +30,33 @@ no_depth_test = true
 texture_filter = 0
 texture = ExtResource("2_tbh02")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="PortalArea" type="Area3D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0436889, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0524916, 0, 0)
 shape = SubResource("BoxShape3D_hone4")
 
 [node name="cooldown" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[node name="MouseArea" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MouseArea"]
+shape = SubResource("CylinderShape3D_plgn0")
+
+[node name="LeftChecker" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0.45)
+target_position = Vector3(-1, 0, 0)
+
+[node name="RightChecker" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, -0.45)
+target_position = Vector3(-1, 0, 0)
+
+[connection signal="body_entered" from="PortalArea" to="." method="_on_area_3d_body_entered"]
+[connection signal="mouse_entered" from="MouseArea" to="." method="_on_mouse_area_mouse_entered"]
+[connection signal="mouse_exited" from="MouseArea" to="." method="_on_mouse_area_mouse_exited"]

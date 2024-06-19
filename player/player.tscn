@@ -264,6 +264,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
+input_ray_pickable = false
 axis_lock_linear_y = true
 script = ExtResource("1_ynmwp")
 
@@ -271,9 +272,9 @@ script = ExtResource("1_ynmwp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438, 0)
 shape = SubResource("CylinderShape3D_idk1l")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="MainRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-target_position = Vector3(0, 0, -15)
+target_position = Vector3(0, 0, -30)
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("3_3cd08")
@@ -286,6 +287,7 @@ max_health = 3
 [node name="AttackArea" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 4
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.429935, -0.738922)
