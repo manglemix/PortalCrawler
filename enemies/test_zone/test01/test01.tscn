@@ -96,6 +96,7 @@ pixel_size = 0.02
 double_sided = false
 no_depth_test = true
 texture_filter = 0
+render_priority = 2
 sprite_frames = SubResource("SpriteFrames_3hm6u")
 
 [node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]

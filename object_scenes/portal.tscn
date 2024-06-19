@@ -14,7 +14,6 @@ height = 6.0
 radius = 1.0
 
 [node name="portal" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03189, 0, 1.26029)
 collision_mask = 2
 input_ray_pickable = false
 script = ExtResource("1_wibcx")
@@ -28,6 +27,7 @@ transform = Transform3D(6.80889e-08, 0.281638, -0.959521, -7.92709e-08, -0.95952
 pixel_size = 0.048
 no_depth_test = true
 texture_filter = 0
+render_priority = 1
 texture = ExtResource("2_tbh02")
 
 [node name="PortalArea" type="Area3D" parent="."]
@@ -56,6 +56,9 @@ target_position = Vector3(-1, 0, 0)
 [node name="RightChecker" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, -0.45)
 target_position = Vector3(-1, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.409827, 0)
 
 [connection signal="body_entered" from="PortalArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="mouse_entered" from="MouseArea" to="." method="_on_mouse_area_mouse_entered"]
