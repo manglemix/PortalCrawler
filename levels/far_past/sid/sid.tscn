@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://gqopyictx6fc"]
+
+[ext_resource type="PackedScene" uid="uid://b2f1l4jihng6q" path="res://levels/far_past/sid/sid.gltf" id="1_biw4t"]
+[ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="2_ksovs"]
+
+[node name="Sid" instance=ExtResource("1_biw4t")]
+
+[node name="Lights" type="Node3D" parent="." index="6"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.72473, 1.90104)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.07169, 3.725, 1.901)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.072, 3.725, 1.901)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.72473, -2.81405)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.07169, 3.725, -2.81409)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Lights" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.072, 3.725, -2.81409)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="LevelBounds" parent="." index="7" instance=ExtResource("2_ksovs")]

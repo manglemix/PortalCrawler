@@ -22,7 +22,7 @@
 		},
 		{
 			"mesh":1,
-			"name":"Cube.004-convcol.001",
+			"name":"Cube.008-convcol",
 			"translation":[
 				-3.056097984313965,
 				0,
@@ -40,7 +40,7 @@
 		},
 		{
 			"mesh":3,
-			"name":"Cube.006-convcol.001",
+			"name":"Cube.007-convcol",
 			"translation":[
 				0,
 				1.4430522918701172,
@@ -50,39 +50,43 @@
 	],
 	"materials":[
 		{
-			"name":"Wall_material",
-			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":0
-				},
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
-		},
-		{
-			"name":"Floor_material_baked",
+			"alphaMode":"BLEND",
+			"doubleSided":true,
+			"name":"StoneBricksSplitface001_1K",
+			"normalTexture":{
+				"index":0,
+				"scale":0
+			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":1
 				},
-				"metallicFactor":0,
-				"roughnessFactor":0.5
+				"metallicRoughnessTexture":{
+					"index":2
+				}
+			}
+		},
+		{
+			"alphaMode":"BLEND",
+			"doubleSided":true,
+			"name":"ConcreteBlocksPavingSquareStack001_1K",
+			"normalTexture":{
+				"index":3,
+				"scale":0
+			},
+			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":4
+				},
+				"metallicRoughnessTexture":{
+					"index":5
+				}
 			}
 		},
 		{
 			"doubleSided":true,
 			"name":"Material.002",
 			"pbrMetallicRoughness":{}
-		},
-		{
-			"name":"Wall_material.003",
-			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":2
-				},
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
 		},
 		{
 			"doubleSided":true,
@@ -160,7 +164,7 @@
 						"TEXCOORD_0":22
 					},
 					"indices":11,
-					"material":3
+					"material":0
 				},
 				{
 					"attributes":{
@@ -169,7 +173,7 @@
 						"TEXCOORD_0":25
 					},
 					"indices":15,
-					"material":4
+					"material":3
 				}
 			]
 		}
@@ -186,23 +190,50 @@
 		{
 			"sampler":0,
 			"source":2
+		},
+		{
+			"sampler":0,
+			"source":3
+		},
+		{
+			"sampler":0,
+			"source":4
+		},
+		{
+			"sampler":0,
+			"source":5
 		}
 	],
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"lab_wall_tile01",
-			"uri":"lab_wall_tile01.png"
+			"name":"StoneBricksSplitface001_NRM_1K",
+			"uri":"StoneBricksSplitface001_NRM_1K.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"lab_tile01",
-			"uri":"lab_tile01.png"
+			"name":"StoneBricksSplitface001_COL_1K",
+			"uri":"StoneBricksSplitface001_COL_1K.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"lab_wall_tile01.png",
-			"uri":"lab_wall_tile01_png.png"
+			"name":"StoneBricksSplitface001_REFL_1K-StoneBricksSplitface001_ROUGHNESS_1K",
+			"uri":"StoneBricksSplitface001_REFL_1K-StoneBricksSplitface001_ROUGHNESS_1K.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"ConcreteBlocksPavingSquareStack001_NRM_1K",
+			"uri":"ConcreteBlocksPavingSquareStack001_NRM_1K.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"ConcreteBlocksPavingSquareStack001_COL_1K",
+			"uri":"ConcreteBlocksPavingSquareStack001_COL_1K.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"ConcreteBlocksPavingSquareStack001_REFL_1K-ConcreteBlocksPavingSquareStack001_ROUGHNESS_1K",
+			"uri":"ConcreteBlocksPavingSquareStack001_REFL_1K-ConcreteBlocksPavingSquareStack001_ROUGHNESS_1K.png"
 		}
 	],
 	"accessors":[
@@ -593,8 +624,8 @@
 	],
 	"samplers":[
 		{
-			"magFilter":9728,
-			"minFilter":9984
+			"magFilter":9729,
+			"minFilter":9987
 		}
 	],
 	"buffers":[
