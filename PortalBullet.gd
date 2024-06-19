@@ -11,6 +11,4 @@ func _physics_process(delta: float) -> void:
 		first = false
 		$CollisionShape3D.disabled = false
 	if (data != null && data.get_collider().name != "Player"):
-		print(data.get_collider().name)
-		print("i am ded")
 		queue_free()

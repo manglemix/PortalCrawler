@@ -23,5 +23,5 @@ transform = Transform3D(-1.09278e-08, 0.25, 1.09278e-08, 0, -1.09278e-08, 0.25, 
 pixel_size = 0.04
 no_depth_test = true
 texture_filter = 0
-render_priority = 10
+render_priority = 4
 texture = ExtResource("2_bhph3")
