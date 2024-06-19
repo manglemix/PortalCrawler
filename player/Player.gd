@@ -9,6 +9,7 @@ extends CharacterBody3D
 @onready var AttackArea = $AttackArea
 
 var portal = preload("res://object_scenes/portal.tscn")
+var p_bullet = preload("res://object_scenes/portal_bullet.tscn")
 var yellowP = preload("res://player/yellow portal.webp")
 var purpleP = preload("res://player/purple portal.webp")
 
@@ -37,7 +38,13 @@ func _input(_event):
 	
 	# shooting portals
 	if Input.is_action_just_pressed("shoot"):
-		_create_portal()
+		if (ray.is_colliding()):
+			var value = ray.get_collider().position.distance_to(position)
+			var bullet = p_bullet.instantiate()
+			get_tree().current_scene.add_child(bullet)
+			bullet.set_global_position(position)
+			bullet.rotation.y = rotation.y
+			_create_portal()
 	
 	if Input.is_action_just_pressed("delete_p"):
 		if (!firstplaced && !secondplaced):
@@ -111,101 +118,95 @@ func _on_died() -> void:
 # the reason why the player is handling this code is because all player inputs
 # should be handled by the player script when possible
 func _create_portal():
-	if (ray.is_colliding()):
-		var value = ray.get_collider().position.distance_to(position)
+	
+	var hitobject = ray.get_collider()
+	
+	if (hitobject.name.begins_with("portal")):
+		adjusting = true
+	else:
+		adjusting = false
+	# this block handles the constant cycling of portals as you spawn more and more
+	var newportal = portal.instantiate()
+	
+	# get the position to spawn the portal at
+	var rayvector = Vector3.ZERO
+	rayvector = ray.get_collision_normal()
+	var xposition = ray.get_collision_point()
+	
+	# place the new portal at the correct position
+	get_tree().current_scene.add_child(newportal)
+	newportal.set_global_position(xposition)
+	
+	# rotate the portal correctly and make sure it knows what way it's facing (for later use)
+	if (rayvector.x > .7):
+		newportal.update_direction('l')
+		if (adjusting):
+			newportal.position.x += -0.02433776855469
+	elif (rayvector.x < -.7):
+		newportal.set_rotation_degrees(Vector3(0, 180, 0))
+		newportal.update_direction('r')
+		if (adjusting):
+			newportal.position.x -= -0.02433776855469
+	elif (rayvector.z > .7):
+		newportal.set_rotation_degrees(Vector3(0, -90, 0))
+		newportal.set_global_position(Vector3(xposition.x, xposition.y, xposition.z))
+		newportal.update_direction('u')
+		if (adjusting):
+			newportal.position.z += -0.02433776855469
+	elif (rayvector.z < -.7):
+		newportal.set_rotation_degrees(Vector3(0, 90, 0))
+		newportal.set_global_position(Vector3(xposition.x, xposition.y, xposition.z))
+		newportal.update_direction('d')
+		if (adjusting):
+			newportal.position.z -= -0.02433776855469
+	# make sure the portal updates its stored position
+	if (!newportal.update_position()):
+		newportal.queue_free()
+		return
+	
 		
-		var hitobject = ray.get_collider()
-		
-		if (hitobject.name.begins_with("portal")):
-			adjusting = true
-		else:
-			adjusting = false
-		# this block handles the constant cycling of portals as you spawn more and more
-		var newportal = portal.instantiate()
-		
-		# get the position to spawn the portal at
-		var rayvector = Vector3.ZERO
-		rayvector = ray.get_collision_normal()
-		var xposition = ray.get_collision_point()
-		
-		# place the new portal at the correct position
-		get_tree().current_scene.add_child(newportal)
-		newportal.set_global_position(xposition)
-		
-		# rotate the portal correctly and make sure it knows what way it's facing (for later use)
-		if (rayvector.x > .7):
-			newportal.update_direction('l')
-			if (adjusting):
-				newportal.position.x += -0.02433776855469
-		elif (rayvector.x < -.7):
-			newportal.set_rotation_degrees(Vector3(0, 180, 0))
-			newportal.update_direction('r')
-			if (adjusting):
-				newportal.position.x -= -0.02433776855469
-		elif (rayvector.z > .7):
-			newportal.set_rotation_degrees(Vector3(0, -90, 0))
-			newportal.set_global_position(Vector3(xposition.x, xposition.y, xposition.z))
-			newportal.update_direction('u')
-			if (adjusting):
-				newportal.position.z += -0.02433776855469
-		elif (rayvector.z < -.7):
-			newportal.set_rotation_degrees(Vector3(0, 90, 0))
-			newportal.set_global_position(Vector3(xposition.x, xposition.y, xposition.z))
-			newportal.update_direction('d')
-			if (adjusting):
-				newportal.position.z -= -0.02433776855469
-		# make sure the portal updates its stored position
-		if (!newportal.update_position()):
-			newportal.queue_free()
-			return
-		
-			
-		if (!firstplaced || hitobject == firstPortal):
-			if (firstPortal != null):
-				newportal.get_node("Sprite3D").set_texture(firstPortal.get_node("Sprite3D").get_texture())
-				firstPortal.queue_free()
-			else:
-				if (storedTexture != null && secondplaced):
-					newportal.get_node("Sprite3D").set_texture(storedTexture)
-					storedTexture = null
-				else:
-					newportal.get_node("Sprite3D").set_texture(purpleP)
-					print("created purple portal in first block")
-			firstPortal = newportal
-			firstplaced = true
-			if (secondplaced):
-				secondPortal._set_partner(firstPortal)
-				firstPortal._set_partner(secondPortal)
-		elif (!secondplaced || hitobject == secondPortal):
-			if (secondPortal != null):
-				newportal.get_node("Sprite3D").set_texture(secondPortal.get_node("Sprite3D").get_texture())
-				secondPortal.queue_free()
-			else:
-				if (storedTexture != null):
-					newportal.get_node("Sprite3D").set_texture(storedTexture)
-					storedTexture = null
-				else:
-					newportal.get_node("Sprite3D").set_texture(yellowP)
-					print("created yellow portal in second block")
-			secondPortal = newportal
-			secondplaced = true
-			secondPortal._set_partner(firstPortal)
-			firstPortal._set_partner(secondPortal)
-		else:
+	if (!firstplaced || hitobject == firstPortal):
+		if (firstPortal != null):
+			newportal.get_node("Sprite3D").set_texture(firstPortal.get_node("Sprite3D").get_texture())
 			firstPortal.queue_free()
-			firstPortal = secondPortal
-			secondPortal = newportal
-			if (!next):
-				secondPortal.get_node("Sprite3D").set_texture(purpleP)
-				print("created purple portal in third block")
-				next = true
+		else:
+			if (storedTexture != null && secondplaced):
+				newportal.get_node("Sprite3D").set_texture(storedTexture)
+				storedTexture = null
 			else:
-				secondPortal.get_node("Sprite3D").set_texture(yellowP)
-				print("created yellow portal in third block")
-				next = false
+				newportal.get_node("Sprite3D").set_texture(purpleP)
+		firstPortal = newportal
+		firstplaced = true
+		if (secondplaced):
 			secondPortal._set_partner(firstPortal)
 			firstPortal._set_partner(secondPortal)
-		storedTexture = null
+	elif (!secondplaced || hitobject == secondPortal):
+		if (secondPortal != null):
+			newportal.get_node("Sprite3D").set_texture(secondPortal.get_node("Sprite3D").get_texture())
+			secondPortal.queue_free()
+		else:
+			if (storedTexture != null):
+				newportal.get_node("Sprite3D").set_texture(storedTexture)
+				storedTexture = null
+			else:
+				newportal.get_node("Sprite3D").set_texture(yellowP)
+		secondPortal = newportal
+		secondplaced = true
+		secondPortal._set_partner(firstPortal)
+		firstPortal._set_partner(secondPortal)
+	else:
+		firstPortal.queue_free()
+		firstPortal = secondPortal
+		secondPortal = newportal
+		if (!next):
+			secondPortal.get_node("Sprite3D").set_texture(purpleP)
+			next = true
+		else:
+			secondPortal.get_node("Sprite3D").set_texture(yellowP)
+			next = false
+		secondPortal._set_partner(firstPortal)
+		firstPortal._set_partner(secondPortal)
+	storedTexture = null
 		
 
 func _on_windup_timeout():

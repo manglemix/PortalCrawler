@@ -68,14 +68,7 @@ func check_velocity(velocity):
 		return velocity.z > 0
 
 
-
-
-
 func _on_mouse_area_mouse_entered():
-	print("detected")
 	deletable = true
-
-
 func _on_mouse_area_mouse_exited():
-	print("left")
 	deletable = false

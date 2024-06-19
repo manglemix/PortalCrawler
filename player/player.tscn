@@ -327,6 +327,8 @@ autoplay = "idle_down"
 script = ExtResource("14_g7fv3")
 character = NodePath("../..")
 
+[node name="RayDelay" type="Timer" parent="."]
+
 [connection signal="damaged" from="Damageable" to="." method="_on_damaged"]
 [connection signal="damaged" from="Damageable" to="Health" method="change_health"]
 [connection signal="died" from="Health" to="." method="_on_died"]
