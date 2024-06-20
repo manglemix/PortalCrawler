@@ -8,7 +8,8 @@ signal player_spotted
 @export var fov := 100.0
 
 
-func _enter(_data) -> void:
+func _enter() -> void:
+	super()
 	set_physics_process(true)
 	_random_target()
 

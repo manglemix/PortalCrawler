@@ -8,10 +8,17 @@ signal lost_player
 @export var chase_speed := 0.9
 @export var fov := 180.0
 
+var _last_position: Vector3
 
-func _enter(data) -> void:
+
+func set_last_position(pos: Vector3) -> void:
+	_last_position = pos
+
+
+func _enter() -> void:
+	super()
 	set_physics_process(true)
-	set_navigation_target(data)
+	set_navigation_target(_last_position)
 
 
 func _physics_process(_delta: float) -> void:

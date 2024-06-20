@@ -40,4 +40,6 @@ func get_states() -> Array[State]:
 
 
 func enter():
+	if get_child_count() == 0:
+		return
 	get_child(0).enter()

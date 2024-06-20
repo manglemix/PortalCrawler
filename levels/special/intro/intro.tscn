@@ -31,7 +31,6 @@ func _ready() -> void:
 script = SubResource("GDScript_ofv5h")
 next_level = "res://levels/far_future/cerium/cerium.tscn"
 player_spawn_point = NodePath("PlayerSpawnPoint")
-is_empty = false
 
 [node name="Lights" type="Node3D" parent="." index="5"]
 

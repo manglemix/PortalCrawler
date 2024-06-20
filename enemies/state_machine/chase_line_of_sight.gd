@@ -8,25 +8,22 @@ signal player_position(position: Vector3)
 @export var chase_speed := 0.9
 @export var fov := 180.0
 
-var _last_position: Vector3
 
-
-func _enter(_data) -> void:
+func _enter() -> void:
+	super()
 	set_physics_process(true)
 	set_navigation_target(player.global_position)
 
 
 func _physics_process(_delta: float) -> void:
 	if is_player_in_sight(deg_to_rad(fov), 1.5):
-		_last_position = player.global_position
 		player_position.emit(player.global_position)
-		set_navigation_target(_last_position)
+		set_navigation_target(player.global_position)
 	else:
-		exit(lost_player, _last_position)
+		exit(lost_player)
 		return
 		
 	if navigation.is_navigation_finished():
-		_last_position = player.global_position
-		set_navigation_target(_last_position)
+		set_navigation_target(player.global_position)
 	
 	navigate_to_next_path_position(chase_speed)
