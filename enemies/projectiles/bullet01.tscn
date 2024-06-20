@@ -1,8 +1,10 @@
-[gd_scene load_steps=46 format=3 uid="uid://backxhi5b3hx3"]
+[gd_scene load_steps=48 format=3 uid="uid://cb7yrhamia1d8"]
 
 [ext_resource type="Script" path="res://enemies/projectiles/basic_projectile.gd" id="1_lvfrw"]
 [ext_resource type="Texture2D" uid="uid://dllapu7wfkpkk" path="res://enemies/projectiles/bullet.webp" id="2_itw1d"]
 [ext_resource type="Script" path="res://components/teleportable.gd" id="3_qy5sj"]
+[ext_resource type="AudioStream" uid="uid://cgwlv40ud55j" path="res://enemies/projectiles/gunshot.wav" id="4_ldery"]
+[ext_resource type="Script" path="res://scripts/persistent_sound.gd" id="5_expnp"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sq72s"]
 radius = 0.15
@@ -320,3 +322,9 @@ script = SubResource("GDScript_ii538")
 
 [node name="Teleportable" type="Node" parent="."]
 script = ExtResource("3_qy5sj")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_ldery")
+autoplay = true
+bus = &"Level SFX"
+script = ExtResource("5_expnp")

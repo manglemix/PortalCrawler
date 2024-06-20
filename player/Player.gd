@@ -114,6 +114,8 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _get_movement():
+	if !is_processing_input():
+		return
 			
 	var direction = Vector3.ZERO
 	velocity = Vector3.ZERO

@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://kxfjcf2n4lwv" path="res://enemies/far_future/niacin/walk_down.png" id="14_a4oe3"]
 [ext_resource type="Texture2D" uid="uid://pgja01anva28" path="res://enemies/far_future/niacin/walk_right.png" id="15_cxdoa"]
 [ext_resource type="Texture2D" uid="uid://3lsf06p0t14a" path="res://enemies/far_future/niacin/walk_up.png" id="16_vsjka"]
-[ext_resource type="PackedScene" path="res://enemies/projectiles/bullet01.tscn" id="19_slhne"]
+[ext_resource type="PackedScene" uid="uid://cb7yrhamia1d8" path="res://enemies/projectiles/bullet01.tscn" id="19_slhne"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
 height = 0.8
@@ -390,6 +390,7 @@ projectile = ExtResource("19_slhne")
 [connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="stop"]
 [connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="BurstTimer" method="stop"]
 [connection signal="lost_player" from="EnemyStateMachine/ChaseLineOfSight" to="EnemyStateMachine/ChaseLastPosition" method="enter"]
+[connection signal="player_position" from="EnemyStateMachine/ChaseLineOfSight" to="EnemyStateMachine/ChaseLastPosition" method="set_last_position"]
 [connection signal="player_position" from="EnemyStateMachine/ChaseLineOfSight" to="Billboard/ProjectileSpawner" method="aim_at"]
 [connection signal="lost_player" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/Wander" method="enter"]
 [connection signal="player_spotted" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]

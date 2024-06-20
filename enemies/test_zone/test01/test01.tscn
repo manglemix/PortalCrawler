@@ -164,6 +164,7 @@ projectile = ExtResource("11_mseqg")
 [connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="start"]
 [connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="stop"]
 [connection signal="lost_player" from="EnemyStateMachine/ChaseLineOfSight" to="EnemyStateMachine/ChaseLastPosition" method="enter"]
+[connection signal="player_position" from="EnemyStateMachine/ChaseLineOfSight" to="EnemyStateMachine/ChaseLastPosition" method="set_last_position"]
 [connection signal="player_position" from="EnemyStateMachine/ChaseLineOfSight" to="Billboard/ProjectileSpawner" method="aim_at"]
 [connection signal="lost_player" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/Wander" method="enter"]
 [connection signal="player_spotted" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
