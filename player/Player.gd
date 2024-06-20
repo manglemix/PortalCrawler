@@ -42,8 +42,6 @@ func _ready():
 
 # all input from the player is handled here
 func _input(_event):
-	var direction = Vector3.ZERO
-	
 	# shooting portals
 	if Input.is_action_just_pressed("shoot"):
 		if (is_level_finished):
@@ -56,8 +54,9 @@ func _input(_event):
 			await get_tree().create_timer(1.5, false).timeout
 			advancing_level.emit()
 			return
+		ray.force_raycast_update()
 		if (ray.is_colliding() && raydelay.is_stopped()):
-			var value = ray.get_collider().position.distance_to(position)
+			var value = ray.get_collider().global_position.distance_to(global_position)
 			var bullet = p_bullet.instantiate()
 			get_tree().current_scene.add_child(bullet)
 			bullet.set_global_position(position)
@@ -98,7 +97,16 @@ func _input(_event):
 			look_at(mouse_pos)
 			$Billboard/CharacterSprite.attack()
 			$Windup.start()
-		
+
+
+func _physics_process(_delta):
+	_get_movement()
+	move_and_slide()
+
+func _get_movement():
+			
+	var direction = Vector3.ZERO
+	velocity = Vector3.ZERO
 	# movement
 	if Input.is_action_pressed("right"):
 		direction.x += 1
@@ -123,10 +131,6 @@ func _input(_event):
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
 	velocity = target_velocity
-
-func _physics_process(_delta):
-	move_and_slide()
-
 
 func _on_damaged(_health_change: int) -> void:
 	Shake.shake_node(get_viewport().get_camera_3d(), 0.25, 0.2, 5)
@@ -185,7 +189,6 @@ func _create_portal():
 	if (!newportal.update_position()):
 		newportal.queue_free()
 		return
-	
 		
 	if (!firstplaced || hitobject == firstPortal):
 		if (firstPortal != null):
