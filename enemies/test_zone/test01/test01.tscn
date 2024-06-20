@@ -1,6 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bawgcpe4clkdo"]
+[gd_scene load_steps=18 format=3 uid="uid://bawgcpe4clkdo"]
 
-[ext_resource type="Script" path="res://enemies/test_zone/test01/enemy.gd" id="1_vnqx7"]
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_vnqx7"]
 [ext_resource type="Texture2D" uid="uid://cirgyej8vtrrl" path="res://enemies/test_zone/test01/wizard.png" id="2_tv2w5"]
 [ext_resource type="Script" path="res://components/health.gd" id="3_rqnin"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="4_4fuy7"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" path="res://enemies/state_machine/chase_line_of_sight.gd" id="8_0b8kw"]
 [ext_resource type="Script" path="res://enemies/state_machine/chase_last_position.gd" id="9_scf73"]
 [ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="10_ef2k6"]
+[ext_resource type="Texture2D" uid="uid://cwpb732w6vs7r" path="res://enemies/test_zone/test01/wizard_side.png" id="11_ms51u"]
 [ext_resource type="PackedScene" uid="uid://jr7h7x8hwhpb" path="res://enemies/projectiles/laser01.tscn" id="11_mseqg"]
 [ext_resource type="Script" path="res://scripts/billboard.gd" id="12_25l4f"]
+[ext_resource type="Script" path="res://scripts/character_sprite.gd" id="12_ctaq7"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
 height = 0.8
@@ -28,7 +30,55 @@ animations = [{
 "texture": ExtResource("2_tv2w5")
 }],
 "loop": true,
-"name": &"default",
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tv2w5")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ms51u")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tv2w5")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tv2w5")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ms51u")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tv2w5")
+}],
+"loop": true,
+"name": &"walk_up",
 "speed": 5.0
 }]
 
@@ -67,12 +117,15 @@ script = ExtResource("5_37b4f")
 
 [node name="Wander" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("6_brwbg")
+wander_speed = 1.2
 
 [node name="ChaseLineOfSight" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("8_0b8kw")
+chase_speed = 1.7
 
 [node name="ChaseLastPosition" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("9_scf73")
+chase_speed = 1.7
 
 [node name="AttackTimer" type="Timer" parent="."]
 
@@ -89,7 +142,7 @@ mesh = SubResource("CapsuleMesh_fhpkm")
 top_level = true
 script = ExtResource("12_25l4f")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Billboard"]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Billboard" node_paths=PackedStringArray("character")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 offset = Vector2(0, 30)
 pixel_size = 0.02
@@ -98,9 +151,12 @@ no_depth_test = true
 texture_filter = 0
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_3hm6u")
+animation = &"idle_up"
+script = ExtResource("12_ctaq7")
+character = NodePath("../..")
 
 [node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.779502, 0.671496, -0.238492)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.671, -0.238)
 script = ExtResource("10_ef2k6")
 projectile = ExtResource("11_mseqg")
 

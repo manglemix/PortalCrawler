@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://btftjw14lb2s7"
-path.s3tc="res://.godot/imported/laser projectile.webp-0b9b5ab9b9d1bed3924f807f92e5765d.s3tc.ctex"
+path="res://.godot/imported/laser projectile.webp-0b9b5ab9b9d1bed3924f807f92e5765d.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://enemies/projectiles/laser projectile.webp"
-dest_files=["res://.godot/imported/laser projectile.webp-0b9b5ab9b9d1bed3924f807f92e5765d.s3tc.ctex"]
+dest_files=["res://.godot/imported/laser projectile.webp-0b9b5ab9b9d1bed3924f807f92e5765d.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

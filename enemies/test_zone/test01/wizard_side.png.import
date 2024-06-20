@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cirgyej8vtrrl"
-path="res://.godot/imported/wizard.png-209b166ed9cab83c16178d87d371d4d2.ctex"
+uid="uid://cwpb732w6vs7r"
+path="res://.godot/imported/wizard_side.png-92f0d4dadb4a8a6557c3b579a2a87a63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/test_zone/test01/wizard.png"
-dest_files=["res://.godot/imported/wizard.png-209b166ed9cab83c16178d87d371d4d2.ctex"]
+source_file="res://enemies/test_zone/test01/wizard_side.png"
+dest_files=["res://.godot/imported/wizard_side.png-92f0d4dadb4a8a6557c3b579a2a87a63.ctex"]
 
 [params]
 

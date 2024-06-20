@@ -1,6 +1,8 @@
 class_name CharacterSprite
 extends AnimatedSprite3D
 
+signal death_animation_finished
+
 enum Direction { LEFT, RIGHT, UP, DOWN }
 
 @export var character: CharacterBody3D
@@ -104,3 +106,5 @@ func die() -> void:
 	_dying = true
 	set_process(false)
 	play(death)
+	await animation_finished
+	death_animation_finished.emit()

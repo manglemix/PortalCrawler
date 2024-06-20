@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cirgyej8vtrrl"
-path="res://.godot/imported/wizard.png-209b166ed9cab83c16178d87d371d4d2.ctex"
+uid="uid://dllapu7wfkpkk"
+path="res://.godot/imported/bullet.webp-f8071d19898b13d101212c7709f327b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/test_zone/test01/wizard.png"
-dest_files=["res://.godot/imported/wizard.png-209b166ed9cab83c16178d87d371d4d2.ctex"]
+source_file="res://enemies/projectiles/bullet.webp"
+dest_files=["res://.godot/imported/bullet.webp-f8071d19898b13d101212c7709f327b6.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cirgyej8vtrrl"
-path="res://.godot/imported/wizard.png-209b166ed9cab83c16178d87d371d4d2.ctex"
+uid="uid://cjn5knam7l11o"
+path="res://.godot/imported/attack_up.png-2e85fd9de8725e82fef12751cb833e2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/test_zone/test01/wizard.png"
-dest_files=["res://.godot/imported/wizard.png-209b166ed9cab83c16178d87d371d4d2.ctex"]
+source_file="res://enemies/far_future/niacin/attack_up.png"
+dest_files=["res://.godot/imported/attack_up.png-2e85fd9de8725e82fef12751cb833e2c.ctex"]
 
 [params]
 
