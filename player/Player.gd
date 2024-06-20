@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody3D
 
+signal advancing_level
+
 # exported vars
 @export var speed = 5
 
@@ -30,6 +32,7 @@ var storedCollider
 var firstPortal
 var secondPortal
 var target_velocity = Vector3.ZERO
+var is_level_finished := false
 
 var adjusting
 
@@ -43,6 +46,18 @@ func _input(_event):
 	
 	# shooting portals
 	if Input.is_action_just_pressed("shoot"):
+		if (is_level_finished):
+			if (firstplaced):
+				if (firstPortal.deletable):
+					firstPortal.queue_free()
+			if (secondplaced):
+				if (secondPortal.deletable):
+					secondPortal.queue_free()
+			set_process_input(false)
+			velocity = Vector3.ZERO
+			await get_tree().create_timer(1.5, false).timeout
+			advancing_level.emit()
+			return
 		if (ray.is_colliding() && raydelay.is_stopped()):
 			var value = ray.get_collider().position.distance_to(position)
 			var bullet = p_bullet.instantiate()
@@ -229,3 +244,12 @@ func _on_windup_timeout():
 
 func _on_ray_delay_timeout():
 	_create_portal()
+
+
+func _on_level_advanced() -> void:
+	set_process_input(true)
+	is_level_finished = false
+
+
+func _on_level_finished() -> void:
+	is_level_finished = true

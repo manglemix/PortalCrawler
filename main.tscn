@@ -9,24 +9,23 @@
 [node name="Main" type="Node3D"]
 script = ExtResource("1_0fj1p")
 
-[node name="Intro" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_bxhde")]
+[node name="Intro" parent="." node_paths=PackedStringArray("player", "camera") instance=ExtResource("1_bxhde")]
 player = NodePath("../Player")
+camera = NodePath("../Camera3D2")
+is_empty = false
 
 [node name="Player" parent="." instance=ExtResource("2_dxy41")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74032, 0, -0.0123425)
 
-[node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="Camera3D2" type="Camera3D" parent="Marker3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 119.495, 0)
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 121.495, 0)
 current = true
 fov = 3.8
 size = 9.37
 near = 110.0
 far = 150.0
 
-[node name="Shake" type="Node" parent="Marker3D/Camera3D2"]
+[node name="Shake" type="Node" parent="Camera3D2"]
 script = ExtResource("3_shpt0")
 use_accessibility = true
 z_scale = 0.0
@@ -37,4 +36,4 @@ z_scale = 0.0
 mouse_filter = 1
 player = NodePath("../../Player")
 
-[connection signal="translate_3d" from="Marker3D/Camera3D2/Shake" to="Marker3D/Camera3D2" method="translate"]
+[connection signal="translate_3d" from="Camera3D2/Shake" to="Camera3D2" method="translate"]
