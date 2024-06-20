@@ -48,11 +48,9 @@ func _input(_event):
 	if Input.is_action_just_pressed("shoot"):
 		if (is_level_finished):
 			if (firstplaced):
-				if (firstPortal.deletable):
-					firstPortal.queue_free()
+				firstPortal.queue_free()
 			if (secondplaced):
-				if (secondPortal.deletable):
-					secondPortal.queue_free()
+				secondPortal.queue_free()
 			set_process_input(false)
 			velocity = Vector3.ZERO
 			await get_tree().create_timer(1.5, false).timeout

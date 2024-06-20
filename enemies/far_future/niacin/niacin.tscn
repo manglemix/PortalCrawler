@@ -370,7 +370,7 @@ no_depth_test = true
 texture_filter = 0
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_3hm6u")
-animation = &"attack_up"
+animation = &"attack_down"
 script = ExtResource("12_3c0g5")
 character = NodePath("../..")
 

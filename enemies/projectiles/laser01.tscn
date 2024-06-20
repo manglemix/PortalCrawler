@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://jr7h7x8hwhpb"]
+[gd_scene load_steps=6 format=3 uid="uid://jr7h7x8hwhpb"]
 
 [ext_resource type="Script" path="res://enemies/projectiles/basic_projectile.gd" id="1_gklsc"]
 [ext_resource type="Texture2D" uid="uid://btftjw14lb2s7" path="res://enemies/projectiles/laser projectile.webp" id="2_0smde"]
+[ext_resource type="AudioStream" uid="uid://crrm0r8t3jgcl" path="res://enemies/test_zone/test01/laser_bullet.wav" id="3_ujakc"]
+[ext_resource type="Script" path="res://scripts/persistent_sound.gd" id="4_3jxoo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sq72s"]
 radius = 0.15
@@ -25,3 +27,12 @@ no_depth_test = true
 texture_filter = 0
 render_priority = 4
 texture = ExtResource("2_0smde")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ujakc")
+volume_db = 40.0
+max_db = 6.0
+autoplay = true
+bus = &"Level SFX"
+doppler_tracking = 2
+script = ExtResource("4_3jxoo")

@@ -12,10 +12,12 @@ script = ExtResource("1_0fj1p")
 [node name="Intro" parent="." node_paths=PackedStringArray("player", "camera") instance=ExtResource("1_bxhde")]
 player = NodePath("../Player")
 camera = NodePath("../Camera3D2")
-is_empty = false
 
 [node name="Player" parent="." instance=ExtResource("2_dxy41")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74032, 0, -0.0123425)
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Player"]
+current = true
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 121.495, 0)
