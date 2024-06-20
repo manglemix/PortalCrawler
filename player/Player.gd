@@ -36,6 +36,14 @@ var is_level_finished := false
 
 var adjusting
 
+@onready var leftheld = false
+@onready var rightheld = false
+@onready var downheld = false
+@onready var upheld = false
+
+@onready var switch = false
+@onready var neg_x = false
+@onready var neg_z = false
 # hotfix for making sure the node is named properly, remove later
 func _ready():
 	name = "Player"
@@ -99,6 +107,8 @@ func _input(_event):
 			look_at(mouse_pos)
 			$Billboard/CharacterSprite.attack()
 			$Windup.start()
+			
+	
 
 
 func _physics_process(_delta):
@@ -114,24 +124,35 @@ func _get_movement():
 		direction.x += 1
 		if $Windup.is_stopped():
 			rotation.y = - PI / 2
+	else:
+		rightheld = false
 	if Input.is_action_pressed("left"):
 		direction.x -= 1
 		if $Windup.is_stopped():
 			rotation.y = PI / 2
+	else:
+		leftheld = false
 	if Input.is_action_pressed("down"):
 		direction.z += 1
 		if $Windup.is_stopped():
 			rotation.y = PI
+	else:
+		downheld = false
 	if Input.is_action_pressed("up"):
 		direction.z -= 1
 		if $Windup.is_stopped():
 			rotation.y = 0.0
+	else:
+		upheld = false
+	
+
 		
 	# applying movement
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
+	target_velocity = change_input(target_velocity)
 	velocity = target_velocity
 
 func _on_damaged(_health_change: int) -> void:
@@ -244,7 +265,25 @@ func _on_windup_timeout():
 		Damageable.damage_node_once(body, 1)
 	$Cooldown.start()
 
-
+func change_input(target_velocity):
+	if (!leftheld && !rightheld && !upheld && !downheld):
+		print("not changing")
+		return target_velocity
+	if (neg_x):
+		target_velocity.x = -target_velocity.x 
+	if (neg_z):
+		target_velocity.z = -target_velocity.z
+	if (switch):
+		var temp = target_velocity.x
+		target_velocity.x = target_velocity.z
+		target_velocity.z = temp
+	return target_velocity
+	
+func set_input_change(g_switch: bool, g_xneg: bool, g_zneg: bool):
+	switch = g_switch
+	neg_x = g_xneg
+	neg_z = g_zneg
+	
 func _on_ray_delay_timeout():
 	_create_portal()
 
@@ -252,7 +291,6 @@ func _on_ray_delay_timeout():
 func _on_level_advanced() -> void:
 	set_process_input(true)
 	is_level_finished = false
-
 
 func _on_level_finished() -> void:
 	is_level_finished = true
