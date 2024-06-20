@@ -41,16 +41,3 @@ func set_player(player: Player) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("kill_all"):
 		queue_free()
-
-
-func _on_died():
-	queue_free()
-
-
-func _on_flash_timer_timeout():
-	$Billboard/AnimatedSprite3D.modulate = Color.WHITE
-
-
-func _on_health_health_changed(_new_health):
-	$FlashTimer.start()
-	$Billboard/AnimatedSprite3D.modulate = Color.RED

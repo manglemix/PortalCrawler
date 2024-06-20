@@ -108,3 +108,9 @@ func die() -> void:
 	play(death)
 	await animation_finished
 	death_animation_finished.emit()
+
+
+func damage_flash(_damage: int):
+	modulate = Color.RED
+	await get_tree().create_timer(0.1, false).timeout
+	modulate = Color.WHITE
