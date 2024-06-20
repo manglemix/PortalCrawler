@@ -1,3 +1,4 @@
+class_name Portal
 extends StaticBody3D
 
 # some nodes for easy access later
@@ -40,20 +41,26 @@ func _set_partner(partner):
 	p = partner
 
 func _physics_process(_delta):
-	# if there is no partner then no work is needed, return
-	if(p == null):
-			return
+
 	# check all overlapping bodies to see if they need to be teleported
 	var bodies = collider.get_overlapping_bodies()
 	for body in bodies:
-		# SPECIFICALLY target_velocity must exist for objects to be teleported, normal velocity
-		# values do not work because the real velocity value will often drop to 0 when the object hits
-		# the wall the portal is on before being checked for teleportation
-		if (!check_velocity(body.target_velocity)):
+		# if there is no partner then no work is needed, return
+		if(p == null):
+			print(body.name)
+			if (body.name.begins_with("Basic")):
+				body.queue_free()
 			return
+		if (body.name == "Player"):
+			if (!check_velocity(body.target_velocity)):
+				return
+		else:
+			if (!check_rotation(body.rotation)):
+				return
 		# get the objects y value because that does not change, then teleport it
 		var bodyY = body.get_global_position().y
 		body.set_global_position(Vector3(p.cXOffset, bodyY, p.cZOffset))
+		body.get_node("Teleportable")._teleported(self, p)
 		
 # small helper function that checks if the object hitting
 # a portals collider is moving with any velocity into the portal
@@ -66,6 +73,16 @@ func check_velocity(velocity):
 		return velocity.z < 0
 	if (facing == 'd'):
 		return velocity.z > 0
+		
+func check_rotation(g_rotation):
+	if (facing == 'l'):
+		return g_rotation.y > 0 && g_rotation.y < PI
+	if (facing == 'r'):
+		return g_rotation.y < 0 && g_rotation.y > -PI
+	if (facing == 'u'):
+		return g_rotation.y > -PI/2 && g_rotation.y < PI/2
+	if (facing == 'd'):
+		return g_rotation.y > PI/2 || g_rotation.y < -PI/2
 
 
 func _on_mouse_area_mouse_entered():

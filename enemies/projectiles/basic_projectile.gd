@@ -22,6 +22,8 @@ func _physics_process(delta: float) -> void:
 		_first_frame = false
 		
 	else:
+		if (data.get_collider().name.begins_with("portal")):
+			return
 		var damageable := Damageable.get_damageable_component(data.get_collider())
 		if damageable == null:
 			if _first_frame:

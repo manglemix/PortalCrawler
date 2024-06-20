@@ -1,7 +1,8 @@
-[gd_scene load_steps=45 format=3 uid="uid://bxwtr1d55wqmr"]
+[gd_scene load_steps=46 format=3 uid="uid://backxhi5b3hx3"]
 
 [ext_resource type="Script" path="res://enemies/projectiles/basic_projectile.gd" id="1_lvfrw"]
 [ext_resource type="Texture2D" uid="uid://dllapu7wfkpkk" path="res://enemies/projectiles/bullet.webp" id="2_itw1d"]
+[ext_resource type="Script" path="res://components/teleportable.gd" id="3_qy5sj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sq72s"]
 radius = 0.15
@@ -296,7 +297,7 @@ func _ready():
 "
 
 [node name="Basic" type="CharacterBody3D"]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_lvfrw")
 
@@ -316,3 +317,6 @@ render_priority = 4
 sprite_frames = SubResource("SpriteFrames_jubel")
 animation = &"loop"
 script = SubResource("GDScript_ii538")
+
+[node name="Teleportable" type="Node" parent="."]
+script = ExtResource("3_qy5sj")
