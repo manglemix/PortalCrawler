@@ -1,17 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://i8o4vpybofdi"]
+[gd_scene load_steps=11 format=3 uid="uid://i8o4vpybofdi"]
 
 [ext_resource type="PackedScene" uid="uid://b4b167iws1oba" path="res://levels/far_future/cerium/cerium.gltf" id="1_yccob"]
 [ext_resource type="Script" path="res://levels/level.gd" id="2_en1m3"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="2_unl7x"]
+[ext_resource type="AudioStream" uid="uid://bg5ahhcsiuvvj" path="res://music/Botanic Panic.mp3" id="3_d1i6a"]
 [ext_resource type="Script" path="res://scripts/difficulty_range.gd" id="5_eljbl"]
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="6_6wcjq"]
 [ext_resource type="PackedScene" uid="uid://8880ddb48ucy" path="res://enemies/far_future/niacin/niacin.tscn" id="7_awq4a"]
 [ext_resource type="Script" path="res://enemies/spawners/staged_spawner.gd" id="7_nedqd"]
+[ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="9_hty2g"]
+[ext_resource type="AudioStream" uid="uid://bqhkq8yb8yobe" path="res://music/Floral Fury.mp3" id="10_4u3jk"]
 
 [node name="Cerium" node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("1_yccob")]
 script = ExtResource("2_en1m3")
 next_level = "res://levels/far_past/sid/sid.tscn"
 player_spawn_point = NodePath("PlayerSpawnPoint")
+music = ExtResource("3_d1i6a")
 
 [node name="Lights" type="Node3D" parent="." index="5"]
 
@@ -93,6 +97,9 @@ script = ExtResource("7_nedqd")
 scenes = Array[PackedScene]([null, ExtResource("7_awq4a")])
 
 [node name="PlayerSpawnPoint" type="Marker3D" parent="." index="8"]
+
+[node name="LevelMusicPlayer" parent="PlayerSpawnPoint" index="0" instance=ExtResource("9_hty2g")]
+stream = ExtResource("10_4u3jk")
 
 [connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]
 [connection signal="finished" from="DifficultyRange/StagedSpawner" to="DifficultyRange/SignalBarrier" method="receive"]

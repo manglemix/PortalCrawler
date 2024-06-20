@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dllapu7wfkpkk" path="res://enemies/projectiles/bullet.webp" id="2_itw1d"]
 [ext_resource type="Script" path="res://components/teleportable.gd" id="3_qy5sj"]
 
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_sq72s"]
 radius = 0.15
 

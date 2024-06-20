@@ -4,6 +4,7 @@ extends Node3D
 
 
 const NEXT_LEVEL_DISTANCE := 40.0
+const TRAVEL_DURATION := 1.0
 
 signal level_complete
 
@@ -18,9 +19,12 @@ signal level_complete
 		update_configuration_warnings()
 
 @export var is_empty := false
+@export var music: AudioStream
 
 var _player: Player
 var _camera: Camera3D
+
+@onready var _level_music_player: AudioStreamPlayer3D = player_spawn_point.get_node("LevelMusicPlayer")
 
 
 func _get_configuration_warnings() -> PackedStringArray:
@@ -58,7 +62,12 @@ func set_player(player: Player) -> void:
 		enemy.set_player(player)
 	
 	_player.advancing_level.connect(_advance_level)
-	_player.global_position = player_spawn_point.global_position
+	_player.global_position = get_player_spawnpoint()
+	_level_music_player.reparent(_player)
+
+
+func get_player_spawnpoint() -> Vector3:
+	return player_spawn_point.global_position
 
 
 func set_camera(camera: Camera3D) -> void:
@@ -90,16 +99,17 @@ func _advance_level() -> void:
 			)		\
 			.set_trans(Tween.TRANS_CUBIC)
 		await get_tree().create_timer(0.15, false).timeout
+		_level_music_player.reparent(self)
 		var slide_tween := _camera		\
 			.create_tween()		\
 			.tween_property(
 				_camera,
 				"position",
 				Vector3(next_level_node.position.x, _camera.position.y, next_level_node.position.z),
-				1.0
+				TRAVEL_DURATION
 			)		\
 			.set_trans(Tween.TRANS_CUBIC)
-		await get_tree().create_timer(0.7, false).timeout
+		await get_tree().create_timer(TRAVEL_DURATION - 0.3, false).timeout
 		_camera		\
 			.create_tween()		\
 			.tween_property(
