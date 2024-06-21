@@ -19,7 +19,6 @@ signal level_complete
 		update_configuration_warnings()
 
 @export var is_empty := false
-@export var music: AudioStream
 
 var _player: Player
 var _camera: Camera3D
@@ -81,48 +80,59 @@ func _on_finished() -> void:
 
 func _advance_level() -> void:
 	var next_level_node: Level = load(next_level).instantiate()
+	var travel := Vector3.ZERO
 	while true:
-		var travel := Vector3(randf() * 2 - 1, 0, randf() * 2 - 1).normalized()
-		if !travel.is_normalized():
-			continue
-		travel *= NEXT_LEVEL_DISTANCE
-		next_level_node.position = position + travel
-		get_parent().add_child(next_level_node)
-		get_parent().move_child(next_level_node, 0)
-		_camera		\
-			.create_tween()		\
-			.tween_property(
-				_camera,
-				"fov",
-				5,
-				0.3
-			)		\
-			.set_trans(Tween.TRANS_CUBIC)
-		await get_tree().create_timer(0.15, false).timeout
-		_level_music_player.reparent(self)
-		var slide_tween := _camera		\
-			.create_tween()		\
-			.tween_property(
-				_camera,
-				"position",
-				Vector3(next_level_node.position.x, _camera.position.y, next_level_node.position.z),
-				TRAVEL_DURATION
-			)		\
-			.set_trans(Tween.TRANS_CUBIC)
-		await get_tree().create_timer(TRAVEL_DURATION - 0.3, false).timeout
-		_camera		\
-			.create_tween()		\
-			.tween_property(
-				_camera,
-				"fov",
-				3.8,
-				0.3
-			)		\
-			.set_trans(Tween.TRANS_CUBIC)
-		await slide_tween.finished
-		queue_free()
-		next_level_node.set_camera(_camera)
-		next_level_node.set_player(_player)
-		_player._on_level_advanced()
-		break
-	
+		travel = Vector3(randf() * 2 - 1, 0, randf() * 2 - 1).normalized()
+		if travel.is_normalized():
+			break
+	travel *= NEXT_LEVEL_DISTANCE
+	next_level_node.position = position + travel
+	get_parent().add_child(next_level_node)
+	get_parent().move_child(next_level_node, 0)
+	_camera		\
+		.create_tween()		\
+		.tween_property(
+			_camera,
+			"fov",
+			5,
+			0.3
+		)		\
+		.set_trans(Tween.TRANS_CUBIC)
+	await get_tree().create_timer(0.15, false).timeout
+	_level_music_player.reparent(self)
+	var audio_listener: AudioListener3D = _player.get_node("AudioListener3D")
+	audio_listener.reparent(get_viewport())
+	audio_listener		\
+		.create_tween()		\
+		.tween_property(
+			audio_listener,
+			"position",
+			next_level_node.get_player_spawnpoint(),
+			TRAVEL_DURATION
+		)		\
+		.set_trans(Tween.TRANS_CUBIC)
+	var slide_tween := _camera		\
+		.create_tween()		\
+		.tween_property(
+			_camera,
+			"position",
+			Vector3(next_level_node.position.x, _camera.position.y, next_level_node.position.z),
+			TRAVEL_DURATION
+		)		\
+		.set_trans(Tween.TRANS_CUBIC)
+	await get_tree().create_timer(TRAVEL_DURATION - 0.3, false).timeout
+	_camera		\
+		.create_tween()		\
+		.tween_property(
+			_camera,
+			"fov",
+			3.8,
+			0.3
+		)		\
+		.set_trans(Tween.TRANS_CUBIC)
+	await slide_tween.finished
+	queue_free()
+	next_level_node.set_camera(_camera)
+	next_level_node.set_player(_player)
+	audio_listener.reparent(_player)
+	_player._on_level_advanced()

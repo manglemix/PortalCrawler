@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://i8o4vpybofdi"]
+[gd_scene load_steps=10 format=3 uid="uid://i8o4vpybofdi"]
 
 [ext_resource type="PackedScene" uid="uid://b4b167iws1oba" path="res://levels/far_future/cerium/cerium.gltf" id="1_yccob"]
 [ext_resource type="Script" path="res://levels/level.gd" id="2_en1m3"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="2_unl7x"]
-[ext_resource type="AudioStream" uid="uid://bg5ahhcsiuvvj" path="res://music/Botanic Panic.mp3" id="3_d1i6a"]
 [ext_resource type="Script" path="res://scripts/difficulty_range.gd" id="5_eljbl"]
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="6_6wcjq"]
 [ext_resource type="PackedScene" uid="uid://8880ddb48ucy" path="res://enemies/far_future/niacin/niacin.tscn" id="7_awq4a"]
@@ -15,7 +14,6 @@
 script = ExtResource("2_en1m3")
 next_level = "res://levels/far_past/sid/sid.tscn"
 player_spawn_point = NodePath("PlayerSpawnPoint")
-music = ExtResource("3_d1i6a")
 
 [node name="Lights" type="Node3D" parent="." index="5"]
 

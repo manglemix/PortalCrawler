@@ -34,7 +34,7 @@ script = ExtResource("3_srx3o")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_e7ios")
+attenuation_model = 3
 volume_db = 80.0
-autoplay = true
 bus = &"Level SFX"
 script = ExtResource("5_3xo2e")
