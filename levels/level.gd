@@ -60,7 +60,8 @@ func set_player(player: Player) -> void:
 			continue
 		enemy.set_player(player)
 	
-	_player.advancing_level.connect(_advance_level)
+	_player.advancing_level.connect(_advance_level.bind(next_level))
+	_player.reset_game.connect(_advance_level.bind("res://levels/special/intro/intro.tscn"))
 	_player.global_position = get_player_spawnpoint()
 	_level_music_player.reparent(_player)
 
@@ -78,8 +79,8 @@ func _on_finished() -> void:
 	_player._on_level_finished()
 
 
-func _advance_level() -> void:
-	var next_level_node: Level = load(next_level).instantiate()
+func _advance_level(to: String) -> void:
+	var next_level_node: Level = load(to).instantiate()
 	var travel := Vector3.ZERO
 	while true:
 		travel = Vector3(randf() * 2 - 1, 0, randf() * 2 - 1).normalized()

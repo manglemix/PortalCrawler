@@ -21,12 +21,10 @@ extends Level
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-	if player == null:
-		push_error(\"player must be provided in intro_level\")
-	if camera == null:
-		push_error(\"camera must be provided\")
-	set_player(player)
-	set_camera(camera)
+	if player != null:
+		set_player(player)
+	if camera != null:
+		set_camera(camera)
 "
 
 [node name="Intro" node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("1_pnk1a")]

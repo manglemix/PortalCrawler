@@ -35,6 +35,8 @@ func set_health(new_health: int):
 		if not _died:
 			died.emit()
 			_died = true
+	else:
+		_died = false
 
 
 func set_max_health(new_max_health: int):

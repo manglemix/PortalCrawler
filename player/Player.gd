@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 signal advancing_level
+signal reset_game
 
 # exported vars
 @export var speed = 5
@@ -291,6 +292,15 @@ func _on_ray_delay_timeout():
 func _on_level_advanced() -> void:
 	set_process_input(true)
 	is_level_finished = false
+	
+	var health: Health = $Health
+	if health.health == 0:
+		health.health = health.max_health
+		$Billboard/CharacterSprite.reset()
+		set_physics_process(true)
 
 func _on_level_finished() -> void:
 	is_level_finished = true
+
+func _on_death_animation_finished() -> void:
+	reset_game.emit()

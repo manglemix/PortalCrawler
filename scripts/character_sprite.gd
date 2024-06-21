@@ -110,6 +110,11 @@ func die() -> void:
 	death_animation_finished.emit()
 
 
+func reset() -> void:
+	_dying = false
+	set_process(true)
+
+
 func damage_flash(_damage: int):
 	modulate = Color.RED
 	await get_tree().create_timer(0.1, false).timeout
