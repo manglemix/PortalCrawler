@@ -336,6 +336,7 @@ pullable_from = [NodePath("../Death")]
 script = ExtResource("7_3xg66")
 chase_speed = 1.7
 min_distance = null
+line_of_sight_check = null
 pullable_from = [NodePath("../Death"), NodePath("../PermaWander")]
 
 [node name="ChaseLastPosition" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]

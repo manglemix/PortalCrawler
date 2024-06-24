@@ -1,18 +1,20 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpmfr1b26ccye"]
+[gd_scene load_steps=20 format=3 uid="uid://dpmfr1b26ccye"]
 
-[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_nv1k3"]
+[ext_resource type="Script" path="res://enemies/bosses/mage/mage_boss.gd" id="1_hwhin"]
 [ext_resource type="Script" path="res://components/health.gd" id="2_7y35l"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="3_g2a4m"]
 [ext_resource type="Script" path="res://scripts/nav/overlapping_nav_agent_3d.gd" id="4_xy5a5"]
 [ext_resource type="Script" path="res://enemies/state_machine/enemy_state_machine.gd" id="5_d7fgn"]
 [ext_resource type="Script" path="res://enemies/state_machine/wait_for_player.gd" id="6_l1guq"]
+[ext_resource type="Script" path="res://enemies/bosses/mage/transparent.gd" id="7_ydkni"]
+[ext_resource type="Script" path="res://enemies/bosses/mage/tired.gd" id="9_m7kon"]
 [ext_resource type="Script" path="res://enemies/state_machine/perma_wander.gd" id="9_mx6lk"]
 [ext_resource type="Script" path="res://scripts/billboard.gd" id="10_f4g1v"]
+[ext_resource type="Script" path="res://enemies/bosses/mage/direct_attack.gd" id="10_u6epo"]
 [ext_resource type="Texture2D" uid="uid://cirgyej8vtrrl" path="res://enemies/test_zone/test01/wizard.png" id="11_hrmgc"]
 [ext_resource type="Texture2D" uid="uid://cwpb732w6vs7r" path="res://enemies/test_zone/test01/wizard_side.png" id="12_7wwmr"]
 [ext_resource type="Script" path="res://scripts/character_sprite.gd" id="13_hnjo7"]
-[ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="14_7a1q8"]
-[ext_resource type="PackedScene" uid="uid://jr7h7x8hwhpb" path="res://enemies/projectiles/laser01.tscn" id="15_soq33"]
+[ext_resource type="PackedScene" uid="uid://ki3827lfk7f6" path="res://enemies/laser/laser.tscn" id="13_o5g7e"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
 height = 0.8
@@ -81,10 +83,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Test01" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
+[sub_resource type="GDScript" id="GDScript_jx6vt"]
+script/source = "extends Node3D
+
+
+func _physics_process(delta: float) -> void:
+	rotation.y += 0.35 * delta
+"
+
+[node name="Mage" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
 collision_layer = 4
 axis_lock_linear_y = true
-script = ExtResource("1_nv1k3")
+script = ExtResource("1_hwhin")
 navigation = NodePath("NavigationAgent3D")
 state_machine = NodePath("EnemyStateMachine")
 
@@ -94,8 +104,8 @@ shape = SubResource("CylinderShape3D_vtf4t")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_7y35l")
-health = 2
-max_health = 2
+health = 20
+max_health = 20
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("3_g2a4m")
@@ -108,7 +118,7 @@ path_max_distance = 0.61
 path_metadata_flags = 0
 avoidance_enabled = true
 neighbor_distance = 10.0
-max_speed = 1.0
+max_speed = 5.0
 script = ExtResource("4_xy5a5")
 
 [node name="EnemyStateMachine" type="Node" parent="."]
@@ -116,6 +126,17 @@ script = ExtResource("5_d7fgn")
 
 [node name="WaitForPlayer" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("6_l1guq")
+
+[node name="Transparent" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
+script = ExtResource("7_ydkni")
+pullable_from = [NodePath("../PermaWander")]
+
+[node name="DirectAttack" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
+script = ExtResource("10_u6epo")
+pullable_from = [NodePath("../PermaWander")]
+
+[node name="Tired" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("9_m7kon")
 
 [node name="PermaWander" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("9_mx6lk")
@@ -135,7 +156,7 @@ script = ExtResource("10_f4g1v")
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Billboard" node_paths=PackedStringArray("character")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 offset = Vector2(0, 30)
-pixel_size = 0.02
+pixel_size = 0.05
 double_sided = false
 no_depth_test = true
 texture_filter = 0
@@ -145,13 +166,42 @@ animation = &"idle_up"
 script = ExtResource("13_hnjo7")
 character = NodePath("../..")
 
-[node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.671, -0.238)
-script = ExtResource("14_7a1q8")
-projectile = ExtResource("15_soq33")
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+remote_path = NodePath("../4Laser")
+update_rotation = false
+update_scale = false
+
+[node name="DirectAttackLaser" parent="RemoteTransform3D" instance=ExtResource("13_o5g7e")]
+visible = false
+
+[node name="4Laser" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+top_level = true
+visible = false
+script = SubResource("GDScript_jx6vt")
+
+[node name="Laser" parent="4Laser" instance=ExtResource("13_o5g7e")]
+
+[node name="Laser2" parent="4Laser" instance=ExtResource("13_o5g7e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Laser3" parent="4Laser" instance=ExtResource("13_o5g7e")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Laser4" parent="4Laser" instance=ExtResource("13_o5g7e")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
 
 [connection signal="died" from="Health" to="." method="queue_free"]
 [connection signal="health_changed" from="Health" to="Billboard/AnimatedSprite3D" method="flash"]
 [connection signal="damaged" from="Damageable" to="Health" method="change_health"]
 [connection signal="damaged" from="Damageable" to="Billboard/AnimatedSprite3D" method="damage_flash"]
-[connection signal="timeout" from="AttackTimer" to="Billboard/ProjectileSpawner" method="spawn"]
+[connection signal="player_received" from="EnemyStateMachine/WaitForPlayer" to="EnemyStateMachine/Transparent" method="enter"]
+[connection signal="entered" from="EnemyStateMachine/Transparent" to="Damageable" method="set_invincible" binds= [true]]
+[connection signal="exited" from="EnemyStateMachine/Transparent" to="Damageable" method="set_invincible" binds= [false]]
+[connection signal="transparency_finished" from="EnemyStateMachine/Transparent" to="EnemyStateMachine/DirectAttack" method="enter"]
+[connection signal="attack_finished" from="EnemyStateMachine/DirectAttack" to="EnemyStateMachine/Tired" method="enter"]
+[connection signal="entered" from="EnemyStateMachine/DirectAttack" to="RemoteTransform3D/DirectAttackLaser" method="set_visible" binds= [true]]
+[connection signal="exited" from="EnemyStateMachine/DirectAttack" to="RemoteTransform3D/DirectAttackLaser" method="set_visible" binds= [false]]
+[connection signal="player_position" from="EnemyStateMachine/DirectAttack" to="RemoteTransform3D/DirectAttackLaser" method="aim_at"]
+[connection signal="tired_finished" from="EnemyStateMachine/Tired" to="EnemyStateMachine/Transparent" method="enter"]

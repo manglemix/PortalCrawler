@@ -12,8 +12,8 @@ signal reset_game
 @onready var raydelay = $RayDelay
 @onready var AttackArea = $AttackArea
 
-var portal = preload("res://object_scenes/portal.tscn")
-var p_bullet = preload("res://object_scenes/portal_bullet.tscn")
+var portal = preload("res://player/portal/portal.tscn")
+var p_bullet = preload("res://player/portal/portal_bullet.tscn")
 var yellowP = preload("res://player/yellow portal.webp")
 var purpleP = preload("res://player/purple portal.webp")
 

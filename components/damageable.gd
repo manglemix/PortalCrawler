@@ -6,6 +6,12 @@ extends Node
 signal damaged(health_change: int)
 
 @export var damage_multiplier := 1.0
+@export var invincible := false:
+	set = set_invincible
+
+func set_invincible(value: bool) -> void:
+	invincible = value
+
 
 func _get_configuration_warnings() -> PackedStringArray:
 	if name != "Damageable":
@@ -19,6 +25,8 @@ func _ready() -> void:
 
 
 func damage_once(damage: int):
+	if invincible:
+		return
 	damaged.emit(roundi(- damage * damage_multiplier))
 
 

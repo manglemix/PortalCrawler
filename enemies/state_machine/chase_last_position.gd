@@ -33,6 +33,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	
 	if player.global_position.distance_to(global_transform.origin) <= min_distance:
-		navigate_to_next_path_position(0)
+		linear_velocity = Vector3.ZERO
+		look_at(player.global_position)
 	else:
 		navigate_to_next_path_position(chase_speed)

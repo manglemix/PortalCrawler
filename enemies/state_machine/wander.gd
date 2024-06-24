@@ -12,7 +12,7 @@ signal player_spotted
 func _enter() -> void:
 	super()
 	set_physics_process(true)
-	set_navigation_target(random_target(global_transform.origin))
+	set_navigation_target(Wander.random_target(global_transform.origin))
 
 
 static func random_target(from: Vector3) -> Vector3:
@@ -24,5 +24,5 @@ func _physics_process(_delta: float) -> void:
 		exit(player_spotted)
 		return
 	if navigation.is_navigation_finished():
-		set_navigation_target(random_target(global_transform.origin))
+		set_navigation_target(Wander.random_target(global_transform.origin))
 	navigate_to_next_path_position(wander_speed)

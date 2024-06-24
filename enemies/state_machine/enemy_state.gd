@@ -85,7 +85,16 @@ func navigate_to_next_path_position(speed: float) -> void:
 	next_pos.y = global_transform.origin.y
 	navigation.velocity = (next_pos - global_transform.origin).normalized() * speed
 	if next_pos.distance_squared_to(global_transform.origin) > 0.05:
-		global_transform = global_transform.looking_at(next_pos)
+		look_at(next_pos)
+
+
+func stop_navigation() -> void:
+	set_navigation_target(global_transform.origin)
+	linear_velocity = Vector3.ZERO
+
+
+func look_at(position: Vector3) -> void:
+	_enemy.look_at(position)
 
 
 ## fov is in radians
