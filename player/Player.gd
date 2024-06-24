@@ -82,7 +82,7 @@ func _input(_event):
 		# Check if we're deleting portals
 		if (firstplaced):
 			if (firstPortal.deletable):
-				storedTexture = firstPortal.get_node("Sprite3D").get_texture()
+				#storedTexture = firstPortal.get_node("Sprite3D").get_texture()
 				firstPortal.queue_free()
 				firstPortal = null
 				if (secondplaced):
@@ -91,7 +91,7 @@ func _input(_event):
 				return
 		if (secondplaced):
 			if (secondPortal.deletable):
-				storedTexture = secondPortal.get_node("Sprite3D").get_texture()
+				#storedTexture = secondPortal.get_node("Sprite3D").get_texture()
 				secondPortal.queue_free()
 				secondPortal = null
 				if (firstplaced):
@@ -230,14 +230,14 @@ func _create_portal():
 		
 	if (!firstplaced || hitobject == firstPortal):
 		if (firstPortal != null):
-			newportal.get_node("Sprite3D").set_texture(firstPortal.get_node("Sprite3D").get_texture())
+			#newportal.get_node("Sprite3D").set_texture(firstPortal.get_node("Sprite3D").get_texture())
 			firstPortal.queue_free()
 		else:
 			if (storedTexture != null && secondplaced):
-				newportal.get_node("Sprite3D").set_texture(storedTexture)
+				#newportal.get_node("Sprite3D").set_texture(storedTexture)
 				storedTexture = null
-			else:
-				newportal.get_node("Sprite3D").set_texture(purpleP)
+			#else:
+				#newportal.get_node("Sprite3D").set_texture(purpleP)
 		firstPortal = newportal
 		firstplaced = true
 		if (secondplaced):
@@ -245,14 +245,14 @@ func _create_portal():
 			firstPortal._set_partner(secondPortal)
 	elif (!secondplaced || hitobject == secondPortal):
 		if (secondPortal != null):
-			newportal.get_node("Sprite3D").set_texture(secondPortal.get_node("Sprite3D").get_texture())
+			#newportal.get_node("Sprite3D").set_texture(secondPortal.get_node("Sprite3D").get_texture())
 			secondPortal.queue_free()
 		else:
 			if (storedTexture != null):
-				newportal.get_node("Sprite3D").set_texture(storedTexture)
+				#newportal.get_node("Sprite3D").set_texture(storedTexture)
 				storedTexture = null
-			else:
-				newportal.get_node("Sprite3D").set_texture(yellowP)
+			#else:
+				#newportal.get_node("Sprite3D").set_texture(yellowP)
 		secondPortal = newportal
 		secondplaced = true
 		secondPortal._set_partner(firstPortal)
@@ -262,10 +262,10 @@ func _create_portal():
 		firstPortal = secondPortal
 		secondPortal = newportal
 		if (!next):
-			secondPortal.get_node("Sprite3D").set_texture(purpleP)
+			#secondPortal.get_node("Sprite3D").set_texture(purpleP)
 			next = true
 		else:
-			secondPortal.get_node("Sprite3D").set_texture(yellowP)
+			#secondPortal.get_node("Sprite3D").set_texture(yellowP)
 			next = false
 		secondPortal._set_partner(firstPortal)
 		firstPortal._set_partner(secondPortal)
@@ -280,6 +280,7 @@ func _on_windup_timeout():
 		Damageable.damage_node_once(body, 1)
 	$Cooldown.start()
 
+@warning_ignore("shadowed_variable")
 func change_input(target_velocity):
 	if (!leftheld && !rightheld && !upheld && !downheld):
 		print("not changing")

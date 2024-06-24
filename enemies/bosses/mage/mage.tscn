@@ -104,7 +104,6 @@ shape = SubResource("CylinderShape3D_vtf4t")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_7y35l")
-health = 20
 max_health = 20
 
 [node name="Damageable" type="Node" parent="."]

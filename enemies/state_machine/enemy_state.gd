@@ -16,6 +16,8 @@ var linear_velocity: Vector3:
 	set = set_linear_velocity, get = get_linear_velocity
 var global_transform: Transform3D:
 	set = set_global_transform, get = get_global_transform
+var transform: Transform3D:
+	set = set_transform, get = get_transform
 
 
 func _ready() -> void:
@@ -52,6 +54,18 @@ func get_global_transform() -> Transform3D:
 
 
 @warning_ignore("shadowed_variable")
+func set_transform(transform: Transform3D) -> void:
+	if is_active():
+		_enemy.transform = transform
+	else:
+		push_error("Cannot set transform of EnemyState if not active")
+
+
+func get_transform() -> Transform3D:
+	return _enemy.transform
+
+
+@warning_ignore("shadowed_variable")
 func set_navigation(navigation: NavigationAgent3D) -> void:
 	self.navigation = navigation
 
@@ -66,16 +80,19 @@ func set_enemy(enemy: Enemy) -> void:
 
 
 func _enter() -> void:
-	navigation.velocity_computed.connect(set_linear_velocity)
+	_last_nav_target_time = 0
 
 
 func _exit() -> void:
-	navigation.velocity_computed.disconnect(set_linear_velocity)
+	if navigation.velocity_computed.is_connected(set_linear_velocity):
+		navigation.velocity_computed.disconnect(set_linear_velocity)
 
 
 func set_navigation_target(target_position: Vector3) -> void:
 	if Time.get_ticks_msec() - _last_nav_target_time < MIN_NAV_RETARGET_DURATION:
 		return
+	if !navigation.velocity_computed.is_connected(set_linear_velocity):
+		navigation.velocity_computed.connect(set_linear_velocity)
 	_last_nav_target_time = Time.get_ticks_msec()
 	navigation.target_position = target_position
 
@@ -89,7 +106,10 @@ func navigate_to_next_path_position(speed: float) -> void:
 
 
 func stop_navigation() -> void:
-	set_navigation_target(global_transform.origin)
+	if navigation.velocity_computed.is_connected(set_linear_velocity):
+		navigation.velocity_computed.disconnect(set_linear_velocity)
+	_last_nav_target_time = Time.get_ticks_msec()
+	navigation.target_position = global_transform.origin
 	linear_velocity = Vector3.ZERO
 
 
