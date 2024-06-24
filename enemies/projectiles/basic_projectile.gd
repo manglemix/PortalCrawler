@@ -2,10 +2,13 @@ class_name BasicProjectile
 extends CharacterBody3D
 
 const MAX_DURATION := 10.0
+const NOCLIP_DURATION := 0.2
 
 @export var speed := 4.5
+@export var damage := 1
 
-var _first_frame := true
+var _noclip_timer := NOCLIP_DURATION
+var _noclipping := true
 
 
 func _ready():
@@ -15,21 +18,22 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	var data := move_and_collide(global_transform.basis.z * - speed * delta)
 	
-	if data == null:
-		if _first_frame:
-			for node in get_collision_exceptions():
-				remove_collision_exception_with(node)
-		_first_frame = false
-		
-	else:
+	if data != null:
 		if (data.get_collider().name.begins_with("portal")):
 			return
 		var damageable := Damageable.get_damageable_component(data.get_collider())
 		if damageable == null:
-			if _first_frame:
+			if _noclipping:
 				add_collision_exception_with(data.get_collider())
-				return
+			else:
+				queue_free()
 		else:
-			damageable.damage_once(1)
-		queue_free()
+			damageable.damage_once(damage)
+			queue_free()
 	
+	if _noclipping:
+		_noclip_timer -= delta
+		if _noclip_timer <= 0.0:
+			for node in get_collision_exceptions():
+				remove_collision_exception_with(node)
+			_noclipping = false

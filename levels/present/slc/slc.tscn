@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b77y4p2jf1vb1"]
+[gd_scene load_steps=26 format=3 uid="uid://b77y4p2jf1vb1"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_jwdw5"]
 [ext_resource type="Texture2D" uid="uid://bdi7wkqpyh1lm" path="res://levels/present/slc/ConcretePrecastPlates004_COL_1K_METALNESS.png" id="3_bx2ht"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="12_w76t8"]
 [ext_resource type="Script" path="res://enemies/spawners/staged_spawner.gd" id="13_tyxir"]
 [ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/test_zone/test01/test01.tscn" id="14_bydcy"]
+[ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="14_q3rdv"]
+[ext_resource type="AudioStream" uid="uid://drm11ek0ib4x8" path="res://music/futuristicBG_sound.mp3" id="15_n0q5f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s66up"]
 resource_name = "ConcretePrecastPlates004_1K"
@@ -293,6 +295,9 @@ script = ExtResource("13_tyxir")
 scenes = Array[PackedScene]([null, ExtResource("14_bydcy")])
 
 [node name="PlayerSpawnPoint" type="Marker3D" parent="."]
+
+[node name="LevelMusicPlayer" parent="PlayerSpawnPoint" instance=ExtResource("14_q3rdv")]
+stream = ExtResource("15_n0q5f")
 
 [connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]
 [connection signal="finished" from="DifficultyRange/StagedSpawner" to="DifficultyRange/SignalBarrier" method="receive"]

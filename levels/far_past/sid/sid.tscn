@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://gqopyictx6fc"]
+[gd_scene load_steps=33 format=3 uid="uid://gqopyictx6fc"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_3hosn"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="2_ksovs"]
@@ -12,7 +12,9 @@
 [ext_resource type="Script" path="res://scripts/difficulty_range.gd" id="11_qjxe6"]
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="12_xfdhn"]
 [ext_resource type="Script" path="res://enemies/spawners/staged_spawner.gd" id="13_mv5f0"]
+[ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="14_jds2y"]
 [ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/test_zone/test01/test01.tscn" id="14_r2tbf"]
+[ext_resource type="AudioStream" uid="uid://dtludju15pidf" path="res://music/quiet_underground_sound_BG.mp3" id="15_jaj8o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2h2t"]
 resource_name = "MetalCastRusted001_1K"
@@ -418,6 +420,9 @@ scenes = Array[PackedScene]([null, ExtResource("14_r2tbf")])
 
 [node name="PlayerSpawnPoint" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43821, 0, -0.404932)
+
+[node name="LevelMusicPlayer" parent="PlayerSpawnPoint" instance=ExtResource("14_jds2y")]
+stream = ExtResource("15_jaj8o")
 
 [connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]
 [connection signal="finished" from="DifficultyRange/StagedSpawner" to="DifficultyRange/SignalBarrier" method="receive"]

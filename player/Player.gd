@@ -49,36 +49,37 @@ var adjusting
 func _ready():
 	name = "Player"
 
+
+func aim_at_mouse() -> void:
+	var camera := get_viewport().get_camera_3d()
+	var mouse_pos := camera.project_position(get_viewport().get_mouse_position(), camera.global_position.y)
+	mouse_pos.y = global_position.y
+	look_at(mouse_pos)
+
+
 # all input from the player is handled here
 func _input(_event):
-	# shooting portals
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("attack"):
+		if ($Cooldown.is_stopped()):
+			aim_at_mouse()
+			$Billboard/CharacterSprite.attack()
+			$Windup.start()
+	elif Input.is_action_just_pressed("shoot"):
+		# Level to level portals
 		if (is_level_finished):
 			if (firstplaced):
+				firstplaced = false
 				firstPortal.queue_free()
 			if (secondplaced):
+				secondplaced = false
 				secondPortal.queue_free()
 			set_process_input(false)
 			velocity = Vector3.ZERO
 			await get_tree().create_timer(1.5, false).timeout
 			advancing_level.emit()
 			return
-		ray.force_raycast_update()
-		if (ray.is_colliding() && raydelay.is_stopped()):
-			var value = ray.get_collider().global_position.distance_to(global_position)
-			var bullet = p_bullet.instantiate()
-			get_tree().current_scene.add_child(bullet)
-			bullet.set_global_position(position)
-			bullet.position.y += 2
-			bullet.rotation.y = rotation.y
-			raydelay.set_wait_time(value / bullet.speed)
-			raydelay.start()
-			storedCollider = ray.get_collider()
-			storedNormal = ray.get_collision_normal()
-			storedPosition = ray.get_collision_point()
-	if Input.is_action_just_pressed("delete_p"):
-		if (!firstplaced && !secondplaced):
-			return
+		
+		# Check if we're deleting portals
 		if (firstplaced):
 			if (firstPortal.deletable):
 				storedTexture = firstPortal.get_node("Sprite3D").get_texture()
@@ -97,17 +98,26 @@ func _input(_event):
 					firstPortal._set_partner(null)
 				secondplaced = false
 				return
-					
-	if Input.is_action_just_pressed("attack"):
-		if ($Cooldown.is_stopped()):
-			var camera := get_viewport().get_camera_3d()
-			var mouse_pos := camera.project_position(get_viewport().get_mouse_position(), camera.global_position.y)
-			mouse_pos.y = global_position.y
-			look_at(mouse_pos)
+		
+		# shooting portals
+		aim_at_mouse()
+		ray.force_raycast_update()
+		if (ray.is_colliding() && raydelay.is_stopped()):
+			var value = ray.get_collider().global_position.distance_to(global_position)
+			var bullet = p_bullet.instantiate()
+			get_tree().current_scene.add_child(bullet)
+			bullet.set_global_position(position)
+			bullet.position.y += 2
+			bullet.rotation.y = rotation.y
+			raydelay.set_wait_time(value / bullet.speed)
+			raydelay.start()
+			storedCollider = ray.get_collider()
+			storedNormal = ray.get_collision_normal()
+			storedPosition = ray.get_collision_point()
 			$Billboard/CharacterSprite.attack()
-			$Windup.start()
-			
-	
+	elif Input.is_action_just_pressed("delete_p"):
+		if (!firstplaced && !secondplaced):
+			return
 
 
 func _physics_process(_delta):

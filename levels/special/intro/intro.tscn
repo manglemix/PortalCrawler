@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="6_i51yc"]
 [ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="7_lfc7h"]
 [ext_resource type="Script" path="res://enemies/spawners/staged_spawner.gd" id="7_rb4f3"]
-[ext_resource type="AudioStream" uid="uid://bg5ahhcsiuvvj" path="res://music/Botanic Panic.mp3" id="8_cbbb2"]
+[ext_resource type="AudioStream" uid="uid://drmeg5fnbd5o" path="res://music/MysteriousBG_sound.mp3" id="8_4r57f"]
 [ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/test_zone/test01/test01.tscn" id="8_xf3yv"]
 
 [sub_resource type="GDScript" id="GDScript_ofv5h"]
@@ -115,7 +115,7 @@ scenes = Array[PackedScene]([null, ExtResource("8_xf3yv")])
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5426, 0, 1.61973)
 
 [node name="LevelMusicPlayer" parent="PlayerSpawnPoint" index="0" instance=ExtResource("7_lfc7h")]
-stream = ExtResource("8_cbbb2")
+stream = ExtResource("8_4r57f")
 
 [connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]
 [connection signal="finished" from="DifficultyRange/StagedSpawner" to="DifficultyRange/SignalBarrier" method="receive"]
