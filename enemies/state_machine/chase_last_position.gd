@@ -1,3 +1,4 @@
+@tool
 class_name ChaseLastPosition
 extends EnemyState
 
@@ -7,6 +8,7 @@ signal lost_player
 
 @export var chase_speed := 0.9
 @export var fov := 180.0
+@export var min_distance := 1.0
 
 var _last_position: Vector3
 
@@ -30,4 +32,7 @@ func _physics_process(_delta: float) -> void:
 		exit(lost_player)
 		return
 	
-	navigate_to_next_path_position(chase_speed)
+	if player.global_position.distance_to(global_transform.origin) <= min_distance:
+		navigate_to_next_path_position(0)
+	else:
+		navigate_to_next_path_position(chase_speed)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://8880ddb48ucy"]
+[gd_scene load_steps=56 format=3 uid="uid://8880ddb48ucy"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_hane4"]
 [ext_resource type="Script" path="res://components/health.gd" id="2_7kn61"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/billboard.gd" id="9_4d3nq"]
 [ext_resource type="Script" path="res://enemies/looping_timer.gd" id="9_dnyc8"]
 [ext_resource type="Script" path="res://enemies/state_machine/death.gd" id="9_pxxhf"]
+[ext_resource type="Script" path="res://enemies/state_machine/perma_wander.gd" id="10_b3jn7"]
 [ext_resource type="Texture2D" uid="uid://dwaoemasbnr1m" path="res://enemies/far_future/niacin/attack_down.png" id="10_snc1w"]
 [ext_resource type="Texture2D" uid="uid://c7grnbtleoopt" path="res://enemies/far_future/niacin/attack_right.png" id="11_je85j"]
 [ext_resource type="Script" path="res://scripts/character_sprite.gd" id="12_3c0g5"]
@@ -334,15 +335,20 @@ pullable_from = [NodePath("../Death")]
 [node name="ChaseLineOfSight" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("7_3xg66")
 chase_speed = 1.7
-pullable_from = [NodePath("../Death")]
+min_distance = null
+pullable_from = [NodePath("../Death"), NodePath("../PermaWander")]
 
 [node name="ChaseLastPosition" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("8_r1gea")
 chase_speed = 1.7
-pullable_from = [NodePath("../Death")]
+min_distance = null
+pullable_from = [NodePath("../Death"), NodePath("../PermaWander")]
 
 [node name="Death" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("9_pxxhf")
+
+[node name="PermaWander" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("10_b3jn7")
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 3.0

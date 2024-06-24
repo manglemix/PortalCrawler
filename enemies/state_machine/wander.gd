@@ -1,3 +1,4 @@
+@tool
 class_name Wander
 extends EnemyState
 
@@ -11,11 +12,11 @@ signal player_spotted
 func _enter() -> void:
 	super()
 	set_physics_process(true)
-	_random_target()
+	set_navigation_target(random_target(global_transform.origin))
 
 
-func _random_target() -> void:
-	set_navigation_target(global_transform.origin + Vector3.RIGHT.rotated(Vector3.UP, randf() * TAU) * randf_range(2.0, 7.0))
+static func random_target(from: Vector3) -> Vector3:
+	return from + Vector3.RIGHT.rotated(Vector3.UP, randf() * TAU) * randf_range(2.0, 7.0)
 
 
 func _physics_process(_delta: float) -> void:
@@ -23,5 +24,5 @@ func _physics_process(_delta: float) -> void:
 		exit(player_spotted)
 		return
 	if navigation.is_navigation_finished():
-		_random_target()
+		set_navigation_target(random_target(global_transform.origin))
 	navigate_to_next_path_position(wander_speed)

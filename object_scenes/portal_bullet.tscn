@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfu18pxxse41g"]
 
-[ext_resource type="Script" path="res://PortalBullet.gd" id="1_n7l26"]
+[ext_resource type="Script" path="res://player/PortalBullet.gd" id="1_n7l26"]
 [ext_resource type="Texture2D" uid="uid://btftjw14lb2s7" path="res://enemies/projectiles/laser projectile.webp" id="2_bhph3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sq72s"]

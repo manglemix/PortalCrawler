@@ -1,3 +1,4 @@
+@tool
 class_name ChaseLineOfSight
 extends EnemyState
 
@@ -7,6 +8,7 @@ signal player_position(position: Vector3)
 
 @export var chase_speed := 0.9
 @export var fov := 180.0
+@export var min_distance := 1.0
 
 
 func _enter() -> void:
@@ -26,4 +28,7 @@ func _physics_process(_delta: float) -> void:
 	if navigation.is_navigation_finished():
 		set_navigation_target(player.global_position)
 	
-	navigate_to_next_path_position(chase_speed)
+	if player.global_position.distance_to(global_transform.origin) <= min_distance:
+		navigate_to_next_path_position(0)
+	else:
+		navigate_to_next_path_position(chase_speed)

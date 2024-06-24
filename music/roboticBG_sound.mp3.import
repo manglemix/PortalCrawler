@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/roboticBG_sound.mp3-e24fe76ff22c0633a69252e4c
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

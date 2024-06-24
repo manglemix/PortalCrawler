@@ -115,9 +115,6 @@ func _input(_event):
 			storedNormal = ray.get_collision_normal()
 			storedPosition = ray.get_collision_point()
 			$Billboard/CharacterSprite.attack()
-	elif Input.is_action_just_pressed("delete_p"):
-		if (!firstplaced && !secondplaced):
-			return
 
 
 func _physics_process(_delta):
@@ -171,7 +168,14 @@ func _on_damaged(_health_change: int) -> void:
 
 
 func _on_died() -> void:
+	if (firstplaced):
+		firstplaced = false
+		firstPortal.queue_free()
+	if (secondplaced):
+		secondplaced = false
+		secondPortal.queue_free()
 	set_physics_process(false)
+	set_process_input(false)
 	
 	
 # function that creates the portals when the player presses the button to do so

@@ -1,4 +1,5 @@
-class_name Death
+@tool
+class_name DeathState
 extends EnemyState
 
 

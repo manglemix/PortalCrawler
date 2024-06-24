@@ -1,3 +1,4 @@
+@tool
 class_name EnemyState
 extends State
 
@@ -56,7 +57,7 @@ func set_navigation(navigation: NavigationAgent3D) -> void:
 
 
 @warning_ignore("shadowed_variable")
-func set_player(player: CharacterBody3D) -> void:
+func set_player(player: Player) -> void:
 	self.player = player
 
 

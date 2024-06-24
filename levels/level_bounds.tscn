@@ -4,16 +4,16 @@
 size = Vector3(15, 1, 12)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6e38s"]
-size = Vector3(20, 1.001, 20)
+size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_36nam"]
-size = Vector3(20, 1.001, 20)
+size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yrxbx"]
-size = Vector3(20, 1.001, 20)
+size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_68rb0"]
-size = Vector3(20, 1.001, 20)
+size = Vector3(20, 1, 20)
 
 [node name="LevelBounds" type="StaticBody3D"]
 
@@ -21,18 +21,33 @@ size = Vector3(20, 1.001, 20)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_tjm2b")
 
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CollisionShape3D"]
+size = Vector3(15, 1, 12)
+
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.195946, -0.980615, 0, 0.980615, 0.195946, 0, -0.0981404, -3.49115)
 shape = SubResource("BoxShape3D_6e38s")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CollisionShape3D2"]
+size = Vector3(20, 1, 20)
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.195946, 0.980615, 0, -0.980615, 0.195946, 0, 0, 3.50815)
 shape = SubResource("BoxShape3D_36nam")
 
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CollisionShape3D3"]
+size = Vector3(20, 1, 20)
+
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.21303, 0.977046, 0, -0.977046, 0.21303, 0, 0, 0, 1, -6.45685, 0, 0)
 shape = SubResource("BoxShape3D_yrxbx")
 
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CollisionShape3D4"]
+size = Vector3(20, 1, 20)
+
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.21303, -0.977046, 0, 0.977046, 0.21303, 0, 0, 0, 1, 6.45525, 0, 0)
 shape = SubResource("BoxShape3D_68rb0")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="CollisionShape3D5"]
+size = Vector3(20, 1, 20)
