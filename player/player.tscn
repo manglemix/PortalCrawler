@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bqa1jm5brrlgo"]
+[gd_scene load_steps=51 format=3 uid="uid://bqa1jm5brrlgo"]
 
 [ext_resource type="Script" path="res://player/Player.gd" id="1_ynmwp"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="3_3cd08"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dvrhq7tumu50h" path="res://player/idle_up.png" id="11_h2kq3"]
 [ext_resource type="Texture2D" uid="uid://b8dti74fbsh54" path="res://player/walk_down.png" id="12_jmdbs"]
 [ext_resource type="Texture2D" uid="uid://cqljyt5be7bbr" path="res://player/walk_right.png" id="13_7sigw"]
+[ext_resource type="Texture2D" uid="uid://bqli22u6eetl6" path="res://player/knight_sit.png" id="13_xphrs"]
 [ext_resource type="Texture2D" uid="uid://cfbmloeajlf44" path="res://player/walk_up.png" id="14_0bs3t"]
 [ext_resource type="Script" path="res://scripts/character_sprite.gd" id="14_g7fv3"]
 
@@ -107,6 +108,18 @@ region = Rect2(0, 0, 100, 100)
 [sub_resource type="AtlasTexture" id="AtlasTexture_acy7f"]
 atlas = ExtResource("11_h2kq3")
 region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dol8n"]
+atlas = ExtResource("13_xphrs")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_somgd"]
+atlas = ExtResource("13_xphrs")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w88p5"]
+atlas = ExtResource("13_xphrs")
+region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_05xh8"]
 atlas = ExtResource("12_jmdbs")
@@ -231,6 +244,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dol8n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_somgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w88p5")
+}],
+"loop": false,
+"name": &"sit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_05xh8")
 }, {
 "duration": 1.0,
@@ -328,7 +355,7 @@ no_depth_test = true
 texture_filter = 0
 render_priority = 3
 sprite_frames = SubResource("SpriteFrames_l8546")
-animation = &"walk_up"
+animation = &"sit"
 autoplay = "idle_down"
 script = ExtResource("14_g7fv3")
 character = NodePath("../..")

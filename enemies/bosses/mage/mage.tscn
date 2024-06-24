@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dpmfr1b26ccye"]
+[gd_scene load_steps=38 format=3 uid="uid://dpmfr1b26ccye"]
 
 [ext_resource type="Script" path="res://enemies/bosses/mage/mage_boss.gd" id="1_hwhin"]
 [ext_resource type="Script" path="res://components/health.gd" id="2_7y35l"]
@@ -11,10 +11,12 @@
 [ext_resource type="Script" path="res://enemies/state_machine/perma_wander.gd" id="9_mx6lk"]
 [ext_resource type="Script" path="res://scripts/billboard.gd" id="10_f4g1v"]
 [ext_resource type="Script" path="res://enemies/bosses/mage/direct_attack.gd" id="10_u6epo"]
-[ext_resource type="Texture2D" uid="uid://cirgyej8vtrrl" path="res://enemies/test_zone/test01/wizard.png" id="11_hrmgc"]
-[ext_resource type="Texture2D" uid="uid://cwpb732w6vs7r" path="res://enemies/test_zone/test01/wizard_side.png" id="12_7wwmr"]
-[ext_resource type="Script" path="res://scripts/character_sprite.gd" id="13_hnjo7"]
+[ext_resource type="Script" path="res://enemies/state_machine/death.gd" id="11_nw1rl"]
 [ext_resource type="PackedScene" uid="uid://ki3827lfk7f6" path="res://enemies/laser/laser.tscn" id="13_o5g7e"]
+[ext_resource type="Texture2D" uid="uid://betxy54ywqvh5" path="res://enemies/bosses/mage/mage_death-Sheet.png" id="13_slglw"]
+[ext_resource type="Texture2D" uid="uid://dlbyyap1td7id" path="res://enemies/bosses/mage/mage_south_walk-Sheet.png" id="14_us5ak"]
+[ext_resource type="Texture2D" uid="uid://cv1nngfqep6hj" path="res://enemies/bosses/mage/mage_south_east_walk-Sheet.png" id="15_t006f"]
+[ext_resource type="Texture2D" uid="uid://bd2anj144mayo" path="res://enemies/bosses/mage/mage_north_walk-Sheet.png" id="16_iev10"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
 height = 0.8
@@ -24,11 +26,83 @@ radius = 0.315262
 radius = 0.4
 height = 1.405
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ljx4"]
+atlas = ExtResource("13_slglw")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_doxn7"]
+atlas = ExtResource("13_slglw")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_663v0"]
+atlas = ExtResource("13_slglw")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p222x"]
+atlas = ExtResource("13_slglw")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y0wj"]
+atlas = ExtResource("13_slglw")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tps4d"]
+atlas = ExtResource("14_us5ak")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o20f0"]
+atlas = ExtResource("14_us5ak")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cj18x"]
+atlas = ExtResource("14_us5ak")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx060"]
+atlas = ExtResource("14_us5ak")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evcgv"]
+atlas = ExtResource("15_t006f")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8og11"]
+atlas = ExtResource("15_t006f")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfa5l"]
+atlas = ExtResource("16_iev10")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xq0c"]
+atlas = ExtResource("16_iev10")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmfqj"]
+atlas = ExtResource("16_iev10")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v4na"]
+atlas = ExtResource("16_iev10")
+region = Rect2(300, 0, 100, 100)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_3hm6u"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_hrmgc")
+"texture": SubResource("AtlasTexture_5ljx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_doxn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_663v0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p222x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y0wj")
 }],
 "loop": true,
 "name": &"death",
@@ -36,31 +110,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_hrmgc")
-}],
-"loop": true,
-"name": &"idle_down",
-"speed": 5.0
+"texture": SubResource("AtlasTexture_tps4d")
 }, {
-"frames": [{
 "duration": 1.0,
-"texture": ExtResource("12_7wwmr")
-}],
-"loop": true,
-"name": &"idle_right",
-"speed": 5.0
+"texture": SubResource("AtlasTexture_o20f0")
 }, {
-"frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_hrmgc")
-}],
-"loop": true,
-"name": &"idle_up",
-"speed": 5.0
+"texture": SubResource("AtlasTexture_cj18x")
 }, {
-"frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_hrmgc")
+"texture": SubResource("AtlasTexture_sx060")
 }],
 "loop": true,
 "name": &"walk_down",
@@ -68,7 +127,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("12_7wwmr")
+"texture": SubResource("AtlasTexture_evcgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8og11")
 }],
 "loop": true,
 "name": &"walk_right",
@@ -76,12 +138,49 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_hrmgc")
+"texture": SubResource("AtlasTexture_gfa5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xq0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmfqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4v4na")
 }],
 "loop": true,
 "name": &"walk_up",
 "speed": 5.0
 }]
+
+[sub_resource type="GDScript" id="GDScript_asehg"]
+script/source = "extends AnimatedSprite3D
+
+enum Direction { LEFT, RIGHT, UP, DOWN }
+
+@export var character: CharacterBody3D
+
+
+func get_direction() -> Direction:
+	var forward_3d: Vector3 = -character.global_basis.z
+	var forward := Vector2(forward_3d.x, forward_3d.z).normalized()
+	var angle := forward.angle()
+	if - PI / 4 < angle and angle < PI / 4:
+		return Direction.RIGHT
+	elif PI / 4 < angle and angle < 3 * PI / 4:
+		return Direction.DOWN
+	elif - 3 * PI / 4 < angle and angle < - PI / 4:
+		return Direction.UP
+	else:
+		return Direction.LEFT
+
+
+func damage_flash(_damage: int):
+	modulate = Color.RED
+	await get_tree().create_timer(0.1, false).timeout
+	modulate = Color.WHITE
+"
 
 [sub_resource type="GDScript" id="GDScript_jx6vt"]
 script/source = "extends Node3D
@@ -104,6 +203,7 @@ shape = SubResource("CylinderShape3D_vtf4t")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_7y35l")
+health = 20
 max_health = 20
 
 [node name="Damageable" type="Node" parent="."]
@@ -141,6 +241,9 @@ script = ExtResource("9_m7kon")
 script = ExtResource("9_mx6lk")
 wander_speed = 0.0
 
+[node name="DeathState" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("11_nw1rl")
+
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -152,18 +255,17 @@ mesh = SubResource("CapsuleMesh_fhpkm")
 top_level = true
 script = ExtResource("10_f4g1v")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Billboard" node_paths=PackedStringArray("character")]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Billboard"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-offset = Vector2(0, 30)
+offset = Vector2(0, 28.065)
 pixel_size = 0.05
 double_sided = false
 no_depth_test = true
 texture_filter = 0
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_3hm6u")
-animation = &"idle_up"
-script = ExtResource("13_hnjo7")
-character = NodePath("../..")
+animation = &"walk_up"
+script = SubResource("GDScript_asehg")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
@@ -192,6 +294,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
 
 [connection signal="died" from="Health" to="." method="queue_free"]
+[connection signal="died" from="Health" to="EnemyStateMachine/DeathState" method="_on_died"]
 [connection signal="health_changed" from="Health" to="Billboard/AnimatedSprite3D" method="flash"]
 [connection signal="damaged" from="Damageable" to="Health" method="change_health"]
 [connection signal="damaged" from="Damageable" to="Billboard/AnimatedSprite3D" method="damage_flash"]
