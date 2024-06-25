@@ -601,7 +601,7 @@ no_depth_test = true
 texture_filter = 0
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_3hm6u")
-animation = &"swing_up"
+animation = &"walk_right"
 script = SubResource("GDScript_asehg")
 character = NodePath("../..")
 
@@ -649,6 +649,7 @@ projectile = ExtResource("29_bq4a8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 top_level = true
 visible = false
+initial_attack_delay = 0.05
 
 [connection signal="died" from="Health" to="EnemyStateMachine/DeathState" method="_on_died"]
 [connection signal="health_changed" from="Health" to="Billboard/AnimatedSprite3D" method="flash"]

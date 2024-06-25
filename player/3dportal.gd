@@ -47,7 +47,6 @@ func _physics_process(_delta):
 	for body in bodies:
 		# if there is no partner then no work is needed, return
 		if(p == null):
-			print(body.name)
 			if (body.name.begins_with("Basic")):
 				body.queue_free()
 			return
@@ -89,3 +88,11 @@ func _on_mouse_area_mouse_entered():
 	deletable = true
 func _on_mouse_area_mouse_exited():
 	deletable = false
+
+
+func _exit_tree() -> void:
+	var out := preload("res://player/portal/portal_out.tscn").instantiate()
+	out.get_node("Sprite3D").modulate = $Sprite3D.modulate
+	out.get_node("Sprite3D/AnimatedSprite3D").modulate = $Sprite3D.modulate
+	out.transform = transform
+	get_parent().add_child.call_deferred(out)

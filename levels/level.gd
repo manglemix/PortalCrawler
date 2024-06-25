@@ -47,6 +47,14 @@ func _ready() -> void:
 
 func set_player(player: Player) -> void:
 	_player = player
+	_player.global_position = get_player_spawnpoint()
+	_player.reset_game.connect(_advance_level.bind("res://levels/special/intro/intro.tscn"))
+	_player.advancing_level.connect(_advance_level.bind(next_level))
+	_level_music_player.reparent(_player)
+	
+	if _player.is_teleporting:
+		await _player.appeared
+	
 	for spawner: Spawner in get_tree().get_nodes_in_group("EnemySpawners"):
 		if !is_ancestor_of(spawner):
 			continue
@@ -59,11 +67,6 @@ func set_player(player: Player) -> void:
 		if !is_ancestor_of(enemy):
 			continue
 		enemy.set_player(player)
-	
-	_player.advancing_level.connect(_advance_level.bind(next_level))
-	_player.reset_game.connect(_advance_level.bind("res://levels/special/intro/intro.tscn"))
-	_player.global_position = get_player_spawnpoint()
-	_level_music_player.reparent(_player)
 
 
 func get_player_spawnpoint() -> Vector3:

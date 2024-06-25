@@ -4,6 +4,7 @@ extends Node
 
 
 signal damaged(health_change: int)
+signal damaged_opaque
 
 @export var damage_multiplier := 1.0
 @export var invincible := false:
@@ -28,6 +29,7 @@ func damage_once(damage: int):
 	if invincible:
 		return
 	damaged.emit(roundi(- damage * damage_multiplier))
+	damaged_opaque.emit()
 
 
 static func get_damageable_component(node: Node) -> Damageable:

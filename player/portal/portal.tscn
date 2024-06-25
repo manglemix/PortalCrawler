@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://bw3oputqb3oe7"]
+[gd_scene load_steps=76 format=3 uid="uid://bw3oputqb3oe7"]
 
 [ext_resource type="Script" path="res://player/3dportal.gd" id="1_wibcx"]
 [ext_resource type="Texture2D" uid="uid://dajx7t5ko3gjp" path="res://player/portal/portal_open_anim/0001.png" id="2_g4ibn"]
@@ -61,6 +61,7 @@
 [ext_resource type="Texture2D" uid="uid://bpfmo4w4mbixy" path="res://player/portal/portal_spiral_anim/0052.png" id="65_kassl"]
 [ext_resource type="Texture2D" uid="uid://dmnmjncx136pa" path="res://player/portal/portal_spiral_anim/0053.png" id="66_4ekyf"]
 [ext_resource type="Texture2D" uid="uid://cbijgx87qvdek" path="res://player/portal/portal_spiral_anim/0054.png" id="67_yqf3x"]
+[ext_resource type="AudioStream" uid="uid://x03bf6xck5i0" path="res://player/portal_usage_SE.mp3" id="68_051r8"]
 [ext_resource type="Texture2D" uid="uid://cswqmnxxuaw8d" path="res://player/portal/portal_spiral_anim/0055.png" id="68_m6f3c"]
 [ext_resource type="Texture2D" uid="uid://be3th783ws5pc" path="res://player/portal/portal_spiral_anim/0056.png" id="69_562t8"]
 [ext_resource type="Texture2D" uid="uid://lwox8lidhfsr" path="res://player/portal/portal_spiral_anim/0057.png" id="70_d7sm1"]
@@ -335,6 +336,14 @@ size = Vector3(0.224753, 1, 0.933747)
 height = 6.0
 radius = 1.0
 
+[sub_resource type="GDScript" id="GDScript_e2ryt"]
+script/source = "extends OmniLight3D
+
+
+func _ready() -> void:
+	create_tween().tween_property(self, \"light_energy\", 1, 0.5)
+"
+
 [node name="portal" type="StaticBody3D"]
 collision_mask = 10
 input_ray_pickable = false
@@ -391,6 +400,16 @@ target_position = Vector3(-1, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.409827, 0)
+light_energy = 0.0
+script = SubResource("GDScript_e2ryt")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("68_051r8")
+attenuation_model = 3
+volume_db = 15.0
+max_db = 6.0
+autoplay = true
+bus = &"Level SFX"
 
 [connection signal="body_entered" from="PortalArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="mouse_entered" from="MouseArea" to="." method="_on_mouse_area_mouse_entered"]

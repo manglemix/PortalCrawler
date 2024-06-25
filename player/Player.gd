@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 signal advancing_level
 signal reset_game
+signal appeared
 
 # exported vars
 @export var speed = 5
@@ -34,6 +35,7 @@ var firstPortal
 var secondPortal
 var target_velocity = Vector3.ZERO
 var is_level_finished := false
+var is_teleporting := false
 
 var adjusting
 
@@ -45,6 +47,7 @@ var adjusting
 @onready var switch = false
 @onready var neg_x = false
 @onready var neg_z = false
+@onready var sprite: CharacterSprite = $Billboard/CharacterSprite
 # hotfix for making sure the node is named properly, remove later
 func _ready():
 	name = "Player"
@@ -60,9 +63,12 @@ func aim_at_mouse() -> void:
 # all input from the player is handled here
 func _input(_event):
 	if Input.is_action_just_pressed("attack"):
-		if ($Cooldown.is_stopped()):
+		if is_level_finished:
+			return
+		if ($Cooldown.is_stopped() and !sprite.animation.contains("attack")):
+			$Swing.play()
 			aim_at_mouse()
-			$Billboard/CharacterSprite.attack()
+			sprite.attack()
 			$Windup.start()
 	elif Input.is_action_just_pressed("shoot"):
 		# Level to level portals
@@ -73,9 +79,13 @@ func _input(_event):
 			if (secondplaced):
 				secondplaced = false
 				secondPortal.queue_free()
+			sprite.set_process(false)
+			$MeshInstance3D.hide()
+			sprite.play(&"sit")
+			is_teleporting = true
 			set_process_input(false)
 			velocity = Vector3.ZERO
-			await get_tree().create_timer(1.5, false).timeout
+			await sprite.animation_finished
 			advancing_level.emit()
 			return
 		
@@ -114,7 +124,8 @@ func _input(_event):
 			storedCollider = ray.get_collider()
 			storedNormal = ray.get_collision_normal()
 			storedPosition = ray.get_collision_point()
-			$Billboard/CharacterSprite.attack()
+			$Swing.play()
+			sprite.attack()
 
 
 func _physics_process(_delta):
@@ -298,23 +309,35 @@ func set_input_change(g_switch: bool, g_xneg: bool, g_zneg: bool):
 	switch = g_switch
 	neg_x = g_xneg
 	neg_z = g_zneg
-	
+
+
 func _on_ray_delay_timeout():
 	_create_portal()
 
 
 func _on_level_advanced() -> void:
-	set_process_input(true)
 	is_level_finished = false
+	sprite.play(&"unsit")
+	await sprite.animation_finished
+	is_teleporting = false
+	appeared.emit()
+	$MeshInstance3D.show()
 	
 	var health: Health = $Health
 	if health.health == 0:
 		health.health = health.max_health
-		$Billboard/CharacterSprite.reset()
-		set_physics_process(true)
+		sprite.reset()
+	else:
+		health.health += 1
+		sprite.set_process(true)
+	
+	set_physics_process(true)
+	set_process_input(true)
+
 
 func _on_level_finished() -> void:
 	is_level_finished = true
 
 func _on_death_animation_finished() -> void:
+	is_teleporting = true
 	reset_game.emit()
