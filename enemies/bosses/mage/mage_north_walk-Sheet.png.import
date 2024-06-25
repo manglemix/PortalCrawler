@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bd2anj144mayo"
-path.s3tc="res://.godot/imported/mage_north_walk-Sheet.png-09584f08d694b175bf1c7ce545199704.s3tc.ctex"
+path="res://.godot/imported/mage_north_walk-Sheet.png-09584f08d694b175bf1c7ce545199704.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://enemies/bosses/mage/mage_north_walk-Sheet.png"
-dest_files=["res://.godot/imported/mage_north_walk-Sheet.png-09584f08d694b175bf1c7ce545199704.s3tc.ctex"]
+dest_files=["res://.godot/imported/mage_north_walk-Sheet.png-09584f08d694b175bf1c7ce545199704.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

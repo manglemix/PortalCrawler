@@ -116,6 +116,8 @@ func reset() -> void:
 
 
 func damage_flash(_damage: int):
+	if _dying:
+		return
 	modulate = Color.RED
 	await get_tree().create_timer(0.1, false).timeout
 	modulate = Color.WHITE

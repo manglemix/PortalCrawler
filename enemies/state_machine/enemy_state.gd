@@ -25,7 +25,7 @@ func _ready() -> void:
 	_raycast = RayCast3D.new()
 	# Should be the same as the Player layer
 	_raycast.collision_mask += 2
-	add_child(_raycast)
+	add_child(_raycast, false, Node.INTERNAL_MODE_FRONT)
 	_raycast.enabled = false
 
 
@@ -129,3 +129,11 @@ func is_player_in_sight(fov: float, min_radius: float) -> bool:
 		return true
 	_raycast.force_raycast_update()
 	return _raycast.get_collider() == player && _raycast.target_position.angle_to(Vector3.FORWARD) < fov / 2.0
+
+
+func get_parent_origin() -> Vector3:
+	return _enemy.get_parent_node_3d().position
+
+
+func get_health() -> Health:
+	return Health.get_health_component(_enemy)

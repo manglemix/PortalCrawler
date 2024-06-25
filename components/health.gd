@@ -10,11 +10,11 @@ signal died
 var _died := false
 
 
-@export var health := 10:
-	set = set_health
-
 @export var max_health := 10:
 	set = set_max_health
+
+@export var health := 10:
+	set = set_health
 
 
 func _get_configuration_warnings() -> PackedStringArray:

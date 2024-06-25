@@ -14,4 +14,3 @@ func _ready() -> void:
 	super()
 	var health := Health.get_health_component(self)
 	health.died.connect(func(): died.emit())
-	tree_exited.connect(func(): died.emit())

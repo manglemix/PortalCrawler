@@ -34,6 +34,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func set_player(player: Player) -> void:
+	if !is_node_ready():
+		await ready
 	if state_machine != null:
 		state_machine.set_player(player)
 

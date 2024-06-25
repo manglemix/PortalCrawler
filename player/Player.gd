@@ -283,7 +283,6 @@ func _on_windup_timeout():
 @warning_ignore("shadowed_variable")
 func change_input(target_velocity):
 	if (!leftheld && !rightheld && !upheld && !downheld):
-		print("not changing")
 		return target_velocity
 	if (neg_x):
 		target_velocity.x = -target_velocity.x 
