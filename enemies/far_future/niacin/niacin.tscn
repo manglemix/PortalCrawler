@@ -154,7 +154,7 @@ region = Rect2(300, 0, 100, 100)
 [sub_resource type="SpriteFrames" id="SpriteFrames_3hm6u"]
 animations = [{
 "frames": [{
-"duration": 5.0,
+"duration": 15.0,
 "texture": SubResource("AtlasTexture_8wpbs")
 }, {
 "duration": 1.0,
@@ -165,7 +165,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 5.0,
+"duration": 15.0,
 "texture": SubResource("AtlasTexture_vcmi4")
 }, {
 "duration": 1.0,
@@ -176,7 +176,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 5.0,
+"duration": 15.0,
 "texture": SubResource("AtlasTexture_553hm")
 }, {
 "duration": 1.0,
@@ -201,7 +201,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 2.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -334,7 +334,7 @@ pullable_from = [NodePath("../Death")]
 
 [node name="ChaseLineOfSight" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("7_3xg66")
-chase_speed = 1.7
+chase_speed = 0.0
 pullable_from = [NodePath("../Death"), NodePath("../PermaWander")]
 
 [node name="ChaseLastPosition" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
@@ -348,8 +348,12 @@ script = ExtResource("9_pxxhf")
 [node name="PermaWander" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("10_b3jn7")
 
+[node name="InitialAttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 4.0
 
 [node name="BurstTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -367,19 +371,19 @@ script = ExtResource("9_4d3nq")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Billboard" node_paths=PackedStringArray("character")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-offset = Vector2(0, 30)
+offset = Vector2(0, 28)
 pixel_size = 0.02
 double_sided = false
 no_depth_test = true
 texture_filter = 0
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_3hm6u")
-animation = &"attack_down"
+animation = &"attack_up"
 script = ExtResource("12_3c0g5")
 character = NodePath("../..")
 
 [node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.671, -0.238)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.418832, -0.238)
 script = ExtResource("13_f7acc")
 projectile = ExtResource("19_slhne")
 
@@ -388,17 +392,20 @@ projectile = ExtResource("19_slhne")
 [connection signal="damaged" from="Damageable" to="Health" method="change_health"]
 [connection signal="damaged" from="Damageable" to="Billboard/AnimatedSprite3D" method="damage_flash"]
 [connection signal="player_spotted" from="EnemyStateMachine/Wander" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
-[connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="start"]
-[connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="BurstTimer" method="start"]
 [connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="Billboard/AnimatedSprite3D" method="attack"]
+[connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="InitialAttackTimer" method="start"]
 [connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="stop"]
 [connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="BurstTimer" method="stop"]
+[connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="InitialAttackTimer" method="stop"]
 [connection signal="lost_player" from="EnemyStateMachine/ChaseLineOfSight" to="EnemyStateMachine/ChaseLastPosition" method="enter"]
 [connection signal="player_position" from="EnemyStateMachine/ChaseLineOfSight" to="EnemyStateMachine/ChaseLastPosition" method="set_last_position"]
 [connection signal="player_position" from="EnemyStateMachine/ChaseLineOfSight" to="Billboard/ProjectileSpawner" method="aim_at"]
+[connection signal="entered" from="EnemyStateMachine/ChaseLastPosition" to="Billboard/AnimatedSprite3D" method="cancel_attack"]
 [connection signal="lost_player" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/Wander" method="enter"]
 [connection signal="player_spotted" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
 [connection signal="entered" from="EnemyStateMachine/Death" to="Billboard/AnimatedSprite3D" method="die"]
+[connection signal="timeout" from="InitialAttackTimer" to="AttackTimer" method="start"]
+[connection signal="timeout" from="InitialAttackTimer" to="BurstTimer" method="start"]
 [connection signal="timeout" from="AttackTimer" to="BurstTimer" method="start"]
 [connection signal="timeout" from="AttackTimer" to="Billboard/AnimatedSprite3D" method="attack"]
 [connection signal="timeout" from="BurstTimer" to="Billboard/ProjectileSpawner" method="spawn"]

@@ -1,6 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cvkxr44q05aed"]
 
 [ext_resource type="PackedScene" uid="uid://cc5rrmn7brbj2" path="res://levels/special/intro/intro.gltf" id="1_pnk1a"]
+[ext_resource type="Script" path="res://levels/level.gd" id="2_b0ads"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="4_icllo"]
 [ext_resource type="Script" path="res://scripts/difficulty_range.gd" id="5_lap8j"]
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="6_i51yc"]
@@ -9,26 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://drmeg5fnbd5o" path="res://music/MysteriousBG_sound.mp3" id="8_4r57f"]
 [ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/test_zone/test01/test01.tscn" id="8_xf3yv"]
 
-[sub_resource type="GDScript" id="GDScript_ofv5h"]
-script/source = "@tool
-extends Level
-
-
-@export var player: Player
-@export var camera: Camera3D
-
-
-func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
-	if player != null:
-		set_player(player)
-	if camera != null:
-		set_camera(camera)
-"
-
 [node name="Intro" node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("1_pnk1a")]
-script = SubResource("GDScript_ofv5h")
+script = ExtResource("2_b0ads")
 next_level = "res://levels/far_past/sid/sid.tscn"
 player_spawn_point = NodePath("PlayerSpawnPoint")
 

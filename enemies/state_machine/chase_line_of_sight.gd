@@ -16,6 +16,7 @@ func _enter() -> void:
 	super()
 	set_physics_process(true)
 	set_navigation_target(player.global_position)
+	navigate_to_next_path_position(chase_speed)
 
 
 func _physics_process(_delta: float) -> void:

@@ -102,6 +102,10 @@ func attack() -> void:
 			flip_h = true
 
 
+func cancel_attack() -> void:
+	set_process(!_dying)
+
+
 func die() -> void:
 	_dying = true
 	set_process(false)

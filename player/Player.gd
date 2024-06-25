@@ -48,9 +48,21 @@ var adjusting
 @onready var neg_x = false
 @onready var neg_z = false
 @onready var sprite: CharacterSprite = $Billboard/CharacterSprite
+
 # hotfix for making sure the node is named properly, remove later
 func _ready():
 	name = "Player"
+	$MeshInstance3D.hide()
+	set_physics_process(false)
+	set_process_input(false)
+	sprite.set_process(false)
+	sprite.play(&"unsit")
+	await sprite.animation_finished
+	$MeshInstance3D.show()
+	sprite.set_process(true)
+	set_physics_process(true)
+	set_process_input(true)
+	appeared.emit()
 
 
 func aim_at_mouse() -> void:
@@ -317,6 +329,7 @@ func _on_ray_delay_timeout():
 
 func _on_level_advanced() -> void:
 	is_level_finished = false
+	$MeshInstance3D.hide()
 	sprite.play(&"unsit")
 	await sprite.animation_finished
 	is_teleporting = false
