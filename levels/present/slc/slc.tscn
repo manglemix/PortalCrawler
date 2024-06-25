@@ -175,7 +175,7 @@ agent_radius = 0.45
 
 [node name="SLC" type="Node3D" node_paths=PackedStringArray("player_spawn_point")]
 script = ExtResource("1_jwdw5")
-next_level = "res://levels/special/mage_boss/mage_boss_level.tscn"
+next_level = "res://levels/far_future/cerium/cerium.tscn"
 player_spawn_point = NodePath("PlayerSpawnPoint")
 
 [node name="Level_005" type="MeshInstance3D" parent="."]

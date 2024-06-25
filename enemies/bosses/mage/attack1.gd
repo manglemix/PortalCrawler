@@ -34,7 +34,8 @@ func _enter() -> void:
 				
 				get_health().died.connect(
 					func():
-						mage_health.health = 0
+						if is_instance_valid(mage_health):
+							mage_health.health = 0
 				)
 				mage_health.died.connect(
 					func():
