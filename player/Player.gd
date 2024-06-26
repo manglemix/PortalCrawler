@@ -15,16 +15,12 @@ signal appeared
 
 var portal = preload("res://player/portal/portal.tscn")
 var p_bullet = preload("res://player/portal/portal_bullet.tscn")
-var yellowP = preload("res://player/yellow portal.webp")
-var purpleP = preload("res://player/purple portal.webp")
 
-var storedTexture
 
 # these are some simple flags for the portal placement code
 @onready var firstplaced = false
 @onready var secondplaced = false
 
-@onready var next = false
 
 var storedNormal
 var storedPosition
@@ -183,6 +179,8 @@ func _get_movement():
 		direction = direction.normalized()
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
+	if (target_velocity == Vector3.ZERO):
+			return
 	target_velocity = change_input(target_velocity)
 	velocity = target_velocity
 
@@ -224,28 +222,29 @@ func _create_portal():
 	get_tree().current_scene.add_child(newportal)
 	newportal.set_global_position(xposition)
 	
+	
 	# rotate the portal correctly and make sure it knows what way it's facing (for later use)
 	if (rayvector.x > .7):
 		newportal.update_direction('l')
 		if (adjusting):
-			newportal.position.x += -0.02433776855469
+			newportal.position.x += -0.06180000305176
 	elif (rayvector.x < -.7):
 		newportal.set_rotation_degrees(Vector3(0, 180, 0))
 		newportal.update_direction('r')
 		if (adjusting):
-			newportal.position.x -= -0.02433776855469
+			newportal.position.x -= -0.06180000305176
 	elif (rayvector.z > .7):
 		newportal.set_rotation_degrees(Vector3(0, -90, 0))
 		newportal.set_global_position(Vector3(xposition.x, xposition.y, xposition.z))
 		newportal.update_direction('u')
 		if (adjusting):
-			newportal.position.z += -0.02433776855469
+			newportal.position.z += -0.06180000305176
 	elif (rayvector.z < -.7):
 		newportal.set_rotation_degrees(Vector3(0, 90, 0))
 		newportal.set_global_position(Vector3(xposition.x, xposition.y, xposition.z))
 		newportal.update_direction('d')
 		if (adjusting):
-			newportal.position.z -= -0.02433776855469
+			newportal.position.z -= -0.06180000305176
 	# make sure the portal updates its stored position
 	if (!newportal.update_position()):
 		newportal.queue_free()
@@ -253,14 +252,8 @@ func _create_portal():
 		
 	if (!firstplaced || hitobject == firstPortal):
 		if (firstPortal != null):
-			#newportal.get_node("Sprite3D").set_texture(firstPortal.get_node("Sprite3D").get_texture())
+			print(xposition.x - firstPortal.position.x)
 			firstPortal.queue_free()
-		else:
-			if (storedTexture != null && secondplaced):
-				#newportal.get_node("Sprite3D").set_texture(storedTexture)
-				storedTexture = null
-			#else:
-				#newportal.get_node("Sprite3D").set_texture(purpleP)
 		firstPortal = newportal
 		firstplaced = true
 		if (secondplaced):
@@ -268,14 +261,7 @@ func _create_portal():
 			firstPortal._set_partner(secondPortal)
 	elif (!secondplaced || hitobject == secondPortal):
 		if (secondPortal != null):
-			#newportal.get_node("Sprite3D").set_texture(secondPortal.get_node("Sprite3D").get_texture())
 			secondPortal.queue_free()
-		else:
-			if (storedTexture != null):
-				#newportal.get_node("Sprite3D").set_texture(storedTexture)
-				storedTexture = null
-			#else:
-				#newportal.get_node("Sprite3D").set_texture(yellowP)
 		secondPortal = newportal
 		secondplaced = true
 		secondPortal._set_partner(firstPortal)
@@ -284,16 +270,9 @@ func _create_portal():
 		firstPortal.queue_free()
 		firstPortal = secondPortal
 		secondPortal = newportal
-		if (!next):
-			#secondPortal.get_node("Sprite3D").set_texture(purpleP)
-			next = true
-		else:
-			#secondPortal.get_node("Sprite3D").set_texture(yellowP)
-			next = false
 		secondPortal._set_partner(firstPortal)
 		firstPortal._set_partner(secondPortal)
-	storedTexture = null
-		
+	
 
 func _on_windup_timeout():
 	if (!AttackArea.has_overlapping_bodies()):
@@ -315,6 +294,16 @@ func change_input(target_velocity):
 		var temp = target_velocity.x
 		target_velocity.x = target_velocity.z
 		target_velocity.z = temp
+		
+	if $Windup.is_stopped():
+		if (target_velocity.x < 0):
+			rotation.y =  PI / 2
+		elif (target_velocity.x < 0):
+			rotation.y = - PI / 2
+		elif (target_velocity.z > 0):
+			rotation.y = PI
+		else:
+			rotation.y = 0.0
 	return target_velocity
 	
 func set_input_change(g_switch: bool, g_xneg: bool, g_zneg: bool):

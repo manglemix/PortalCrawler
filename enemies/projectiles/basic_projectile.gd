@@ -20,6 +20,7 @@ func _physics_process(delta: float) -> void:
 	
 	if data != null:
 		if (data.get_collider().name.begins_with("portal")):
+			print("hit portal")
 			return
 		var damageable := Damageable.get_damageable_component(data.get_collider())
 		if damageable == null:

@@ -96,8 +96,8 @@ shape = SubResource("CylinderShape3D_vtf4t")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_rqnin")
-health = 2
 max_health = 2
+health = 2
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("4_4fuy7")
@@ -123,14 +123,11 @@ wander_speed = 1.2
 [node name="ChaseLineOfSight" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("8_0b8kw")
 chase_speed = 1.7
-min_distance = null
-line_of_sight_check = null
 pullable_from = [NodePath("../PermaWander")]
 
 [node name="ChaseLastPosition" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("9_scf73")
 chase_speed = 1.7
-min_distance = null
 pullable_from = [NodePath("../PermaWander")]
 
 [node name="PermaWander" type="Node" parent="EnemyStateMachine"]

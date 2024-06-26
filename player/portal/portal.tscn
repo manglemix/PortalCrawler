@@ -70,7 +70,7 @@
 [ext_resource type="Texture2D" uid="uid://rdvle2dtegce" path="res://player/portal/portal_spiral_anim/0060.png" id="73_rufak"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2rly3"]
-size = Vector3(0.273, 1, 2)
+size = Vector3(0.310462, 1, 0.949387)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y55j1"]
 animations = [{
@@ -345,12 +345,12 @@ func _ready() -> void:
 "
 
 [node name="portal" type="StaticBody3D"]
-collision_mask = 10
+collision_mask = 2
 input_ray_pickable = false
 script = ExtResource("1_wibcx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.112162, 0, -0.0075599)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0934312, 0, -4.49419e-05)
 shape = SubResource("BoxShape3D_2rly3")
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="."]
@@ -373,7 +373,7 @@ sprite_frames = SubResource("SpriteFrames_p0ah4")
 
 [node name="PortalArea" type="Area3D" parent="."]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PortalArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0524916, 0, 0)
