@@ -91,8 +91,6 @@ func _on_mouse_area_mouse_exited():
 
 
 func _exit_tree() -> void:
-	if (deletable == false):
-		return
 	var out := preload("res://player/portal/portal_out.tscn").instantiate()
 	out.get_node("Sprite3D").modulate = $Sprite3D.modulate
 	out.get_node("Sprite3D/AnimatedSprite3D").modulate = $Sprite3D.modulate
