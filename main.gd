@@ -16,7 +16,7 @@ func _input(event: InputEvent) -> void:
 	
 	var camera: Camera3D = $Camera3D
 	set_process_input(false)
-	await create_tween().tween_property(camera, "position:z", 0, 4).set_trans(Tween.TRANS_QUAD).finished
+	await create_tween().tween_property(camera, "position:z", 0, 3.5).set_trans(Tween.TRANS_QUAD).finished
 	var title: AnimatedSprite3D = $Title
 	title.queue_free()
 	var intro_level: Level = $Intro
