@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://main.gd" id="1_0fj1p"]
 [ext_resource type="PackedScene" uid="uid://cvkxr44q05aed" path="res://levels/special/intro/intro.tscn" id="1_bxhde"]
 [ext_resource type="Script" path="res://components/shake.gd" id="3_shpt0"]
-[ext_resource type="Texture2D" path="res://title1.png" id="4_f71c7"]
-[ext_resource type="Texture2D" path="res://title2.png" id="5_uycmx"]
+[ext_resource type="Texture2D" uid="uid://bfs672ffd823t" path="res://title1.png" id="4_f71c7"]
+[ext_resource type="Texture2D" uid="uid://d6hab5ml7lu3" path="res://title2.png" id="5_uycmx"]
 [ext_resource type="AudioStream" uid="uid://drmeg5fnbd5o" path="res://music/MysteriousBG_sound.mp3" id="6_ginua"]
 [ext_resource type="Environment" uid="uid://c5n0f5yefxrgl" path="res://levels/default_env.tres" id="7_j8djq"]
 
