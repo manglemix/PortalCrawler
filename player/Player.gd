@@ -205,6 +205,8 @@ func _on_died() -> void:
 func _create_portal():
 	
 	var hitobject = storedCollider
+	if (!is_instance_valid(hitobject)):
+		return
 	
 	if (hitobject.name.begins_with("portal")):
 		adjusting = true
