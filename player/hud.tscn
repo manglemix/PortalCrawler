@@ -73,7 +73,7 @@ anchors_preset = -1
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 40.0
-offset_bottom = 90.0
+offset_bottom = 70.0
 theme_override_constants/separation = 10
 script = SubResource("GDScript_w8sf7")
 
