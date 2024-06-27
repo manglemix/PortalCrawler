@@ -98,6 +98,7 @@ script/source = "extends AnimatedSprite3D
 
 
 func _ready() -> void:
+	$\"../OmniLight3D\".light_color = modulate
 	await create_tween().tween_property($AnimatedSprite3D, \"modulate:a\", 0, 0.5).finished
 	play(&\"close\")
 	animation_finished.connect(queue_free)
