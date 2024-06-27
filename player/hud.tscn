@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=7 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
+[ext_resource type="Texture2D" uid="uid://buel4iifkemvw" path="res://player/pause.png" id="2_pm0b2"]
 
 [sub_resource type="GDScript" id="GDScript_fp6gk"]
 script/source = "extends Control
@@ -11,6 +12,12 @@ script/source = "extends Control
 
 func _ready() -> void:
 	propagate_call(\"set_player\", [player])
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(\"ui_cancel\"):
+		$Pause.visible = !$Pause.visible
+		get_tree().paused = $Pause.visible
 "
 
 [sub_resource type="GDScript" id="GDScript_w8sf7"]
@@ -46,7 +53,11 @@ func set_player(player: Player) -> void:
 
 [sub_resource type="Theme" id="Theme_hcktf"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28xjp"]
+bg_color = Color(0, 0, 0, 0.388235)
+
 [node name="HUD" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,3 +96,28 @@ layout_mode = 2
 theme = SubResource("Theme_hcktf")
 texture = ExtResource("1_h1oyn")
 expand_mode = 2
+
+[node name="Pause" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_28xjp")
+
+[node name="Pause" type="TextureRect" parent="Pause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_right = 0.5
+anchor_bottom = 0.6
+offset_left = -64.8
+offset_right = 64.8
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pm0b2")
+expand_mode = 2
+stretch_mode = 5
