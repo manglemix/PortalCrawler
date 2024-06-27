@@ -442,7 +442,8 @@ input_ray_pickable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.429935, -0.738922)
 shape = SubResource("BoxShape3D_5fal6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AttackArea/CollisionShape3D"]
+[node name="HitboxDisplay" type="MeshInstance3D" parent="AttackArea/CollisionShape3D"]
+visible = false
 mesh = SubResource("BoxMesh_fim7j")
 
 [node name="Windup" type="Timer" parent="."]
