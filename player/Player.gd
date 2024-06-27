@@ -252,7 +252,6 @@ func _create_portal():
 		
 	if (!firstplaced || hitobject == firstPortal):
 		if (firstPortal != null):
-			print(xposition.x - firstPortal.position.x)
 			firstPortal.queue_free()
 		firstPortal = newportal
 		firstplaced = true

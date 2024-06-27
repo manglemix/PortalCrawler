@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
-[ext_resource type="Texture2D" uid="uid://buel4iifkemvw" path="res://player/pause.png" id="2_pm0b2"]
+[ext_resource type="Texture2D" path="res://player/pause.png" id="2_pm0b2"]
 
 [sub_resource type="GDScript" id="GDScript_fp6gk"]
 script/source = "extends Control
@@ -64,6 +64,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = SubResource("GDScript_fp6gk")
 
 [node name="HealthBar" type="HBoxContainer" parent="."]
@@ -105,6 +106,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_28xjp")
 
 [node name="Pause" type="TextureRect" parent="Pause"]
