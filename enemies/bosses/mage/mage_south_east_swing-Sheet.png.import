@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cgxp7g2v46a6l"
-path.s3tc="res://.godot/imported/mage_south_east_swing-Sheet.png-aa99e8c01037dc4f4a5aa0caa9be75bb.s3tc.ctex"
+path="res://.godot/imported/mage_south_east_swing-Sheet.png-aa99e8c01037dc4f4a5aa0caa9be75bb.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://enemies/bosses/mage/mage_south_east_swing-Sheet.png"
-dest_files=["res://.godot/imported/mage_south_east_swing-Sheet.png-aa99e8c01037dc4f4a5aa0caa9be75bb.s3tc.ctex"]
+dest_files=["res://.godot/imported/mage_south_east_swing-Sheet.png-aa99e8c01037dc4f4a5aa0caa9be75bb.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

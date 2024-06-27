@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://m8be7j6m5c7o"
-path.s3tc="res://.godot/imported/mage_south_east_shoot-Sheet.png-16ef3c3ca59163033b47761c86934974.s3tc.ctex"
+path="res://.godot/imported/mage_south_east_shoot-Sheet.png-16ef3c3ca59163033b47761c86934974.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://enemies/bosses/mage/mage_south_east_shoot-Sheet.png"
-dest_files=["res://.godot/imported/mage_south_east_shoot-Sheet.png-16ef3c3ca59163033b47761c86934974.s3tc.ctex"]
+dest_files=["res://.godot/imported/mage_south_east_shoot-Sheet.png-16ef3c3ca59163033b47761c86934974.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
