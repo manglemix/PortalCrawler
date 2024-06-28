@@ -9,6 +9,7 @@ const NOCLIP_DURATION := 0.2
 
 var _noclip_timer := NOCLIP_DURATION
 var _noclipping := true
+var _attacking_enemies := false
 
 
 func _ready():
@@ -37,3 +38,9 @@ func _physics_process(delta: float) -> void:
 			for node in get_collision_exceptions():
 				remove_collision_exception_with(node)
 			_noclipping = false
+
+
+func attack_enemies() -> void:
+	if !_attacking_enemies:
+		collision_mask += 4
+		_attacking_enemies = true

@@ -328,3 +328,5 @@ stream = ExtResource("4_ldery")
 attenuation_model = 3
 bus = &"Level SFX"
 script = ExtResource("5_expnp")
+
+[connection signal="teleported" from="Teleportable" to="." method="attack_enemies"]

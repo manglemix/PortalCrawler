@@ -73,7 +73,7 @@ func _input(_event):
 	if Input.is_action_just_pressed("attack"):
 		if is_level_finished:
 			return
-		if ($Cooldown.is_stopped() and !sprite.animation.contains("attack")):
+		if (!sprite.animation.contains("attack")):
 			$Swing.play()
 			aim_at_mouse()
 			sprite.attack()
@@ -276,12 +276,12 @@ func _create_portal():
 	
 
 func _on_windup_timeout():
-	if (!AttackArea.has_overlapping_bodies()):
+	if (!AttackArea.has_overlapping_bodies() and !AttackArea.has_overlapping_areas()):
 		return
-	var bodies = AttackArea.get_overlapping_bodies()
-	for body in bodies:
+	for body in AttackArea.get_overlapping_bodies():
 		Damageable.damage_node_once(body, 1)
-	$Cooldown.start()
+	for body in AttackArea.get_overlapping_areas():
+		Damageable.damage_node_once(body, 1)
 
 @warning_ignore("shadowed_variable")
 func change_input(target_velocity):

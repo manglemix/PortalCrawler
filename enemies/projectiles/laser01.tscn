@@ -38,3 +38,5 @@ attenuation_model = 3
 volume_db = 80.0
 bus = &"Level SFX"
 script = ExtResource("5_3xo2e")
+
+[connection signal="teleported" from="Teleportable" to="." method="attack_enemies"]

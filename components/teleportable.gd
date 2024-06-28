@@ -3,6 +3,9 @@ class_name Teleportable
 extends Node
 
 
+signal teleported
+
+
 func _get_configuration_warnings() -> PackedStringArray:
 	if name != "Teleportable":
 		return ["Name must be Teleportable"]
@@ -108,3 +111,5 @@ func _teleported(Portal1: Portal, Portal2: Portal):
 				pass
 			elif (Portal2.facing == 'd'):
 				get_parent().rotation.y += PI
+	
+	teleported.emit()

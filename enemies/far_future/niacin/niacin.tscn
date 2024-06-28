@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://8880ddb48ucy"]
+[gd_scene load_steps=57 format=3 uid="uid://8880ddb48ucy"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_hane4"]
 [ext_resource type="Script" path="res://components/health.gd" id="2_7kn61"]
@@ -294,8 +294,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uedc0"]
+height = 0.908896
+radius = 0.315262
+
 [node name="Niacin" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
-collision_layer = 4
+collision_layer = 0
 axis_lock_linear_y = true
 script = ExtResource("1_hane4")
 navigation = NodePath("NavigationAgent3D")
@@ -309,9 +313,6 @@ shape = SubResource("CylinderShape3D_vtf4t")
 script = ExtResource("2_7kn61")
 max_health = 3
 health = 3
-
-[node name="Damageable" type="Node" parent="."]
-script = ExtResource("3_wrdvw")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.3
@@ -387,10 +388,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.418832, -0.238)
 script = ExtResource("13_f7acc")
 projectile = ExtResource("19_slhne")
 
+[node name="Hurtbox" type="StaticBody3D" parent="Billboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.467104, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Damageable" type="Node" parent="Billboard/Hurtbox"]
+script = ExtResource("3_wrdvw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Billboard/Hurtbox"]
+shape = SubResource("CylinderShape3D_uedc0")
+
 [connection signal="died" from="Health" to="EnemyStateMachine/Death" method="_on_died"]
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
-[connection signal="damaged" from="Damageable" to="Health" method="change_health"]
-[connection signal="damaged" from="Damageable" to="Billboard/AnimatedSprite3D" method="damage_flash"]
 [connection signal="player_spotted" from="EnemyStateMachine/Wander" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
 [connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="InitialAttackTimer" method="start"]
 [connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="Billboard/AnimatedSprite3D" method="attack"]
@@ -410,3 +420,5 @@ projectile = ExtResource("19_slhne")
 [connection signal="timeout" from="AttackTimer" to="Billboard/AnimatedSprite3D" method="attack"]
 [connection signal="timeout" from="BurstTimer" to="Billboard/ProjectileSpawner" method="spawn"]
 [connection signal="death_animation_finished" from="Billboard/AnimatedSprite3D" to="." method="queue_free"]
+[connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Health" method="change_health"]
+[connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Billboard/AnimatedSprite3D" method="damage_flash"]

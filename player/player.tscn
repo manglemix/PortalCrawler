@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://bqa1jm5brrlgo"]
+[gd_scene load_steps=69 format=3 uid="uid://bqa1jm5brrlgo"]
 
 [ext_resource type="Script" path="res://player/Player.gd" id="1_ynmwp"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="3_3cd08"]
@@ -27,8 +27,6 @@ radius = 0.291114
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5fal6"]
 size = Vector3(1, 1, 1.04498)
-
-[sub_resource type="BoxMesh" id="BoxMesh_fim7j"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_85xhj"]
 radius = 0.4
@@ -442,15 +440,7 @@ input_ray_pickable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.429935, -0.738922)
 shape = SubResource("BoxShape3D_5fal6")
 
-[node name="HitboxDisplay" type="MeshInstance3D" parent="AttackArea/CollisionShape3D"]
-visible = false
-mesh = SubResource("BoxMesh_fim7j")
-
 [node name="Windup" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
-[node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 
