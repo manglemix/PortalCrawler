@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			_timer -= delta
 			if _timer <= 0:
-				damager.damage_once(damage)
+				damager.damage_once(damage, self)
 				_timer = attack_delay
 			
 	else:

@@ -279,9 +279,9 @@ func _on_windup_timeout():
 	if (!AttackArea.has_overlapping_bodies() and !AttackArea.has_overlapping_areas()):
 		return
 	for body in AttackArea.get_overlapping_bodies():
-		Damageable.damage_node_once(body, 1)
+		Damageable.damage_node_once(body, 1, self)
 	for body in AttackArea.get_overlapping_areas():
-		Damageable.damage_node_once(body, 1)
+		Damageable.damage_node_once(body, 1, self)
 
 @warning_ignore("shadowed_variable")
 func change_input(target_velocity):

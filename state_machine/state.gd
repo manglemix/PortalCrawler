@@ -85,9 +85,9 @@ func on_pull_request(other: State) -> void:
 	_pullable_states.append(other)
 
 
-func pull_state() -> void:
+func pull_state() -> bool:
 	if is_active():
-		return
+		return false
 	var i := 0
 	while i < _pullable_states.size():
 		var state := _pullable_states[i]
@@ -98,8 +98,10 @@ func pull_state() -> void:
 			if state.can_pull():
 				state.exited.connect(enter, CONNECT_ONE_SHOT)
 				state._exit_internal()
+				return true
 			break
 		i += 1
+	return false
 
 
 func can_pull() -> bool:

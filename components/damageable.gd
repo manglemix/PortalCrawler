@@ -4,6 +4,7 @@ extends Node
 
 
 signal damaged(health_change: int)
+signal damaged_from(health_change: int, from: Node)
 signal damaged_opaque
 
 @export var damage_multiplier := 1.0
@@ -25,10 +26,12 @@ func _ready() -> void:
 		renamed.connect(update_configuration_warnings)
 
 
-func damage_once(damage: int):
+func damage_once(damage: int, from: Node):
 	if invincible:
 		return
-	damaged.emit(roundi(- damage * damage_multiplier))
+	damage = roundi(- damage * damage_multiplier)
+	damaged_from.emit(damage, from)
+	damaged.emit(damage)
 	damaged_opaque.emit()
 
 
@@ -38,8 +41,8 @@ static func get_damageable_component(node: Node) -> Damageable:
 	return node.get_node_or_null("Damageable")
 
 
-static func damage_node_once(node: Node, damage: int):
+static func damage_node_once(node: Node, damage: int, from: Node):
 	var damageable := get_damageable_component(node)
 	if damageable == null:
 		return
-	damageable.damage_once(damage)
+	damageable.damage_once(damage, from)

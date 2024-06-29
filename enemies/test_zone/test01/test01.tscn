@@ -118,25 +118,26 @@ script = ExtResource("5_6xoju")
 [node name="EnemyStateMachine" type="Node" parent="."]
 script = ExtResource("5_37b4f")
 
-[node name="Wander" type="Node" parent="EnemyStateMachine"]
+[node name="Wander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("6_brwbg")
 wander_speed = 1.2
+pullable_from = [NodePath("../Damaged")]
 
 [node name="ChaseLineOfSight" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("8_0b8kw")
 chase_speed = 1.7
-pullable_from = [NodePath("../PermaWander")]
+pullable_from = [NodePath("../PermaWander"), NodePath("../Damaged")]
 
 [node name="ChaseLastPosition" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("9_scf73")
 chase_speed = 1.7
-pullable_from = [NodePath("../PermaWander")]
-
-[node name="PermaWander" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("9_r0sqy")
+pullable_from = [NodePath("../PermaWander"), NodePath("../Damaged")]
 
 [node name="Damaged" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("10_4ulu0")
+
+[node name="PermaWander" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("9_r0sqy")
 
 [node name="AttackTimer" type="Timer" parent="."]
 
@@ -188,6 +189,8 @@ shape = SubResource("CylinderShape3D_f3srr")
 [connection signal="player_position" from="EnemyStateMachine/ChaseLineOfSight" to="Billboard/ProjectileSpawner" method="aim_at"]
 [connection signal="lost_player" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/Wander" method="enter"]
 [connection signal="player_spotted" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
+[connection signal="stun_finished" from="EnemyStateMachine/Damaged" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
 [connection signal="timeout" from="AttackTimer" to="Billboard/ProjectileSpawner" method="spawn"]
 [connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Health" method="change_health"]
 [connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Billboard/AnimatedSprite3D" method="damage_flash"]
+[connection signal="damaged_from" from="Billboard/Hurtbox/Damageable" to="EnemyStateMachine/Damaged" method="_on_damaged"]

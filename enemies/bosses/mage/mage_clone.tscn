@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c6q7wfn1l1j15"]
+[gd_scene load_steps=52 format=3 uid="uid://c6q7wfn1l1j15"]
 
 [ext_resource type="Script" path="res://components/health.gd" id="2_ymwt7"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="3_fbdvx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://enemies/state_machine/enemy_state_machine.gd" id="5_oheg2"]
 [ext_resource type="Script" path="res://enemies/state_machine/death.gd" id="7_kktdn"]
 [ext_resource type="Script" path="res://enemies/state_machine/chase_line_of_sight.gd" id="7_u1tmt"]
+[ext_resource type="Script" path="res://enemies/state_machine/damaged.gd" id="8_qebjp"]
 [ext_resource type="Script" path="res://enemies/state_machine/perma_wander.gd" id="9_ai66x"]
 [ext_resource type="Texture2D" uid="uid://cb5bb00rlu0xf" path="res://enemies/bosses/mage/mage_south_swing-Sheet.png" id="9_oww2m"]
 [ext_resource type="Script" path="res://scripts/billboard.gd" id="10_4hwq2"]
@@ -286,6 +287,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2oi7m"]
+height = 0.908896
+radius = 0.315262
+
 [node name="MageClone" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
 collision_layer = 4
 axis_lock_linear_y = true
@@ -301,9 +306,6 @@ shape = SubResource("CylinderShape3D_vtf4t")
 script = ExtResource("2_ymwt7")
 max_health = 3
 health = 3
-
-[node name="Damageable" type="Node" parent="."]
-script = ExtResource("3_fbdvx")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.3
@@ -323,6 +325,10 @@ script = ExtResource("5_oheg2")
 script = ExtResource("7_u1tmt")
 chase_speed = 2.0
 line_of_sight_check = false
+pullable_from = [NodePath("../PermaWander"), NodePath("../DeathState"), NodePath("../Damaged")]
+
+[node name="Damaged" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
+script = ExtResource("8_qebjp")
 pullable_from = [NodePath("../PermaWander"), NodePath("../DeathState")]
 
 [node name="PermaWander" type="Node" parent="EnemyStateMachine"]
@@ -360,14 +366,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.671, -0.238)
 script = ExtResource("14_bxld1")
 projectile = ExtResource("15_s5qa1")
 
+[node name="Hurtbox" type="StaticBody3D" parent="Billboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.467104, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Billboard/Hurtbox"]
+shape = SubResource("CylinderShape3D_2oi7m")
+
+[node name="Damageable" type="Node" parent="Billboard/Hurtbox"]
+script = ExtResource("3_fbdvx")
+
 [connection signal="died" from="Health" to="EnemyStateMachine/DeathState" method="_on_died"]
 [connection signal="health_changed" from="Health" to="Billboard/AnimatedSprite3D" method="flash"]
-[connection signal="damaged" from="Damageable" to="Health" method="change_health"]
-[connection signal="damaged" from="Damageable" to="Billboard/AnimatedSprite3D" method="damage_flash"]
 [connection signal="entered" from="EnemyStateMachine/Chase" to="AttackTimer" method="start"]
 [connection signal="exited" from="EnemyStateMachine/Chase" to="AttackTimer" method="stop"]
 [connection signal="player_position" from="EnemyStateMachine/Chase" to="Billboard/ProjectileSpawner" method="aim_at"]
+[connection signal="stun_finished" from="EnemyStateMachine/Damaged" to="EnemyStateMachine/Chase" method="enter"]
 [connection signal="entered" from="EnemyStateMachine/DeathState" to="Billboard/AnimatedSprite3D" method="die"]
 [connection signal="timeout" from="AttackTimer" to="Billboard/AnimatedSprite3D" method="attack"]
 [connection signal="timeout" from="AttackTimer" to="Billboard/ProjectileSpawner" method="spawn"]
 [connection signal="death_animation_finished" from="Billboard/AnimatedSprite3D" to="." method="_on_death_animation_finished"]
+[connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Health" method="change_health"]
+[connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Billboard/AnimatedSprite3D" method="damage_flash"]
+[connection signal="damaged_from" from="Billboard/Hurtbox/Damageable" to="EnemyStateMachine/Damaged" method="_on_damaged"]

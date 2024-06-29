@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				queue_free()
 		else:
-			damageable.damage_once(damage)
+			damageable.damage_once(damage, self)
 			queue_free()
 	
 	if _noclipping:
