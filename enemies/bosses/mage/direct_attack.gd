@@ -18,9 +18,13 @@ func _enter() -> void:
 	get_tree().create_timer(DURATION, false).timeout.connect(exit.bind(attack_finished))
 
 
+func _exit() -> void:
+	set_physics_process(true)
+
+
 func _physics_process(_delta: float) -> void:
 	var pos := player.global_position
 	await get_tree().create_timer(DELAY, false).timeout
+	player_position.emit(pos)
 	if is_active():
-		player_position.emit(pos)
 		look_at(pos)

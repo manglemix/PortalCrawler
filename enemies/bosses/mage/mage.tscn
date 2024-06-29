@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://dpmfr1b26ccye"]
+[gd_scene load_steps=80 format=3 uid="uid://dpmfr1b26ccye"]
 
 [ext_resource type="Script" path="res://enemies/bosses/mage/mage_boss.gd" id="1_hwhin"]
 [ext_resource type="Script" path="res://components/health.gd" id="2_7y35l"]
@@ -510,6 +510,10 @@ func damage_flash(_damage: int):
 	modulate = Color.WHITE
 "
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_splg6"]
+height = 2.53098
+radius = 0.630724
+
 [sub_resource type="GDScript" id="GDScript_jx6vt"]
 script/source = "extends Node3D
 
@@ -533,9 +537,6 @@ shape = SubResource("CylinderShape3D_vtf4t")
 script = ExtResource("2_7y35l")
 max_health = 20
 health = 20
-
-[node name="Damageable" type="Node" parent="."]
-script = ExtResource("3_g2a4m")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.3
@@ -605,6 +606,17 @@ animation = &"walk_right"
 script = SubResource("GDScript_asehg")
 character = NodePath("../..")
 
+[node name="Hurtbox" type="StaticBody3D" parent="Billboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27329, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Damageable" type="Node" parent="Billboard/Hurtbox"]
+script = ExtResource("3_g2a4m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Billboard/Hurtbox"]
+shape = SubResource("CylinderShape3D_splg6")
+
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 remote_path = NodePath("../4Laser")
@@ -653,11 +665,9 @@ initial_attack_delay = 0.05
 
 [connection signal="died" from="Health" to="EnemyStateMachine/DeathState" method="_on_died"]
 [connection signal="health_changed" from="Health" to="Billboard/AnimatedSprite3D" method="flash"]
-[connection signal="damaged" from="Damageable" to="Health" method="change_health"]
-[connection signal="damaged" from="Damageable" to="Billboard/AnimatedSprite3D" method="damage_flash"]
 [connection signal="player_received" from="EnemyStateMachine/WaitForPlayer" to="EnemyStateMachine/Transparent" method="enter"]
-[connection signal="entered" from="EnemyStateMachine/Transparent" to="Damageable" method="set_invincible" binds= [true]]
-[connection signal="exited" from="EnemyStateMachine/Transparent" to="Damageable" method="set_invincible" binds= [false]]
+[connection signal="entered" from="EnemyStateMachine/Transparent" to="Billboard/Hurtbox/Damageable" method="set_invincible" binds= [true]]
+[connection signal="exited" from="EnemyStateMachine/Transparent" to="Billboard/Hurtbox/Damageable" method="set_invincible" binds= [false]]
 [connection signal="transparency_finished" from="EnemyStateMachine/Transparent" to="EnemyStateMachine/DirectAttack" method="enter"]
 [connection signal="attack_finished" from="EnemyStateMachine/DirectAttack" to="EnemyStateMachine/Tired" method="enter"]
 [connection signal="entered" from="EnemyStateMachine/DirectAttack" to="Billboard/AnimatedSprite3D" method="start_shooting"]
@@ -672,3 +682,5 @@ initial_attack_delay = 0.05
 [connection signal="attack_finished" from="EnemyStateMachine/Attack2" to="EnemyStateMachine/Transparent" method="enter"]
 [connection signal="attacked" from="EnemyStateMachine/Attack2" to="4Laser/ChainSpawner" method="spawn"]
 [connection signal="entered" from="EnemyStateMachine/DeathState" to="Billboard/AnimatedSprite3D" method="die"]
+[connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Health" method="change_health"]
+[connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Billboard/AnimatedSprite3D" method="damage_flash"]
