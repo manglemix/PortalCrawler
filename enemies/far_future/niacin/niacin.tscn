@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://8880ddb48ucy"]
+[gd_scene load_steps=59 format=3 uid="uid://8880ddb48ucy"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_hane4"]
 [ext_resource type="Script" path="res://components/health.gd" id="2_7kn61"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://kxfjcf2n4lwv" path="res://enemies/far_future/niacin/walk_down.png" id="14_a4oe3"]
 [ext_resource type="Texture2D" uid="uid://pgja01anva28" path="res://enemies/far_future/niacin/walk_right.png" id="15_cxdoa"]
 [ext_resource type="Texture2D" uid="uid://3lsf06p0t14a" path="res://enemies/far_future/niacin/walk_up.png" id="16_vsjka"]
+[ext_resource type="Script" path="res://components/ysort.gd" id="21_850qb"]
 [ext_resource type="PackedScene" uid="uid://jr7h7x8hwhpb" path="res://enemies/projectiles/laser01.tscn" id="22_8cgxm"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
@@ -387,6 +388,9 @@ sprite_frames = SubResource("SpriteFrames_3hm6u")
 animation = &"attack_up"
 script = ExtResource("12_3c0g5")
 character = NodePath("../..")
+
+[node name="YSort" type="Node" parent="Billboard/AnimatedSprite3D"]
+script = ExtResource("21_850qb")
 
 [node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.418832, -0.238)

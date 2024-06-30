@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bqa1jm5brrlgo"]
+[gd_scene load_steps=70 format=3 uid="uid://bqa1jm5brrlgo"]
 
 [ext_resource type="Script" path="res://player/Player.gd" id="1_ynmwp"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="3_3cd08"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bqli22u6eetl6" path="res://player/knight_sit.png" id="13_xphrs"]
 [ext_resource type="Texture2D" uid="uid://cfbmloeajlf44" path="res://player/walk_up.png" id="14_0bs3t"]
 [ext_resource type="Script" path="res://scripts/character_sprite.gd" id="14_g7fv3"]
+[ext_resource type="Script" path="res://components/ysort.gd" id="18_5mns3"]
 [ext_resource type="AudioStream" uid="uid://d1ckmuxt1gds6" path="res://player/dying_SE.mp3" id="18_i6t1m"]
 [ext_resource type="AudioStream" uid="uid://c43kl47sbygfd" path="res://player/knight_taking_damage.mp3" id="19_snk2t"]
 [ext_resource type="AudioStream" uid="uid://dihnnup83kost" path="res://player/sword_swing_miss.mp3" id="20_yefx7"]
@@ -451,15 +452,16 @@ mesh = SubResource("CapsuleMesh_85xhj")
 skeleton = NodePath("../Billboard/CharacterSprite")
 
 [node name="Billboard" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 top_level = true
 script = ExtResource("4_7s1tg")
 
 [node name="CharacterSprite" type="AnimatedSprite3D" parent="Billboard" node_paths=PackedStringArray("character")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -0.302772, 1.32346e-08)
 sorting_offset = 50.0
 cast_shadow = 0
 gi_mode = 2
-offset = Vector2(0, 8)
+offset = Vector2(0, 28.62)
 pixel_size = 0.025
 double_sided = false
 no_depth_test = true
@@ -470,6 +472,9 @@ animation = &"attack_up"
 autoplay = "idle_down"
 script = ExtResource("14_g7fv3")
 character = NodePath("../..")
+
+[node name="YSort" type="Node" parent="Billboard/CharacterSprite"]
+script = ExtResource("18_5mns3")
 
 [node name="RayDelay" type="Timer" parent="."]
 one_shot = true

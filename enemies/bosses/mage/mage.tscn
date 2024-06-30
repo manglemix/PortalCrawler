@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://dpmfr1b26ccye"]
+[gd_scene load_steps=81 format=3 uid="uid://dpmfr1b26ccye"]
 
 [ext_resource type="Script" path="res://enemies/bosses/mage/mage_boss.gd" id="1_hwhin"]
 [ext_resource type="Script" path="res://components/health.gd" id="2_7y35l"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://cb5bb00rlu0xf" path="res://enemies/bosses/mage/mage_south_swing-Sheet.png" id="21_135fi"]
 [ext_resource type="Texture2D" uid="uid://cgxp7g2v46a6l" path="res://enemies/bosses/mage/mage_south_east_swing-Sheet.png" id="22_uus1r"]
 [ext_resource type="Texture2D" uid="uid://bmt8hegyecdyt" path="res://enemies/bosses/mage/mage_north_swing-Sheet.png" id="23_yajh7"]
+[ext_resource type="Script" path="res://components/ysort.gd" id="26_yldkk"]
 [ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="28_l2ro3"]
 [ext_resource type="Script" path="res://enemies/spawners/chain_spawner.gd" id="28_r4khc"]
 [ext_resource type="PackedScene" uid="uid://dy0uaej4flf11" path="res://enemies/projectiles/magic01.tscn" id="30_tci0l"]
@@ -612,6 +613,9 @@ sprite_frames = SubResource("SpriteFrames_3hm6u")
 animation = &"walk_right"
 script = SubResource("GDScript_asehg")
 character = NodePath("../..")
+
+[node name="YSort" type="Node" parent="Billboard/AnimatedSprite3D"]
+script = ExtResource("26_yldkk")
 
 [node name="Hurtbox" type="StaticBody3D" parent="Billboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27329, 0)

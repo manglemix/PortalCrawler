@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bawgcpe4clkdo"]
+[gd_scene load_steps=70 format=3 uid="uid://bawgcpe4clkdo"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_vnqx7"]
 [ext_resource type="Texture2D" uid="uid://cirgyej8vtrrl" path="res://enemies/medieval/harry/wizard.png" id="2_tv2w5"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cwpb732w6vs7r" path="res://enemies/medieval/harry/wizard_side.png" id="11_ms51u"]
 [ext_resource type="Script" path="res://scripts/billboard.gd" id="12_25l4f"]
 [ext_resource type="Script" path="res://scripts/character_sprite.gd" id="12_ctaq7"]
+[ext_resource type="Script" path="res://components/ysort.gd" id="16_wf0wl"]
 [ext_resource type="PackedScene" uid="uid://dy0uaej4flf11" path="res://enemies/projectiles/magic01.tscn" id="17_lmpbm"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
@@ -472,23 +473,25 @@ cast_shadow = 3
 mesh = SubResource("CapsuleMesh_fhpkm")
 
 [node name="Billboard" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 top_level = true
 script = ExtResource("12_25l4f")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Billboard" node_paths=PackedStringArray("character")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-offset = Vector2(0, 30)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.306787, 1.34101e-08)
+offset = Vector2(0, 47.09)
 pixel_size = 0.02
 double_sided = false
 no_depth_test = true
 texture_filter = 0
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_3hm6u")
-animation = &"death"
-frame = 20
-frame_progress = 0.370625
+animation = &"idle_down"
 script = ExtResource("12_ctaq7")
 character = NodePath("../..")
+
+[node name="YSort" type="Node" parent="Billboard/AnimatedSprite3D"]
+script = ExtResource("16_wf0wl")
 
 [node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.671, -0.238)
