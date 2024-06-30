@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://kxfjcf2n4lwv" path="res://enemies/far_future/niacin/walk_down.png" id="14_a4oe3"]
 [ext_resource type="Texture2D" uid="uid://pgja01anva28" path="res://enemies/far_future/niacin/walk_right.png" id="15_cxdoa"]
 [ext_resource type="Texture2D" uid="uid://3lsf06p0t14a" path="res://enemies/far_future/niacin/walk_up.png" id="16_vsjka"]
-[ext_resource type="PackedScene" uid="uid://cb7yrhamia1d8" path="res://enemies/projectiles/bullet01.tscn" id="19_slhne"]
+[ext_resource type="PackedScene" uid="uid://jr7h7x8hwhpb" path="res://enemies/projectiles/laser01.tscn" id="22_8cgxm"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
 height = 0.8
@@ -391,7 +391,7 @@ character = NodePath("../..")
 [node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.418832, -0.238)
 script = ExtResource("13_f7acc")
-projectile = ExtResource("19_slhne")
+projectile = ExtResource("22_8cgxm")
 
 [node name="Hurtbox" type="StaticBody3D" parent="Billboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.467104, 0)
