@@ -45,8 +45,9 @@ func _enter() -> void:
 				add_child(mage)
 			
 			await sprite.animation_finished
-			sprite.set_process(true)
-			get_tree().create_timer(0.5, false).timeout.connect(exit.bind(attack_finished))
+			if is_active():
+				sprite.set_process(true)
+				get_tree().create_timer(0.5, false).timeout.connect(exit.bind(attack_finished))
 			return
 	
 	sprite.start_shooting()

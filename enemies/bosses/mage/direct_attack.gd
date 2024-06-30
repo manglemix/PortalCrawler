@@ -9,6 +9,12 @@ const DURATION := 3.0
 const DELAY := 0.3
 
 
+@warning_ignore("shadowed_variable")
+func set_player(player: Player) -> void:
+	super(player)
+	set_physics_process(true)
+
+
 func _enter() -> void:
 	super()
 	stop_navigation()

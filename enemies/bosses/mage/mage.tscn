@@ -29,7 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://bmt8hegyecdyt" path="res://enemies/bosses/mage/mage_north_swing-Sheet.png" id="23_yajh7"]
 [ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="28_l2ro3"]
 [ext_resource type="Script" path="res://enemies/spawners/chain_spawner.gd" id="28_r4khc"]
-[ext_resource type="PackedScene" uid="uid://jr7h7x8hwhpb" path="res://enemies/projectiles/laser01.tscn" id="29_bq4a8"]
+[ext_resource type="PackedScene" uid="uid://dy0uaej4flf11" path="res://enemies/projectiles/magic01.tscn" id="30_tci0l"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
 height = 0.8
@@ -518,8 +518,15 @@ radius = 0.630724
 script/source = "extends Node3D
 
 
+@onready var health: Health = $\"../Health\"
+
+
 func _physics_process(delta: float) -> void:
-	rotation.y += 0.35 * delta
+	var step := 0.35 * delta
+	@warning_ignore(\"integer_division\")
+	if health.health <= health.max_health / 2.0:
+		step *= 2
+	rotation.y += step
 "
 
 [node name="Mage" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
@@ -535,8 +542,8 @@ shape = SubResource("CylinderShape3D_vtf4t")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_7y35l")
-max_health = 20
-health = 20
+max_health = 30
+health = 30
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.3
@@ -655,7 +662,7 @@ script = ExtResource("28_r4khc")
 
 [node name="ProjectileSpawner" type="Marker3D" parent="4Laser/ChainSpawner"]
 script = ExtResource("28_l2ro3")
-projectile = ExtResource("29_bq4a8")
+projectile = ExtResource("30_tci0l")
 
 [node name="DirectAttackLaser" parent="." instance=ExtResource("13_o5g7e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)

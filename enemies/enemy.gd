@@ -3,6 +3,8 @@ class_name Enemy
 extends CharacterBody3D
 
 
+signal died
+
 @export var navigation: NavigationAgent3D
 @export var state_machine: EnemyStateMachine
 
@@ -27,6 +29,17 @@ func _ready() -> void:
 			state_machine.set_navigation(navigation)
 		if !state_machine.enter_on_ready:
 			state_machine.enter()
+	var health := Health.get_health_component(self)
+	if health == null:
+		tree_exiting.connect(
+			func():
+				died.emit()
+		)
+	else:
+		health.died.connect(
+			func():
+				died.emit()
+		)
 
 
 func _physics_process(_delta: float) -> void:

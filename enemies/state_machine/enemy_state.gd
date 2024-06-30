@@ -11,6 +11,7 @@ var player: CharacterBody3D
 var _enemy: Enemy
 var _raycast: RayCast3D
 var _last_nav_target_time := -MIN_NAV_RETARGET_DURATION
+var _hiding_errors := false
 
 var linear_velocity: Vector3:
 	set = set_linear_velocity, get = get_linear_velocity
@@ -33,7 +34,7 @@ func _ready() -> void:
 func set_linear_velocity(linear_velocity: Vector3) -> void:
 	if is_active():
 		_enemy.velocity = linear_velocity
-	else:
+	elif !_hiding_errors:
 		push_error("Cannot set linear_velocity of EnemyState if not active")
 
 
@@ -45,7 +46,7 @@ func get_linear_velocity() -> Vector3:
 func set_global_transform(global_transform: Transform3D) -> void:
 	if is_active():
 		_enemy.global_transform = global_transform
-	else:
+	elif !_hiding_errors:
 		push_error("Cannot set global_transform of EnemyState if not active")
 
 
@@ -57,7 +58,7 @@ func get_global_transform() -> Transform3D:
 func set_transform(transform: Transform3D) -> void:
 	if is_active():
 		_enemy.transform = transform
-	else:
+	elif !_hiding_errors:
 		push_error("Cannot set transform of EnemyState if not active")
 
 
@@ -137,3 +138,11 @@ func get_parent_origin() -> Vector3:
 
 func get_health() -> Health:
 	return Health.get_health_component(_enemy)
+
+
+func hide_errors() -> void:
+	_hiding_errors = true
+
+
+func unhide_errors() -> void:
+	_hiding_errors = false

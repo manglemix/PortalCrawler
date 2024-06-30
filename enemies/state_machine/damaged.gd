@@ -13,6 +13,11 @@ var _timer := 0.0
 var _tween: Tween
 
 
+func _ready() -> void:
+	super()
+	hide_errors()
+
+
 func _on_damaged(_damage: int, from: Node = null) -> void:
 	if is_active():
 		_timer += delay

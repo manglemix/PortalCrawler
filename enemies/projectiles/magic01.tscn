@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy0uaej4flf11"]
+
+[ext_resource type="Script" path="res://enemies/projectiles/basic_projectile.gd" id="1_cad6g"]
+[ext_resource type="Texture2D" uid="uid://corsgd42piluv" path="res://enemies/projectiles/magic_ball.png" id="2_ym8xy"]
+[ext_resource type="Script" path="res://components/teleportable.gd" id="3_4qltt"]
+[ext_resource type="AudioStream" uid="uid://crrm0r8t3jgcl" path="res://enemies/test_zone/test01/laser_bullet.wav" id="4_pym4v"]
+[ext_resource type="Script" path="res://scripts/persistent_sound.gd" id="5_qlu6u"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sq72s"]
+radius = 0.173872
+
+[node name="Basic" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_cad6g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_sq72s")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.172549, 0.180392, 1)
+omni_range = 2.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 0, 0)
+pixel_size = 0.03
+no_depth_test = true
+texture_filter = 0
+render_priority = 4
+texture = ExtResource("2_ym8xy")
+
+[node name="Teleportable" type="Node" parent="."]
+script = ExtResource("3_4qltt")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_pym4v")
+attenuation_model = 3
+volume_db = 80.0
+bus = &"Level SFX"
+script = ExtResource("5_qlu6u")
+
+[connection signal="teleported" from="Teleportable" to="." method="attack_enemies"]
