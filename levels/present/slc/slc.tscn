@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="12_w76t8"]
 [ext_resource type="PackedScene" uid="uid://8880ddb48ucy" path="res://enemies/far_future/niacin/niacin.tscn" id="13_is2ae"]
 [ext_resource type="Script" path="res://enemies/spawners/staged_spawner.gd" id="13_tyxir"]
-[ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/test_zone/test01/test01.tscn" id="14_bydcy"]
+[ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/medieval/harry/test01.tscn" id="14_bydcy"]
 [ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="14_q3rdv"]
 [ext_resource type="AudioStream" uid="uid://drm11ek0ib4x8" path="res://music/futuristicBG_sound.mp3" id="15_n0q5f"]
 

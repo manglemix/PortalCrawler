@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemies/projectiles/basic_projectile.gd" id="1_cad6g"]
 [ext_resource type="Texture2D" uid="uid://corsgd42piluv" path="res://enemies/projectiles/magic_ball.png" id="2_ym8xy"]
 [ext_resource type="Script" path="res://components/teleportable.gd" id="3_4qltt"]
-[ext_resource type="AudioStream" uid="uid://crrm0r8t3jgcl" path="res://enemies/test_zone/test01/laser_bullet.wav" id="4_pym4v"]
+[ext_resource type="AudioStream" uid="uid://crrm0r8t3jgcl" path="res://enemies/medieval/harry/laser_bullet.wav" id="4_pym4v"]
 [ext_resource type="Script" path="res://scripts/persistent_sound.gd" id="5_qlu6u"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sq72s"]

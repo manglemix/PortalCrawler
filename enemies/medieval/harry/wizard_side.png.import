@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwpb732w6vs7r"
-path="res://.godot/imported/wizard_side.png-92f0d4dadb4a8a6557c3b579a2a87a63.ctex"
+path="res://.godot/imported/wizard_side.png-a1f1eb1d8a5b2d764a84ef1f8a5cf16c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/test_zone/test01/wizard_side.png"
-dest_files=["res://.godot/imported/wizard_side.png-92f0d4dadb4a8a6557c3b579a2a87a63.ctex"]
+source_file="res://enemies/medieval/harry/wizard_side.png"
+dest_files=["res://.godot/imported/wizard_side.png-a1f1eb1d8a5b2d764a84ef1f8a5cf16c.ctex"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://crrm0r8t3jgcl"
-path="res://.godot/imported/laser_bullet.wav-206c8f0e85ca8638f44bda1f38505a80.sample"
+path="res://.godot/imported/laser_bullet.wav-704f411035e2a4a2cb43b9cfab9ce378.sample"
 
 [deps]
 
-source_file="res://enemies/test_zone/test01/laser_bullet.wav"
-dest_files=["res://.godot/imported/laser_bullet.wav-206c8f0e85ca8638f44bda1f38505a80.sample"]
+source_file="res://enemies/medieval/harry/laser_bullet.wav"
+dest_files=["res://.godot/imported/laser_bullet.wav-704f411035e2a4a2cb43b9cfab9ce378.sample"]
 
 [params]
 

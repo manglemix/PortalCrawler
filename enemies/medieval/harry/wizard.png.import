@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ghow4axy4yue"
-path="res://.godot/imported/wizard_death.png-5d7b516e2f3f8ad7ac1255b156b9c896.ctex"
+uid="uid://cirgyej8vtrrl"
+path="res://.godot/imported/wizard.png-c91bd17bf252f2b430306a83aee6c76e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/test_zone/test01/wizard_death.png"
-dest_files=["res://.godot/imported/wizard_death.png-5d7b516e2f3f8ad7ac1255b156b9c896.ctex"]
+source_file="res://enemies/medieval/harry/wizard.png"
+dest_files=["res://.godot/imported/wizard.png-c91bd17bf252f2b430306a83aee6c76e.ctex"]
 
 [params]
 

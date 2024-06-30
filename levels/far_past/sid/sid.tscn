@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="12_xfdhn"]
 [ext_resource type="Script" path="res://enemies/spawners/staged_spawner.gd" id="13_mv5f0"]
 [ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="14_jds2y"]
-[ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/test_zone/test01/test01.tscn" id="14_r2tbf"]
+[ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/medieval/harry/test01.tscn" id="14_r2tbf"]
 [ext_resource type="AudioStream" uid="uid://dtludju15pidf" path="res://music/quiet_underground_sound_BG.mp3" id="15_jaj8o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2h2t"]
