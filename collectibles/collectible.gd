@@ -55,4 +55,5 @@ func _input(event: InputEvent) -> void:
 	clearing_display.emit()
 	Collectibles.clear_display()
 	await to_display.create_tween().tween_property(to_display, "scale", Vector3.ZERO, 1.0).set_trans(Tween.TRANS_EXPO).finished
+	to_display.queue_free()
 	queue_free()

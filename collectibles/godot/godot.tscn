@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://vawhhb4eio81"]
+[gd_scene load_steps=11 format=3 uid="uid://vawhhb4eio81"]
 
 [ext_resource type="PackedScene" uid="uid://cutp4m1y312yv" path="res://collectibles/godot/godot.gltf" id="1_kdcso"]
+[ext_resource type="Script" path="res://collectibles/fade_in.gd" id="3_4btr5"]
+[ext_resource type="FontFile" uid="uid://5fqp282we4x2" path="res://fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="3_fi686"]
 [ext_resource type="Script" path="res://collectibles/scale_up.gd" id="3_vcsd6"]
+[ext_resource type="Script" path="res://collectibles/fade_out.gd" id="4_r13ab"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_epunk"]
 bounce = 0.7
@@ -54,6 +57,32 @@ light_energy = 2.0
 transform = Transform3D(-0.325635, -0.659161, 0.677841, 0.118939, -0.739779, -0.662254, 0.937985, -0.135032, 0.319298, 2.94848, -1.52435, 1.45596)
 visible = false
 
+[node name="CanvasLayer" type="CanvasLayer" parent="WithLights"]
+
+[node name="Label" type="Label" parent="WithLights/CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_fi686")
+theme_override_font_sizes/font_size = 48
+text = "They seem to be worshipping this deity..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FadeIn" type="Node" parent="WithLights/CanvasLayer/Label"]
+script = ExtResource("3_4btr5")
+
+[node name="Timer" type="Timer" parent="WithLights/CanvasLayer/Label"]
+wait_time = 0.5
+one_shot = true
+
+[node name="FadeOut" type="Node" parent="WithLights/CanvasLayer/Label"]
+script = ExtResource("4_r13ab")
+duration = 1.0
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_k6clg")
 
@@ -73,5 +102,8 @@ shape = SubResource("CapsuleShape3D_f2at0")
 transform = Transform3D(1, 0, 0, 0, -0.0697391, 0.997565, 0, -0.997565, -0.0697391, -0.12, -0.184, -0.1)
 shape = SubResource("CapsuleShape3D_f2at0")
 
+[connection signal="clearing_display" from="." to="WithLights/CanvasLayer/Label/FadeOut" method="fade_out"]
 [connection signal="contacted_player" from="." to="WithLights/SpotLight3D" method="show"]
 [connection signal="contacted_player" from="." to="WithLights/SpotLight3D2" method="show"]
+[connection signal="contacted_player" from="." to="WithLights/CanvasLayer/Label/Timer" method="start"]
+[connection signal="timeout" from="WithLights/CanvasLayer/Label/Timer" to="WithLights/CanvasLayer/Label/FadeIn" method="fade_in"]

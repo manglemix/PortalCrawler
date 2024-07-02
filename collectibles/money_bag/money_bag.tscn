@@ -114,6 +114,7 @@ script = SubResource("GDScript_agqo0")
 [node name="money_bag" type="Node3D" parent="."]
 
 [node name="MoneyBag" type="MeshInstance3D" parent="money_bag"]
+layers = 3
 mesh = SubResource("ArrayMesh_iqf2n")
 skeleton = NodePath("")
 
@@ -157,6 +158,7 @@ update_scale = false
 transform = Transform3D(1.31134e-07, 1, 1.14641e-14, 1.31134e-07, -5.73206e-15, -1, -1, 1.31134e-07, -1.31134e-07, 0.418228, -0.110634, 5.96046e-08)
 size = Vector3(0.3, 0.3, 0.3)
 texture_albedo = ExtResource("6_tnar7")
+cull_mask = 1048574
 
 [connection signal="contacted_player" from="." to="money_bag/ScaleDown" method="scale_down"]
 [connection signal="contacted_player" from="." to="ChainSpawner" method="spawn"]
