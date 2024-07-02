@@ -1,4 +1,4 @@
-[gd_scene load_steps=200 format=3 uid="uid://ce1ouvngdq8h5"]
+[gd_scene load_steps=203 format=3 uid="uid://ce1ouvngdq8h5"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0fj1p"]
 [ext_resource type="PackedScene" uid="uid://cvkxr44q05aed" path="res://levels/special/intro/intro.tscn" id="1_bxhde"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://d6hab5ml7lu3" path="res://title2.png" id="5_uycmx"]
 [ext_resource type="AudioStream" uid="uid://drmeg5fnbd5o" path="res://music/MysteriousBG_sound.mp3" id="6_ginua"]
 [ext_resource type="Environment" uid="uid://c5n0f5yefxrgl" path="res://levels/default_env.tres" id="7_j8djq"]
+[ext_resource type="Script" path="res://scripts/game_state/beta_collectibles.gd" id="8_a8teh"]
+[ext_resource type="Script" path="res://scripts/auto_free.gd" id="8_e65g6"]
+[ext_resource type="Script" path="res://scripts/game_state/wallet.gd" id="10_jfjg2"]
 
 [sub_resource type="Shader" id="Shader_08ta6"]
 code = "shader_type canvas_item;
@@ -1485,5 +1488,14 @@ fov = 3.8
 size = 9.37
 near = 20.0
 far = 150.0
+
+[node name="GameStateData" type="Node" parent="."]
+script = ExtResource("8_e65g6")
+
+[node name="BetaCollectibles" type="Node" parent="GameStateData"]
+script = ExtResource("8_a8teh")
+
+[node name="Wallet" type="Node" parent="GameStateData"]
+script = ExtResource("10_jfjg2")
 
 [connection signal="translate_3d" from="SubViewportContainer/SubViewport/Camera3D/Shake" to="SubViewportContainer/SubViewport/Camera3D" method="translate"]

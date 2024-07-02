@@ -1,7 +1,7 @@
 extends Node
 
 
-const SAVE_FILE := "user://save.tres"
+const SAVE_FILE := "user://save.res"
 
 var has_godot_plushie := false
 
@@ -10,6 +10,9 @@ var _ignore_saves := false
 
 func _ready() -> void:
 	_ignore_saves = FileAccess.file_exists(".ignore-saves")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	read_save_file()
 
 
 func get_difficulty() -> int:
@@ -26,14 +29,16 @@ func read_save_file() -> void:
 		var packed: PackedDataContainer = load(SAVE_FILE)
 		for key in packed:
 			data[key] = packed[key]
-	propagate_call("_load_save_data", [data])
+	for fragment: SaveDataFragment in get_children():
+		fragment._load_save_data(data)
 
 
 func save_game() -> void:
 	if _ignore_saves:
 		return
 	var data := {}
-	propagate_call("_create_save_data", [data])
+	for fragment: SaveDataFragment in get_children():
+		fragment._create_save_data(data)
 	var packed = PackedDataContainer.new()
 	packed.pack(data)
 	ResourceSaver.save(packed, SAVE_FILE)

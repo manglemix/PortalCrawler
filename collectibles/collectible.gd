@@ -2,26 +2,31 @@ class_name Collectible
 extends RigidBody3D
 
 
-signal moving_to_collectibles_viewport
+signal contacted_player
+signal clearing_display
 
 @export var speed := 6.0
 @export var display_rotation := Vector3.ZERO
 @export var display_origin := Vector3(0.0, 87.0, 0.0)
 @export var to_display: Node3D
 
+
 func _ready() -> void:
 	max_contacts_reported = 4
 	contact_monitor = true
 	collision_layer = 0
 	collision_mask = 3
-	linear_velocity = global_basis.z * - speed
 	can_sleep = false
 	set_process_input(false)
+	await get_tree().process_frame
+	linear_velocity = global_basis.z * - speed
 	
 	while true:
 		var body: Node = await body_entered
 		if body is Player:
-			moving_to_collectibles_viewport.emit()
+			contacted_player.emit()
+			if !is_instance_valid(to_display):
+				break
 			Collectibles.move_to_collectible_viewport(to_display)
 			var display_quat := Quaternion.from_euler(Vector3(deg_to_rad(display_rotation.x), deg_to_rad(display_rotation.y), deg_to_rad(display_rotation.z)))
 			
@@ -47,6 +52,7 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	set_process_input(false)
+	clearing_display.emit()
 	Collectibles.clear_display()
 	await to_display.create_tween().tween_property(to_display, "scale", Vector3.ZERO, 1.0).set_trans(Tween.TRANS_EXPO).finished
 	queue_free()

@@ -6,7 +6,9 @@ var _collectible_viewport: SubViewportContainer
 
 
 func get_collectible() -> PackedScene:
-	return preload("res://collectibles/godot/godot.tscn")
+	if !BetaCollectibles.has_godot_plushie:
+		return preload("res://collectibles/godot/godot.tscn")
+	return preload("res://collectibles/money_bag/money_bag.tscn")
 
 
 func _set_blur(strength: float) -> void:

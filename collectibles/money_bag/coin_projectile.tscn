@@ -1,0 +1,307 @@
+[gd_scene load_steps=68 format=3 uid="uid://1re1g5iro0rr"]
+
+[ext_resource type="Texture2D" uid="uid://blert85nwmruo" path="res://collectibles/money_bag/flipping/0001.png" id="1_h5s02"]
+[ext_resource type="Texture2D" uid="uid://bdst12723luut" path="res://collectibles/money_bag/flipping/0002.png" id="2_0j6n8"]
+[ext_resource type="Texture2D" uid="uid://dkukr7p7i5fd7" path="res://collectibles/money_bag/flipping/0003.png" id="3_bnre5"]
+[ext_resource type="Texture2D" uid="uid://qghvph5hvsw7" path="res://collectibles/money_bag/flipping/0004.png" id="4_cinbu"]
+[ext_resource type="Texture2D" uid="uid://c4jbkdspvft2m" path="res://collectibles/money_bag/flipping/0005.png" id="5_07ca7"]
+[ext_resource type="Texture2D" uid="uid://b02avv7g2axlt" path="res://collectibles/money_bag/flipping/0006.png" id="6_gjvyk"]
+[ext_resource type="Texture2D" uid="uid://p82j6xwt6hp6" path="res://collectibles/money_bag/flipping/0007.png" id="7_gesm8"]
+[ext_resource type="Texture2D" uid="uid://b4wntj40l07ds" path="res://collectibles/money_bag/flipping/0008.png" id="8_5pk42"]
+[ext_resource type="Texture2D" uid="uid://q8d657rkkqov" path="res://collectibles/money_bag/flipping/0009.png" id="9_108jx"]
+[ext_resource type="Texture2D" uid="uid://bbt6x5qvhh8ct" path="res://collectibles/money_bag/flipping/0010.png" id="10_346kp"]
+[ext_resource type="Texture2D" uid="uid://bqyga0pqndy4d" path="res://collectibles/money_bag/flipping/0011.png" id="11_7hj6g"]
+[ext_resource type="Texture2D" uid="uid://bbgr8uertr2m5" path="res://collectibles/money_bag/flipping/0012.png" id="12_iaunb"]
+[ext_resource type="Texture2D" uid="uid://buw4u11acw0kq" path="res://collectibles/money_bag/flipping/0013.png" id="13_i8707"]
+[ext_resource type="Texture2D" uid="uid://d3qyyipn5houx" path="res://collectibles/money_bag/flipping/0014.png" id="14_jdae5"]
+[ext_resource type="Texture2D" uid="uid://h1meoajplk4l" path="res://collectibles/money_bag/flipping/0015.png" id="15_4sk8h"]
+[ext_resource type="Texture2D" uid="uid://cd4txvkh7ili1" path="res://collectibles/money_bag/flipping/0016.png" id="16_bsupg"]
+[ext_resource type="Texture2D" uid="uid://c8f20a3x78osi" path="res://collectibles/money_bag/flipping/0017.png" id="17_k80m4"]
+[ext_resource type="Texture2D" uid="uid://ccrb0mwovos4i" path="res://collectibles/money_bag/flipping/0018.png" id="18_28vmt"]
+[ext_resource type="Texture2D" uid="uid://b6sf5tcqw8bm3" path="res://collectibles/money_bag/flipping/0019.png" id="19_v4fxw"]
+[ext_resource type="Texture2D" uid="uid://cl8xl8wcjr4ik" path="res://collectibles/money_bag/flipping/0020.png" id="20_dfk1r"]
+[ext_resource type="Texture2D" uid="uid://dhphqupjv0a7s" path="res://collectibles/money_bag/flipping/0021.png" id="21_tj1ek"]
+[ext_resource type="Texture2D" uid="uid://ci7whxjov6sud" path="res://collectibles/money_bag/flipping/0022.png" id="22_71wev"]
+[ext_resource type="Texture2D" uid="uid://mfoxj3nyd1lb" path="res://collectibles/money_bag/flipping/0023.png" id="23_aet6k"]
+[ext_resource type="Texture2D" uid="uid://dadq3gu6ldaah" path="res://collectibles/money_bag/flipping/0024.png" id="24_ksb7p"]
+[ext_resource type="Texture2D" uid="uid://bjgbljnovtqk8" path="res://collectibles/money_bag/flipping/0025.png" id="25_ppik0"]
+[ext_resource type="Texture2D" uid="uid://u75ft0clad6i" path="res://collectibles/money_bag/flipping/0026.png" id="26_6vxq5"]
+[ext_resource type="Texture2D" uid="uid://dskhrio6sl4x3" path="res://collectibles/money_bag/flipping/0027.png" id="27_lr6gq"]
+[ext_resource type="Texture2D" uid="uid://beunc2tl7ixlc" path="res://collectibles/money_bag/flipping/0028.png" id="28_y4ffj"]
+[ext_resource type="Texture2D" uid="uid://btt3vpdiffv6b" path="res://collectibles/money_bag/flipping/0029.png" id="29_6nvxd"]
+[ext_resource type="Texture2D" uid="uid://bdhe11dyk2h8v" path="res://collectibles/money_bag/flipping/0030.png" id="30_ynxdr"]
+[ext_resource type="Texture2D" uid="uid://jrrsec048so5" path="res://collectibles/money_bag/flipping/0031.png" id="31_rslen"]
+[ext_resource type="Texture2D" uid="uid://c6mxcvw147nuu" path="res://collectibles/money_bag/flipping/0032.png" id="32_md1mq"]
+[ext_resource type="Texture2D" uid="uid://bmulekukcuupx" path="res://collectibles/money_bag/flipping/0033.png" id="33_7fncs"]
+[ext_resource type="Texture2D" uid="uid://dyj6yf2fbf3nx" path="res://collectibles/money_bag/flipping/0034.png" id="34_vjnxx"]
+[ext_resource type="Texture2D" uid="uid://ct503njepwrgn" path="res://collectibles/money_bag/flipping/0035.png" id="35_hm2ys"]
+[ext_resource type="Texture2D" uid="uid://bo0c7tna7kkw6" path="res://collectibles/money_bag/flipping/0036.png" id="36_m5x3l"]
+[ext_resource type="Texture2D" uid="uid://cbyxg4twnxnbj" path="res://collectibles/money_bag/flipping/0037.png" id="37_uo6jy"]
+[ext_resource type="Texture2D" uid="uid://b8h0ld1a35il0" path="res://collectibles/money_bag/flipping/0038.png" id="38_scu33"]
+[ext_resource type="Texture2D" uid="uid://4mgen5d72bbo" path="res://collectibles/money_bag/flipping/0039.png" id="39_e7hyf"]
+[ext_resource type="Texture2D" uid="uid://c6ox1cp60uvq7" path="res://collectibles/money_bag/flipping/0040.png" id="40_y47ob"]
+[ext_resource type="Texture2D" uid="uid://cvtwkq8t8dsf8" path="res://collectibles/money_bag/flipping/0041.png" id="41_asbcy"]
+[ext_resource type="Texture2D" uid="uid://dl171vy1bwwcc" path="res://collectibles/money_bag/flipping/0042.png" id="42_wgjxw"]
+[ext_resource type="Texture2D" uid="uid://2vrijwvnaexo" path="res://collectibles/money_bag/flipping/0043.png" id="43_k0mv7"]
+[ext_resource type="Texture2D" uid="uid://cnygmeua0dt6v" path="res://collectibles/money_bag/flipping/0044.png" id="44_v52uh"]
+[ext_resource type="Texture2D" uid="uid://bsbp3f012or4p" path="res://collectibles/money_bag/flipping/0045.png" id="45_hpnek"]
+[ext_resource type="Texture2D" uid="uid://cocar7j5gukay" path="res://collectibles/money_bag/flipping/0046.png" id="46_su3r8"]
+[ext_resource type="Texture2D" uid="uid://cj74231fou7d4" path="res://collectibles/money_bag/flipping/0047.png" id="47_ou7pn"]
+[ext_resource type="Texture2D" uid="uid://bs6s1k6q6y2s8" path="res://collectibles/money_bag/flipping/0048.png" id="48_iqgv6"]
+[ext_resource type="Texture2D" uid="uid://masitjruh0ow" path="res://collectibles/money_bag/flipping/0049.png" id="49_o2xr0"]
+[ext_resource type="Texture2D" uid="uid://7fe8alxqwwa2" path="res://collectibles/money_bag/flipping/0050.png" id="50_2q8wr"]
+[ext_resource type="Texture2D" uid="uid://chfxa0xt3gjj5" path="res://collectibles/money_bag/flipping/0051.png" id="51_6110j"]
+[ext_resource type="Texture2D" uid="uid://b44r25nu21eon" path="res://collectibles/money_bag/flipping/0052.png" id="52_6r4ek"]
+[ext_resource type="Texture2D" uid="uid://bgy0s3gvyqoww" path="res://collectibles/money_bag/flipping/0053.png" id="53_bexvw"]
+[ext_resource type="Texture2D" uid="uid://bcyx2coetwx33" path="res://collectibles/money_bag/flipping/0054.png" id="54_yq6ij"]
+[ext_resource type="Texture2D" uid="uid://chfv608elo414" path="res://collectibles/money_bag/flipping/0055.png" id="55_rkxlg"]
+[ext_resource type="Texture2D" uid="uid://duawfyx4rdpib" path="res://collectibles/money_bag/flipping/0056.png" id="56_cfple"]
+[ext_resource type="Texture2D" uid="uid://j7o1vboybye6" path="res://collectibles/money_bag/flipping/0057.png" id="57_g0ey8"]
+[ext_resource type="Texture2D" uid="uid://b7vo103upnchh" path="res://collectibles/money_bag/flipping/0058.png" id="58_56ait"]
+[ext_resource type="Texture2D" uid="uid://ls0oqeqsybkq" path="res://collectibles/money_bag/flipping/0059.png" id="59_87ycm"]
+[ext_resource type="Texture2D" uid="uid://3ovn4dnmtle7" path="res://collectibles/money_bag/flipping/0060.png" id="60_ysure"]
+[ext_resource type="Script" path="res://collectibles/scale_up.gd" id="61_648s1"]
+[ext_resource type="Script" path="res://collectibles/scale_down.gd" id="62_scohe"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ivwl0"]
+bounce = 0.8
+
+[sub_resource type="GDScript" id="GDScript_yuhj7"]
+script/source = "extends RigidBody3D
+
+
+func _ready() -> void:
+	await get_tree().process_frame
+	linear_velocity = -global_basis.z * randf_range(1.5, 3.5)
+"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0inv6"]
+radius = 0.158286
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hans2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h5s02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0j6n8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bnre5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cinbu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_07ca7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gjvyk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gesm8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5pk42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_108jx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_346kp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7hj6g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_iaunb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_i8707")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_jdae5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_4sk8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_bsupg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_k80m4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_28vmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_v4fxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_dfk1r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_tj1ek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_71wev")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_aet6k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ksb7p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_ppik0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_6vxq5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_lr6gq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_y4ffj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_6nvxd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_ynxdr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_rslen")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_md1mq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_7fncs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_vjnxx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_hm2ys")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_m5x3l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_uo6jy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_scu33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_e7hyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_y47ob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_asbcy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_wgjxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_k0mv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_v52uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_hpnek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_su3r8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_ou7pn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_iqgv6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_o2xr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_2q8wr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_6110j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_6r4ek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_bexvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_yq6ij")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_rkxlg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_cfple")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_g0ey8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_56ait")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_87ycm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_ysure")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[sub_resource type="SphereMesh" id="SphereMesh_3ufdv"]
+radius = 0.1
+height = 0.2
+
+[node name="CoinProjectile" type="RigidBody3D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_ivwl0")
+script = SubResource("GDScript_yuhj7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_0inv6")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.002
+billboard = 1
+double_sided = false
+texture_filter = 1
+render_priority = 127
+sprite_frames = SubResource("SpriteFrames_hans2")
+autoplay = "default"
+frame_progress = 0.246976
+
+[node name="ScaleUp" type="Node" parent="AnimatedSprite3D"]
+script = ExtResource("61_648s1")
+
+[node name="ScaleDown" type="Node" parent="AnimatedSprite3D"]
+script = ExtResource("62_scohe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatedSprite3D"]
+cast_shadow = 3
+mesh = SubResource("SphereMesh_3ufdv")
+skeleton = NodePath("../..")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="finished" from="AnimatedSprite3D/ScaleDown" to="." method="queue_free"]
+[connection signal="timeout" from="Timer" to="AnimatedSprite3D/ScaleDown" method="scale_down"]

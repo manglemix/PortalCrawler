@@ -1,11 +1,20 @@
 [gd_scene load_steps=8 format=3 uid="uid://vawhhb4eio81"]
 
-[ext_resource type="Script" path="res://collectibles/collectible.gd" id="1_6c1lw"]
 [ext_resource type="PackedScene" uid="uid://cutp4m1y312yv" path="res://collectibles/godot/godot.gltf" id="1_kdcso"]
 [ext_resource type="Script" path="res://collectibles/scale_up.gd" id="3_vcsd6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_epunk"]
 bounce = 0.7
+
+[sub_resource type="GDScript" id="GDScript_agqo0"]
+script/source = "extends Collectible
+
+
+func _ready() -> void:
+	super()
+	await contacted_player
+	BetaCollectibles.has_godot_plushie = true
+"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k6clg"]
 radius = 0.324
@@ -23,7 +32,7 @@ collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_epunk")
 max_contacts_reported = 1
 contact_monitor = true
-script = ExtResource("1_6c1lw")
+script = SubResource("GDScript_agqo0")
 display_rotation = Vector3(131.1, 78.3, -109.9)
 display_origin = Vector3(0, 87, 0.056)
 to_display = NodePath("WithLights")
@@ -46,7 +55,6 @@ transform = Transform3D(-0.325635, -0.659161, 0.677841, 0.118939, -0.739779, -0.
 visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-visible = false
 shape = SubResource("SphereShape3D_k6clg")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
@@ -65,5 +73,5 @@ shape = SubResource("CapsuleShape3D_f2at0")
 transform = Transform3D(1, 0, 0, 0, -0.0697391, 0.997565, 0, -0.997565, -0.0697391, -0.12, -0.184, -0.1)
 shape = SubResource("CapsuleShape3D_f2at0")
 
-[connection signal="moving_to_collectibles_viewport" from="." to="WithLights/SpotLight3D" method="show"]
-[connection signal="moving_to_collectibles_viewport" from="." to="WithLights/SpotLight3D2" method="show"]
+[connection signal="contacted_player" from="." to="WithLights/SpotLight3D" method="show"]
+[connection signal="contacted_player" from="." to="WithLights/SpotLight3D2" method="show"]

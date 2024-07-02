@@ -21,7 +21,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameState="*res://scripts/game_state.gd"
+GameState="*res://scripts/game_state/game_state.gd"
 Collectibles="*res://scripts/collectibles.gd"
 LevelMusic="*res://music/level_music.gd"
 

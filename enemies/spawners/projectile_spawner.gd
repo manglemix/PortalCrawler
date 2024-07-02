@@ -26,5 +26,5 @@ func spawn() -> void:
 		get_viewport().add_child(projectile_node)
 	else:
 		add_child(projectile_node)
-	projectile_node.transform = global_transform
-	projectile_node.transform.basis = projectile_node.transform.basis.rotated(Vector3.UP, (2 * randf() - 1) * deg_to_rad(max_spread_angle))
+	projectile_node.global_transform = global_transform
+	projectile_node.global_basis = projectile_node.global_basis.rotated(Vector3.UP, (2 * randf() - 1) * deg_to_rad(max_spread_angle))
