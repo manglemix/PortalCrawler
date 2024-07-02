@@ -83,6 +83,11 @@ func _on_finished() -> void:
 	_player._on_level_finished()
 
 
+func _on_can_move_on() -> void:
+	GameState.save_game()
+	_player._on_can_move_on()
+
+
 func _advance_level(to: String) -> void:
 	var next_level_node: Level = load(to).instantiate()
 	var travel := Vector3.ZERO

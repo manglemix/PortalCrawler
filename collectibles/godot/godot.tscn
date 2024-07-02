@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://vawhhb4eio81"]
+
+[ext_resource type="Script" path="res://collectibles/collectible.gd" id="1_6c1lw"]
+[ext_resource type="PackedScene" uid="uid://cutp4m1y312yv" path="res://collectibles/godot/godot.gltf" id="1_kdcso"]
+[ext_resource type="Script" path="res://collectibles/scale_up.gd" id="3_vcsd6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_epunk"]
+bounce = 0.7
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k6clg"]
+radius = 0.324
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m0max"]
+radius = 0.076
+height = 0.336
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f2at0"]
+radius = 0.108
+height = 0.556
+
+[node name="Godot" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_epunk")
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_6c1lw")
+
+[node name="godot" parent="." instance=ExtResource("1_kdcso")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.292, 0)
+
+[node name="ScaleUp" type="Node" parent="godot"]
+script = ExtResource("3_vcsd6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_k6clg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.569078, 0.808725, 0.148707, -0.817818, -0.575476, 0, 0.0855773, -0.121615, 0.988881, 0.312, -0.168, 0.016)
+shape = SubResource("CapsuleShape3D_m0max")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.56854, -0.808951, -0.149535, 0.81815, -0.575005, 0, -0.0859836, -0.122342, 0.988756, -0.312, -0.168, 0.016)
+shape = SubResource("CapsuleShape3D_m0max")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0697391, 0.997565, 0, -0.997565, -0.0697391, 0.12, -0.184, -0.1)
+shape = SubResource("CapsuleShape3D_f2at0")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0697391, 0.997565, 0, -0.997565, -0.0697391, -0.12, -0.184, -0.1)
+shape = SubResource("CapsuleShape3D_f2at0")

@@ -79,22 +79,7 @@ func _input(_event):
 			sprite.attack()
 			$Windup.start()
 	elif Input.is_action_just_pressed("shoot"):
-		# Level to level portals
-		if (is_level_finished):
-			if (firstplaced):
-				firstplaced = false
-				firstPortal.queue_free()
-			if (secondplaced):
-				secondplaced = false
-				secondPortal.queue_free()
-			sprite.set_process(false)
-			$MeshInstance3D.hide()
-			sprite.play(&"sit")
-			is_teleporting = true
-			set_process_input(false)
-			velocity = Vector3.ZERO
-			await sprite.animation_finished
-			advancing_level.emit()
+		if is_level_finished:
 			return
 		
 		# Check if we're deleting portals
@@ -340,6 +325,23 @@ func _on_level_advanced() -> void:
 
 func _on_level_finished() -> void:
 	is_level_finished = true
+
+
+func _on_can_move_on() -> void:
+	if (firstplaced):
+		firstplaced = false
+		firstPortal.queue_free()
+	if (secondplaced):
+		secondplaced = false
+		secondPortal.queue_free()
+	sprite.set_process(false)
+	$MeshInstance3D.hide()
+	sprite.play(&"sit")
+	is_teleporting = true
+	set_process_input(false)
+	velocity = Vector3.ZERO
+	await sprite.animation_finished
+	advancing_level.emit()
 
 func _on_death_animation_finished() -> void:
 	is_teleporting = true

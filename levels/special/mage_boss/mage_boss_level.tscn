@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://tq7ah32pmclk"]
+[gd_scene load_steps=8 format=3 uid="uid://tq7ah32pmclk"]
 
 [ext_resource type="PackedScene" uid="uid://cvo26tu4y2k1n" path="res://levels/special/mage_boss/mage_boss_level.glb" id="1_mhfh0"]
 [ext_resource type="Script" path="res://levels/level.gd" id="1_reh0n"]
 [ext_resource type="AudioStream" uid="uid://cqpoixnwno7no" path="res://levels/special/mage_boss/intense_bossBattle_BG.mp3" id="5_e6eo0"]
+[ext_resource type="Script" path="res://levels/collectible_spawner.gd" id="7_d5lki"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="9_h68wo"]
 [ext_resource type="PackedScene" uid="uid://dpmfr1b26ccye" path="res://enemies/bosses/mage/mage.tscn" id="12_hqnon"]
 [ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="14_0ql2b"]
@@ -73,4 +74,10 @@ stream = ExtResource("5_e6eo0")
 [node name="Mage" parent="." index="6" instance=ExtResource("12_hqnon")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.31643, 0, 0)
 
+[node name="CollectibleSpawner" type="Marker3D" parent="Mage" index="10"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.376755, 0)
+script = ExtResource("7_d5lki")
+
+[connection signal="level_complete" from="." to="Mage/CollectibleSpawner" method="spawn"]
 [connection signal="died" from="Mage" to="." method="_on_finished"]
+[connection signal="collectible_collected" from="Mage/CollectibleSpawner" to="." method="_on_can_move_on"]
