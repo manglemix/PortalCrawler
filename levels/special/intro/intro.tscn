@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="7_lfc7h"]
 [ext_resource type="Script" path="res://enemies/spawners/staged_spawner.gd" id="7_rb4f3"]
 [ext_resource type="AudioStream" uid="uid://drmeg5fnbd5o" path="res://music/MysteriousBG_sound.mp3" id="8_4r57f"]
-[ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/medieval/harry/test01.tscn" id="8_xf3yv"]
+[ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/medieval/harry/harry.tscn" id="8_xf3yv"]
 [ext_resource type="Script" path="res://levels/collectible_spawner.gd" id="10_l2ewj"]
 
 [node name="Intro" node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("1_pnk1a")]

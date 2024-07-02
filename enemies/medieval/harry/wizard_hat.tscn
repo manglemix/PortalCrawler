@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgxuhsvd120o7"]
+
+[ext_resource type="Texture2D" uid="uid://ghow4axy4yue" path="res://enemies/medieval/harry/wizard_death.png" id="1_by25f"]
+
+[sub_resource type="GDScript" id="GDScript_1xxqt"]
+script/source = "extends Sprite3D
+
+
+var player: Player
+var speed := 0.0
+
+
+func _physics_process(delta: float) -> void:
+	speed = move_toward(speed, 10.0, 10.0 * delta)
+	global_position = global_position.move_toward(player.global_position, delta * speed)
+	if global_position == player.global_position:
+		Wallet.wizard_hats += 1
+		queue_free()
+"
+
+[node name="WizardHat" type="Sprite3D"]
+offset = Vector2(0, 47.09)
+pixel_size = 0.02
+billboard = 1
+double_sided = false
+no_depth_test = true
+texture_filter = 0
+render_priority = 127
+texture = ExtResource("1_by25f")
+region_enabled = true
+region_rect = Rect2(4864, 0, 128, 128)
+script = SubResource("GDScript_1xxqt")
