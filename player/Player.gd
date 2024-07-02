@@ -108,7 +108,7 @@ func _input(_event):
 		if (ray.is_colliding() && raydelay.is_stopped()):
 			var value = ray.get_collider().global_position.distance_to(global_position)
 			var bullet = p_bullet.instantiate()
-			get_tree().current_scene.add_child(bullet)
+			get_viewport().add_child(bullet)
 			bullet.set_global_position(position)
 			bullet.position.y += 2
 			bullet.rotation.y = rotation.y
@@ -206,7 +206,7 @@ func _create_portal():
 	var xposition = storedPosition
 	
 	# place the new portal at the correct position
-	get_tree().current_scene.add_child(newportal)
+	get_viewport().add_child(newportal)
 	newportal.set_global_position(xposition)
 	
 	

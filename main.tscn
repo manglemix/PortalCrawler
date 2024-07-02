@@ -1,4 +1,4 @@
-[gd_scene load_steps=198 format=3 uid="uid://ce1ouvngdq8h5"]
+[gd_scene load_steps=200 format=3 uid="uid://ce1ouvngdq8h5"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0fj1p"]
 [ext_resource type="PackedScene" uid="uid://cvkxr44q05aed" path="res://levels/special/intro/intro.tscn" id="1_bxhde"]
@@ -7,6 +7,34 @@
 [ext_resource type="Texture2D" uid="uid://d6hab5ml7lu3" path="res://title2.png" id="5_uycmx"]
 [ext_resource type="AudioStream" uid="uid://drmeg5fnbd5o" path="res://music/MysteriousBG_sound.mp3" id="6_ginua"]
 [ext_resource type="Environment" uid="uid://c5n0f5yefxrgl" path="res://levels/default_env.tres" id="7_j8djq"]
+
+[sub_resource type="Shader" id="Shader_08ta6"]
+code = "shader_type canvas_item;
+
+uniform float strength: hint_range(0.0, 1.0) = 1.0;
+uniform float brightness: hint_range(0.0, 1.0) = 1.0;
+
+// --- Functions --- //
+void fragment() {
+	COLOR.rgb = (texture(TEXTURE, UV) + 
+			texture(TEXTURE, UV * 0.99 + 0.5*0.01) +
+			texture(TEXTURE, UV * 0.98 + 0.5*0.02) +
+			texture(TEXTURE, UV * 0.97 + 0.5*0.03) +
+			texture(TEXTURE, UV * 0.96 + 0.5*0.04) +
+			texture(TEXTURE, UV * 0.95 + 0.5*0.05) +
+			texture(TEXTURE, UV * 0.94 + 0.5*0.06) +
+			texture(TEXTURE, UV * 0.93 + 0.5*0.07) +
+			texture(TEXTURE, UV * 0.92 + 0.5*0.08) +
+			texture(TEXTURE, UV * 0.91 + 0.5*0.09)).rgb / 10.0;
+	
+	COLOR.rgb = (COLOR.rgb * strength + texture(TEXTURE, UV).rgb * (1.0 - strength)) * brightness;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tnmek"]
+shader = SubResource("Shader_08ta6")
+shader_parameter/strength = 0.0
+shader_parameter/brightness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8lclr"]
 atlas = ExtResource("4_f71c7")
@@ -1357,12 +1385,39 @@ func _physics_process(_delta: float) -> void:
 	_last_origin = new_origin
 "
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_0fj1p")
 
-[node name="Intro" parent="." instance=ExtResource("1_bxhde")]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_tnmek")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+msaa_3d = 2
+canvas_item_default_texture_filter = 0
+audio_listener_enable_3d = true
+physics_object_picking = true
+size = Vector2i(1152, 648)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="Intro" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_bxhde")]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 121.495, -20)
 current = true
 fov = 3.8
@@ -1370,14 +1425,18 @@ size = 9.37
 near = 110.0
 far = 150.0
 
-[node name="Shake" type="Node" parent="Camera3D"]
+[node name="Shake" type="Node" parent="SubViewportContainer/SubViewport/Camera3D"]
 script = ExtResource("3_shpt0")
 use_accessibility = true
 z_scale = 0.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -121.495)
+remote_path = NodePath("../../../../CollectibleDisplay/SubViewport/Foci")
+update_rotation = false
+update_scale = false
 
-[node name="Title" type="AnimatedSprite3D" parent="."]
+[node name="Title" type="AnimatedSprite3D" parent="SubViewportContainer/SubViewport"]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 offset = Vector2(-8, 0)
@@ -1388,14 +1447,43 @@ sprite_frames = SubResource("SpriteFrames_psy06")
 autoplay = "default"
 frame_progress = 0.736047
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Title"]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="SubViewportContainer/SubViewport/Title"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 121.495, 0)
 stream = ExtResource("6_ginua")
 autoplay = true
 bus = &"Music"
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = ExtResource("7_j8djq")
 script = SubResource("GDScript_dpa23")
 
-[connection signal="translate_3d" from="Camera3D/Shake" to="Camera3D" method="translate"]
+[node name="CollectibleDisplay" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CollectibleDisplay"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 2
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Foci" type="Marker3D" parent="CollectibleDisplay/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="Camera3D" type="Camera3D" parent="CollectibleDisplay/SubViewport/Foci"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 121.495, 0)
+current = true
+fov = 3.8
+size = 9.37
+near = 20.0
+far = 150.0
+
+[connection signal="translate_3d" from="SubViewportContainer/SubViewport/Camera3D/Shake" to="SubViewportContainer/SubViewport/Camera3D" method="translate"]

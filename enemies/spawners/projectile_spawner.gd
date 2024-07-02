@@ -23,7 +23,7 @@ func spawn() -> void:
 			spawned.emit(projectile_node)
 	)
 	if spawn_on_root:
-		get_tree().current_scene.add_child(projectile_node)
+		get_viewport().add_child(projectile_node)
 	else:
 		add_child(projectile_node)
 	projectile_node.transform = global_transform

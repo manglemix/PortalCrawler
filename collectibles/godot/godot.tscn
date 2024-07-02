@@ -18,19 +18,35 @@ height = 0.336
 radius = 0.108
 height = 0.556
 
-[node name="Godot" type="RigidBody3D"]
+[node name="Godot" type="RigidBody3D" node_paths=PackedStringArray("to_display")]
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_epunk")
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_6c1lw")
+display_rotation = Vector3(131.1, 78.3, -109.9)
+display_origin = Vector3(0, 87, 0.056)
+to_display = NodePath("WithLights")
 
-[node name="godot" parent="." instance=ExtResource("1_kdcso")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.292, 0)
+[node name="WithLights" type="Node3D" parent="."]
 
-[node name="ScaleUp" type="Node" parent="godot"]
+[node name="godot" parent="WithLights" instance=ExtResource("1_kdcso")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4.00001, 0, -0.29, 0)
+
+[node name="ScaleUp" type="Node" parent="WithLights/godot"]
 script = ExtResource("3_vcsd6")
 
+[node name="SpotLight3D" type="SpotLight3D" parent="WithLights"]
+transform = Transform3D(-0.949349, 0.0611026, -0.308226, -0.0478462, 0.941364, 0.333984, 0.31056, 0.331815, -0.890759, -0.692113, 0.805199, -2.17397)
+visible = false
+light_energy = 2.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="WithLights"]
+transform = Transform3D(-0.325635, -0.659161, 0.677841, 0.118939, -0.739779, -0.662254, 0.937985, -0.135032, 0.319298, 2.94848, -1.52435, 1.45596)
+visible = false
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
 shape = SubResource("SphereShape3D_k6clg")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
@@ -48,3 +64,6 @@ shape = SubResource("CapsuleShape3D_f2at0")
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0697391, 0.997565, 0, -0.997565, -0.0697391, -0.12, -0.184, -0.1)
 shape = SubResource("CapsuleShape3D_f2at0")
+
+[connection signal="moving_to_collectibles_viewport" from="." to="WithLights/SpotLight3D" method="show"]
+[connection signal="moving_to_collectibles_viewport" from="." to="WithLights/SpotLight3D2" method="show"]

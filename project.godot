@@ -25,9 +25,12 @@ GameState="*res://scripts/game_state.gd"
 Collectibles="*res://scripts/collectibles.gd"
 LevelMusic="*res://music/level_music.gd"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
-window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [input]
