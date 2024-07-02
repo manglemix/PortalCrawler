@@ -79,6 +79,7 @@ func set_camera(camera: Camera3D) -> void:
 
 func _on_finished() -> void:
 	level_complete.emit()
+	# You were cheating weren't you
 	_player._on_level_finished()
 
 

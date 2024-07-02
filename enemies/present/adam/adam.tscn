@@ -1,0 +1,500 @@
+[gd_scene load_steps=69 format=3 uid="uid://dvpbee1aireck"]
+
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_wadi7"]
+[ext_resource type="Script" path="res://components/health.gd" id="2_k3mgt"]
+[ext_resource type="Script" path="res://scripts/nav/overlapping_nav_agent_3d.gd" id="3_ohnvs"]
+[ext_resource type="Script" path="res://enemies/state_machine/enemy_state_machine.gd" id="4_p6i4q"]
+[ext_resource type="Script" path="res://enemies/state_machine/wander.gd" id="5_ju7y0"]
+[ext_resource type="Script" path="res://enemies/state_machine/chase_line_of_sight.gd" id="6_vav7k"]
+[ext_resource type="Script" path="res://enemies/state_machine/chase_last_position.gd" id="7_7fgi7"]
+[ext_resource type="Script" path="res://enemies/state_machine/damaged.gd" id="8_86l5i"]
+[ext_resource type="Script" path="res://enemies/state_machine/death.gd" id="9_7hx0q"]
+[ext_resource type="Script" path="res://enemies/state_machine/perma_wander.gd" id="10_nr5rr"]
+[ext_resource type="Script" path="res://enemies/looping_timer.gd" id="11_ynun1"]
+[ext_resource type="Script" path="res://scripts/billboard.gd" id="12_gq3we"]
+[ext_resource type="Script" path="res://scripts/random_binary_fork.gd" id="12_yfv2m"]
+[ext_resource type="PackedScene" uid="uid://cb7yrhamia1d8" path="res://enemies/projectiles/bullet01.tscn" id="14_wadr0"]
+[ext_resource type="Texture2D" uid="uid://dev7ay5bd5fbo" path="res://enemies/present/adam/Solider_death-Sheet.png" id="16_76osm"]
+[ext_resource type="Script" path="res://anim_state_machine/animation_state_machine.gd" id="16_e27g3"]
+[ext_resource type="Texture2D" uid="uid://by3x517bwfycf" path="res://enemies/present/adam/Solider_south_rifle_shoot-Sheet.png" id="17_jif2k"]
+[ext_resource type="Texture2D" uid="uid://cldxfqm14fxeu" path="res://enemies/present/adam/Solider_south_walk-Sheet.png" id="17_t7foe"]
+[ext_resource type="Texture2D" uid="uid://cm4c5j8q0asq7" path="res://enemies/present/adam/Solider_south_east_walk-Sheet.png" id="18_igqpl"]
+[ext_resource type="Texture2D" uid="uid://mylsco8hgxyr" path="res://enemies/present/adam/Solider_south_east_rifle_shoot-Sheet.png" id="18_mmgf8"]
+[ext_resource type="Texture2D" uid="uid://bnjui0l8gv8au" path="res://enemies/present/adam/Solider_north_rifle_shoot-Sheet.png" id="19_s1w6v"]
+[ext_resource type="Texture2D" uid="uid://dd61jnet3hyra" path="res://enemies/present/adam/Solider_north_walk-Sheet.png" id="19_uvr5y"]
+[ext_resource type="Script" path="res://anim_state_machine/cardinal_animation_state.gd" id="20_qwiqs"]
+[ext_resource type="Script" path="res://anim_state_machine/animation_state.gd" id="21_wrgjj"]
+[ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="22_sp0vn"]
+[ext_resource type="Script" path="res://components/damageable.gd" id="24_0qiq7"]
+[ext_resource type="Texture2D" uid="uid://p2tynpwrykkx" path="res://enemies/present/adam/Solider_south_pistol_shoot-Sheet.png" id="24_d8ec5"]
+[ext_resource type="Texture2D" uid="uid://mh2jit0g8klg" path="res://enemies/present/adam/Solider_south_east_pistol_shoot-Sheet.png" id="25_nux6x"]
+[ext_resource type="Texture2D" uid="uid://c11y3um8ncant" path="res://enemies/present/adam/Solider_north_pistol_shoot-Sheet.png" id="26_cqb6n"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vtf4t"]
+height = 0.8
+radius = 0.315262
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fhpkm"]
+radius = 0.4
+height = 1.405
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uedc0"]
+height = 0.908896
+radius = 0.315262
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mptsl"]
+atlas = ExtResource("17_t7foe")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71hnn"]
+atlas = ExtResource("17_t7foe")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw8n3"]
+atlas = ExtResource("17_t7foe")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olgqi"]
+atlas = ExtResource("17_t7foe")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c154t"]
+atlas = ExtResource("18_igqpl")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7ndo"]
+atlas = ExtResource("18_igqpl")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd133"]
+atlas = ExtResource("19_uvr5y")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwaja"]
+atlas = ExtResource("19_uvr5y")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbkg5"]
+atlas = ExtResource("19_uvr5y")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5mrn"]
+atlas = ExtResource("19_uvr5y")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oiu4u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mptsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71hnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kw8n3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olgqi")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c154t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7ndo")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bd133")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwaja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbkg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5mrn")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3ksj"]
+atlas = ExtResource("17_jif2k")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8algd"]
+atlas = ExtResource("17_jif2k")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7t8hr"]
+atlas = ExtResource("17_jif2k")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr7x2"]
+atlas = ExtResource("17_jif2k")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f350"]
+atlas = ExtResource("18_mmgf8")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcu6u"]
+atlas = ExtResource("18_mmgf8")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxyfo"]
+atlas = ExtResource("18_mmgf8")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_poekc"]
+atlas = ExtResource("18_mmgf8")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwkbd"]
+atlas = ExtResource("19_s1w6v")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ux5w3"]
+atlas = ExtResource("19_s1w6v")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0db0"]
+atlas = ExtResource("19_s1w6v")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rlw6"]
+atlas = ExtResource("19_s1w6v")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lm5h4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3ksj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8algd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7t8hr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nr7x2")
+}],
+"loop": false,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f350")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcu6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxyfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_poekc")
+}],
+"loop": false,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwkbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ux5w3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0db0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rlw6")
+}],
+"loop": false,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83aoe"]
+atlas = ExtResource("24_d8ec5")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfysh"]
+atlas = ExtResource("24_d8ec5")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqrl2"]
+atlas = ExtResource("25_nux6x")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfgm2"]
+atlas = ExtResource("25_nux6x")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jfdh"]
+atlas = ExtResource("26_cqb6n")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nywa8"]
+atlas = ExtResource("26_cqb6n")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8d0c8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83aoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfysh")
+}],
+"loop": false,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqrl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfgm2")
+}],
+"loop": false,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jfdh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nywa8")
+}],
+"loop": false,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_om3th"]
+atlas = ExtResource("16_76osm")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0661e"]
+atlas = ExtResource("16_76osm")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i41ra"]
+atlas = ExtResource("16_76osm")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc88x"]
+atlas = ExtResource("16_76osm")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yfeo8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_om3th")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0661e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i41ra")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_wc88x")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Adam" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
+collision_layer = 0
+axis_lock_linear_y = true
+script = ExtResource("1_wadi7")
+navigation = NodePath("NavigationAgent3D")
+state_machine = NodePath("EnemyStateMachine")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("CylinderShape3D_vtf4t")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_k3mgt")
+max_health = 3
+health = 3
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.3
+target_desired_distance = 0.3
+path_height_offset = 0.5
+path_max_distance = 0.61
+path_metadata_flags = 0
+avoidance_enabled = true
+neighbor_distance = 10.0
+max_speed = 1.0
+script = ExtResource("3_ohnvs")
+
+[node name="EnemyStateMachine" type="Node" parent="."]
+script = ExtResource("4_p6i4q")
+
+[node name="Wander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
+script = ExtResource("5_ju7y0")
+wander_speed = 1.2
+pullable_from = [NodePath("../DeathState"), NodePath("../Damaged")]
+
+[node name="ChaseLineOfSight" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
+script = ExtResource("6_vav7k")
+chase_speed = 0.0
+pullable_from = [NodePath("../DeathState"), NodePath("../PermaWander"), NodePath("../Damaged")]
+
+[node name="ChaseLastPosition" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
+script = ExtResource("7_7fgi7")
+chase_speed = 1.7
+pullable_from = [NodePath("../DeathState"), NodePath("../PermaWander"), NodePath("../Damaged")]
+
+[node name="Damaged" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
+script = ExtResource("8_86l5i")
+pullable_from = [NodePath("../DeathState"), NodePath("../PermaWander")]
+
+[node name="DeathState" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("9_7hx0q")
+
+[node name="PermaWander" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("10_nr5rr")
+
+[node name="InitialAttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="BurstTimer" type="Timer" parent="."]
+wait_time = 0.2
+script = ExtResource("11_ynun1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.767171, 0)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_fhpkm")
+
+[node name="RandomAttack" type="Node" parent="."]
+script = ExtResource("12_yfv2m")
+
+[node name="Billboard" type="Node3D" parent="."]
+top_level = true
+script = ExtResource("12_gq3we")
+
+[node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.418832, -0.238)
+script = ExtResource("22_sp0vn")
+projectile = ExtResource("14_wadr0")
+
+[node name="Hurtbox" type="StaticBody3D" parent="Billboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.467104, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Damageable" type="Node" parent="Billboard/Hurtbox"]
+script = ExtResource("24_0qiq7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Billboard/Hurtbox"]
+shape = SubResource("CylinderShape3D_uedc0")
+
+[node name="AnimationStateMachine" type="Node3D" parent="Billboard"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("16_e27g3")
+
+[node name="Walk" type="AnimatedSprite3D" parent="Billboard/AnimationStateMachine" node_paths=PackedStringArray("rotation_source")]
+offset = Vector2(4.66, 29.25)
+pixel_size = 0.025
+double_sided = false
+no_depth_test = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_oiu4u")
+animation = &"up"
+script = ExtResource("20_qwiqs")
+always_update = true
+rotation_source = NodePath("../../..")
+
+[node name="RifleShoot" type="AnimatedSprite3D" parent="Billboard/AnimationStateMachine" node_paths=PackedStringArray("rotation_source")]
+offset = Vector2(4.66, 29.25)
+pixel_size = 0.025
+double_sided = false
+no_depth_test = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_lm5h4")
+animation = &"right"
+script = ExtResource("20_qwiqs")
+rotation_source = NodePath("../../..")
+
+[node name="PistolShoot" type="AnimatedSprite3D" parent="Billboard/AnimationStateMachine" node_paths=PackedStringArray("rotation_source")]
+offset = Vector2(4.66, 29.25)
+pixel_size = 0.025
+double_sided = false
+no_depth_test = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_8d0c8")
+animation = &"up"
+script = ExtResource("20_qwiqs")
+rotation_source = NodePath("../../..")
+
+[node name="Death" type="AnimatedSprite3D" parent="Billboard/AnimationStateMachine"]
+offset = Vector2(4.66, 29.25)
+pixel_size = 0.025
+double_sided = false
+no_depth_test = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_yfeo8")
+script = ExtResource("21_wrgjj")
+
+[connection signal="died" from="Health" to="EnemyStateMachine/DeathState" method="_on_died"]
+[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
+[connection signal="entered" from="EnemyStateMachine/Wander" to="Billboard/AnimationStateMachine/Walk" method="enter"]
+[connection signal="player_spotted" from="EnemyStateMachine/Wander" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
+[connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="InitialAttackTimer" method="start"]
+[connection signal="entered" from="EnemyStateMachine/ChaseLineOfSight" to="RandomAttack" method="emit"]
+[connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="InitialAttackTimer" method="stop"]
+[connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="AttackTimer" method="stop"]
+[connection signal="exited" from="EnemyStateMachine/ChaseLineOfSight" to="BurstTimer" method="stop"]
+[connection signal="lost_player" from="EnemyStateMachine/ChaseLineOfSight" to="EnemyStateMachine/ChaseLastPosition" method="enter"]
+[connection signal="player_position" from="EnemyStateMachine/ChaseLineOfSight" to="EnemyStateMachine/ChaseLastPosition" method="set_last_position"]
+[connection signal="player_position" from="EnemyStateMachine/ChaseLineOfSight" to="Billboard/ProjectileSpawner" method="aim_at"]
+[connection signal="entered" from="EnemyStateMachine/ChaseLastPosition" to="Billboard/AnimationStateMachine/Walk" method="enter"]
+[connection signal="lost_player" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/Wander" method="enter"]
+[connection signal="player_spotted" from="EnemyStateMachine/ChaseLastPosition" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
+[connection signal="stun_finished" from="EnemyStateMachine/Damaged" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
+[connection signal="entered" from="EnemyStateMachine/DeathState" to="Billboard/AnimationStateMachine/Death" method="enter"]
+[connection signal="entered" from="EnemyStateMachine/PermaWander" to="Billboard/AnimationStateMachine/Walk" method="enter"]
+[connection signal="timeout" from="InitialAttackTimer" to="AttackTimer" method="start"]
+[connection signal="timeout" from="InitialAttackTimer" to="BurstTimer" method="start"]
+[connection signal="timeout" from="AttackTimer" to="BurstTimer" method="start"]
+[connection signal="timeout" from="AttackTimer" to="RandomAttack" method="emit"]
+[connection signal="timeout" from="BurstTimer" to="Billboard/ProjectileSpawner" method="spawn"]
+[connection signal="signal1" from="RandomAttack" to="Billboard/AnimationStateMachine/RifleShoot" method="enter"]
+[connection signal="signal2" from="RandomAttack" to="Billboard/AnimationStateMachine/PistolShoot" method="enter"]
+[connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Health" method="change_health"]
+[connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Billboard/AnimationStateMachine" method="damage_flash"]
+[connection signal="damaged_from" from="Billboard/Hurtbox/Damageable" to="EnemyStateMachine/Damaged" method="_on_damaged"]
+[connection signal="exited" from="Billboard/AnimationStateMachine/Death" to="." method="queue_free"]

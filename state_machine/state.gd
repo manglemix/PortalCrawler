@@ -37,6 +37,8 @@ func is_active() -> bool:
 ## Should not be called while the State is already active. DO NOT override.
 ## Instead, override [method _enter].
 func enter() -> void:
+	if is_active():
+		return
 	_active = true
 	_enter()
 	entered.emit()
@@ -77,8 +79,7 @@ func exit(exit_signal: Signal) -> void:
 	if !is_active():
 		return
 	_exit_internal()
-	if exit_signal != null:
-		exit_signal.emit()
+	exit_signal.emit()
 
 
 func on_pull_request(other: State) -> void:
