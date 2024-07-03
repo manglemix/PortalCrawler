@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://bk1hs0ucrbyot"]
+
+[ext_resource type="PackedScene" uid="uid://d3estyfagpb7m" path="res://collectibles/aseprite/aseprite.gltf" id="1_t2ov4"]
+[ext_resource type="Script" path="res://collectibles/scale_up.gd" id="2_03n8y"]
+[ext_resource type="FontFile" uid="uid://5fqp282we4x2" path="res://fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="3_wy1fx"]
+[ext_resource type="Script" path="res://collectibles/beta_collectible_label.gd" id="4_633hu"]
+[ext_resource type="Script" path="res://collectibles/fade_in.gd" id="4_jpj30"]
+[ext_resource type="Script" path="res://collectibles/fade_out.gd" id="5_x858o"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_epunk"]
+bounce = 0.7
+
+[sub_resource type="GDScript" id="GDScript_agqo0"]
+script/source = "extends Collectible
+
+
+func _ready() -> void:
+	super()
+	await contacted_player
+	BetaCollectibles.has_aseprite_plushie = true
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nrqlu"]
+size = Vector3(1.065, 0.0953674, 1.06262)
+
+[node name="Aseprite" type="RigidBody3D" node_paths=PackedStringArray("to_display")]
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_epunk")
+max_contacts_reported = 1
+contact_monitor = true
+script = SubResource("GDScript_agqo0")
+to_display = NodePath("WithLights")
+
+[node name="WithLights" type="Node3D" parent="."]
+
+[node name="aseprite" parent="WithLights" instance=ExtResource("1_t2ov4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="ScaleUp" type="Node" parent="WithLights/aseprite"]
+script = ExtResource("2_03n8y")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WithLights"]
+transform = Transform3D(-0.949349, 0.0611027, -0.308226, -0.162177, 0.744887, 0.64718, 0.269138, 0.664387, -0.697248, -0.692113, 1.38485, -1.67946)
+visible = false
+light_energy = 2.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="WithLights"]
+
+[node name="Label" type="Label" parent="WithLights/CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_wy1fx")
+theme_override_font_sizes/font_size = 48
+text = "What an ominous metal tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_633hu")
+
+[node name="FadeIn" type="Node" parent="WithLights/CanvasLayer/Label"]
+script = ExtResource("4_jpj30")
+
+[node name="Timer" type="Timer" parent="WithLights/CanvasLayer/Label"]
+wait_time = 0.5
+one_shot = true
+
+[node name="FadeOut" type="Node" parent="WithLights/CanvasLayer/Label"]
+script = ExtResource("5_x858o")
+duration = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.57764e-05, -0.00457764)
+shape = SubResource("BoxShape3D_nrqlu")
+
+[connection signal="clearing_display" from="." to="WithLights/CanvasLayer/Label/FadeOut" method="fade_out"]
+[connection signal="contacted_player" from="." to="WithLights/SpotLight3D" method="show"]
+[connection signal="contacted_player" from="." to="WithLights/CanvasLayer/Label/Timer" method="start"]
+[connection signal="timeout" from="WithLights/CanvasLayer/Label/Timer" to="WithLights/CanvasLayer/Label/FadeIn" method="fade_in"]

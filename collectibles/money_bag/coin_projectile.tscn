@@ -71,6 +71,7 @@ script/source = "extends RigidBody3D
 
 
 func _ready() -> void:
+	$AnimatedSprite3D.frame = randi_range(0, 59)
 	await get_tree().process_frame
 	linear_velocity = -global_basis.z * randf_range(1.5, 3.5)
 "

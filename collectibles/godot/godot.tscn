@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://vawhhb4eio81"]
+[gd_scene load_steps=12 format=3 uid="uid://vawhhb4eio81"]
 
 [ext_resource type="PackedScene" uid="uid://cutp4m1y312yv" path="res://collectibles/godot/godot.gltf" id="1_kdcso"]
 [ext_resource type="Script" path="res://collectibles/fade_in.gd" id="3_4btr5"]
 [ext_resource type="FontFile" uid="uid://5fqp282we4x2" path="res://fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="3_fi686"]
 [ext_resource type="Script" path="res://collectibles/scale_up.gd" id="3_vcsd6"]
 [ext_resource type="Script" path="res://collectibles/fade_out.gd" id="4_r13ab"]
+[ext_resource type="Script" path="res://collectibles/beta_collectible_label.gd" id="4_yvcol"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_epunk"]
 bounce = 0.7
@@ -71,6 +72,7 @@ theme_override_font_sizes/font_size = 48
 text = "They seem to be worshipping this deity..."
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("4_yvcol")
 
 [node name="FadeIn" type="Node" parent="WithLights/CanvasLayer/Label"]
 script = ExtResource("3_4btr5")

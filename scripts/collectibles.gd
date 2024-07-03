@@ -8,6 +8,10 @@ var _collectible_viewport: SubViewportContainer
 func get_collectible() -> PackedScene:
 	if !BetaCollectibles.has_godot_plushie and randf() <= 0.2:
 		return preload("res://collectibles/godot/godot.tscn")
+	if !BetaCollectibles.has_aseprite_plushie and randf() <= 0.2:
+		return preload("res://collectibles/aseprite/aseprite.tscn")
+	if !BetaCollectibles.has_blender_plushie and randf() <= 0.2:
+		return preload("res://collectibles/blender/blender.tscn")
 	return preload("res://collectibles/money_bag/money_bag.tscn")
 
 
