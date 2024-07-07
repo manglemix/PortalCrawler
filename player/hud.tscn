@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=11 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
 [ext_resource type="Texture2D" uid="uid://buel4iifkemvw" path="res://player/pause.png" id="2_pm0b2"]
+[ext_resource type="Texture2D" uid="uid://c7w7w04ymhr1m" path="res://player/idle-mouse.png" id="3_ki1ma"]
+[ext_resource type="Texture2D" uid="uid://bbn1mcu6qaovu" path="res://player/attack-mouse.png" id="4_d36ju"]
+[ext_resource type="Texture2D" uid="uid://ds6siicrhahi8" path="res://player/delete_portal.png" id="5_uk65h"]
 
 [sub_resource type="GDScript" id="GDScript_fp6gk"]
 script/source = "extends Control
@@ -12,12 +15,18 @@ script/source = "extends Control
 
 func _ready() -> void:
 	propagate_call(\"set_player\", [player])
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(\"ui_cancel\"):
 		$Pause.visible = !$Pause.visible
 		get_tree().paused = $Pause.visible
+		if $Pause.visible:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+			
 "
 
 [sub_resource type="GDScript" id="GDScript_w8sf7"]
@@ -55,6 +64,45 @@ func set_player(player: Player) -> void:
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28xjp"]
 bg_color = Color(0, 0, 0, 0.388235)
+
+[sub_resource type="GDScript" id="GDScript_pqjgk"]
+script/source = "extends Node2D
+
+
+@onready var idle: Sprite2D = $Idle
+@onready var attack: Sprite2D = $Attack
+@onready var delete: Sprite2D = $DeletePortal
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		position = get_global_mouse_position()
+
+	elif event.is_action_pressed(\"attack\"):
+		idle.hide()
+		attack.show()
+	
+	elif event.is_action_released(\"attack\"):
+		idle.show()
+		attack.hide()
+
+
+func _process(_delta: float) -> void:
+	position = get_global_mouse_position()
+	
+	if DeletablePortals.deletable_portals > 0:
+		delete.show()
+		idle.hide()
+		attack.hide()
+	elif Input.is_action_pressed(\"attack\"):
+		delete.hide()
+		idle.hide()
+		attack.show()
+	else:
+		delete.hide()
+		idle.show()
+		attack.hide()
+"
 
 [node name="HUD" type="Control"]
 process_mode = 3
@@ -123,3 +171,26 @@ grow_vertical = 2
 texture = ExtResource("2_pm0b2")
 expand_mode = 2
 stretch_mode = 5
+
+[node name="Node2D" type="Node2D" parent="."]
+script = SubResource("GDScript_pqjgk")
+
+[node name="Idle" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(42, 42)
+scale = Vector2(4, 4)
+texture = ExtResource("3_ki1ma")
+
+[node name="Attack" type="Sprite2D" parent="Node2D"]
+visible = false
+texture_filter = 1
+position = Vector2(42, 42)
+scale = Vector2(4, 4)
+texture = ExtResource("4_d36ju")
+
+[node name="DeletePortal" type="Sprite2D" parent="Node2D"]
+visible = false
+texture_filter = 1
+position = Vector2(42, 42)
+scale = Vector2(4, 4)
+texture = ExtResource("5_uk65h")

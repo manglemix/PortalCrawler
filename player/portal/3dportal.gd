@@ -12,7 +12,15 @@ extends StaticBody3D
 var p
 var facing
 
-@onready var deletable = false
+@onready var deletable = false:
+	set(x):
+		if x == deletable:
+			pass
+		elif x:
+			DeletablePortals.deletable_portals += 1
+		else:
+			DeletablePortals.deletable_portals -= 1
+		deletable = x
 
 func _ready():
 	name = "portal"
@@ -47,7 +55,7 @@ func _physics_process(_delta):
 	for body in bodies:
 		# if there is no partner then no work is needed, return
 		if(p == null):
-			if (body.name.begins_with("Basic")):
+			if (body.name.begins_with("Basic") or body.collision_layer & 16 > 0):
 				body.queue_free()
 			return
 		if (body.name == "Player"):
@@ -96,3 +104,5 @@ func _exit_tree() -> void:
 	out.get_node("Sprite3D/AnimatedSprite3D").modulate = $Sprite3D.modulate
 	out.transform = transform
 	get_parent().add_child.call_deferred(out)
+	# Triggers the setter
+	deletable = false

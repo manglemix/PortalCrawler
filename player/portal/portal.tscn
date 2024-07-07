@@ -1,6 +1,6 @@
 [gd_scene load_steps=76 format=3 uid="uid://bw3oputqb3oe7"]
 
-[ext_resource type="Script" path="res://player/3dportal.gd" id="1_wibcx"]
+[ext_resource type="Script" path="res://player/portal/3dportal.gd" id="1_3js65"]
 [ext_resource type="Texture2D" uid="uid://dajx7t5ko3gjp" path="res://player/portal/portal_open_anim/0001.png" id="2_g4ibn"]
 [ext_resource type="Texture2D" uid="uid://c2qyjk0yngj0q" path="res://player/portal/portal_open_anim/0002.png" id="3_c12ba"]
 [ext_resource type="Texture2D" uid="uid://dpaowqh3n2adm" path="res://player/portal/portal_open_anim/0003.png" id="4_78ag4"]
@@ -348,7 +348,7 @@ func _ready() -> void:
 [node name="portal" type="StaticBody3D"]
 collision_mask = 2
 input_ray_pickable = false
-script = ExtResource("1_wibcx")
+script = ExtResource("1_3js65")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0934312, 0, -4.49419e-05)
@@ -412,6 +412,5 @@ max_db = 6.0
 autoplay = true
 bus = &"Level SFX"
 
-[connection signal="body_entered" from="PortalArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="mouse_entered" from="MouseArea" to="." method="_on_mouse_area_mouse_entered"]
 [connection signal="mouse_exited" from="MouseArea" to="." method="_on_mouse_area_mouse_exited"]

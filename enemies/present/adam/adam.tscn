@@ -330,6 +330,7 @@ animations = [{
 
 [node name="Adam" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
 collision_layer = 0
+collision_mask = 17
 axis_lock_linear_y = true
 script = ExtResource("1_wadi7")
 navigation = NodePath("NavigationAgent3D")

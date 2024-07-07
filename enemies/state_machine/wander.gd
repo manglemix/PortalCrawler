@@ -6,7 +6,7 @@ extends EnemyState
 signal player_spotted
 
 @export var wander_speed := 0.75
-@export var fov := 100.0
+@export var fov := 190.0
 
 
 func _enter() -> void:

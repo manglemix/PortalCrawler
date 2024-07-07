@@ -7,7 +7,7 @@ signal player_spotted
 signal lost_player
 
 @export var chase_speed := 0.9
-@export var fov := 180.0
+@export var fov := 190.0
 @export var min_distance := 1.0
 
 var _last_position: Vector3

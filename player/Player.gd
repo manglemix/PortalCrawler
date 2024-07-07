@@ -79,9 +79,6 @@ func _input(_event):
 			sprite.attack()
 			$Windup.start()
 	elif Input.is_action_just_pressed("shoot"):
-		if is_level_finished:
-			return
-		
 		# Check if we're deleting portals
 		if (firstplaced):
 			if (firstPortal.deletable):

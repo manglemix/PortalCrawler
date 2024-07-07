@@ -7,7 +7,7 @@ signal lost_player(last_position: Vector3)
 signal player_position(position: Vector3)
 
 @export var chase_speed := 0.9
-@export var fov := 180.0
+@export var fov := 190.0
 @export var min_distance := 1.0
 @export var line_of_sight_check := true
 

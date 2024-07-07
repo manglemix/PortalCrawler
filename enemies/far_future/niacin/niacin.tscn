@@ -302,6 +302,7 @@ radius = 0.315262
 
 [node name="Niacin" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
 collision_layer = 0
+collision_mask = 17
 axis_lock_linear_y = true
 script = ExtResource("1_hane4")
 navigation = NodePath("NavigationAgent3D")
