@@ -34,6 +34,14 @@ settings/stdout/print_fps=true
 
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/label_font_auto_sizer/plugin.cfg")
+
+[gui]
+
+theme/default_font_antialiasing=0
+
 [input]
 
 right={

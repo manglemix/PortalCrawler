@@ -51,8 +51,3 @@ func set_player(player: Player) -> void:
 		await ready
 	if state_machine != null:
 		state_machine.set_player(player)
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("kill_all"):
-		Health.set_node_health(self, 0)

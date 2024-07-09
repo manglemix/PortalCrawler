@@ -15,7 +15,7 @@ func _ready() -> void:
 	max_contacts_reported = 4
 	contact_monitor = true
 	collision_layer = 0
-	collision_mask = 3
+	collision_mask = 19
 	can_sleep = false
 	set_process_input(false)
 	await get_tree().process_frame

@@ -46,6 +46,7 @@ var poison_count := 0:
 			sprite = $Billboard/CharacterSprite2
 		sprite.show()
 		poison_count = x
+var has_kill_all_spell := false
 
 @onready var leftheld = false
 @onready var rightheld = false
@@ -81,8 +82,8 @@ func aim_at_mouse() -> void:
 
 
 # all input from the player is handled here
-func _input(_event):
-	if Input.is_action_just_pressed("attack"):
+func _input(event):
+	if event.is_action_pressed("attack"):
 		if is_level_finished:
 			return
 		if (!sprite.animation.contains("attack")):
@@ -90,7 +91,7 @@ func _input(_event):
 			aim_at_mouse()
 			sprite.attack()
 			$Windup.start()
-	elif Input.is_action_just_pressed("shoot"):
+	elif event.is_action_pressed("shoot"):
 		# Check if we're deleting portals
 		if (firstplaced):
 			if (firstPortal.deletable):
@@ -128,6 +129,13 @@ func _input(_event):
 			storedPosition = ray.get_collision_point()
 			$Swing.play()
 			sprite.attack()
+
+	elif event.is_action_pressed("kill_all"):
+		if !has_kill_all_spell:
+			return
+		has_kill_all_spell = false
+		for enemy: Enemy in get_tree().get_nodes_in_group(&"Enemies"):
+			Health.set_node_health(enemy, 0)
 
 
 func _physics_process(_delta):
