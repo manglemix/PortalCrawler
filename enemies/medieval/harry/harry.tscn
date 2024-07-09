@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bawgcpe4clkdo"]
+[gd_scene load_steps=64 format=3 uid="uid://bawgcpe4clkdo"]
 
 [ext_resource type="Script" path="res://components/health.gd" id="2_rntsd"]
 [ext_resource type="Script" path="res://scripts/nav/overlapping_nav_agent_3d.gd" id="3_rijuc"]
@@ -378,11 +378,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_681s8"]
+radius = 0.173872
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f3srr"]
 height = 1.4348
 radius = 0.354206
 
-[node name="Test01" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
+[node name="Harry" type="CharacterBody3D" node_paths=PackedStringArray("navigation", "state_machine") groups=["Enemies"]]
 collision_layer = 0
 collision_mask = 17
 axis_lock_linear_y = true
@@ -410,8 +413,9 @@ neighbor_distance = 10.0
 max_speed = 1.0
 script = ExtResource("3_rijuc")
 
-[node name="EnemyStateMachine" type="Node" parent="."]
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("shapecast")]
 script = ExtResource("4_1x7av")
+shapecast = NodePath("../Billboard/ProjectileSpawner/ShapeCast3D")
 
 [node name="Wander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("5_ls1la")
@@ -421,22 +425,30 @@ pullable_from = [NodePath("../Damaged"), NodePath("../DeathState")]
 [node name="ChaseLineOfSight" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("6_why28")
 chase_speed = 1.7
+fov = 190.0
+min_distance = 1.0
+line_of_sight_check = true
 pullable_from = [NodePath("../PermaWander"), NodePath("../Damaged"), NodePath("../DeathState")]
 
 [node name="ChaseLastPosition" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("7_tpweg")
 chase_speed = 1.7
+fov = 190.0
+min_distance = 1.0
 pullable_from = [NodePath("../PermaWander"), NodePath("../Damaged"), NodePath("../DeathState")]
 
 [node name="Damaged" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("8_dk7sq")
 pullable_from = [NodePath("../DeathState")]
 
-[node name="PermaWander" type="Node" parent="EnemyStateMachine"]
+[node name="PermaWander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("9_radp2")
+wander_speed = 0.75
+pullable_from = []
 
-[node name="DeathState" type="Node" parent="EnemyStateMachine"]
+[node name="DeathState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("10_hdnbw")
+pullable_from = []
 
 [node name="AttackTimer" type="Timer" parent="."]
 
@@ -467,9 +479,16 @@ character = NodePath("../..")
 script = ExtResource("16_6p7ng")
 
 [node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.671, -0.238)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.205695, -0.238)
 script = ExtResource("17_dj4k7")
 projectile = ExtResource("18_kad3b")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Billboard/ProjectileSpawner"]
+enabled = false
+shape = SubResource("SphereShape3D_681s8")
+exclude_parent = false
+max_results = 1
+collision_mask = 3
 
 [node name="Hurtbox" type="StaticBody3D" parent="Billboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.511923, 0)

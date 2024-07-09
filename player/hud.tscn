@@ -120,11 +120,12 @@ script/source = "extends Button
 
 func _on_pressed() -> void:
 	OS.set_restart_on_exit(true)
+	await get_tree().process_frame
 	get_tree().quit()
 	#get_tree().change_scene_to_file(\"res://main.tscn\")
 "
 
-[sub_resource type="LabelSettings" id="LabelSettings_r77ie"]
+[sub_resource type="LabelSettings" id="LabelSettings_27pwt"]
 font = ExtResource("5_lipyx")
 font_size = 14
 
@@ -134,6 +135,9 @@ extends LabelAutoSizer
 
 
 func _ready() -> void:
+	super()
+	if Engine.is_editor_hint():
+		return
 	text = str(Wallet.coins)
 	Wallet.wallet_instance.coins_changed.connect(
 		func():
@@ -141,7 +145,7 @@ func _ready() -> void:
 	)
 "
 
-[sub_resource type="LabelSettings" id="LabelSettings_ypyq4"]
+[sub_resource type="LabelSettings" id="LabelSettings_cs6l1"]
 font = ExtResource("5_lipyx")
 
 [sub_resource type="GDScript" id="GDScript_t1ar8"]
@@ -150,6 +154,9 @@ extends LabelAutoSizer
 
 
 func _ready() -> void:
+	super()
+	if Engine.is_editor_hint():
+		return
 	text = str(Wallet.wizard_hats)
 	Wallet.wallet_instance.wizard_hats_changed.connect(
 		func():
@@ -341,8 +348,8 @@ grow_horizontal = 0
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 6
-text = "<null>"
-label_settings = SubResource("LabelSettings_r77ie")
+text = "0"
+label_settings = SubResource("LabelSettings_27pwt")
 horizontal_alignment = 2
 autowrap_mode = 3
 clip_text = true
@@ -359,7 +366,7 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 6
 text = "0"
-label_settings = SubResource("LabelSettings_ypyq4")
+label_settings = SubResource("LabelSettings_cs6l1")
 horizontal_alignment = 2
 autowrap_mode = 3
 clip_text = true

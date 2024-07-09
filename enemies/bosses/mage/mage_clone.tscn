@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://c6q7wfn1l1j15"]
+[gd_scene load_steps=54 format=3 uid="uid://c6q7wfn1l1j15"]
 
 [ext_resource type="Script" path="res://components/health.gd" id="2_ymwt7"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="3_fbdvx"]
@@ -288,6 +288,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_665ly"]
+radius = 0.173872
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2oi7m"]
 height = 0.908896
 radius = 0.315262
@@ -319,12 +322,15 @@ neighbor_distance = 10.0
 max_speed = 1.0
 script = ExtResource("4_gd7de")
 
-[node name="EnemyStateMachine" type="Node" parent="."]
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("shapecast")]
 script = ExtResource("5_oheg2")
+shapecast = NodePath("../Billboard/ProjectileSpawner/ShapeCast3D")
 
 [node name="Chase" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("7_u1tmt")
 chase_speed = 2.0
+fov = 190.0
+min_distance = 1.0
 line_of_sight_check = false
 pullable_from = [NodePath("../PermaWander"), NodePath("../DeathState"), NodePath("../Damaged")]
 
@@ -332,11 +338,14 @@ pullable_from = [NodePath("../PermaWander"), NodePath("../DeathState"), NodePath
 script = ExtResource("8_qebjp")
 pullable_from = [NodePath("../PermaWander"), NodePath("../DeathState")]
 
-[node name="PermaWander" type="Node" parent="EnemyStateMachine"]
+[node name="PermaWander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("9_ai66x")
+wander_speed = 0.75
+pullable_from = []
 
-[node name="DeathState" type="Node" parent="EnemyStateMachine"]
+[node name="DeathState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("7_kktdn")
+pullable_from = []
 
 [node name="AttackTimer" type="Timer" parent="."]
 
@@ -369,6 +378,13 @@ script = ExtResource("17_u540q")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.671, -0.238)
 script = ExtResource("14_bxld1")
 projectile = ExtResource("18_5g2y7")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Billboard/ProjectileSpawner"]
+enabled = false
+shape = SubResource("SphereShape3D_665ly")
+exclude_parent = false
+max_results = 4
+collision_mask = 3
 
 [node name="Hurtbox" type="StaticBody3D" parent="Billboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.467104, 0)

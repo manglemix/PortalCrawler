@@ -3,6 +3,8 @@ class_name EnemyStateMachine
 extends StateMachine
 
 
+@export var shapecast: ShapeCast3D
+
 var _enemy: Enemy
 
 
@@ -37,3 +39,9 @@ func set_enemy(enemy: Enemy) -> void:
 func set_navigation(navigation: NavigationAgent3D) -> void:
 	for state in get_enemy_states():
 		state.set_navigation(navigation)
+
+
+func _ready() -> void:
+	for state in get_enemy_states():
+		state.set_shapecast(shapecast)
+	super()
