@@ -57,10 +57,10 @@
 		{
 			"alphaMode":"BLEND",
 			"doubleSided":true,
-			"name":"TilesTerrazzoVenetianPolished001_1K",
+			"name":"TilesTerrazzoVenetianPolished001_1K.001",
 			"normalTexture":{
 				"index":0,
-				"scale":0
+				"scale":0.7999999523162842
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
@@ -74,10 +74,10 @@
 		{
 			"alphaMode":"BLEND",
 			"doubleSided":true,
-			"name":"TilesMosaicPennyround001_1K",
+			"name":"TilesMosaicPennyround001_1K.001",
 			"normalTexture":{
 				"index":3,
-				"scale":0
+				"scale":0.7999999523162842
 			},
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
@@ -197,33 +197,33 @@
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"TilesTerrazzoVenetianPolished001_NRM_1K",
-			"uri":"TilesTerrazzoVenetianPolished001_NRM_1K.png"
+			"name":"Far Future Wall Normal",
+			"uri":"Far%20Future%20Wall%20Normal.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"TilesTerrazzoVenetianPolished001_COL_VAR1_1K",
-			"uri":"TilesTerrazzoVenetianPolished001_COL_VAR1_1K.png"
+			"name":"Far Future Wall Color",
+			"uri":"Far%20Future%20Wall%20Color.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"TilesTerrazzoVenetianPolished001_REFL_1K-TilesTerrazzoVenetianPolished001_GLOSS_1K",
-			"uri":"TilesTerrazzoVenetianPolished001_REFL_1K-TilesTerrazzoVenetianPolished001_GLOSS_1K.png"
+			"name":"Far Future Wall Metal-Far Future Wall Roughness",
+			"uri":"Far%20Future%20Wall%20Metal-Far%20Future%20Wall%20Roughness.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"TilesMosaicPennyround001_NRM_1K",
-			"uri":"TilesMosaicPennyround001_NRM_1K.png"
+			"name":"Far Future Tile Normal",
+			"uri":"Far%20Future%20Tile%20Normal.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"TilesMosaicPennyround001_COL_1K",
-			"uri":"TilesMosaicPennyround001_COL_1K.png"
+			"name":"Far Future Tile Color",
+			"uri":"Far%20Future%20Tile%20Color.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"TilesMosaicPennyround001_REFL_1K-TilesMosaicPennyround001_ROUGHNESS_1K",
-			"uri":"TilesMosaicPennyround001_REFL_1K-TilesMosaicPennyround001_ROUGHNESS_1K.png"
+			"name":"Far Future Tile Metal-Far Future Tile Roughness",
+			"uri":"Far%20Future%20Tile%20Metal-Far%20Future%20Tile%20Roughness.png"
 		}
 	],
 	"accessors":[
@@ -402,12 +402,12 @@
 			"componentType":5126,
 			"count":24,
 			"max":[
-				0.8159915208816528,
+				0.7506632804870605,
 				4.186519145965576,
 				2.996230125427246
 			],
 			"min":[
-				-0.8159915208816528,
+				-0.7582011222839355,
 				-1,
 				-2.996230125427246
 			],
@@ -580,8 +580,8 @@
 	],
 	"samplers":[
 		{
-			"magFilter":9729,
-			"minFilter":9987
+			"magFilter":9728,
+			"minFilter":9984
 		}
 	],
 	"buffers":[

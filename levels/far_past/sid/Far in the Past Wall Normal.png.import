@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://0k53hw632pvs"
+path="res://.godot/imported/Far in the Past Wall Normal.png-a36419a0a6f0b4f7a5ebb548edea7c9b.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://levels/far_past/sid/Far in the Past Wall Normal.png"
+dest_files=["res://.godot/imported/Far in the Past Wall Normal.png-a36419a0a6f0b4f7a5ebb548edea7c9b.ctex"]
+
+[params]
+
+compress/mode=3
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://levels/far_past/sid/Far in the Past Wall Normal.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

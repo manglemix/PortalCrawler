@@ -198,7 +198,6 @@ func _on_died() -> void:
 # the reason why the player is handling this code is because all player inputs
 # should be handled by the player script when possible
 func _create_portal():
-	
 	var hitobject = storedCollider
 	if (!is_instance_valid(hitobject)):
 		return
@@ -349,11 +348,13 @@ func _on_can_move_on() -> void:
 	if (secondplaced):
 		secondplaced = false
 		secondPortal.queue_free()
+	set_process_input(false)
+	if "idle" not in sprite.animation and "walk" not in sprite.animation:
+		await sprite.animation_finished
 	sprite.set_process(false)
 	$MeshInstance3D.hide()
 	sprite.play(&"sit")
 	is_teleporting = true
-	set_process_input(false)
 	velocity = Vector3.ZERO
 	await sprite.animation_finished
 	advancing_level.emit()

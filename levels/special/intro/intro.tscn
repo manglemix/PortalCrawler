@@ -15,7 +15,7 @@
 
 [node name="Intro" node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("1_pnk1a")]
 script = ExtResource("2_b0ads")
-next_level = "res://levels/far_past/sid/sid.tscn"
+next_level = "res://levels/medieval/hogwarts/hogwarts.tscn"
 player_spawn_point = NodePath("PlayerSpawnPoint")
 
 [node name="Level_006" parent="." index="0"]

@@ -1,0 +1,431 @@
+[gd_scene load_steps=33 format=3 uid="uid://c5pkdtfupew0e"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_47a1a"]
+[ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="2_t6hfu"]
+[ext_resource type="Texture2D" uid="uid://yofuobxonmtm" path="res://levels/medieval/hogwarts/Middle Ages Wall Color.png" id="2_ymgow"]
+[ext_resource type="Texture2D" uid="uid://7n7bf12wwt7i" path="res://levels/medieval/hogwarts/Middle Ages Wall Roughness.png" id="3_b2b2d"]
+[ext_resource type="Script" path="res://scripts/difficulty_range.gd" id="3_mdq40"]
+[ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="4_04o61"]
+[ext_resource type="Texture2D" uid="uid://8ran7hw78bhn" path="res://levels/medieval/hogwarts/Middle Ages Wall Normal.png" id="4_g7vw4"]
+[ext_resource type="Texture2D" uid="uid://vfob1afaxyx4" path="res://levels/medieval/hogwarts/Middle Ages Floor Color.png" id="5_b264a"]
+[ext_resource type="Script" path="res://enemies/spawners/staged_spawner.gd" id="5_ufn4r"]
+[ext_resource type="Texture2D" uid="uid://xwnpwpump6o7" path="res://levels/medieval/hogwarts/Middle Ages Floor Roughness.png" id="6_u2582"]
+[ext_resource type="PackedScene" uid="uid://bawgcpe4clkdo" path="res://enemies/medieval/harry/harry.tscn" id="6_yxqff"]
+[ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="7_o3udq"]
+[ext_resource type="Texture2D" uid="uid://c5nc7funifrt5" path="res://levels/medieval/hogwarts/Middle Ages Floor Normal.png" id="7_t4tf4"]
+[ext_resource type="Script" path="res://scripts/nav/overlapping_nav_region_3d.gd" id="8_3yjj7"]
+[ext_resource type="AudioStream" uid="uid://dtludju15pidf" path="res://music/quiet_underground_sound_BG.mp3" id="8_ng0pv"]
+[ext_resource type="Script" path="res://levels/collectible_spawner.gd" id="9_t66sk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3l4y"]
+resource_name = "StoneBricksSplitface001_1K.001"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("2_ymgow")
+metallic_texture = ExtResource("3_b2b2d")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_b2b2d")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("4_g7vw4")
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0c5y"]
+resource_name = "ConcreteBlocksPavingSquareStack001_1K.001"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("5_b264a")
+metallic_texture = ExtResource("6_u2582")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("6_u2582")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("7_t4tf4")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_62j5q"]
+_surfaces = [{
+"aabb": AABB(-6.82551, 0, -3.7988, 13.651, 4, 7.5976),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 3, 0, 2, 0, 0, 0, 1, 0, 3, 0, 2, 0, 7, 0, 6, 0, 2, 0, 3, 0, 7, 0, 6, 0, 5, 0, 4, 0, 6, 0, 7, 0, 5, 0, 4, 0, 1, 0, 0, 0, 4, 0, 5, 0, 1, 0),
+"name": "StoneBricksSplitface001_1K.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(166, 16, 0, 0, 244, 228, 0, 0, 0, 0, 255, 255, 254, 255, 0, 0, 166, 16, 0, 0, 10, 27, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 88, 239, 0, 0, 244, 228, 0, 0, 255, 255, 255, 255, 254, 255, 0, 0, 88, 239, 0, 0, 10, 27, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0)
+}, {
+"aabb": AABB(-5.9377, 0, -2.99623, 11.8754, 1e-05, 5.99248),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(1, 0, 2, 0, 0, 0, 1, 0, 3, 0, 2, 0),
+"name": "ConcreteBlocksPavingSquareStack001_1K.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_oqlhj"]
+resource_name = "Medieval_Cube_017"
+_surfaces = [{
+"aabb": AABB(-6.82551, 0, -3.7988, 13.651, 4, 7.5976),
+"attribute_data": PackedByteArray(231, 205, 144, 172, 232, 60, 150, 254, 226, 216, 35, 140, 251, 50, 227, 221, 245, 61, 134, 34, 1, 135, 150, 254, 251, 50, 25, 2, 237, 144, 227, 221, 16, 59, 144, 172, 18, 246, 255, 255, 21, 48, 35, 140, 255, 255, 75, 223, 205, 208, 134, 34, 249, 171, 255, 255, 199, 219, 25, 2, 12, 162, 75, 223),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray(1, 0, 7, 0, 5, 0, 1, 0, 3, 0, 7, 0, 4, 0, 14, 0, 12, 0, 4, 0, 6, 0, 14, 0, 13, 0, 11, 0, 9, 0, 13, 0, 15, 0, 11, 0, 8, 0, 2, 0, 0, 0, 8, 0, 10, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_j3l4y"),
+"name": "StoneBricksSplitface001_1K.001",
+"primitive": 3,
+"uv_scale": Vector4(7.78899, 6.21046, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray(166, 16, 0, 0, 244, 228, 255, 255, 166, 16, 0, 0, 244, 228, 123, 192, 0, 0, 255, 255, 254, 255, 255, 255, 0, 0, 255, 255, 254, 255, 123, 192, 166, 16, 0, 0, 10, 27, 16, 136, 166, 16, 0, 0, 10, 27, 123, 192, 0, 0, 255, 255, 0, 0, 16, 136, 0, 0, 255, 255, 0, 0, 123, 192, 88, 239, 0, 0, 244, 228, 255, 255, 88, 239, 0, 0, 244, 228, 123, 192, 255, 255, 255, 255, 254, 255, 255, 255, 255, 255, 255, 255, 254, 255, 123, 192, 88, 239, 0, 0, 10, 27, 16, 136, 88, 239, 0, 0, 10, 27, 123, 192, 255, 255, 255, 255, 0, 0, 16, 136, 255, 255, 255, 255, 0, 0, 123, 192, 255, 127, 110, 244, 5, 151, 130, 11, 255, 127, 110, 244, 5, 151, 130, 11, 254, 255, 255, 127, 5, 151, 130, 11, 255, 255, 255, 127, 5, 151, 130, 11, 255, 127, 110, 244, 130, 139, 249, 232, 255, 127, 110, 244, 130, 139, 249, 232, 254, 255, 255, 127, 130, 139, 249, 232, 254, 255, 255, 127, 130, 139, 249, 232)
+}, {
+"aabb": AABB(-5.9377, 0, -2.99623, 11.8754, 1e-05, 5.99248),
+"attribute_data": PackedByteArray(255, 255, 103, 80, 254, 255, 255, 255, 77, 44, 103, 80, 77, 44, 254, 255),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(1, 0, 2, 0, 0, 0, 1, 0, 3, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_r0c5y"),
+"name": "ConcreteBlocksPavingSquareStack001_1K.001",
+"primitive": 3,
+"uv_scale": Vector4(7.06465, 4.29783, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 254, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_62j5q")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4qmy5"]
+resource_name = "Material.001"
+cull_mode = 2
+metallic = 1.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o1maq"]
+_surfaces = [{
+"aabb": AABB(-0.271279, -1.78551, 0.336286, 4.20612, 4.34246, 1.66962),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0, 2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0, 2, 0, 4, 0, 6, 0, 2, 0, 0, 0, 4, 0),
+"name": "StoneBricksSplitface001_1K.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 250, 121, 0, 0, 241, 22, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 241, 22, 255, 255, 203, 57, 0, 0, 255, 255, 0, 0, 250, 121, 0, 0, 13, 233, 255, 255, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 13, 233, 255, 255, 203, 57, 0, 0)
+}, {
+"aabb": AABB(0.105666, 2.55695, 0.713231, 3.45223, 1.00136e-05, 1.29268),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_64ivw"]
+resource_name = "Medieval_Cube_019"
+_surfaces = [{
+"aabb": AABB(-0.271279, -1.78551, 0.336286, 4.20612, 4.34246, 1.66962),
+"attribute_data": PackedByteArray(212, 209, 255, 255, 229, 69, 57, 54, 199, 116, 255, 255, 206, 219, 148, 149, 204, 106, 148, 149, 212, 209, 255, 255, 229, 69, 148, 149, 229, 69, 255, 255, 217, 199, 148, 149, 223, 79, 148, 149, 255, 255, 255, 255, 16, 116, 57, 54, 199, 116, 255, 255, 4, 246, 148, 149, 193, 126, 148, 149, 169, 163, 255, 255, 16, 116, 148, 149, 169, 163, 255, 255, 163, 173, 148, 149, 174, 153, 148, 149),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray(2, 0, 9, 0, 4, 0, 2, 0, 7, 0, 9, 0, 5, 0, 18, 0, 8, 0, 5, 0, 15, 0, 18, 0, 17, 0, 14, 0, 19, 0, 17, 0, 12, 0, 14, 0, 10, 0, 3, 0, 13, 0, 10, 0, 0, 0, 3, 0, 6, 0, 11, 0, 16, 0, 6, 0, 1, 0, 11, 0),
+"material": SubResource("StandardMaterial3D_j3l4y"),
+"name": "StoneBricksSplitface001_1K.001",
+"primitive": 3,
+"uv_scale": Vector4(4.10835, 2.01991, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 250, 121, 23, 136, 0, 0, 0, 0, 250, 121, 255, 191, 0, 0, 0, 0, 250, 121, 18, 192, 241, 22, 255, 255, 255, 255, 23, 136, 241, 22, 255, 255, 255, 255, 18, 192, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 191, 0, 0, 0, 0, 0, 0, 18, 192, 241, 22, 255, 255, 203, 57, 255, 255, 241, 22, 255, 255, 203, 57, 18, 192, 255, 255, 0, 0, 250, 121, 23, 136, 255, 255, 0, 0, 250, 121, 255, 191, 255, 255, 0, 0, 250, 121, 18, 192, 13, 233, 255, 255, 255, 255, 23, 136, 13, 233, 255, 255, 255, 255, 18, 192, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 0, 0, 18, 192, 13, 233, 255, 255, 203, 57, 255, 255, 13, 233, 255, 255, 203, 57, 18, 192, 0, 0, 255, 127, 0, 0, 255, 127, 26, 133, 201, 245, 0, 0, 255, 127, 26, 133, 201, 245, 255, 127, 174, 250, 0, 0, 255, 127, 26, 133, 201, 245, 255, 127, 174, 250, 26, 133, 201, 245, 0, 0, 255, 127, 0, 0, 255, 127, 52, 138, 26, 5, 0, 0, 255, 127, 52, 138, 26, 5, 255, 127, 174, 250, 0, 0, 255, 127, 52, 138, 26, 5, 255, 127, 174, 250, 52, 138, 26, 5)
+}, {
+"aabb": AABB(0.105666, 2.55695, 0.713231, 3.45223, 1.00136e-05, 1.29268),
+"attribute_data": PackedByteArray(255, 255, 0, 0, 255, 255, 68, 211, 45, 32, 0, 0, 45, 32, 68, 211),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0),
+"material": SubResource("StandardMaterial3D_4qmy5"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0.481079, 0.523559, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 254, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_o1maq")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g1jf0"]
+points = PackedVector3Array(-0.271279, -1.78551, 0.336286, -0.271279, -1.78551, 1.13171, 0.105444, 2.55695, 0.713159, 3.93484, -1.78551, 0.336286, 3.93484, -1.78551, 1.13171, 0.105444, 2.55695, 2.0059, 3.55771, 2.55695, 0.713159, 3.55771, 2.55695, 2.0059)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_v4crf"]
+_surfaces = [{
+"aabb": AABB(-2.34116, -1.78551, 0.544561, 3.21308, 4.34246, 1.49203),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0, 2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0, 2, 0, 4, 0, 6, 0, 2, 0, 0, 0, 4, 0),
+"name": "StoneBricksSplitface001_1K.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 249, 89, 0, 0, 8, 30, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 30, 255, 255, 172, 64, 0, 0, 255, 255, 0, 0, 249, 89, 0, 0, 246, 225, 255, 255, 255, 255, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 246, 225, 255, 255, 172, 64, 0, 0)
+}, {
+"aabb": AABB(-1.96422, 2.55695, 0.921506, 2.45919, 1.00136e-05, 1.1151),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8nfxs"]
+resource_name = "Medieval_Cube_020"
+_surfaces = [{
+"aabb": AABB(-2.34116, -1.78551, 0.544561, 3.21308, 4.34246, 1.49203),
+"attribute_data": PackedByteArray(212, 209, 255, 255, 229, 69, 32, 60, 199, 116, 255, 255, 206, 219, 177, 152, 204, 106, 177, 152, 212, 209, 255, 255, 229, 69, 177, 152, 229, 69, 255, 255, 217, 199, 177, 152, 223, 79, 177, 152, 255, 255, 255, 255, 16, 116, 32, 60, 199, 116, 255, 255, 4, 246, 177, 152, 193, 126, 177, 152, 169, 163, 255, 255, 16, 116, 177, 152, 169, 163, 255, 255, 163, 173, 177, 152, 174, 153, 177, 152),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray(2, 0, 9, 0, 4, 0, 2, 0, 7, 0, 9, 0, 5, 0, 18, 0, 8, 0, 5, 0, 15, 0, 18, 0, 17, 0, 14, 0, 19, 0, 17, 0, 12, 0, 14, 0, 10, 0, 3, 0, 13, 0, 10, 0, 0, 0, 3, 0, 6, 0, 11, 0, 16, 0, 6, 0, 1, 0, 11, 0),
+"material": SubResource("StandardMaterial3D_j3l4y"),
+"name": "StoneBricksSplitface001_1K.001",
+"primitive": 3,
+"uv_scale": Vector4(4.10835, 2.08079, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 249, 89, 238, 136, 0, 0, 0, 0, 249, 89, 255, 191, 0, 0, 0, 0, 249, 89, 18, 192, 8, 30, 255, 255, 255, 255, 238, 136, 8, 30, 255, 255, 255, 255, 18, 192, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 191, 0, 0, 0, 0, 0, 0, 18, 192, 8, 30, 255, 255, 172, 64, 255, 255, 8, 30, 255, 255, 172, 64, 18, 192, 255, 255, 0, 0, 249, 89, 238, 136, 255, 255, 0, 0, 249, 89, 255, 191, 255, 255, 0, 0, 249, 89, 18, 192, 246, 225, 255, 255, 255, 255, 238, 136, 246, 225, 255, 255, 255, 255, 18, 192, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 0, 0, 0, 0, 255, 191, 254, 255, 0, 0, 0, 0, 18, 192, 246, 225, 255, 255, 172, 64, 255, 255, 246, 225, 255, 255, 172, 64, 18, 192, 0, 0, 255, 127, 0, 0, 255, 127, 26, 133, 201, 245, 0, 0, 255, 127, 26, 133, 201, 245, 255, 127, 174, 250, 0, 0, 255, 127, 26, 133, 201, 245, 255, 127, 174, 250, 26, 133, 201, 245, 0, 0, 255, 127, 0, 0, 255, 127, 52, 138, 26, 5, 0, 0, 255, 127, 52, 138, 26, 5, 255, 127, 174, 250, 0, 0, 255, 127, 52, 138, 26, 5, 255, 127, 174, 250, 52, 138, 26, 5)
+}, {
+"aabb": AABB(-1.96422, 2.55695, 0.921506, 2.45919, 1.00136e-05, 1.1151),
+"attribute_data": PackedByteArray(255, 255, 0, 0, 255, 255, 16, 239, 45, 32, 0, 0, 45, 32, 16, 239),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0),
+"material": SubResource("StandardMaterial3D_4qmy5"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0.481079, 0.462685, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 254, 255, 255, 255, 254, 255, 0, 0, 0, 0, 255, 255, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_v4crf")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a042m"]
+points = PackedVector3Array(-2.34116, -1.78551, 0.544561, -2.34116, -1.78551, 1.06888, -1.96437, 2.55695, 0.921367, 0.871605, -1.78551, 0.544561, 0.871919, -1.78551, 1.06888, -1.96437, 2.55695, 2.0366, 0.494816, 2.55695, 0.921367, 0.494816, 2.55695, 2.0366)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_eehw8"]
+_surfaces = [{
+"aabb": AABB(-0.271279, -1.78551, 0.336286, 4.20612, 4.34246, 1.66962),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0, 2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0, 2, 0, 4, 0, 6, 0, 2, 0, 0, 0, 4, 0),
+"name": "StoneBricksSplitface001_1K.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 250, 121, 0, 0, 241, 22, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 241, 22, 255, 255, 203, 57, 0, 0, 255, 255, 0, 0, 250, 121, 0, 0, 13, 233, 255, 255, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 13, 233, 255, 255, 203, 57, 0, 0)
+}, {
+"aabb": AABB(0.105666, 2.55695, 0.713231, 3.45223, 1.00136e-05, 1.29268),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qi8gk"]
+resource_name = "Medieval_Cube_025"
+_surfaces = [{
+"aabb": AABB(-0.271279, -1.78551, 0.336286, 4.20612, 4.34246, 1.66962),
+"attribute_data": PackedByteArray(212, 209, 255, 255, 229, 69, 195, 60, 199, 116, 255, 255, 206, 219, 7, 153, 204, 106, 7, 153, 212, 209, 255, 255, 229, 69, 7, 153, 229, 69, 255, 255, 217, 199, 7, 153, 223, 79, 7, 153, 255, 255, 255, 255, 16, 116, 195, 60, 199, 116, 255, 255, 4, 246, 7, 153, 193, 126, 7, 153, 169, 163, 255, 255, 16, 116, 7, 153, 169, 163, 255, 255, 163, 173, 7, 153, 174, 153, 7, 153),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray(2, 0, 9, 0, 4, 0, 2, 0, 7, 0, 9, 0, 5, 0, 18, 0, 8, 0, 5, 0, 15, 0, 18, 0, 17, 0, 14, 0, 19, 0, 17, 0, 12, 0, 14, 0, 10, 0, 3, 0, 13, 0, 10, 0, 0, 0, 3, 0, 6, 0, 11, 0, 16, 0, 6, 0, 1, 0, 11, 0),
+"material": SubResource("StandardMaterial3D_j3l4y"),
+"name": "StoneBricksSplitface001_1K.001",
+"primitive": 3,
+"uv_scale": Vector4(4.10835, 2.08755, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 250, 121, 23, 136, 0, 0, 0, 0, 250, 121, 255, 191, 0, 0, 0, 0, 250, 121, 18, 192, 241, 22, 255, 255, 255, 255, 23, 136, 241, 22, 255, 255, 255, 255, 18, 192, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 191, 0, 0, 0, 0, 0, 0, 18, 192, 241, 22, 255, 255, 203, 57, 255, 255, 241, 22, 255, 255, 203, 57, 18, 192, 255, 255, 0, 0, 250, 121, 23, 136, 255, 255, 0, 0, 250, 121, 255, 191, 255, 255, 0, 0, 250, 121, 18, 192, 13, 233, 255, 255, 255, 255, 23, 136, 13, 233, 255, 255, 255, 255, 18, 192, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 0, 0, 18, 192, 13, 233, 255, 255, 203, 57, 255, 255, 13, 233, 255, 255, 203, 57, 18, 192, 0, 0, 255, 127, 0, 0, 255, 127, 26, 133, 201, 245, 0, 0, 255, 127, 26, 133, 201, 245, 255, 127, 174, 250, 0, 0, 255, 127, 26, 133, 201, 245, 255, 127, 174, 250, 26, 133, 201, 245, 0, 0, 255, 127, 0, 0, 255, 127, 52, 138, 26, 5, 0, 0, 255, 127, 52, 138, 26, 5, 255, 127, 174, 250, 0, 0, 255, 127, 52, 138, 26, 5, 255, 127, 174, 250, 52, 138, 26, 5)
+}, {
+"aabb": AABB(0.105666, 2.55695, 0.713231, 3.45223, 1.00136e-05, 1.29268),
+"attribute_data": PackedByteArray(255, 255, 0, 0, 255, 255, 156, 242, 45, 32, 0, 0, 45, 32, 156, 242),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0),
+"material": SubResource("StandardMaterial3D_4qmy5"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0.481079, 0.455921, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 254, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_eehw8")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_bbpub"]
+points = PackedVector3Array(-0.271279, -1.78551, 0.336286, -0.271279, -1.78551, 1.13171, 0.105444, 2.55695, 0.713159, 3.93484, -1.78551, 0.336286, 3.93484, -1.78551, 1.13171, 0.105444, 2.55695, 2.0059, 3.55771, 2.55695, 0.713159, 3.55771, 2.55695, 2.0059)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_u71xv"]
+vertices = PackedVector3Array(-4.9377, 0.553128, -2.09623, -4.9377, 0.553128, -2.59623, -5.5377, 0.553128, -2.59623, -4.6377, 0.553128, -1.79623, -4.9377, 0.553128, -2.09623, -5.5377, 0.553128, -2.59623, -5.5377, 0.553128, 2.60377, -3.3377, 0.553128, 2.10377, -3.0377, 0.553128, 1.80377, -5.5377, 0.553128, 2.60377, -3.3377, 0.553128, 2.60377, -3.3377, 0.553128, 2.10377, -3.0377, 0.553128, 1.80377, -1.2377, 0.553128, 1.80377, -1.2377, 0.553128, -1.79623, -4.6377, 0.553128, -1.79623, 5.0623, 0.553128, -1.89623, 5.5623, 0.553128, -2.19623, 5.5623, 0.553128, -2.59623, -0.137702, 0.553128, -2.59623, 5.5623, 0.553128, 2.60377, 5.5623, 0.553128, 1.70377, 5.0623, 0.553128, 1.40377, 1.5623, 0.553128, 2.10377, 1.5623, 0.553128, 2.60377, -0.437702, 0.553128, -1.79623, -1.2377, 0.553128, -1.79623, -1.2377, 0.553128, 1.80377, -0.437702, 0.553128, -1.79623, -1.2377, 0.553128, 1.80377, 1.2623, 0.553128, 1.80377, -0.137702, 0.553128, -2.09623, 1.2623, 0.553128, 1.80377, 1.5623, 0.553128, 2.10377, 5.0623, 0.553128, 1.40377, 5.0623, 0.553128, -1.89623, -0.137702, 0.553128, -2.59623, -0.137702, 0.553128, -2.09623)
+polygons = [PackedInt32Array(0, 2, 1), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 8), PackedInt32Array(5, 8, 7), PackedInt32Array(5, 7, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(23, 20, 24), PackedInt32Array(26, 25, 27), PackedInt32Array(28, 31, 29), PackedInt32Array(29, 31, 30), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(35, 32, 37), PackedInt32Array(35, 37, 36)]
+cell_size = 0.1
+agent_radius = 0.4
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_hdqm3"]
+vertices = PackedVector3Array(-5.0377, 0.553128, -2.09623, -5.0377, 0.553128, -2.49623, -5.4377, 0.553128, -2.49623, -5.4377, 0.553128, 2.50377, -5.4377, 0.553128, 2.50377, -3.4377, 0.553128, 2.50377, -3.4377, 0.553128, 2.10377, -5.4377, 0.553128, 2.50377, -3.4377, 0.553128, 2.10377, -3.0377, 0.553128, 1.70377, -4.6377, 0.553128, -1.69623, -5.0377, 0.553128, -2.09623, -3.0377, 0.553128, 1.70377, -1.2377, 0.553128, 1.70377, -1.2377, 0.553128, -1.69623, -4.6377, 0.553128, -1.69623, 5.4623, 0.553128, 2.50377, 5.4623, 0.553128, 1.80377, 4.9623, 0.553128, 1.40377, 1.5623, 0.553128, 1.90377, 1.6623, 0.553128, 2.50377, 1.2623, 0.553128, 1.70377, 1.5623, 0.553128, 1.90377, 4.9623, 0.553128, 1.40377, 4.9623, 0.553128, -1.89623, -0.0377016, 0.553128, -2.49623, -0.237701, 0.553128, -1.79623, 4.9623, 0.553128, -1.89623, 5.4623, 0.553128, -2.49623, -0.0377016, 0.553128, -2.49623, -0.237701, 0.553128, -1.79623, -1.2377, 0.553128, -1.69623, -1.2377, 0.553128, 1.70377, 1.2623, 0.553128, 1.70377)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(6, 5, 4), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(10, 7, 11), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 20), PackedInt32Array(18, 20, 19), PackedInt32Array(22, 21, 23), PackedInt32Array(23, 21, 24), PackedInt32Array(24, 21, 26), PackedInt32Array(24, 26, 25), PackedInt32Array(29, 28, 27), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33)]
+cell_size = 0.1
+agent_radius = 0.45
+
+[node name="Medieval" type="Node3D" node_paths=PackedStringArray("player_spawn_point")]
+script = ExtResource("1_47a1a")
+next_level = "res://levels/present/slc/slc.tscn"
+player_spawn_point = NodePath("PlayerSpawnPoint")
+
+[node name="Level_008" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_oqlhj")
+skeleton = NodePath("")
+
+[node name="Cube_007_001" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7276, 1.44305, 1.79291)
+mesh = SubResource("ArrayMesh_64ivw")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_007_001"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_007_001/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_g1jf0")
+
+[node name="Cube_009_001" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 4.79324, 1.44305, -0.982056)
+mesh = SubResource("ArrayMesh_8nfxs")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_009_001"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_009_001/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_a042m")
+
+[node name="Cube_007_002" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, -0.692877, 1.44305, -1.79697)
+mesh = SubResource("ArrayMesh_qi8gk")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_007_002"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_007_002/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_bbpub")
+
+[node name="OverlappingNavRegion" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_u71xv")
+script = ExtResource("8_3yjj7")
+
+[node name="OverlappingNavRegion2" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_hdqm3")
+script = ExtResource("8_3yjj7")
+index = 1
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.72473, 1.90104)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.07169, 3.725, 1.901)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.072, 3.725, 1.901)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.72473, -2.81405)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.07169, 3.725, -2.81409)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.072, 3.725, -2.81409)
+light_energy = 2.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 7.5
+
+[node name="LevelBounds" parent="." instance=ExtResource("2_t6hfu")]
+
+[node name="DifficultyRange" type="Node3D" parent="."]
+script = ExtResource("3_mdq40")
+
+[node name="SignalBarrier" type="Node" parent="DifficultyRange"]
+script = ExtResource("4_04o61")
+barrier_count = 4
+
+[node name="StagedSpawner" type="Marker3D" parent="DifficultyRange" groups=["EnemySpawners"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2295, 0, -2.58996)
+script = ExtResource("5_ufn4r")
+scenes = Array[PackedScene]([ExtResource("6_yxqff"), ExtResource("6_yxqff")])
+
+[node name="StagedSpawner2" type="Marker3D" parent="DifficultyRange" groups=["EnemySpawners"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4186, 0, 2.28644)
+script = ExtResource("5_ufn4r")
+scenes = Array[PackedScene]([ExtResource("6_yxqff"), ExtResource("6_yxqff")])
+
+[node name="StagedSpawner3" type="Marker3D" parent="DifficultyRange" groups=["EnemySpawners"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59486, 0, -1.98246)
+script = ExtResource("5_ufn4r")
+scenes = Array[PackedScene]([null, ExtResource("6_yxqff")])
+
+[node name="StagedSpawner4" type="Marker3D" parent="DifficultyRange" groups=["EnemySpawners"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.27767, 0, 2.58265)
+script = ExtResource("5_ufn4r")
+scenes = Array[PackedScene]([null, ExtResource("6_yxqff")])
+
+[node name="PlayerSpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43821, 0, -0.404932)
+
+[node name="LevelMusicPlayer" parent="PlayerSpawnPoint" instance=ExtResource("7_o3udq")]
+stream = ExtResource("8_ng0pv")
+
+[node name="CollectibleSpawner" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21164, 0.504632, -1.03665)
+script = ExtResource("9_t66sk")
+
+[connection signal="level_complete" from="." to="CollectibleSpawner" method="spawn"]
+[connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]
+[connection signal="finished" from="DifficultyRange/StagedSpawner" to="DifficultyRange/SignalBarrier" method="receive"]
+[connection signal="finished" from="DifficultyRange/StagedSpawner2" to="DifficultyRange/SignalBarrier" method="receive"]
+[connection signal="finished" from="DifficultyRange/StagedSpawner3" to="DifficultyRange/SignalBarrier" method="receive"]
+[connection signal="finished" from="DifficultyRange/StagedSpawner4" to="DifficultyRange/SignalBarrier" method="receive"]
+[connection signal="collectible_collected" from="CollectibleSpawner" to="." method="_on_can_move_on"]

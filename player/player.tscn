@@ -825,7 +825,7 @@ render_priority = 3
 sprite_frames = SubResource("SpriteFrames_vcte5")
 animation = &"walk_up"
 autoplay = "idle_down"
-frame_progress = 0.860224
+frame_progress = 0.256506
 script = ExtResource("14_g7fv3")
 character = NodePath("../..")
 

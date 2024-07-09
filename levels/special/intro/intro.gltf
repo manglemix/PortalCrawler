@@ -73,34 +73,28 @@
 		{
 			"alphaMode":"BLEND",
 			"doubleSided":true,
-			"name":"StoneBricksSplitface001_1K",
-			"normalTexture":{
-				"index":0,
-				"scale":0
-			},
+			"name":"StoneBricksSplitface001_1K.002",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":1
+					"index":0
 				},
+				"metallicFactor":0,
 				"metallicRoughnessTexture":{
-					"index":2
+					"index":1
 				}
 			}
 		},
 		{
 			"alphaMode":"BLEND",
 			"doubleSided":true,
-			"name":"ConcreteBlocksPavingSquareStack001_1K",
-			"normalTexture":{
-				"index":3,
-				"scale":0
-			},
+			"name":"ConcreteBlocksPavingSquareStack001_1K.002",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":4
+					"index":2
 				},
+				"metallicFactor":0,
 				"metallicRoughnessTexture":{
-					"index":5
+					"index":3
 				}
 			}
 		},
@@ -223,46 +217,28 @@
 		{
 			"sampler":0,
 			"source":3
-		},
-		{
-			"sampler":0,
-			"source":4
-		},
-		{
-			"sampler":0,
-			"source":5
 		}
 	],
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"StoneBricksSplitface001_NRM_1K",
-			"uri":"StoneBricksSplitface001_NRM_1K.png"
+			"name":"Traveling in Portal Wall Color",
+			"uri":"Traveling%20in%20Portal%20Wall%20Color.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"StoneBricksSplitface001_COL_1K",
-			"uri":"StoneBricksSplitface001_COL_1K.png"
+			"name":"Traveling in Portal Wall Roughness",
+			"uri":"Traveling%20in%20Portal%20Wall%20Roughness.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"StoneBricksSplitface001_REFL_1K-StoneBricksSplitface001_ROUGHNESS_1K",
-			"uri":"StoneBricksSplitface001_REFL_1K-StoneBricksSplitface001_ROUGHNESS_1K.png"
+			"name":"Traveling in Portal Floor Color",
+			"uri":"Traveling%20in%20Portal%20Floor%20Color.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"ConcreteBlocksPavingSquareStack001_NRM_1K",
-			"uri":"ConcreteBlocksPavingSquareStack001_NRM_1K.png"
-		},
-		{
-			"mimeType":"image/png",
-			"name":"ConcreteBlocksPavingSquareStack001_COL_1K",
-			"uri":"ConcreteBlocksPavingSquareStack001_COL_1K.png"
-		},
-		{
-			"mimeType":"image/png",
-			"name":"ConcreteBlocksPavingSquareStack001_REFL_1K-ConcreteBlocksPavingSquareStack001_ROUGHNESS_1K",
-			"uri":"ConcreteBlocksPavingSquareStack001_REFL_1K-ConcreteBlocksPavingSquareStack001_ROUGHNESS_1K.png"
+			"name":"Traveling in Portal Floor Roughness",
+			"uri":"Traveling%20in%20Portal%20Floor%20Roughness.png"
 		}
 	],
 	"accessors":[
@@ -711,8 +687,8 @@
 	],
 	"samplers":[
 		{
-			"magFilter":9729,
-			"minFilter":9987
+			"magFilter":9728,
+			"minFilter":9984
 		}
 	],
 	"buffers":[
