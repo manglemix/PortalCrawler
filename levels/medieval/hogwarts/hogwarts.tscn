@@ -393,12 +393,12 @@ script = ExtResource("4_04o61")
 barrier_count = 4
 
 [node name="StagedSpawner" type="Marker3D" parent="DifficultyRange" groups=["EnemySpawners"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2295, 0, -2.58996)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8041, 0, -1.69932)
 script = ExtResource("5_ufn4r")
 scenes = Array[PackedScene]([ExtResource("6_yxqff"), ExtResource("6_yxqff")])
 
 [node name="StagedSpawner2" type="Marker3D" parent="DifficultyRange" groups=["EnemySpawners"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4186, 0, 2.28644)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18731, 0, 1.79134)
 script = ExtResource("5_ufn4r")
 scenes = Array[PackedScene]([ExtResource("6_yxqff"), ExtResource("6_yxqff")])
 
@@ -408,7 +408,7 @@ script = ExtResource("5_ufn4r")
 scenes = Array[PackedScene]([null, ExtResource("6_yxqff")])
 
 [node name="StagedSpawner4" type="Marker3D" parent="DifficultyRange" groups=["EnemySpawners"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.27767, 0, 2.58265)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.62945, 0, 2.30904)
 script = ExtResource("5_ufn4r")
 scenes = Array[PackedScene]([null, ExtResource("6_yxqff")])
 
