@@ -94,7 +94,9 @@ func _input(event):
 	elif event.is_action_pressed("shoot"):
 		# Check if we're deleting portals
 		if (firstplaced):
-			if (firstPortal.deletable):
+			if firstPortal == null:
+				firstplaced = false
+			elif (firstPortal.deletable):
 				#storedTexture = firstPortal.get_node("Sprite3D").get_texture()
 				firstPortal.queue_free()
 				firstPortal = null
@@ -103,7 +105,9 @@ func _input(event):
 				firstplaced = false
 				return
 		if (secondplaced):
-			if (secondPortal.deletable):
+			if secondPortal == null:
+				secondplaced = false
+			elif (secondPortal.deletable):
 				#storedTexture = secondPortal.get_node("Sprite3D").get_texture()
 				secondPortal.queue_free()
 				secondPortal = null

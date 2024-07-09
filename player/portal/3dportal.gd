@@ -24,6 +24,13 @@ var facing
 
 func _ready():
 	name = "portal"
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	print("a")
+	for body: CollisionObject3D in collider.get_overlapping_bodies():
+		print(body.name)
+		if body.collision_layer & 16 > 0:
+			queue_free()
 # obviously could grab these values without storing them, but for
 # code readability and performance we store them after they are updated 1 time
 var cZOffset
@@ -55,7 +62,7 @@ func _physics_process(_delta):
 	for body in bodies:
 		# if there is no partner then no work is needed, return
 		if(p == null):
-			if (body.name.begins_with("Basic") or body.collision_layer & 16 > 0):
+			if (body.name.begins_with("Basic")):
 				body.queue_free()
 			return
 		if (body.name == "Player"):
@@ -66,8 +73,10 @@ func _physics_process(_delta):
 				return
 		# get the objects y value because that does not change, then teleport it
 		var bodyY = body.get_global_position().y
-		body.set_global_position(Vector3(p.cXOffset, bodyY, p.cZOffset))
-		body.get_node("Teleportable")._teleported(self, p)
+		var teleportable: Teleportable = body.get_node_or_null("Teleportable")
+		if teleportable != null:
+			body.set_global_position(Vector3(p.cXOffset, bodyY, p.cZOffset))
+			teleportable._teleported(self, p)
 		
 # small helper function that checks if the object hitting
 # a portals collider is moving with any velocity into the portal
