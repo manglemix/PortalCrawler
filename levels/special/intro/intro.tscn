@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cvkxr44q05aed"]
+[gd_scene load_steps=13 format=3 uid="uid://cvkxr44q05aed"]
 
 [ext_resource type="PackedScene" uid="uid://cc5rrmn7brbj2" path="res://levels/special/intro/intro.gltf" id="1_pnk1a"]
 [ext_resource type="Script" path="res://levels/level.gd" id="2_b0ads"]
@@ -12,14 +12,6 @@
 [ext_resource type="Script" path="res://levels/collectible_spawner.gd" id="10_l2ewj"]
 [ext_resource type="Texture2D" uid="uid://gphrioc4w4j6" path="res://levels/special/intro/wasd.png" id="11_8lxhu"]
 [ext_resource type="Texture2D" uid="uid://crnp621elkfk2" path="res://levels/special/intro/right-click.png" id="12_uks87"]
-
-[sub_resource type="GDScript" id="GDScript_6ou7y"]
-script/source = "extends Sprite3D
-
-
-func _on_intro_level_complete() -> void:
-	create_tween().tween_property(self, \"modulate:a\", 0.0, 1.0).set_trans(Tween.TRANS_EXPO)
-"
 
 [node name="Intro" node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("1_pnk1a")]
 script = ExtResource("2_b0ads")
@@ -118,28 +110,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35549, 0.741545, 1.87468)
 script = ExtResource("10_l2ewj")
 
 [node name="WASD" type="Sprite3D" parent="." index="11"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -4.48183, 0, 2.00061)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -4.48183, 0.00712329, 2.00061)
 pixel_size = 0.0335
 shaded = true
 double_sided = false
-no_depth_test = true
 texture_filter = 0
 render_priority = 1
 texture = ExtResource("11_8lxhu")
-script = SubResource("GDScript_6ou7y")
 
 [node name="WASD2" type="Sprite3D" parent="." index="12"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.328088, 0, -0.622757)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.328088, 0.00712329, -0.622757)
 pixel_size = 0.0335
 shaded = true
 double_sided = false
-no_depth_test = true
 texture_filter = 0
 render_priority = 1
 texture = ExtResource("12_uks87")
 
 [connection signal="level_complete" from="." to="CollectibleSpawner" method="spawn"]
-[connection signal="level_complete" from="." to="WASD" method="_on_intro_level_complete"]
 [connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]
 [connection signal="finished" from="DifficultyRange/StagedSpawner" to="DifficultyRange/SignalBarrier" method="receive"]
 [connection signal="finished" from="DifficultyRange/StagedSpawner3" to="DifficultyRange/SignalBarrier" method="receive"]

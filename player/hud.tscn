@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=16 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
 [ext_resource type="Texture2D" uid="uid://buel4iifkemvw" path="res://player/pause.png" id="2_pm0b2"]
+[ext_resource type="Texture2D" uid="uid://dyhosqkkw550k" path="res://player/restart.png" id="3_6tax7"]
+[ext_resource type="Texture2D" uid="uid://dj0g5ye0dmrbq" path="res://player/fullscreen.png" id="3_7ejf0"]
 [ext_resource type="Texture2D" uid="uid://c7w7w04ymhr1m" path="res://player/idle-mouse.png" id="3_ki1ma"]
 [ext_resource type="Texture2D" uid="uid://bbn1mcu6qaovu" path="res://player/attack-mouse.png" id="4_d36ju"]
 [ext_resource type="Texture2D" uid="uid://ds6siicrhahi8" path="res://player/delete_portal.png" id="5_uk65h"]
@@ -88,6 +90,27 @@ func set_player(player: Player) -> void:
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28xjp"]
 bg_color = Color(0, 0, 0, 0.388235)
+
+[sub_resource type="GDScript" id="GDScript_6fp17"]
+script/source = "extends Button
+
+
+func _on_pressed() -> void:
+	if get_window().mode == Window.MODE_FULLSCREEN:
+		icon = preload(\"res://player/fullscreen.png\")
+		get_window().mode = Window.MODE_WINDOWED
+	else:
+		icon = preload(\"res://player/windowed.png\")
+		get_window().mode = Window.MODE_FULLSCREEN
+"
+
+[sub_resource type="GDScript" id="GDScript_adouf"]
+script/source = "extends Button
+
+
+func _on_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://main.tscn\")
+"
 
 [sub_resource type="GDScript" id="GDScript_pqjgk"]
 script/source = "extends Node2D
@@ -206,6 +229,34 @@ texture = ExtResource("2_pm0b2")
 expand_mode = 2
 stretch_mode = 5
 
+[node name="Fullscreen" type="Button" parent="Pause"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.251
+anchor_top = 0.7
+anchor_right = 0.45
+anchor_bottom = 0.8
+grow_horizontal = 0
+icon = ExtResource("3_7ejf0")
+icon_alignment = 1
+expand_icon = true
+script = SubResource("GDScript_6fp17")
+
+[node name="Restart" type="Button" parent="Pause"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_top = 0.7
+anchor_right = 0.68
+anchor_bottom = 0.8
+grow_vertical = 2
+icon = ExtResource("3_6tax7")
+icon_alignment = 1
+expand_icon = true
+script = SubResource("GDScript_adouf")
+
 [node name="Node2D" type="Node2D" parent="."]
 script = SubResource("GDScript_pqjgk")
 
@@ -228,3 +279,6 @@ texture_filter = 1
 position = Vector2(42, 42)
 scale = Vector2(4, 4)
 texture = ExtResource("5_uk65h")
+
+[connection signal="pressed" from="Pause/Fullscreen" to="Pause/Fullscreen" method="_on_pressed"]
+[connection signal="pressed" from="Pause/Restart" to="Pause/Restart" method="_on_pressed"]
