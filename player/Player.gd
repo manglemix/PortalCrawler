@@ -35,6 +35,18 @@ var is_teleporting := false
 
 var adjusting
 
+var poison_count := 0:
+	set(x):
+		if poison_count == x or x < 0:
+			return
+		sprite.hide()
+		if x == 0:
+			sprite = $Billboard/CharacterSprite
+		elif poison_count == 0:
+			sprite = $Billboard/CharacterSprite2
+		sprite.show()
+		poison_count = x
+
 @onready var leftheld = false
 @onready var rightheld = false
 @onready var downheld = false
@@ -166,6 +178,7 @@ func _get_movement():
 	target_velocity = change_input(target_velocity)
 	velocity = target_velocity
 
+
 func _on_damaged(_health_change: int) -> void:
 	Shake.shake_node(get_viewport().get_camera_3d(), 0.25, 0.2, 5)
 
@@ -260,10 +273,15 @@ func _create_portal():
 func _on_windup_timeout():
 	if (!AttackArea.has_overlapping_bodies() and !AttackArea.has_overlapping_areas()):
 		return
-	for body in AttackArea.get_overlapping_bodies():
+	var hit := false
+	for body in AttackArea.get_overlapping_bodies() + AttackArea.get_overlapping_areas():
+		hit = true
 		Damageable.damage_node_once(body, 1, self)
-	for body in AttackArea.get_overlapping_areas():
-		Damageable.damage_node_once(body, 1, self)
+		if poison_count > 0:
+			Damageable.node_afflict_poison(body, self)
+	if hit:
+		poison_count -= 1
+
 
 @warning_ignore("shadowed_variable")
 func change_input(target_velocity):

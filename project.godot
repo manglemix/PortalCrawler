@@ -22,7 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GameState="*res://scripts/game_state/game_state.gd"
-Collectibles="*res://scripts/collectibles.gd"
+Collectibles="*res://collectibles/collectibles.gd"
 LevelMusic="*res://music/level_music.gd"
 DeletablePortals="*res://player/portal/deletable_portals.gd"
 

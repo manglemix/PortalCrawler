@@ -5,6 +5,7 @@ extends Node
 
 signal max_health_changed(new_max_health: int)
 signal health_changed(new_health: int)
+signal shield_changed(new_shield: int)
 signal died
 
 var _died := false
@@ -15,6 +16,9 @@ var _died := false
 
 @export var health := 10:
 	set = set_health
+
+@export var shield := 0:
+	set = set_shield
 
 
 func _get_configuration_warnings() -> PackedStringArray:
@@ -29,7 +33,16 @@ func _ready() -> void:
 
 
 func set_health(new_health: int):
-	health = clampi(new_health, 0, max_health)
+	new_health = clampi(new_health, 0, max_health)
+	if new_health < health:
+		var damage := health - new_health
+		if damage > shield:
+			shield = 0
+			new_health += shield
+		else:
+			shield -= damage
+			return
+	health = new_health
 	health_changed.emit(health)
 	if health == 0:
 		if not _died:
@@ -37,6 +50,13 @@ func set_health(new_health: int):
 			_died = true
 	else:
 		_died = false
+
+
+func set_shield(new_shield: int):
+	if new_shield < 0:
+		new_shield = 0
+	shield = new_shield
+	shield_changed.emit(shield)
 
 
 func set_max_health(new_max_health: int):

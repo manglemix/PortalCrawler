@@ -39,6 +39,8 @@ func _process(delta: float) -> void:
 
 
 func _knockback(from: Node) -> void:
+	if from == null:
+		return
 	if "global_position" in from:
 		var from_position: Vector3 = from.global_position
 		var travel := (global_transform.origin - from_position).normalized()

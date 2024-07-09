@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://enemies/state_machine/damaged.gd" id="8_86l5i"]
 [ext_resource type="Script" path="res://enemies/state_machine/death.gd" id="9_7hx0q"]
 [ext_resource type="Script" path="res://enemies/state_machine/perma_wander.gd" id="10_nr5rr"]
-[ext_resource type="Script" path="res://enemies/looping_timer.gd" id="11_ynun1"]
+[ext_resource type="Script" path="res://scripts/looping_timer.gd" id="11_ynun1"]
 [ext_resource type="Script" path="res://scripts/billboard.gd" id="12_gq3we"]
 [ext_resource type="Script" path="res://scripts/random_binary_fork.gd" id="12_yfv2m"]
 [ext_resource type="PackedScene" uid="uid://cb7yrhamia1d8" path="res://enemies/projectiles/bullet01.tscn" id="14_wadr0"]

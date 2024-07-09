@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=12 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
 [ext_resource type="Texture2D" uid="uid://buel4iifkemvw" path="res://player/pause.png" id="2_pm0b2"]
@@ -55,12 +55,36 @@ func set_player(player: Player) -> void:
 					indicator.expand_mode = TextureRect.EXPAND_FIT_WIDTH
 					add_child(indicator)
 			else:
-				for _i in range(new_max_health, get_child_count()):
-					get_child(new_max_health).queue_free()
+				for i in range(new_max_health, get_child_count()):
+					get_child(i).queue_free()
 	)
 "
 
 [sub_resource type="Theme" id="Theme_hcktf"]
+
+[sub_resource type="GDScript" id="GDScript_hqk0h"]
+script/source = "extends HBoxContainer
+
+
+const FULL: Texture2D = preload(\"res://player/upgrade icons/shield upgrade icon.png\")
+
+
+func set_player(player: Player) -> void:
+	var health := Health.get_health_component(player)
+	health.shield_changed.connect(
+		func(new_shield: int):
+			if new_shield >= get_child_count():
+				for _i in range(new_shield - get_child_count()):
+					var indicator := TextureRect.new()
+					indicator.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+					indicator.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+					indicator.texture = FULL
+					add_child(indicator)
+			else:
+				for i in range(new_shield, get_child_count()):
+					get_child(i).queue_free()
+	)
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28xjp"]
 bg_color = Color(0, 0, 0, 0.388235)
@@ -145,6 +169,16 @@ layout_mode = 2
 theme = SubResource("Theme_hcktf")
 texture = ExtResource("1_h1oyn")
 expand_mode = 2
+
+[node name="ShieldBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.13
+anchor_right = 0.03
+anchor_bottom = 0.22
+theme_override_constants/separation = 10
+script = SubResource("GDScript_hqk0h")
 
 [node name="Pause" type="Panel" parent="."]
 visible = false
