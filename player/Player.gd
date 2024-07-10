@@ -136,12 +136,12 @@ func _input(event):
 			sprite.attack()
 
 	elif event.is_action_pressed("kill_all"):
-		#if !has_kill_all_spell:
-			#return
+		if !has_kill_all_spell:
+			return
 		has_kill_all_spell = false
 		for enemy: Enemy in get_tree().get_nodes_in_group(&"Enemies"):
-			#if !&"Boss" in enemy.get_groups():
-			Health.set_node_health(enemy, 0)
+			if !&"Boss" in enemy.get_groups():
+				Health.set_node_health(enemy, 0)
 
 
 func _physics_process(_delta):

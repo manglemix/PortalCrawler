@@ -1,17 +1,17 @@
-[gd_scene load_steps=33 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=35 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
 [ext_resource type="Texture2D" uid="uid://buel4iifkemvw" path="res://player/pause.png" id="2_pm0b2"]
 [ext_resource type="Texture2D" uid="uid://dyhosqkkw550k" path="res://player/restart.png" id="3_6tax7"]
 [ext_resource type="Texture2D" uid="uid://dj0g5ye0dmrbq" path="res://player/fullscreen.png" id="3_7ejf0"]
-[ext_resource type="Texture2D" uid="uid://c7w7w04ymhr1m" path="res://player/idle-mouse.png" id="3_ki1ma"]
-[ext_resource type="Texture2D" uid="uid://bbn1mcu6qaovu" path="res://player/attack-mouse.png" id="4_d36ju"]
 [ext_resource type="Texture2D" uid="uid://b0gr36oxtbq6j" path="res://player/coin.png" id="5_iavf7"]
 [ext_resource type="FontFile" uid="uid://5fqp282we4x2" path="res://fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="5_lipyx"]
 [ext_resource type="Texture2D" uid="uid://ds6siicrhahi8" path="res://player/delete_portal.png" id="5_uk65h"]
 [ext_resource type="Texture2D" uid="uid://p0hbynlugb2f" path="res://player/wizard_hat.png" id="6_gtsf6"]
 [ext_resource type="Texture2D" uid="uid://ebwjernenu5x" path="res://player/upgrade icons/fortune cookie icon.png" id="8_5s7ip"]
 [ext_resource type="Texture2D" uid="uid://iuv4kbwss6ke" path="res://player/upgrade icons/fortune cookie opened.png" id="9_kcx3t"]
+[ext_resource type="Texture2D" uid="uid://dk0lrmqd3n3yr" path="res://player/sword.png" id="10_7gfkp"]
+[ext_resource type="FontFile" uid="uid://dniag53xm4vlt" path="res://fonts/Pixelify_Sans/static/PixelifySans-SemiBold.ttf" id="11_8ms1p"]
 
 [sub_resource type="GDScript" id="GDScript_fp6gk"]
 script/source = "extends Control
@@ -448,8 +448,7 @@ func _ready() -> void:
 script/source = "extends Node2D
 
 
-@onready var idle: Sprite2D = $Idle
-@onready var attack: Sprite2D = $Attack
+@onready var idle: Sprite2D = $Node2D/Idle
 @onready var delete: Sprite2D = $DeletePortal
 
 
@@ -459,11 +458,9 @@ func _input(event: InputEvent) -> void:
 
 	elif event.is_action_pressed(\"attack\"):
 		idle.hide()
-		attack.show()
 	
 	elif event.is_action_released(\"attack\"):
 		idle.show()
-		attack.hide()
 
 
 func _process(_delta: float) -> void:
@@ -472,16 +469,43 @@ func _process(_delta: float) -> void:
 	if DeletablePortals.deletable_portals > 0:
 		delete.show()
 		idle.hide()
-		attack.hide()
-	elif Input.is_action_pressed(\"attack\"):
-		delete.hide()
-		idle.hide()
-		attack.show()
 	else:
 		delete.hide()
 		idle.show()
-		attack.hide()
 "
+
+[sub_resource type="GDScript" id="GDScript_7r6cs"]
+script/source = "extends Node2D
+
+var player: Player
+
+@onready var idle: Sprite2D = $Idle
+
+
+func _ready() -> void:
+	set_process(false)
+
+
+@warning_ignore(\"shadowed_variable\")
+func set_player(player: Player) -> void:
+	self.player = player
+	set_process(true)
+	
+
+
+func _process(_delta: float) -> void:
+	if player.poison_count == 0:
+		idle.texture = preload(\"res://player/sword.png\")
+	else:
+		idle.texture = preload(\"res://player/poison-sword.png\")
+	var player_viewport: SubViewport = player.get_viewport()
+	var player_pos := player_viewport.get_camera_3d().unproject_position(player.global_position) / Vector2(player_viewport.size)
+	rotation = (player_pos - get_parent().global_position / get_viewport_rect().size).angle()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_2g4dd"]
+font = ExtResource("11_8ms1p")
+font_size = 48
 
 [node name="HUD" type="Control"]
 process_mode = 3
@@ -697,18 +721,15 @@ script = SubResource("GDScript_telwv")
 [node name="Node2D" type="Node2D" parent="."]
 script = SubResource("GDScript_pqjgk")
 
-[node name="Idle" type="Sprite2D" parent="Node2D"]
-texture_filter = 1
-position = Vector2(42, 42)
-scale = Vector2(4, 4)
-texture = ExtResource("3_ki1ma")
+[node name="Node2D" type="Node2D" parent="Node2D"]
+script = SubResource("GDScript_7r6cs")
 
-[node name="Attack" type="Sprite2D" parent="Node2D"]
-visible = false
+[node name="Idle" type="Sprite2D" parent="Node2D/Node2D"]
 texture_filter = 1
-position = Vector2(42, 42)
+position = Vector2(-85, 0)
+rotation = 1.5708
 scale = Vector2(4, 4)
-texture = ExtResource("4_d36ju")
+texture = ExtResource("10_7gfkp")
 
 [node name="DeletePortal" type="Sprite2D" parent="Node2D"]
 visible = false
@@ -716,6 +737,14 @@ texture_filter = 1
 position = Vector2(42, 42)
 scale = Vector2(4, 4)
 texture = ExtResource("5_uk65h")
+
+[node name="Label" type="Label" parent="Node2D"]
+offset_left = -14.0
+offset_top = -34.0
+offset_right = 26.0
+offset_bottom = 25.0
+text = "x"
+label_settings = SubResource("LabelSettings_2g4dd")
 
 [connection signal="pressed" from="Pause/Fullscreen" to="Pause/Fullscreen" method="_on_pressed"]
 [connection signal="pressed" from="Pause/Restart" to="Pause/Restart" method="_on_pressed"]
