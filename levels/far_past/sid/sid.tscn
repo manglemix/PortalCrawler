@@ -289,7 +289,7 @@ agent_radius = 0.45
 
 [node name="Sid" type="Node3D" node_paths=PackedStringArray("player_spawn_point")]
 script = ExtResource("1_3hosn")
-next_level = "res://levels/medieval/hogwarts/hogwarts.tscn"
+next_level = "res://levels/1800s/holmes/holmes.tscn"
 player_spawn_point = NodePath("PlayerSpawnPoint")
 
 [node name="Level_001" type="MeshInstance3D" parent="."]

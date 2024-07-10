@@ -73,8 +73,6 @@ func _ready():
 	set_physics_process(true)
 	set_process_input(true)
 	appeared.emit()
-	await get_tree().create_timer(2.0, false).timeout
-	open_fortune_cookie()
 
 
 func aim_at_mouse() -> void:
@@ -138,10 +136,11 @@ func _input(event):
 			sprite.attack()
 
 	elif event.is_action_pressed("kill_all"):
-		if !has_kill_all_spell:
-			return
+		#if !has_kill_all_spell:
+			#return
 		has_kill_all_spell = false
 		for enemy: Enemy in get_tree().get_nodes_in_group(&"Enemies"):
+			#if !&"Boss" in enemy.get_groups():
 			Health.set_node_health(enemy, 0)
 
 
