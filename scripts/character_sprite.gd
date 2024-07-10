@@ -107,6 +107,8 @@ func cancel_attack() -> void:
 
 
 func die() -> void:
+	if !visible:
+		return
 	_dying = true
 	set_process(false)
 	play(death)

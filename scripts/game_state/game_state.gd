@@ -24,24 +24,28 @@ func change_difficulty(value: int) -> void:
 
 
 func read_save_file() -> void:
-	var data := {}
-	if !_ignore_saves and FileAccess.file_exists(SAVE_FILE):
-		var packed: PackedDataContainer = load(SAVE_FILE)
-		for key in packed:
-			data[key] = packed[key]
-	for fragment: SaveDataFragment in get_children():
-		fragment._load_save_data(data)
+	# Disable save system
+	return
+	#var data := {}
+	#if !_ignore_saves and FileAccess.file_exists(SAVE_FILE):
+		#var packed: PackedDataContainer = load(SAVE_FILE)
+		#for key in packed:
+			#data[key] = packed[key]
+	#for fragment: SaveDataFragment in get_children():
+		#fragment._load_save_data(data)
 
 
 func save_game() -> void:
-	if _ignore_saves:
-		return
-	var data := {}
-	for fragment: SaveDataFragment in get_children():
-		fragment._create_save_data(data)
-	var packed = PackedDataContainer.new()
-	packed.pack(data)
-	ResourceSaver.save(packed, SAVE_FILE)
+	# Disable save system
+	return
+	#if _ignore_saves:
+		#return
+	#var data := {}
+	#for fragment: SaveDataFragment in get_children():
+		#fragment._create_save_data(data)
+	#var packed = PackedDataContainer.new()
+	#packed.pack(data)
+	#ResourceSaver.save(packed, SAVE_FILE)
 
 
 func _exit_tree() -> void:

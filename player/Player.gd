@@ -208,6 +208,10 @@ func _on_died() -> void:
 		secondPortal.queue_free()
 	set_physics_process(false)
 	set_process_input(false)
+	Wallet.coins = 0
+	Wallet.wizard_hats = 0
+	poison_count = 0
+	has_kill_all_spell = false
 	
 	
 # function that creates the portals when the player presses the button to do so
