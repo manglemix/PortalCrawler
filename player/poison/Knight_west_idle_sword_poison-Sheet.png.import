@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://esol322vk7up"
-path.s3tc="res://.godot/imported/Knight_west_idle_sword_poison-Sheet.png-b5a3d228637a5e02c9e92abb041a50ab.s3tc.ctex"
+path="res://.godot/imported/Knight_west_idle_sword_poison-Sheet.png-b5a3d228637a5e02c9e92abb041a50ab.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://player/poison/Knight_west_idle_sword_poison-Sheet.png"
-dest_files=["res://.godot/imported/Knight_west_idle_sword_poison-Sheet.png-b5a3d228637a5e02c9e92abb041a50ab.s3tc.ctex"]
+dest_files=["res://.godot/imported/Knight_west_idle_sword_poison-Sheet.png-b5a3d228637a5e02c9e92abb041a50ab.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

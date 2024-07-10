@@ -288,6 +288,7 @@ stream = ExtResource("15_2krow")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.68145, 0.504632, -1.75701)
 script = ExtResource("16_vjs4q")
 
+[connection signal="level_complete" from="." to="CollectibleSpawner" method="spawn"]
 [connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]
 [connection signal="finished" from="DifficultyRange/StagedSpawner" to="DifficultyRange/SignalBarrier" method="receive"]
 [connection signal="finished" from="DifficultyRange/StagedSpawner2" to="DifficultyRange/SignalBarrier" method="receive"]

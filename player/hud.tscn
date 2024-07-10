@@ -1,21 +1,25 @@
-[gd_scene load_steps=35 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=36 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
-[ext_resource type="Texture2D" uid="uid://buel4iifkemvw" path="res://player/pause.png" id="2_pm0b2"]
-[ext_resource type="Texture2D" uid="uid://dyhosqkkw550k" path="res://player/restart.png" id="3_6tax7"]
-[ext_resource type="Texture2D" uid="uid://dj0g5ye0dmrbq" path="res://player/fullscreen.png" id="3_7ejf0"]
+[ext_resource type="FontFile" uid="uid://dhsjp4frr3cjb" path="res://fonts/Pixelify_Sans/static/PixelifySans-Bold.ttf" id="3_dplwm"]
 [ext_resource type="Texture2D" uid="uid://b0gr36oxtbq6j" path="res://player/coin.png" id="5_iavf7"]
 [ext_resource type="FontFile" uid="uid://5fqp282we4x2" path="res://fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="5_lipyx"]
 [ext_resource type="Texture2D" uid="uid://ds6siicrhahi8" path="res://player/delete_portal.png" id="5_uk65h"]
 [ext_resource type="Texture2D" uid="uid://p0hbynlugb2f" path="res://player/wizard_hat.png" id="6_gtsf6"]
+[ext_resource type="Texture2D" uid="uid://bjllashvnd5ww" path="res://levels/special/shop/shop ui.png" id="8_1ig04"]
 [ext_resource type="Texture2D" uid="uid://ebwjernenu5x" path="res://player/upgrade icons/fortune cookie icon.png" id="8_5s7ip"]
 [ext_resource type="Texture2D" uid="uid://iuv4kbwss6ke" path="res://player/upgrade icons/fortune cookie opened.png" id="9_kcx3t"]
 [ext_resource type="Texture2D" uid="uid://dk0lrmqd3n3yr" path="res://player/sword.png" id="10_7gfkp"]
-[ext_resource type="FontFile" uid="uid://dniag53xm4vlt" path="res://fonts/Pixelify_Sans/static/PixelifySans-SemiBold.ttf" id="11_8ms1p"]
+
+[sub_resource type="Theme" id="Theme_2rn68"]
+Button/font_sizes/font_size = 48
+Button/fonts/font = ExtResource("5_lipyx")
 
 [sub_resource type="GDScript" id="GDScript_fp6gk"]
 script/source = "extends Control
 
+
+signal pause_menu_visibility(visible: bool)
 
 @export var player: Player
 
@@ -23,17 +27,27 @@ script/source = "extends Control
 func _ready() -> void:
 	propagate_call(\"set_player\", [player])
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	player.opening_shop.connect(
+		func(_ignored):
+			pause_menu_visibility.emit(true)
+			set_process_input(false)
+	)
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(\"ui_cancel\"):
 		$Pause.visible = !$Pause.visible
 		get_tree().paused = $Pause.visible
+		pause_menu_visibility.emit($Pause.visible)
 		if $Pause.visible:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-			
+
+
+func _on_shop_ui_closed() -> void:
+	pause_menu_visibility.emit(false)
+	set_process_input(true)
 "
 
 [sub_resource type="GDScript" id="GDScript_w8sf7"]
@@ -96,23 +110,27 @@ func set_player(player: Player) -> void:
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28xjp"]
 bg_color = Color(0, 0, 0, 0.388235)
 
+[sub_resource type="LabelSettings" id="LabelSettings_05drl"]
+font = ExtResource("3_dplwm")
+font_size = 128
+
 [sub_resource type="GDScript" id="GDScript_6fp17"]
 script/source = "extends Button
 
 
 func _ready() -> void:
 	if get_window().mode == Window.MODE_FULLSCREEN:
-		icon = preload(\"res://player/windowed.png\")
+		text = \"Windowed\"
 	else:
-		icon = preload(\"res://player/fullscreen.png\")
+		text = \"Fullscreen\"
 
 
 func _on_pressed() -> void:
 	if get_window().mode == Window.MODE_FULLSCREEN:
-		icon = preload(\"res://player/fullscreen.png\")
+		text = \"Fullscreen\"
 		get_window().mode = Window.MODE_WINDOWED
 	else:
-		icon = preload(\"res://player/windowed.png\")
+		text = \"Windowed\"
 		get_window().mode = Window.MODE_FULLSCREEN
 "
 
@@ -122,6 +140,7 @@ script/source = "extends Button
 
 func _on_pressed() -> void:
 	OS.set_restart_on_exit(true)
+	await get_tree().process_frame
 	await get_tree().process_frame
 	get_tree().quit()
 	#get_tree().change_scene_to_file(\"res://main.tscn\")
@@ -275,6 +294,76 @@ func random_fortune() -> void:
 	text = fortunes[randi_range(0, fortunes.size() - 1)]
 "
 
+[sub_resource type="Animation" id="Animation_vr5ws"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_5s7ip")]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Label:modulate:r")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("Label:modulate:g")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("Label:modulate:b")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="Animation" id="Animation_8dxeu"]
 resource_name = "open"
 length = 2.5
@@ -360,76 +449,6 @@ tracks/6/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_vr5ws"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("8_5s7ip")]
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath("Label:modulate:r")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath("Label:modulate:g")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/path = NodePath("Label:modulate:b")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Label:modulate:a")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gktww"]
 _data = {
 "RESET": SubResource("Animation_vr5ws"),
@@ -442,6 +461,67 @@ script/source = "extends AnimationPlayer
 
 func _ready() -> void:
 	play(\"open\")
+"
+
+[sub_resource type="GDScript" id="GDScript_fa6n2"]
+script/source = "extends TextureRect
+
+
+signal closed
+
+var _shop: Shop
+
+@onready var slot1: Button = $Slot1
+@onready var slot2: Button = $Slot2
+@onready var slot3: Button = $Slot3
+
+
+func _ready() -> void:
+	set_process_input(false)
+
+
+func set_player(player: Player) -> void:
+	while true:
+		_shop = await player.opening_shop
+		_shop.force_close.connect(
+			func():
+				closed.emit()
+		)
+		slot1.icon = _shop.slot1_texture
+		slot2.icon = _shop.slot2_texture
+		slot3.icon = _shop.slot3_texture
+		slot1.pressed.connect(select_slot1)
+		slot2.pressed.connect(select_slot2)
+		slot3.pressed.connect(select_slot3)
+		show()
+		set_process_input(true)
+		await closed
+		set_process_input(false)
+		hide()
+		slot1.pressed.disconnect(select_slot1)
+		slot2.pressed.disconnect(select_slot2)
+		slot3.pressed.disconnect(select_slot3)
+		player.shop_closed()
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(\"ui_cancel\"):
+		closed.emit()
+
+
+func select_slot1() -> void:
+	_shop._on_texture_pressed(_shop.slot1_texture)
+	slot1.icon = _shop.slot1_texture
+
+
+func select_slot2() -> void:
+	_shop._on_texture_pressed(_shop.slot2_texture)
+	slot2.icon = _shop.slot2_texture
+
+
+func select_slot3() -> void:
+	_shop._on_texture_pressed(_shop.slot3_texture)
+	slot3.icon = _shop.slot3_texture
 "
 
 [sub_resource type="GDScript" id="GDScript_pqjgk"]
@@ -504,7 +584,7 @@ func _process(_delta: float) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_2g4dd"]
-font = ExtResource("11_8ms1p")
+font = ExtResource("5_lipyx")
 font_size = 48
 
 [node name="HUD" type="Control"]
@@ -516,7 +596,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
+theme = SubResource("Theme_2rn68")
 script = SubResource("GDScript_fp6gk")
 
 [node name="HealthBar" type="HBoxContainer" parent="."]
@@ -568,10 +649,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_28xjp")
 
-[node name="Pause" type="TextureRect" parent="Pause"]
+[node name="Pause" type="Label" parent="Pause"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -582,9 +662,9 @@ offset_left = -64.8
 offset_right = 64.8
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_pm0b2")
-expand_mode = 2
-stretch_mode = 5
+text = "||"
+label_settings = SubResource("LabelSettings_05drl")
+horizontal_alignment = 1
 
 [node name="Fullscreen" type="Button" parent="Pause"]
 texture_filter = 1
@@ -595,7 +675,8 @@ anchor_top = 0.7
 anchor_right = 0.45
 anchor_bottom = 0.8
 grow_horizontal = 0
-icon = ExtResource("3_7ejf0")
+focus_mode = 0
+text = "Fullscreen"
 icon_alignment = 1
 expand_icon = true
 script = SubResource("GDScript_6fp17")
@@ -609,7 +690,8 @@ anchor_top = 0.7
 anchor_right = 0.68
 anchor_bottom = 0.8
 grow_vertical = 2
-icon = ExtResource("3_6tax7")
+focus_mode = 0
+text = "Restart"
 icon_alignment = 1
 expand_icon = true
 script = SubResource("GDScript_adouf")
@@ -680,6 +762,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_28xjp")
 script = SubResource("GDScript_n8btn")
 
@@ -718,6 +801,57 @@ libraries = {
 }
 script = SubResource("GDScript_telwv")
 
+[node name="ShopUI" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_1ig04")
+expand_mode = 2
+stretch_mode = 5
+script = SubResource("GDScript_fa6n2")
+
+[node name="Slot1" type="Button" parent="ShopUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0636574
+anchor_top = 0.223765
+anchor_right = 0.311053
+anchor_bottom = 0.722737
+flat = true
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot2" type="Button" parent="ShopUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.375579
+anchor_top = 0.223765
+anchor_right = 0.622975
+anchor_bottom = 0.722737
+flat = true
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot3" type="Button" parent="ShopUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.687211
+anchor_top = 0.223765
+anchor_right = 0.928819
+anchor_bottom = 0.722737
+flat = true
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
 [node name="Node2D" type="Node2D" parent="."]
 script = SubResource("GDScript_pqjgk")
 
@@ -726,9 +860,9 @@ script = SubResource("GDScript_7r6cs")
 
 [node name="Idle" type="Sprite2D" parent="Node2D/Node2D"]
 texture_filter = 1
-position = Vector2(-85, 0)
+position = Vector2(-63, 0)
 rotation = 1.5708
-scale = Vector2(4, 4)
+scale = Vector2(3, 3)
 texture = ExtResource("10_7gfkp")
 
 [node name="DeletePortal" type="Sprite2D" parent="Node2D"]
@@ -748,3 +882,4 @@ label_settings = SubResource("LabelSettings_2g4dd")
 
 [connection signal="pressed" from="Pause/Fullscreen" to="Pause/Fullscreen" method="_on_pressed"]
 [connection signal="pressed" from="Pause/Restart" to="Pause/Restart" method="_on_pressed"]
+[connection signal="closed" from="ShopUI" to="." method="_on_shop_ui_closed"]

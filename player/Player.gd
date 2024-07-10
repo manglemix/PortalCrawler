@@ -5,6 +5,7 @@ signal advancing_level
 signal reset_game
 signal appeared
 signal opening_fortune_cookie
+signal opening_shop(from: Shop)
 
 # exported vars
 @export var speed = 4
@@ -136,8 +137,8 @@ func _input(event):
 			sprite.attack()
 
 	elif event.is_action_pressed("kill_all"):
-		if !has_kill_all_spell:
-			return
+		#if !has_kill_all_spell:
+			#return
 		has_kill_all_spell = false
 		for enemy: Enemy in get_tree().get_nodes_in_group(&"Enemies"):
 			if !&"Boss" in enemy.get_groups():
@@ -150,6 +151,7 @@ func _physics_process(_delta):
 
 func _get_movement():
 	if !is_processing_input():
+		velocity = Vector3.ZERO
 		return
 			
 	var direction = Vector3.ZERO
@@ -385,4 +387,13 @@ func open_fortune_cookie() -> void:
 
 
 func _on_opened_fortune_cookie() -> void:
+	set_process_input(true)
+
+
+func open_shop(from: Shop) -> void:
+	set_process_input(false)
+	opening_shop.emit(from)
+
+
+func shop_closed() -> void:
 	set_process_input(true)

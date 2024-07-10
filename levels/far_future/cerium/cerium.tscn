@@ -13,7 +13,7 @@
 
 [node name="Cerium" node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("1_yccob")]
 script = ExtResource("2_en1m3")
-next_level = "res://levels/special/mage_boss/mage_boss_level.tscn"
+next_level = "res://levels/special/shop/shop.tscn"
 player_spawn_point = NodePath("PlayerSpawnPoint")
 
 [node name="Cube_002" parent="." index="3"]

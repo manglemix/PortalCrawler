@@ -4,6 +4,7 @@ extends Control
 func _ready() -> void:
 	Collectibles._main_viewport = $SubViewportContainer
 	Collectibles._collectible_viewport = $CollectibleDisplay
+	get_viewport().disable_3d = true
 
 
 func _input(event: InputEvent) -> void:
@@ -31,7 +32,14 @@ func _input(event: InputEvent) -> void:
 	$SubViewportContainer/SubViewport.add_child(player)
 	var hud := preload("res://player/hud.tscn").instantiate()
 	hud.player = player
+	hud.pause_menu_visibility.connect(
+		func(pause_visible: bool):
+			if pause_visible:
+				$HUD.mouse_filter = MOUSE_FILTER_STOP
+			else:
+				$HUD.mouse_filter = MOUSE_FILTER_IGNORE
+	)
 	await player.appeared
 	intro_level.set_player(player)
 	intro_level.set_camera(camera)
-	$SubViewportContainer2/SubViewport.add_child(hud)
+	$HUD/SubViewport.add_child(hud)

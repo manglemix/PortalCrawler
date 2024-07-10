@@ -43,6 +43,8 @@ func _ready() -> void:
 		return
 	if is_empty:
 		await get_tree().process_frame
+		while _player == null:
+			await get_tree().process_frame
 		_on_finished()
 
 func set_player(player: Player) -> void:

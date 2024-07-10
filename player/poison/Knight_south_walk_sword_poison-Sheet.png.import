@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5go2atgv45d2"
-path.s3tc="res://.godot/imported/Knight_south_walk_sword_poison-Sheet.png-60b9fd69d7f3d1ff7f6be2c5c96f6041.s3tc.ctex"
+path="res://.godot/imported/Knight_south_walk_sword_poison-Sheet.png-60b9fd69d7f3d1ff7f6be2c5c96f6041.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://player/poison/Knight_south_walk_sword_poison-Sheet.png"
-dest_files=["res://.godot/imported/Knight_south_walk_sword_poison-Sheet.png-60b9fd69d7f3d1ff7f6be2c5c96f6041.s3tc.ctex"]
+dest_files=["res://.godot/imported/Knight_south_walk_sword_poison-Sheet.png-60b9fd69d7f3d1ff7f6be2c5c96f6041.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

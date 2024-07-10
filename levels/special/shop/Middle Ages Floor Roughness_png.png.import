@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p613shfnav4g"
-path="res://.godot/imported/Knight_west_walk_sword_poison-Sheet.png-ac98ff80a9a3611383746d9036f755c3.ctex"
+uid="uid://dllj0y8dqnqdv"
+path="res://.godot/imported/Middle Ages Floor Roughness_png.png-3a7aedd448d5cc4ca6755e97e1d6dac7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/poison/Knight_west_walk_sword_poison-Sheet.png"
-dest_files=["res://.godot/imported/Knight_west_walk_sword_poison-Sheet.png-ac98ff80a9a3611383746d9036f755c3.ctex"]
+source_file="res://levels/special/shop/Middle Ages Floor Roughness_png.png"
+dest_files=["res://.godot/imported/Middle Ages Floor Roughness_png.png-3a7aedd448d5cc4ca6755e97e1d6dac7.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

@@ -1,0 +1,183 @@
+[gd_scene load_steps=21 format=3 uid="uid://q7ehavjgr16c"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_caxu8"]
+[ext_resource type="Texture2D" uid="uid://b0xxyfgos2y5w" path="res://levels/special/shop/Middle Ages Wall Color_png.png" id="2_w66pn"]
+[ext_resource type="Texture2D" uid="uid://dfhtex8qyiwie" path="res://levels/special/shop/shop sprite.png" id="2_xo4ut"]
+[ext_resource type="Script" path="res://components/ysort.gd" id="3_0oqx6"]
+[ext_resource type="Texture2D" uid="uid://rg8j2vf0nnnu" path="res://levels/special/shop/Middle Ages Wall Roughness_png.png" id="3_ei7g3"]
+[ext_resource type="Texture2D" uid="uid://68jsykxy3sed" path="res://levels/special/shop/Middle Ages Wall Normal_png.png" id="4_e6svt"]
+[ext_resource type="Texture2D" uid="uid://d4cn0wbq311md" path="res://levels/special/shop/Middle Ages Floor Color_png.png" id="5_13872"]
+[ext_resource type="Texture2D" uid="uid://dllj0y8dqnqdv" path="res://levels/special/shop/Middle Ages Floor Roughness_png.png" id="6_04g5d"]
+[ext_resource type="Texture2D" uid="uid://vml55drm7su5" path="res://levels/special/shop/Middle Ages Floor Normal_png.png" id="7_k7xp7"]
+[ext_resource type="Script" path="res://levels/special/shop/shop.gd" id="9_l6v1h"]
+[ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="10_83btw"]
+[ext_resource type="AudioStream" uid="uid://drmeg5fnbd5o" path="res://music/MysteriousBG_sound.mp3" id="11_70uh3"]
+[ext_resource type="Texture2D" uid="uid://cr6whonsplasx" path="res://levels/special/shop/exit.png" id="12_3jvmg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paddx"]
+resource_name = "StoneBricksSplitface001_1K.004"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("2_w66pn")
+metallic_texture = ExtResource("3_ei7g3")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_ei7g3")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("4_e6svt")
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7wi1"]
+resource_name = "ConcreteBlocksPavingSquareStack001_1K.004"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("5_13872")
+metallic_texture = ExtResource("6_04g5d")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("6_04g5d")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("7_k7xp7")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_58jxn"]
+_surfaces = [{
+"aabb": AABB(-6.82551, 0, -3.7988, 13.651, 4, 7.5976),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 3, 0, 2, 0, 0, 0, 1, 0, 3, 0, 2, 0, 7, 0, 6, 0, 2, 0, 3, 0, 7, 0, 6, 0, 5, 0, 4, 0, 6, 0, 7, 0, 5, 0, 4, 0, 1, 0, 0, 0, 4, 0, 5, 0, 1, 0),
+"name": "StoneBricksSplitface001_1K.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(166, 16, 0, 0, 244, 228, 0, 0, 0, 0, 255, 255, 254, 255, 0, 0, 166, 16, 0, 0, 10, 27, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 88, 239, 0, 0, 244, 228, 0, 0, 255, 255, 255, 255, 254, 255, 0, 0, 88, 239, 0, 0, 10, 27, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0)
+}, {
+"aabb": AABB(-5.9377, 0, -2.99623, 11.8754, 1e-05, 5.99248),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(1, 0, 2, 0, 0, 0, 1, 0, 3, 0, 2, 0),
+"name": "ConcreteBlocksPavingSquareStack001_1K.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ksg11"]
+resource_name = "Shop_Cube_032"
+_surfaces = [{
+"aabb": AABB(-6.82551, 0, -3.7988, 13.651, 4, 7.5976),
+"attribute_data": PackedByteArray(231, 205, 144, 172, 232, 60, 150, 254, 226, 216, 35, 140, 251, 50, 227, 221, 245, 61, 134, 34, 1, 135, 150, 254, 251, 50, 25, 2, 237, 144, 227, 221, 16, 59, 144, 172, 18, 246, 255, 255, 21, 48, 35, 140, 255, 255, 75, 223, 205, 208, 134, 34, 249, 171, 255, 255, 199, 219, 25, 2, 12, 162, 75, 223),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray(1, 0, 7, 0, 5, 0, 1, 0, 3, 0, 7, 0, 4, 0, 14, 0, 12, 0, 4, 0, 6, 0, 14, 0, 13, 0, 11, 0, 9, 0, 13, 0, 15, 0, 11, 0, 8, 0, 2, 0, 0, 0, 8, 0, 10, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_paddx"),
+"name": "StoneBricksSplitface001_1K.004",
+"primitive": 3,
+"uv_scale": Vector4(7.78899, 6.21046, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray(166, 16, 0, 0, 244, 228, 255, 255, 166, 16, 0, 0, 244, 228, 123, 192, 0, 0, 255, 255, 254, 255, 255, 255, 0, 0, 255, 255, 254, 255, 123, 192, 166, 16, 0, 0, 10, 27, 16, 136, 166, 16, 0, 0, 10, 27, 123, 192, 0, 0, 255, 255, 0, 0, 16, 136, 0, 0, 255, 255, 0, 0, 123, 192, 88, 239, 0, 0, 244, 228, 255, 255, 88, 239, 0, 0, 244, 228, 123, 192, 255, 255, 255, 255, 254, 255, 255, 255, 255, 255, 255, 255, 254, 255, 123, 192, 88, 239, 0, 0, 10, 27, 16, 136, 88, 239, 0, 0, 10, 27, 123, 192, 255, 255, 255, 255, 0, 0, 16, 136, 255, 255, 255, 255, 0, 0, 123, 192, 255, 127, 110, 244, 5, 151, 130, 11, 255, 127, 110, 244, 5, 151, 130, 11, 254, 255, 255, 127, 5, 151, 130, 11, 255, 255, 255, 127, 5, 151, 130, 11, 255, 127, 110, 244, 130, 139, 249, 232, 255, 127, 110, 244, 130, 139, 249, 232, 254, 255, 255, 127, 130, 139, 249, 232, 254, 255, 255, 127, 130, 139, 249, 232)
+}, {
+"aabb": AABB(-5.9377, 0, -2.99623, 11.8754, 1e-05, 5.99248),
+"attribute_data": PackedByteArray(255, 255, 103, 80, 254, 255, 255, 255, 77, 44, 103, 80, 77, 44, 254, 255),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(1, 0, 2, 0, 0, 0, 1, 0, 3, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_q7wi1"),
+"name": "ConcreteBlocksPavingSquareStack001_1K.004",
+"primitive": 3,
+"uv_scale": Vector4(7.06465, 4.29783, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 254, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_58jxn")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s1k0g"]
+size = Vector3(4.775, 2.445, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mij2a"]
+size = Vector3(5.395, 3.015, 3)
+
+[sub_resource type="GDScript" id="GDScript_ohkpo"]
+script/source = "extends RayCast3D
+
+
+signal move_on
+
+
+func _physics_process(_delta: float) -> void:
+	if is_colliding():
+		move_on.emit()
+		set_physics_process(false)
+"
+
+[node name="Shop" type="Node3D" node_paths=PackedStringArray("player_spawn_point")]
+script = ExtResource("1_caxu8")
+next_level = "res://levels/special/mage_boss/mage_boss_level.tscn"
+player_spawn_point = NodePath("PlayerSpawnPoint")
+is_empty = true
+
+[node name="Level_010" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_ksg11")
+skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.65444, -2.13602)
+light_energy = 3.0
+light_size = 0.25
+shadow_enabled = true
+omni_range = 11.954
+omni_attenuation = 0.707107
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -2.10079)
+pixel_size = 0.0765
+double_sided = false
+no_depth_test = true
+texture_filter = 0
+render_priority = 20
+texture = ExtResource("2_xo4ut")
+script = ExtResource("9_l6v1h")
+
+[node name="YSort" type="Node" parent="Sprite3D"]
+script = ExtResource("3_0oqx6")
+is_static = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sprite3D"]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.063042, 0, 0)
+shape = SubResource("BoxShape3D_s1k0g")
+
+[node name="Area3D" type="Area3D" parent="Sprite3D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0836175, 0, 0)
+shape = SubResource("BoxShape3D_mij2a")
+
+[node name="PlayerSpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97007, 0, 2.11122)
+
+[node name="LevelMusicPlayer" parent="PlayerSpawnPoint" instance=ExtResource("10_83btw")]
+stream = ExtResource("11_70uh3")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4.35125, 0.00205141, 1.78289)
+pixel_size = 0.0466
+shaded = true
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("12_3jvmg")
+
+[node name="RayCast3D" type="RayCast3D" parent="Sprite3D2"]
+target_position = Vector3(0, 0, 1)
+collision_mask = 2
+script = SubResource("GDScript_ohkpo")
+
+[connection signal="body_entered" from="Sprite3D/Area3D" to="Sprite3D" method="_on_body_entered"]
+[connection signal="move_on" from="Sprite3D2/RayCast3D" to="." method="_on_can_move_on"]
