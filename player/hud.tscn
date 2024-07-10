@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=39 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
 [ext_resource type="FontFile" uid="uid://dhsjp4frr3cjb" path="res://fonts/Pixelify_Sans/static/PixelifySans-Bold.ttf" id="3_dplwm"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ebwjernenu5x" path="res://player/upgrade icons/fortune cookie icon.png" id="8_5s7ip"]
 [ext_resource type="Texture2D" uid="uid://iuv4kbwss6ke" path="res://player/upgrade icons/fortune cookie opened.png" id="9_kcx3t"]
 [ext_resource type="Texture2D" uid="uid://dk0lrmqd3n3yr" path="res://player/sword.png" id="10_7gfkp"]
+[ext_resource type="Texture2D" uid="uid://crxw53hg7euwe" path="res://player/upgrade icons/kill all spell upgrade icon.png" id="11_hfuu5"]
 
 [sub_resource type="Theme" id="Theme_2rn68"]
 Button/font_sizes/font_size = 48
@@ -463,6 +464,10 @@ func _ready() -> void:
 	play(\"open\")
 "
 
+[sub_resource type="Theme" id="Theme_6nv73"]
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("5_lipyx")
+
 [sub_resource type="GDScript" id="GDScript_fa6n2"]
 script/source = "extends TextureRect
 
@@ -474,6 +479,14 @@ var _shop: Shop
 @onready var slot1: Button = $Slot1
 @onready var slot2: Button = $Slot2
 @onready var slot3: Button = $Slot3
+
+@onready var slot1_price_type: TextureRect = $Slot1PriceType
+@onready var slot2_price_type: TextureRect = $Slot2PriceType
+@onready var slot3_price_type: TextureRect = $Slot3PriceType
+
+@onready var slot1_price: Label = $Slot1Price
+@onready var slot2_price: Label = $Slot2Price
+@onready var slot3_price: Label = $Slot3Price
 
 
 func _ready() -> void:
@@ -490,6 +503,12 @@ func set_player(player: Player) -> void:
 		slot1.icon = _shop.slot1_texture
 		slot2.icon = _shop.slot2_texture
 		slot3.icon = _shop.slot3_texture
+		slot1_price_type.texture = price_type_to_texture(_shop.slot1_price_type)
+		slot2_price_type.texture = price_type_to_texture(_shop.slot2_price_type)
+		slot3_price_type.texture = price_type_to_texture(_shop.slot3_price_type)
+		slot1_price.text = str(_shop.slot1_price)
+		slot2_price.text = str(_shop.slot2_price)
+		slot3_price.text = str(_shop.slot3_price)
 		slot1.pressed.connect(select_slot1)
 		slot2.pressed.connect(select_slot2)
 		slot3.pressed.connect(select_slot3)
@@ -512,16 +531,29 @@ func _input(event: InputEvent) -> void:
 func select_slot1() -> void:
 	_shop._on_texture_pressed(_shop.slot1_texture)
 	slot1.icon = _shop.slot1_texture
+	slot1_price_type.texture = price_type_to_texture(_shop.slot1_price_type)
+	slot1_price.text = str(_shop.slot1_price)
 
 
 func select_slot2() -> void:
 	_shop._on_texture_pressed(_shop.slot2_texture)
 	slot2.icon = _shop.slot2_texture
+	slot2_price_type.texture = price_type_to_texture(_shop.slot2_price_type)
+	slot2_price.text = str(_shop.slot2_price)
 
 
 func select_slot3() -> void:
 	_shop._on_texture_pressed(_shop.slot3_texture)
 	slot3.icon = _shop.slot3_texture
+	slot3_price_type.texture = price_type_to_texture(_shop.slot3_price_type)
+	slot3_price.text = str(_shop.slot3_price)
+
+
+func price_type_to_texture(type: Shop.PriceType) -> Texture2D:
+	match type:
+		Shop.PriceType.WIZARD_HATS:
+			return preload(\"res://player/wizard_hat.png\")
+	return preload(\"res://player/coin.png\")
 "
 
 [sub_resource type="GDScript" id="GDScript_pqjgk"]
@@ -586,6 +618,26 @@ func _process(_delta: float) -> void:
 [sub_resource type="LabelSettings" id="LabelSettings_2g4dd"]
 font = ExtResource("5_lipyx")
 font_size = 48
+
+[sub_resource type="GDScript" id="GDScript_l6nu7"]
+script/source = "extends HBoxContainer
+
+
+var _player: Player
+
+
+func _ready() -> void:
+	set_process(false)
+
+
+func set_player(player: Player) -> void:
+	_player = player
+	set_process(true)
+
+
+func _process(_delta: float) -> void:
+	visible = _player.has_kill_all_spell
+"
 
 [node name="HUD" type="Control"]
 process_mode = 3
@@ -811,6 +863,7 @@ anchor_right = 0.8
 anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_6nv73")
 texture = ExtResource("8_1ig04")
 expand_mode = 2
 stretch_mode = 5
@@ -852,6 +905,75 @@ icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
 
+[node name="Slot1PriceType" type="TextureRect" parent="ShopUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.133102
+anchor_top = 0.766461
+anchor_right = 0.163484
+anchor_bottom = 0.817901
+texture = ExtResource("5_iavf7")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot2PriceType" type="TextureRect" parent="ShopUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.44647
+anchor_top = 0.766461
+anchor_right = 0.476852
+anchor_bottom = 0.817901
+texture = ExtResource("5_iavf7")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot3PriceType" type="TextureRect" parent="ShopUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.757523
+anchor_top = 0.766461
+anchor_right = 0.787905
+anchor_bottom = 0.817901
+texture = ExtResource("5_iavf7")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot1Price" type="Label" parent="ShopUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.164931
+anchor_top = 0.766461
+anchor_right = 0.240162
+anchor_bottom = 0.817901
+text = "100"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot2Price" type="Label" parent="ShopUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.476852
+anchor_top = 0.76749
+anchor_right = 0.552083
+anchor_bottom = 0.81893
+text = "100"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot3Price" type="Label" parent="ShopUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.789352
+anchor_top = 0.76749
+anchor_right = 0.864583
+anchor_bottom = 0.81893
+text = "100"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="Node2D" type="Node2D" parent="."]
 script = SubResource("GDScript_pqjgk")
 
@@ -879,6 +1001,32 @@ offset_right = 26.0
 offset_bottom = 25.0
 text = "x"
 label_settings = SubResource("LabelSettings_2g4dd")
+
+[node name="KillAll" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.775
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 0
+script = SubResource("GDScript_l6nu7")
+
+[node name="Button" type="Button" parent="KillAll"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+text = "X"
+
+[node name="TextureRect" type="TextureRect" parent="KillAll"]
+layout_mode = 2
+texture = ExtResource("11_hfuu5")
+expand_mode = 2
+stretch_mode = 5
 
 [connection signal="pressed" from="Pause/Fullscreen" to="Pause/Fullscreen" method="_on_pressed"]
 [connection signal="pressed" from="Pause/Restart" to="Pause/Restart" method="_on_pressed"]

@@ -3,7 +3,7 @@ extends SaveDataFragment
 
 
 static var wallet_instance := WalletInstance.new()
-static var coins := 100:
+static var coins := 0:
 	set(x):
 		coins = x
 		wallet_instance.coins_changed.emit()
