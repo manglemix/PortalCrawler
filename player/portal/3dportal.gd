@@ -26,9 +26,7 @@ func _ready():
 	name = "portal"
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	print("a")
 	for body: CollisionObject3D in collider.get_overlapping_bodies():
-		print(body.name)
 		if body.collision_layer & 16 > 0:
 			queue_free()
 # obviously could grab these values without storing them, but for

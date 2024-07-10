@@ -4,9 +4,10 @@ extends CharacterBody3D
 signal advancing_level
 signal reset_game
 signal appeared
+signal opening_fortune_cookie
 
 # exported vars
-@export var speed = 5
+@export var speed = 4
 
 # stored nodes/scenes for easy reference
 @onready var ray = $MainRay
@@ -72,6 +73,8 @@ func _ready():
 	set_physics_process(true)
 	set_process_input(true)
 	appeared.emit()
+	await get_tree().create_timer(2.0, false).timeout
+	open_fortune_cookie()
 
 
 func aim_at_mouse() -> void:
@@ -371,6 +374,16 @@ func _on_can_move_on() -> void:
 	await sprite.animation_finished
 	advancing_level.emit()
 
+
 func _on_death_animation_finished() -> void:
 	is_teleporting = true
 	reset_game.emit()
+
+
+func open_fortune_cookie() -> void:
+	set_process_input(false)
+	opening_fortune_cookie.emit()
+
+
+func _on_opened_fortune_cookie() -> void:
+	set_process_input(true)

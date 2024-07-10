@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://collectibles/scale_up.gd" id="2_bt3yj"]
 [ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="2_xynlk"]
 [ext_resource type="PackedScene" uid="uid://1re1g5iro0rr" path="res://collectibles/money_bag/coin_projectile.tscn" id="5_0io0e"]
-[ext_resource type="Texture2D" uid="uid://b8kgw8py608eh" path="res://collectibles/money_bag/coin.png" id="6_tnar7"]
+[ext_resource type="Texture2D" uid="uid://b0gr36oxtbq6j" path="res://player/coin.png" id="6_akijx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_epunk"]
 bounce = 0.7
@@ -155,9 +155,9 @@ update_rotation = false
 update_scale = false
 
 [node name="Decal" type="Decal" parent="."]
-transform = Transform3D(1.31134e-07, 1, 1.14641e-14, 1.31134e-07, -5.73206e-15, -1, -1, 1.31134e-07, -1.31134e-07, 0.418228, -0.110634, 5.96046e-08)
-size = Vector3(0.3, 0.3, 0.3)
-texture_albedo = ExtResource("6_tnar7")
+transform = Transform3D(1.31134e-07, 1, 1.14641e-14, 1.31134e-07, -5.73206e-15, -1, -1, 1.31134e-07, -1.31134e-07, 0.405008, -0.110634, 5.7871e-08)
+size = Vector3(0.3, 0.168872, 0.3)
+texture_albedo = ExtResource("6_akijx")
 cull_mask = 1048574
 
 [connection signal="contacted_player" from="." to="money_bag/ScaleDown" method="scale_down"]

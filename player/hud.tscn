@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=33 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
 [ext_resource type="Texture2D" uid="uid://buel4iifkemvw" path="res://player/pause.png" id="2_pm0b2"]
@@ -10,6 +10,8 @@
 [ext_resource type="FontFile" uid="uid://5fqp282we4x2" path="res://fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="5_lipyx"]
 [ext_resource type="Texture2D" uid="uid://ds6siicrhahi8" path="res://player/delete_portal.png" id="5_uk65h"]
 [ext_resource type="Texture2D" uid="uid://p0hbynlugb2f" path="res://player/wizard_hat.png" id="6_gtsf6"]
+[ext_resource type="Texture2D" uid="uid://ebwjernenu5x" path="res://player/upgrade icons/fortune cookie icon.png" id="8_5s7ip"]
+[ext_resource type="Texture2D" uid="uid://iuv4kbwss6ke" path="res://player/upgrade icons/fortune cookie opened.png" id="9_kcx3t"]
 
 [sub_resource type="GDScript" id="GDScript_fp6gk"]
 script/source = "extends Control
@@ -125,19 +127,15 @@ func _on_pressed() -> void:
 	#get_tree().change_scene_to_file(\"res://main.tscn\")
 "
 
-[sub_resource type="LabelSettings" id="LabelSettings_27pwt"]
+[sub_resource type="LabelSettings" id="LabelSettings_yloxr"]
 font = ExtResource("5_lipyx")
-font_size = 14
+font_size = 30
 
 [sub_resource type="GDScript" id="GDScript_xgkjs"]
-script/source = "@tool
-extends LabelAutoSizer
+script/source = "extends Label
 
 
 func _ready() -> void:
-	super()
-	if Engine.is_editor_hint():
-		return
 	text = str(Wallet.coins)
 	Wallet.wallet_instance.coins_changed.connect(
 		func():
@@ -145,23 +143,305 @@ func _ready() -> void:
 	)
 "
 
-[sub_resource type="LabelSettings" id="LabelSettings_cs6l1"]
+[sub_resource type="LabelSettings" id="LabelSettings_nklj2"]
 font = ExtResource("5_lipyx")
+font_size = 30
 
 [sub_resource type="GDScript" id="GDScript_t1ar8"]
-script/source = "@tool
-extends LabelAutoSizer
+script/source = "extends Label
 
 
 func _ready() -> void:
-	super()
-	if Engine.is_editor_hint():
-		return
 	text = str(Wallet.wizard_hats)
 	Wallet.wallet_instance.wizard_hats_changed.connect(
 		func():
 			text = str(Wallet.wizard_hats)
 	)
+"
+
+[sub_resource type="GDScript" id="GDScript_n8btn"]
+script/source = "extends Panel
+
+
+signal _input_received
+
+
+func set_player(player: Player) -> void:
+	player.opening_fortune_cookie.connect(
+		func():
+			set_process_input(false)
+			var anim_player: AnimationPlayer = $AnimationPlayer
+			anim_player.play(\"RESET\")
+			await create_tween().tween_property(self, \"modulate:a\", 1, 1.0).set_trans(Tween.TRANS_EXPO).finished
+			anim_player.play(\"open\")
+			await anim_player.animation_finished
+			set_process_input(true)
+			await _input_received
+			create_tween().tween_property(self, \"modulate:a\", 0, 1.0).set_trans(Tween.TRANS_EXPO)
+			player._on_opened_fortune_cookie()
+	)
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if !event.pressed:
+			return
+	elif event is InputEventKey:
+		if !event.pressed:
+			return
+	elif event is InputEventJoypadButton:
+		if !event.pressed:
+			return
+	else:
+		return
+
+	_input_received.emit()
+"
+
+[sub_resource type="GDScript" id="GDScript_dskwj"]
+script/source = "@tool
+extends TextureRect
+
+
+func _ready() -> void:
+	pivot_offset = size / 2
+	resized.connect(
+		func():
+			pivot_offset = size / 2
+	)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_6vwyo"]
+font = ExtResource("5_lipyx")
+font_size = 32
+
+[sub_resource type="GDScript" id="GDScript_vv52o"]
+script/source = "extends Label
+
+
+var fortunes := \"\"\"Adventure awaits around the next corner.
+Your creativity will lead you to success.
+A small act of kindness will bring unexpected rewards.
+The path to wisdom begins with curiosity.
+Your hard work will soon pay off.
+A pleasant surprise is in store for you.
+The best way to predict the future is to create it.
+Your talents will be recognized and rewarded.
+A new friendship will bring joy to your life.
+Embrace change, for it brings opportunity.
+Your positive attitude will attract good things.
+A journey of a thousand miles begins with a single step.
+Success is the sum of small efforts repeated daily.
+The greatest risk is not taking one.
+A smile is your passport to the hearts of others.
+Your dreams are within reach; pursue them with passion.
+Good things come to those who wait, but better things come to those who act.
+Your unique perspective will solve an important problem.
+Luck favors the prepared mind.
+The best time to plant a tree was 20 years ago. The second best time is now.
+Your confidence will lead you to great achievements.
+An unexpected opportunity will arise. Be ready to seize it.
+The only way to do great work is to love what you do.
+Your kindness will return to you tenfold.
+A goal without a plan is just a wish.
+The key to happiness lies within you.
+Your perseverance will overcome all obstacles.
+Today's efforts will bloom into tomorrow's success.
+A new chapter in your life is about to begin.
+Your intuition will guide you to the right path.
+Believe in yourself and others will too.
+The best mirror is an old friend.
+Your potential is limitless; dare to explore it.
+A small step in the right direction can change your life.
+Your optimism will lead you to great heights.
+The greatest adventure is what lies ahead.
+Your imagination is your only limitation.
+Good fortune will be yours if you create it.
+A problem is a chance for you to do your best.
+Your determination will move mountains.
+The best is yet to come.
+Your actions today will shape your tomorrow.
+A curious mind will never be bored.
+Your generosity will open new doors.
+The wisdom you seek is already within you.
+Your resilience will turn obstacles into opportunities.
+A moment of patience can prevent a great disaster.
+Your unique talents will bring you unexpected success.
+The joy of living comes from giving.
+Your future is as bright as your faith.\"\"\".split(\"\\n\")
+
+
+func random_fortune() -> void:
+	text = fortunes[randi_range(0, fortunes.size() - 1)]
+"
+
+[sub_resource type="Animation" id="Animation_8dxeu"]
+resource_name = "open"
+length = 2.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.467748, -0.25, 0, 0.25, 0, 0.378736, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7, 1.1, 1.8)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("8_5s7ip"), ExtResource("9_kcx3t")]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Label:modulate:r")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("Label:modulate:g")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("Label:modulate:b")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.8, 2.5)
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Label")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"random_fortune"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vr5ws"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_5s7ip")]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Label:modulate:r")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("Label:modulate:g")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("Label:modulate:b")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gktww"]
+_data = {
+"RESET": SubResource("Animation_vr5ws"),
+"open": SubResource("Animation_8dxeu")
+}
+
+[sub_resource type="GDScript" id="GDScript_telwv"]
+script/source = "extends AnimationPlayer
+
+
+func _ready() -> void:
+	play(\"open\")
 "
 
 [sub_resource type="GDScript" id="GDScript_pqjgk"]
@@ -333,50 +613,86 @@ texture = ExtResource("6_gtsf6")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.934
-anchor_top = 0.01
-anchor_right = 0.934
-anchor_bottom = 0.125
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
-
-[node name="Label" type="Label" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
+anchor_left = 0.889
+anchor_top = 0.025
+anchor_right = 0.929
+anchor_bottom = 0.095
 size_flags_vertical = 6
 text = "0"
-label_settings = SubResource("LabelSettings_27pwt")
+label_settings = SubResource("LabelSettings_yloxr")
 horizontal_alignment = 2
+vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
 script = SubResource("GDScript_xgkjs")
-_max_steps = 10
-_size_just_modified_by_autosizer = false
-_set_defaults = true
-_base_font_size = 14
-_current_font_size = 14
-_last_size_state = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
+[node name="Label2" type="Label" parent="."]
 custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.889
+anchor_top = 0.115
+anchor_right = 0.929
+anchor_bottom = 0.173
 size_flags_vertical = 6
+theme_override_font_sizes/font_size = 16
 text = "0"
-label_settings = SubResource("LabelSettings_cs6l1")
+label_settings = SubResource("LabelSettings_nklj2")
 horizontal_alignment = 2
+vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
 script = SubResource("GDScript_t1ar8")
-_max_steps = 10
-_size_just_modified_by_autosizer = false
-_set_defaults = true
-_base_font_size = 16
-_current_font_size = 16
-_last_size_state = 1
+
+[node name="FortuneCookies" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_28xjp")
+script = SubResource("GDScript_n8btn")
+
+[node name="TextureRect" type="TextureRect" parent="FortuneCookies"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.4
+anchor_right = 0.6
+anchor_bottom = 0.6
+pivot_offset = Vector2(115.2, 64.8)
+texture = ExtResource("8_5s7ip")
+expand_mode = 3
+stretch_mode = 5
+script = SubResource("GDScript_dskwj")
+
+[node name="Label" type="Label" parent="FortuneCookies"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.645
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Twest"
+label_settings = SubResource("LabelSettings_6vwyo")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_vv52o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FortuneCookies"]
+libraries = {
+"": SubResource("AnimationLibrary_gktww")
+}
+script = SubResource("GDScript_telwv")
 
 [node name="Node2D" type="Node2D" parent="."]
 script = SubResource("GDScript_pqjgk")

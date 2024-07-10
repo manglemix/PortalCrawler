@@ -34,4 +34,4 @@ func _input(event: InputEvent) -> void:
 	await player.appeared
 	intro_level.set_player(player)
 	intro_level.set_camera(camera)
-	add_child(hud)
+	$SubViewportContainer2/SubViewport.add_child(hud)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://bawgcpe4clkdo"]
+[gd_scene load_steps=65 format=3 uid="uid://bawgcpe4clkdo"]
 
 [ext_resource type="Script" path="res://components/health.gd" id="2_rntsd"]
 [ext_resource type="Script" path="res://scripts/nav/overlapping_nav_agent_3d.gd" id="3_rijuc"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cwpb732w6vs7r" path="res://enemies/medieval/harry/wizard_side.png" id="14_d3uaa"]
 [ext_resource type="Script" path="res://scripts/character_sprite.gd" id="15_oet0n"]
 [ext_resource type="Script" path="res://components/ysort.gd" id="16_6p7ng"]
+[ext_resource type="Script" path="res://collectibles/scale_up.gd" id="16_r8i2o"]
 [ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="17_dj4k7"]
 [ext_resource type="PackedScene" uid="uid://dy0uaej4flf11" path="res://enemies/projectiles/magic01.tscn" id="18_kad3b"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="19_avhgi"]
@@ -457,6 +458,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.7
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_fhpkm")
 
+[node name="ScaleUp" type="Node" parent="MeshInstance3D"]
+script = ExtResource("16_r8i2o")
+
 [node name="Billboard" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 top_level = true
@@ -477,6 +481,9 @@ character = NodePath("../..")
 
 [node name="YSort" type="Node" parent="Billboard/AnimatedSprite3D"]
 script = ExtResource("16_6p7ng")
+
+[node name="ScaleUp" type="Node" parent="Billboard/AnimatedSprite3D"]
+script = ExtResource("16_r8i2o")
 
 [node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.205695, -0.238)

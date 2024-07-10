@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dvpbee1aireck"]
+[gd_scene load_steps=71 format=3 uid="uid://dvpbee1aireck"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_wadi7"]
 [ext_resource type="Script" path="res://components/health.gd" id="2_k3mgt"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://enemies/state_machine/death.gd" id="9_7hx0q"]
 [ext_resource type="Script" path="res://enemies/state_machine/perma_wander.gd" id="10_nr5rr"]
 [ext_resource type="Script" path="res://scripts/looping_timer.gd" id="11_ynun1"]
+[ext_resource type="Script" path="res://collectibles/scale_up.gd" id="12_cqm6a"]
 [ext_resource type="Script" path="res://scripts/billboard.gd" id="12_gq3we"]
 [ext_resource type="Script" path="res://scripts/random_binary_fork.gd" id="12_yfv2m"]
 [ext_resource type="PackedScene" uid="uid://cb7yrhamia1d8" path="res://enemies/projectiles/bullet01.tscn" id="14_wadr0"]
@@ -412,6 +413,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.7
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_fhpkm")
 
+[node name="ScaleUp" type="Node" parent="MeshInstance3D"]
+script = ExtResource("12_cqm6a")
+
 [node name="RandomAttack" type="Node" parent="."]
 script = ExtResource("12_yfv2m")
 
@@ -459,6 +463,9 @@ script = ExtResource("20_qwiqs")
 always_update = true
 rotation_source = NodePath("../../..")
 
+[node name="ScaleUp" type="Node" parent="Billboard/AnimationStateMachine/Walk"]
+script = ExtResource("12_cqm6a")
+
 [node name="RifleShoot" type="AnimatedSprite3D" parent="Billboard/AnimationStateMachine" node_paths=PackedStringArray("rotation_source")]
 offset = Vector2(4.66, 29.25)
 pixel_size = 0.025
@@ -469,6 +476,9 @@ sprite_frames = SubResource("SpriteFrames_lm5h4")
 animation = &"right"
 script = ExtResource("20_qwiqs")
 rotation_source = NodePath("../../..")
+
+[node name="ScaleUp" type="Node" parent="Billboard/AnimationStateMachine/RifleShoot"]
+script = ExtResource("12_cqm6a")
 
 [node name="PistolShoot" type="AnimatedSprite3D" parent="Billboard/AnimationStateMachine" node_paths=PackedStringArray("rotation_source")]
 offset = Vector2(4.66, 29.25)
@@ -481,6 +491,9 @@ animation = &"up"
 script = ExtResource("20_qwiqs")
 rotation_source = NodePath("../../..")
 
+[node name="ScaleUp" type="Node" parent="Billboard/AnimationStateMachine/PistolShoot"]
+script = ExtResource("12_cqm6a")
+
 [node name="Death" type="AnimatedSprite3D" parent="Billboard/AnimationStateMachine"]
 offset = Vector2(4.66, 29.25)
 pixel_size = 0.025
@@ -489,6 +502,9 @@ no_depth_test = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_yfeo8")
 script = ExtResource("21_wrgjj")
+
+[node name="ScaleUp" type="Node" parent="Billboard/AnimationStateMachine/Death"]
+script = ExtResource("12_cqm6a")
 
 [connection signal="died" from="Health" to="EnemyStateMachine/DeathState" method="_on_died"]
 [connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]

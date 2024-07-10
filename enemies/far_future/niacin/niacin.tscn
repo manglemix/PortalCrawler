@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://8880ddb48ucy"]
+[gd_scene load_steps=61 format=3 uid="uid://8880ddb48ucy"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_hane4"]
 [ext_resource type="Script" path="res://components/health.gd" id="2_7kn61"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://c7grnbtleoopt" path="res://enemies/far_future/niacin/attack_right.png" id="11_je85j"]
 [ext_resource type="Script" path="res://scripts/character_sprite.gd" id="12_3c0g5"]
 [ext_resource type="Texture2D" uid="uid://cjn5knam7l11o" path="res://enemies/far_future/niacin/attack_up.png" id="12_4082v"]
+[ext_resource type="Script" path="res://collectibles/scale_up.gd" id="12_uakdw"]
 [ext_resource type="Texture2D" uid="uid://vmfnrmlrq0lm" path="res://enemies/far_future/niacin/death.png" id="13_4m80o"]
 [ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="13_f7acc"]
 [ext_resource type="Texture2D" uid="uid://kxfjcf2n4lwv" path="res://enemies/far_future/niacin/walk_down.png" id="14_a4oe3"]
@@ -385,6 +386,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.7
 cast_shadow = 3
 mesh = SubResource("CapsuleMesh_fhpkm")
 
+[node name="ScaleUp" type="Node" parent="MeshInstance3D"]
+script = ExtResource("12_uakdw")
+
 [node name="Billboard" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 top_level = true
@@ -405,6 +409,9 @@ character = NodePath("../..")
 
 [node name="YSort" type="Node" parent="Billboard/AnimatedSprite3D"]
 script = ExtResource("21_850qb")
+
+[node name="ScaleUp" type="Node" parent="Billboard/AnimatedSprite3D"]
+script = ExtResource("12_uakdw")
 
 [node name="ProjectileSpawner" type="Marker3D" parent="Billboard"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.223852, -0.238)
