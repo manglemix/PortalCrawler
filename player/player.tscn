@@ -856,6 +856,7 @@ bus = &"SFX"
 [connection signal="damaged_opaque" from="Damageable" to="Damaged" method="_on_damaged"]
 [connection signal="died" from="Health" to="." method="_on_died"]
 [connection signal="died" from="Health" to="Billboard/CharacterSprite" method="die"]
+[connection signal="died" from="Health" to="Billboard/CharacterSprite2" method="die"]
 [connection signal="died" from="Health" to="Death" method="play"]
 [connection signal="timeout" from="Windup" to="." method="_on_windup_timeout"]
 [connection signal="death_animation_finished" from="Billboard/CharacterSprite" to="." method="_on_death_animation_finished"]
