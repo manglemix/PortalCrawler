@@ -845,6 +845,7 @@ text = "Twest"
 label_settings = SubResource("LabelSettings_6vwyo")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 script = SubResource("GDScript_vv52o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FortuneCookies"]
@@ -876,6 +877,7 @@ anchor_left = 0.0636574
 anchor_top = 0.223765
 anchor_right = 0.311053
 anchor_bottom = 0.722737
+focus_mode = 0
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -888,6 +890,7 @@ anchor_left = 0.375579
 anchor_top = 0.223765
 anchor_right = 0.622975
 anchor_bottom = 0.722737
+focus_mode = 0
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -900,6 +903,7 @@ anchor_left = 0.687211
 anchor_top = 0.223765
 anchor_right = 0.928819
 anchor_bottom = 0.722737
+focus_mode = 0
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -990,8 +994,8 @@ texture = ExtResource("10_7gfkp")
 [node name="DeletePortal" type="Sprite2D" parent="Node2D"]
 visible = false
 texture_filter = 1
-position = Vector2(42, 42)
-scale = Vector2(4, 4)
+position = Vector2(31, 32)
+scale = Vector2(3, 3)
 texture = ExtResource("5_uk65h")
 
 [node name="Label" type="Label" parent="Node2D"]

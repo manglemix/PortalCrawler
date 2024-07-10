@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bp8t8j8deffse"
-path.s3tc="res://.godot/imported/Redcoat_Solider_north_shoot-Sheet.png-778eee7279fc46787f0cdb8268e472f9.s3tc.ctex"
+path="res://.godot/imported/Redcoat_Solider_north_shoot-Sheet.png-778eee7279fc46787f0cdb8268e472f9.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://enemies/1800s/lincoln/Redcoat_Solider_north_shoot-Sheet.png"
-dest_files=["res://.godot/imported/Redcoat_Solider_north_shoot-Sheet.png-778eee7279fc46787f0cdb8268e472f9.s3tc.ctex"]
+dest_files=["res://.godot/imported/Redcoat_Solider_north_shoot-Sheet.png-778eee7279fc46787f0cdb8268e472f9.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

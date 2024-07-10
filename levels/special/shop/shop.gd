@@ -6,7 +6,7 @@ signal force_close
 
 enum PriceType { COINS, WIZARD_HATS }
 
-const POISON_SWORD: Texture2D = preload("res://player/poison-sword.png")
+const POISON_SWORD: Texture2D = preload("res://player/upgrade icons/poison-sword.png")
 const KILL_ALL: Texture2D = preload("res://player/upgrade icons/kill all spell upgrade icon.png")
 const SHIELD: Texture2D = preload("res://player/upgrade icons/shield upgrade icon.png")
 const FORTUNE: Texture2D = preload("res://player/upgrade icons/fortune cookie icon.png")

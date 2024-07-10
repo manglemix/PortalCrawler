@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chg4uwa7irymw"
-path.s3tc="res://.godot/imported/Redcoat_Solider_north_walk-Sheet.png-e249b99a381f3837443b2939bb9ff38a.s3tc.ctex"
+path="res://.godot/imported/Redcoat_Solider_north_walk-Sheet.png-e249b99a381f3837443b2939bb9ff38a.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://enemies/1800s/lincoln/Redcoat_Solider_north_walk-Sheet.png"
-dest_files=["res://.godot/imported/Redcoat_Solider_north_walk-Sheet.png-e249b99a381f3837443b2939bb9ff38a.s3tc.ctex"]
+dest_files=["res://.godot/imported/Redcoat_Solider_north_walk-Sheet.png-e249b99a381f3837443b2939bb9ff38a.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

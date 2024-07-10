@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pdym8y73fisg"
-path="res://.godot/imported/windowed.png-1183d6ee8a17975304e24f2b6ee46af6.ctex"
+uid="uid://dxa4qsmtyvvfa"
+path="res://.godot/imported/poison-sword.png-fbbfc42c4cda063a7e507f825262b7fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/windowed.png"
-dest_files=["res://.godot/imported/windowed.png-1183d6ee8a17975304e24f2b6ee46af6.ctex"]
+source_file="res://player/upgrade icons/poison-sword.png"
+dest_files=["res://.godot/imported/poison-sword.png-fbbfc42c4cda063a7e507f825262b7fe.ctex"]
 
 [params]
 
