@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvkxr44q05aed"]
+[gd_scene load_steps=12 format=3 uid="uid://cvkxr44q05aed"]
 
 [ext_resource type="PackedScene" uid="uid://cc5rrmn7brbj2" path="res://levels/special/intro/intro.gltf" id="1_pnk1a"]
 [ext_resource type="Script" path="res://levels/level.gd" id="2_b0ads"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="4_icllo"]
-[ext_resource type="Script" path="res://scripts/difficulty_range.gd" id="5_lap8j"]
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="6_i51yc"]
 [ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="7_lfc7h"]
 [ext_resource type="Script" path="res://enemies/spawners/staged_spawner.gd" id="7_rb4f3"]
@@ -77,24 +76,18 @@ omni_range = 7.5
 
 [node name="LevelBounds" parent="." index="6" instance=ExtResource("4_icllo")]
 
-[node name="DifficultyRange" type="Node3D" parent="." index="7"]
-script = ExtResource("5_lap8j")
+[node name="Spawners" type="Node3D" parent="." index="7"]
 
-[node name="SignalBarrier" type="Node" parent="DifficultyRange" index="0"]
+[node name="SignalBarrier" type="Node" parent="Spawners" index="0"]
 script = ExtResource("6_i51yc")
-barrier_count = 3
+barrier_count = 2
 
-[node name="StagedSpawner" type="Marker3D" parent="DifficultyRange" index="1" groups=["EnemySpawners"]]
+[node name="StagedSpawner" type="Marker3D" parent="Spawners" index="1" groups=["EnemySpawners"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2295, 0, -2.34422)
-script = ExtResource("7_rb4f3")
-scenes = Array[PackedScene]([null, ExtResource("8_xf3yv")])
-
-[node name="StagedSpawner3" type="Marker3D" parent="DifficultyRange" index="2" groups=["EnemySpawners"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59486, 0, -1.98246)
 script = ExtResource("7_rb4f3")
 scenes = Array[PackedScene]([ExtResource("8_xf3yv"), ExtResource("8_xf3yv")])
 
-[node name="StagedSpawner4" type="Marker3D" parent="DifficultyRange" index="3" groups=["EnemySpawners"]]
+[node name="StagedSpawner4" type="Marker3D" parent="Spawners" index="2" groups=["EnemySpawners"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.27767, 0, 2.10141)
 script = ExtResource("7_rb4f3")
 scenes = Array[PackedScene]([null, ExtResource("8_xf3yv")])
@@ -128,8 +121,7 @@ render_priority = 1
 texture = ExtResource("12_uks87")
 
 [connection signal="level_complete" from="." to="CollectibleSpawner" method="spawn"]
-[connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]
-[connection signal="finished" from="DifficultyRange/StagedSpawner" to="DifficultyRange/SignalBarrier" method="receive"]
-[connection signal="finished" from="DifficultyRange/StagedSpawner3" to="DifficultyRange/SignalBarrier" method="receive"]
-[connection signal="finished" from="DifficultyRange/StagedSpawner4" to="DifficultyRange/SignalBarrier" method="receive"]
+[connection signal="passed" from="Spawners/SignalBarrier" to="." method="_on_finished"]
+[connection signal="finished" from="Spawners/StagedSpawner" to="Spawners/SignalBarrier" method="receive"]
+[connection signal="finished" from="Spawners/StagedSpawner4" to="Spawners/SignalBarrier" method="receive"]
 [connection signal="collectible_collected" from="CollectibleSpawner" to="." method="_on_can_move_on"]

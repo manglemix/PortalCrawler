@@ -760,8 +760,8 @@ script = ExtResource("3_3cd08")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_uht5j")
-max_health = 3
-health = 3
+max_health = 4
+health = 4
 
 [node name="Teleportable" type="Node" parent="."]
 script = ExtResource("4_8li43")

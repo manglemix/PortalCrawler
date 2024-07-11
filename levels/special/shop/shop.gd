@@ -10,6 +10,7 @@ const POISON_SWORD: Texture2D = preload("res://player/upgrade icons/poison-sword
 const KILL_ALL: Texture2D = preload("res://player/upgrade icons/kill all spell upgrade icon.png")
 const SHIELD: Texture2D = preload("res://player/upgrade icons/shield upgrade icon.png")
 const FORTUNE: Texture2D = preload("res://player/upgrade icons/fortune cookie icon.png")
+const FORTUNE_TOOLTIP: String = "Reveals your fortune"
 
 var slot1_texture: Texture2D
 var slot2_texture: Texture2D
@@ -23,6 +24,10 @@ var slot1_price: int
 var slot2_price: int
 var slot3_price: int
 
+var slot1_tooltip: String
+var slot2_tooltip: String
+var slot3_tooltip: String
+
 var _player: Player
 var _first_time := true
 
@@ -33,23 +38,28 @@ func _on_body_entered(player: Player) -> void:
 		var slot_textures: Array[Texture2D] = []
 		var slot_price_types: Array[PriceType] = []
 		var slot_prices: Array[int] = []
+		var slot_tooltips: Array[String] = []
 		
 		if player.poison_count == 0:
 			slot_textures.append(POISON_SWORD)
 			slot_price_types.append(PriceType.COINS)
 			slot_prices.append(30)
+			slot_tooltips.append("Adds poison to your sword")
 		if !player.has_kill_all_spell:
 			slot_textures.append(KILL_ALL)
 			slot_price_types.append(PriceType.WIZARD_HATS)
 			slot_prices.append(35)
+			slot_tooltips.append("Kills all enemies. Single Use")
 		if Health.get_health_component(player).shield < 3:
 			slot_textures.append(SHIELD)
 			slot_price_types.append(PriceType.COINS)
 			slot_prices.append(10)
+			slot_tooltips.append("Adds 1 armor")
 		while slot_textures.size() < 3:
 			slot_textures.append(FORTUNE)
 			slot_price_types.append(PriceType.COINS)
 			slot_prices.append(5)
+			slot_tooltips.append(FORTUNE_TOOLTIP)
 		
 		slot1_texture = slot_textures[0]
 		slot2_texture = slot_textures[1]
@@ -60,6 +70,9 @@ func _on_body_entered(player: Player) -> void:
 		slot1_price = slot_prices[0]
 		slot2_price = slot_prices[1]
 		slot3_price = slot_prices[2]
+		slot1_tooltip = slot_tooltips[0]
+		slot2_tooltip = slot_tooltips[1]
+		slot3_tooltip = slot_tooltips[2]
 		
 		_first_time = false
 	player.open_shop(self)
@@ -104,11 +117,14 @@ func _on_texture_pressed(texture: Texture2D) -> void:
 		slot1_texture = FORTUNE
 		slot1_price_type = PriceType.COINS
 		slot1_price = 5
+		slot1_tooltip = FORTUNE_TOOLTIP
 	elif texture == slot2_texture:
 		slot2_texture = FORTUNE
 		slot2_price_type = PriceType.COINS
 		slot2_price = 5
+		slot2_tooltip = FORTUNE_TOOLTIP
 	else:
 		slot3_texture = FORTUNE
 		slot3_price_type = PriceType.COINS
 		slot3_price = 5
+		slot3_tooltip = FORTUNE_TOOLTIP

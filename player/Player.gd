@@ -212,6 +212,8 @@ func _on_died() -> void:
 	Wallet.wizard_hats = 0
 	poison_count = 0
 	has_kill_all_spell = false
+	GameState.level_counter = 0
+	GameState.reset_difficulty()
 	
 	
 # function that creates the portals when the player presses the button to do so

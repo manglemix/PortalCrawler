@@ -1,10 +1,16 @@
 extends Node
 
 
+signal level_counter_changed
+
 const SAVE_FILE := "user://save.res"
 
 var has_godot_plushie := false
 
+var level_counter := 0:
+	set(x):
+		level_counter = x
+		level_counter_changed.emit()
 var _difficulty := 0
 var _ignore_saves := false
 
@@ -21,6 +27,10 @@ func get_difficulty() -> int:
 
 func change_difficulty(value: int) -> void:
 	_difficulty += value
+
+
+func reset_difficulty() -> void:
+	_difficulty = 0
 
 
 func read_save_file() -> void:

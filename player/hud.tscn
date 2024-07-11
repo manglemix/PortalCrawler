@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=41 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
 [ext_resource type="FontFile" uid="uid://dhsjp4frr3cjb" path="res://fonts/Pixelify_Sans/static/PixelifySans-Bold.ttf" id="3_dplwm"]
@@ -509,6 +509,9 @@ func set_player(player: Player) -> void:
 		slot1_price.text = str(_shop.slot1_price)
 		slot2_price.text = str(_shop.slot2_price)
 		slot3_price.text = str(_shop.slot3_price)
+		slot1.tooltip_text = _shop.slot1_tooltip
+		slot2.tooltip_text = _shop.slot2_tooltip
+		slot3.tooltip_text = _shop.slot3_tooltip
 		slot1.pressed.connect(select_slot1)
 		slot2.pressed.connect(select_slot2)
 		slot3.pressed.connect(select_slot3)
@@ -639,6 +642,21 @@ func _process(_delta: float) -> void:
 	visible = _player.has_kill_all_spell
 "
 
+[sub_resource type="LabelSettings" id="LabelSettings_1325r"]
+font = ExtResource("3_dplwm")
+font_size = 64
+
+[sub_resource type="GDScript" id="GDScript_viv43"]
+script/source = "extends Label
+
+
+func _ready():
+	GameState.level_counter_changed.connect(
+		func():
+			text = str(GameState.level_counter)
+	)
+"
+
 [node name="HUD" type="Control"]
 process_mode = 3
 texture_filter = 1
@@ -677,6 +695,13 @@ texture = ExtResource("1_h1oyn")
 expand_mode = 2
 
 [node name="TextureRect3" type="TextureRect" parent="HealthBar"]
+texture_filter = 1
+layout_mode = 2
+theme = SubResource("Theme_hcktf")
+texture = ExtResource("1_h1oyn")
+expand_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="HealthBar"]
 texture_filter = 1
 layout_mode = 2
 theme = SubResource("Theme_hcktf")
@@ -877,6 +902,7 @@ anchor_left = 0.0636574
 anchor_top = 0.223765
 anchor_right = 0.311053
 anchor_bottom = 0.722737
+tooltip_text = "Test"
 focus_mode = 0
 flat = true
 icon_alignment = 1
@@ -986,9 +1012,9 @@ script = SubResource("GDScript_7r6cs")
 
 [node name="Idle" type="Sprite2D" parent="Node2D/Node2D"]
 texture_filter = 1
-position = Vector2(-63, 0)
+position = Vector2(-1, 0)
 rotation = 1.5708
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 texture = ExtResource("10_7gfkp")
 
 [node name="DeletePortal" type="Sprite2D" parent="Node2D"]
@@ -999,6 +1025,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("5_uk65h")
 
 [node name="Label" type="Label" parent="Node2D"]
+visible = false
 offset_left = -14.0
 offset_top = -34.0
 offset_right = 26.0
@@ -1007,17 +1034,18 @@ text = "x"
 label_settings = SubResource("LabelSettings_2g4dd")
 
 [node name="KillAll" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.775
+anchor_left = 0.750868
+anchor_top = 0.484568
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.733025
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 0
+alignment = 2
 script = SubResource("GDScript_l6nu7")
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="KillAll"]
 layout_mode = 2
@@ -1031,6 +1059,20 @@ layout_mode = 2
 texture = ExtResource("11_hfuu5")
 expand_mode = 2
 stretch_mode = 5
+
+[node name="LevelCounter" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.005
+anchor_top = 0.992
+anchor_right = 0.005
+anchor_bottom = 0.992284
+grow_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_1325r")
+vertical_alignment = 2
+script = SubResource("GDScript_viv43")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Pause/Fullscreen" to="Pause/Fullscreen" method="_on_pressed"]
 [connection signal="pressed" from="Pause/Restart" to="Pause/Restart" method="_on_pressed"]
