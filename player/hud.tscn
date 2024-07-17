@@ -26,6 +26,8 @@ signal pause_menu_visibility(visible: bool)
 
 @export var player: Player
 
+@onready var cursor: Node2D = $Cursor
+
 
 func _ready() -> void:
 	propagate_call(\"set_player\", [player])
@@ -34,6 +36,8 @@ func _ready() -> void:
 		func(_ignored):
 			pause_menu_visibility.emit(true)
 			set_process_input(false)
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			cursor.hide()
 	)
 
 
@@ -44,13 +48,17 @@ func _input(event: InputEvent) -> void:
 		pause_menu_visibility.emit($Pause.visible)
 		if $Pause.visible:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			cursor.hide()
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+			cursor.show()
 
 
 func _on_shop_ui_closed() -> void:
 	pause_menu_visibility.emit(false)
 	set_process_input(true)
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	cursor.show()
 "
 
 [sub_resource type="GDScript" id="GDScript_w8sf7"]
@@ -2074,27 +2082,27 @@ text = "100"
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Cursor" type="Node2D" parent="."]
 script = SubResource("GDScript_pqjgk")
 
-[node name="Node2D" type="Node2D" parent="Node2D"]
+[node name="Node2D" type="Node2D" parent="Cursor"]
 script = SubResource("GDScript_7r6cs")
 
-[node name="Idle" type="Sprite2D" parent="Node2D/Node2D"]
+[node name="Idle" type="Sprite2D" parent="Cursor/Node2D"]
 texture_filter = 1
 position = Vector2(-1, 0)
 rotation = 1.5708
 scale = Vector2(2, 2)
 texture = ExtResource("10_7gfkp")
 
-[node name="DeletePortal" type="Sprite2D" parent="Node2D"]
+[node name="DeletePortal" type="Sprite2D" parent="Cursor"]
 visible = false
 texture_filter = 1
 position = Vector2(31, 32)
 scale = Vector2(3, 3)
 texture = ExtResource("5_uk65h")
 
-[node name="Label" type="Label" parent="Node2D"]
+[node name="Label" type="Label" parent="Cursor"]
 visible = false
 offset_left = -14.0
 offset_top = -34.0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nlyyy0nyp4ro"
-path="res://.godot/imported/complete.png-8e92069161491c4c94467bb333a64848.ctex"
+uid="uid://ipets4yvroy3"
+path="res://.godot/imported/walk.png-535d5b750dc6e46e885d9523a7e91725.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/far_past/rex/complete.png"
-dest_files=["res://.godot/imported/complete.png-8e92069161491c4c94467bb333a64848.ctex"]
+source_file="res://enemies/far_past/rex/walk.png"
+dest_files=["res://.godot/imported/walk.png-535d5b750dc6e46e885d9523a7e91725.ctex"]
 
 [params]
 

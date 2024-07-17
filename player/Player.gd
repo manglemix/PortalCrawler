@@ -135,12 +135,13 @@ func _input(event):
 			_create_portal(storedPosition, storedNormal, storedCollider)
 
 	elif event.is_action_pressed("kill_all"):
-		if !OS.has_feature("editor") or !ProjectSettings.get_setting("global/cheats"):
+		var cheats: bool = OS.has_feature("editor") and ProjectSettings.get_setting("global/cheats")
+		if !cheats:
 			if !has_kill_all_spell or is_level_finished:
 				return
 		has_kill_all_spell = false
 		for enemy: Enemy in get_tree().get_nodes_in_group(&"Enemies"):
-			if !&"Boss" in enemy.get_groups():
+			if cheats or !&"Boss" in enemy.get_groups():
 				Health.set_node_health(enemy, 0)
 
 
