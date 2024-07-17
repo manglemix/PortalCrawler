@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfgiqodxflxft"
-path="res://.godot/imported/Middle Ages Wall Color_png.png-1e4b3ef0d244c1c9c9a7451964b82155.ctex"
+uid="uid://cy350jlxfjuxb"
+path="res://.godot/imported/all Normal.png-be7c867859f848569ccee762daef0c13.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/1800s/holmes/Middle Ages Wall Color_png.png"
-dest_files=["res://.godot/imported/Middle Ages Wall Color_png.png-1e4b3ef0d244c1c9c9a7451964b82155.ctex"]
+source_file="res://levels/1800s/holmes/all Normal.png"
+dest_files=["res://.godot/imported/all Normal.png-be7c867859f848569ccee762daef0c13.ctex"]
 
 [params]
 
@@ -19,12 +19,12 @@ compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://levels/1800s/holmes/all Normal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

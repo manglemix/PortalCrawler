@@ -10,6 +10,7 @@ const TWEEN_DURATION := 0.3
 const TRANSPARENCY := 0.01
 
 @onready var sprite: AnimatedSprite3D = $"../../Billboard/AnimatedSprite3D"
+@onready var healthbar: AnimatedSprite3D = $"../../Billboard/HealthBar"
 @onready var shadow: MeshInstance3D = $"../../MeshInstance3D"
 
 
@@ -20,12 +21,14 @@ func _enter() -> void:
 	get_tree().create_timer(DURATION, false).timeout.connect(exit.bind(transparency_finished))
 	shadow.hide()
 	sprite.create_tween().tween_property(sprite, "modulate:a", TRANSPARENCY, TWEEN_DURATION)
+	healthbar.create_tween().tween_property(healthbar, "modulate:a", TRANSPARENCY, TWEEN_DURATION)
 
 
 func _exit() -> void:
 	super()
 	shadow.show()
 	sprite.create_tween().tween_property(sprite, "modulate:a", 1, TWEEN_DURATION)
+	healthbar.create_tween().tween_property(healthbar, "modulate:a", 1, TWEEN_DURATION)
 
 
 func _physics_process(_delta: float) -> void:

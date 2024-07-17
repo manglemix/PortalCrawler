@@ -1,9 +1,9 @@
 [gd_scene load_steps=27 format=3 uid="uid://44e6nqkgyy5p"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_nmq4g"]
-[ext_resource type="Texture2D" uid="uid://dfgiqodxflxft" path="res://levels/1800s/holmes/Middle Ages Wall Color_png.png" id="2_dr6yy"]
-[ext_resource type="Texture2D" uid="uid://ccn38u4hmen6n" path="res://levels/1800s/holmes/Middle Ages Wall Roughness_png.png" id="3_omurd"]
-[ext_resource type="Texture2D" uid="uid://dhwb7uwhbta5d" path="res://levels/1800s/holmes/Middle Ages Wall Normal_png.png" id="4_cfmhr"]
+[ext_resource type="Texture2D" uid="uid://dj8htd0crvi4f" path="res://levels/1800s/holmes/Present Day Wall Color.png" id="2_ybpnu"]
+[ext_resource type="Texture2D" uid="uid://6jbial1g4au5" path="res://levels/1800s/holmes/ughness.png" id="3_wtavt"]
+[ext_resource type="Texture2D" uid="uid://cy350jlxfjuxb" path="res://levels/1800s/holmes/all Normal.png" id="4_cscsf"]
 [ext_resource type="Texture2D" uid="uid://dni5r0mr64nrc" path="res://levels/1800s/holmes/Middle Ages Floor Color_png.png" id="5_6kbe4"]
 [ext_resource type="Texture2D" uid="uid://qlnxlgjlls4d" path="res://levels/1800s/holmes/Middle Ages Floor Roughness_png.png" id="6_mndmg"]
 [ext_resource type="Texture2D" uid="uid://fk3ra210bugs" path="res://levels/1800s/holmes/Middle Ages Floor Normal_png.png" id="7_52i52"]
@@ -17,31 +17,29 @@
 [ext_resource type="AudioStream" uid="uid://dtludju15pidf" path="res://music/quiet_underground_sound_BG.mp3" id="15_2krow"]
 [ext_resource type="Script" path="res://levels/collectible_spawner.gd" id="16_vjs4q"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m26o5"]
-resource_name = "StoneBricksSplitface001_1K.004"
-transparency = 4
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g23bn"]
+resource_name = "ConcretePrecastPlates004_1K.001"
 cull_mode = 2
-albedo_texture = ExtResource("2_dr6yy")
-metallic_texture = ExtResource("3_omurd")
+albedo_texture = ExtResource("2_ybpnu")
+metallic_texture = ExtResource("3_wtavt")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("3_omurd")
+roughness_texture = ExtResource("3_wtavt")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("4_cfmhr")
+normal_texture = ExtResource("4_cscsf")
 texture_filter = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ib4i1"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s01oh"]
 resource_name = "Material.002"
 cull_mode = 2
-metallic = 1.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_hy5tv"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_y16qj"]
 _surfaces = [{
 "aabb": AABB(-0.621678, -0.342462, -4.54795, 1.24336, 4.34246, 9.09591),
 "format": 34896613377,
 "index_count": 30,
 "index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0, 2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0, 2, 0, 4, 0, 6, 0, 2, 0, 0, 0, 4, 0),
-"name": "StoneBricksSplitface001_1K.004",
+"name": "ConcretePrecastPlates004_1K.001",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 8,
@@ -59,27 +57,27 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_q55qe"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_gq8wk"]
 resource_name = "Holmes_Cube_029"
 _surfaces = [{
 "aabb": AABB(-0.621678, -0.342462, -4.54795, 1.24336, 4.34246, 9.09591),
-"attribute_data": PackedByteArray(8, 135, 195, 143, 255, 255, 54, 156, 5, 132, 84, 212, 131, 195, 211, 147, 119, 144, 255, 255, 131, 195, 54, 156, 5, 132, 54, 156, 255, 255, 84, 212, 255, 255, 37, 152, 140, 243, 255, 255, 8, 135, 54, 156, 255, 255, 169, 168, 255, 255, 169, 168, 131, 195, 37, 152, 140, 243, 84, 212, 131, 195, 195, 143, 5, 132, 169, 168, 5, 132, 169, 168, 255, 255, 211, 147, 119, 144, 84, 212),
+"attribute_data": PackedByteArray(253, 203, 143, 105, 255, 255, 54, 156, 5, 132, 84, 212, 116, 198, 252, 149, 119, 144, 255, 255, 10, 187, 252, 149, 5, 132, 54, 156, 255, 255, 84, 212, 147, 192, 106, 194, 140, 243, 255, 255, 10, 187, 143, 105, 255, 255, 169, 168, 255, 255, 169, 168, 147, 192, 252, 149, 140, 243, 84, 212, 253, 203, 252, 149, 5, 132, 169, 168, 5, 132, 169, 168, 116, 198, 106, 194, 119, 144, 84, 212),
 "format": 34896613399,
 "index_count": 30,
 "index_data": PackedByteArray(2, 0, 9, 0, 4, 0, 2, 0, 7, 0, 9, 0, 5, 0, 18, 0, 8, 0, 5, 0, 15, 0, 18, 0, 17, 0, 14, 0, 19, 0, 17, 0, 12, 0, 14, 0, 10, 0, 3, 0, 13, 0, 10, 0, 0, 0, 3, 0, 6, 0, 11, 0, 16, 0, 6, 0, 1, 0, 11, 0),
-"material": SubResource("StandardMaterial3D_m26o5"),
-"name": "StoneBricksSplitface001_1K.004",
+"material": SubResource("StandardMaterial3D_g23bn"),
+"name": "ConcretePrecastPlates004_1K.001",
 "primitive": 3,
 "uv_scale": Vector4(2.70759, 3.68584, 0, 0),
 "vertex_count": 20,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 110, 192, 0, 0, 0, 0, 254, 255, 84, 213, 0, 0, 0, 0, 254, 255, 79, 253, 146, 83, 255, 255, 75, 230, 110, 192, 146, 83, 255, 255, 75, 230, 79, 253, 0, 0, 0, 0, 0, 0, 7, 250, 0, 0, 0, 0, 0, 0, 84, 213, 0, 0, 0, 0, 0, 0, 79, 253, 146, 83, 255, 255, 179, 25, 7, 250, 146, 83, 255, 255, 179, 25, 79, 253, 254, 255, 0, 0, 254, 255, 110, 192, 254, 255, 0, 0, 254, 255, 84, 213, 254, 255, 0, 0, 254, 255, 79, 253, 108, 172, 255, 255, 75, 230, 110, 192, 108, 172, 255, 255, 75, 230, 79, 253, 255, 255, 0, 0, 0, 0, 7, 250, 255, 255, 0, 0, 0, 0, 84, 213, 255, 255, 0, 0, 0, 0, 79, 253, 108, 172, 255, 255, 179, 25, 7, 250, 108, 172, 255, 255, 179, 25, 79, 253, 249, 244, 5, 11, 170, 42, 84, 213, 20, 253, 138, 62, 249, 244, 5, 11, 20, 253, 138, 62, 213, 188, 213, 188, 170, 42, 84, 213, 20, 253, 138, 62, 213, 188, 213, 188, 20, 253, 138, 62, 249, 244, 5, 11, 170, 42, 84, 213, 137, 190, 234, 130, 249, 244, 5, 11, 137, 190, 234, 130, 213, 188, 213, 188, 170, 42, 84, 213, 137, 190, 234, 130, 213, 188, 213, 188, 137, 190, 234, 130)
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 255, 0, 0, 0, 0, 254, 255, 84, 213, 0, 0, 0, 0, 254, 255, 79, 253, 146, 83, 255, 255, 75, 230, 255, 255, 146, 83, 255, 255, 75, 230, 79, 253, 0, 0, 0, 0, 0, 0, 141, 247, 0, 0, 0, 0, 0, 0, 84, 213, 0, 0, 0, 0, 0, 0, 79, 253, 146, 83, 255, 255, 179, 25, 141, 247, 146, 83, 255, 255, 179, 25, 79, 253, 254, 255, 0, 0, 254, 255, 255, 255, 254, 255, 0, 0, 254, 255, 84, 213, 254, 255, 0, 0, 254, 255, 79, 253, 108, 172, 255, 255, 75, 230, 255, 255, 108, 172, 255, 255, 75, 230, 79, 253, 255, 255, 0, 0, 0, 0, 141, 247, 255, 255, 0, 0, 0, 0, 84, 213, 255, 255, 0, 0, 0, 0, 79, 253, 108, 172, 255, 255, 179, 25, 141, 247, 108, 172, 255, 255, 179, 25, 79, 253, 255, 127, 14, 140, 170, 42, 84, 213, 20, 253, 138, 62, 255, 127, 14, 140, 20, 253, 138, 62, 255, 255, 255, 127, 170, 42, 84, 213, 20, 253, 138, 62, 255, 255, 255, 127, 20, 253, 138, 62, 255, 127, 14, 140, 170, 42, 84, 213, 137, 190, 234, 130, 255, 127, 14, 140, 137, 190, 234, 130, 255, 255, 255, 127, 170, 42, 84, 213, 137, 190, 234, 130, 255, 255, 255, 127, 137, 190, 234, 130)
 }, {
 "aabb": AABB(-0.215766, 4, -3.63481, 0.431532, 1.00136e-05, 7.26963),
 "attribute_data": PackedByteArray(255, 255, 255, 255, 233, 156, 254, 255, 255, 255, 234, 220, 233, 156, 234, 220),
 "format": 34896613399,
 "index_count": 6,
 "index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0),
-"material": SubResource("StandardMaterial3D_ib4i1"),
+"material": SubResource("StandardMaterial3D_s01oh"),
 "name": "Material.002",
 "primitive": 3,
 "uv_scale": Vector4(2.70759, 0.453975, 0, 0),
@@ -87,12 +85,12 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 84, 213, 0, 0, 0, 0, 0, 0, 84, 213, 254, 255, 0, 0, 254, 255, 84, 213, 255, 255, 0, 0, 0, 0, 84, 213, 170, 170, 169, 170, 170, 170, 170, 170, 170, 170, 169, 170, 170, 170, 170, 170)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_hy5tv")
+shadow_mesh = SubResource("ArrayMesh_y16qj")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5l6a7"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hxnvt"]
 points = PackedVector3Array(-0.621678, -0.342462, -4.54795, 0.621678, -0.342462, -4.54795, -0.621678, -0.342462, 4.54795, -0.215786, 4, -3.63533, 0.215664, 4, -3.63533, 0.215664, 4, 3.63444, 0.621557, -0.342462, 4.54795, -0.215786, 4, 3.63444)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_koidu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnqmk"]
 resource_name = "ConcreteBlocksPavingSquareStack001_1K.004"
 transparency = 4
 cull_mode = 2
@@ -105,13 +103,13 @@ normal_enabled = true
 normal_texture = ExtResource("7_52i52")
 texture_filter = 2
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_0e70w"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_52n2c"]
 _surfaces = [{
 "aabb": AABB(-6.82551, 0, -3.7988, 13.651, 4, 7.5976),
 "format": 34896613377,
 "index_count": 24,
 "index_data": PackedByteArray(0, 0, 3, 0, 2, 0, 0, 0, 1, 0, 3, 0, 2, 0, 7, 0, 6, 0, 2, 0, 3, 0, 7, 0, 6, 0, 5, 0, 4, 0, 6, 0, 7, 0, 5, 0, 4, 0, 1, 0, 0, 0, 4, 0, 5, 0, 1, 0),
-"name": "StoneBricksSplitface001_1K.004",
+"name": "ConcretePrecastPlates004_1K.001",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 8,
@@ -129,7 +127,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_a4ojb"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_nr7yv"]
 resource_name = "Holmes_Cube_033"
 _surfaces = [{
 "aabb": AABB(-6.82551, 0, -3.7988, 13.651, 4, 7.5976),
@@ -137,8 +135,8 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 24,
 "index_data": PackedByteArray(1, 0, 7, 0, 5, 0, 1, 0, 3, 0, 7, 0, 4, 0, 14, 0, 12, 0, 4, 0, 6, 0, 14, 0, 13, 0, 11, 0, 9, 0, 13, 0, 15, 0, 11, 0, 8, 0, 2, 0, 0, 0, 8, 0, 10, 0, 2, 0),
-"material": SubResource("StandardMaterial3D_m26o5"),
-"name": "StoneBricksSplitface001_1K.004",
+"material": SubResource("StandardMaterial3D_g23bn"),
+"name": "ConcretePrecastPlates004_1K.001",
 "primitive": 3,
 "uv_scale": Vector4(7.78899, 6.21046, 0, 0),
 "vertex_count": 16,
@@ -149,7 +147,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 6,
 "index_data": PackedByteArray(1, 0, 2, 0, 0, 0, 1, 0, 3, 0, 2, 0),
-"material": SubResource("StandardMaterial3D_koidu"),
+"material": SubResource("StandardMaterial3D_xnqmk"),
 "name": "ConcreteBlocksPavingSquareStack001_1K.004",
 "primitive": 3,
 "uv_scale": Vector4(7.06465, 4.29783, 0, 0),
@@ -157,15 +155,15 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 254, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_0e70w")
+shadow_mesh = SubResource("ArrayMesh_52n2c")
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_uifls"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_fp62t"]
 vertices = PackedVector3Array(-5.5377, 0.553128, 0.00376511, -4.8377, 0.553128, 0.00376511, -4.8377, 0.553128, -0.596235, 4.8623, 0.553128, -0.596235, 4.8623, 0.553128, 0.00376511, 5.5623, 0.553128, 0.00376511, -5.5377, 0.553128, 0.00376511, -4.8377, 0.553128, -0.596235, -4.5377, 0.553128, -0.896235, -5.5377, 0.553128, -2.59623, 4.5623, 0.553128, -0.896235, 4.8623, 0.553128, -0.596235, 5.5623, 0.553128, 0.00376511, 5.5623, 0.553128, -2.59623, -4.5377, 0.553128, -0.896235, 4.5623, 0.553128, -0.896235, 5.5623, 0.553128, -2.59623, -5.5377, 0.553128, -2.59623, 5.5623, 0.553128, 0.00376511, 4.8623, 0.553128, 0.00376511, 4.8623, 0.553128, 0.603765, -4.8377, 0.553128, 0.603765, -4.8377, 0.553128, 0.00376511, -5.5377, 0.553128, 0.00376511, 5.5623, 0.553128, 0.00376511, 4.8623, 0.553128, 0.603765, 4.5623, 0.553128, 0.903765, 5.5623, 0.553128, 2.60377, -4.5377, 0.553128, 0.903765, -4.8377, 0.553128, 0.603765, -5.5377, 0.553128, 0.00376511, -5.5377, 0.553128, 2.60377, 4.5623, 0.553128, 0.903765, -4.5377, 0.553128, 0.903765, -5.5377, 0.553128, 2.60377, 5.5623, 0.553128, 2.60377)
 polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(11, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(14, 17, 15), PackedInt32Array(15, 17, 16), PackedInt32Array(20, 19, 18), PackedInt32Array(23, 22, 21), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(29, 28, 30), PackedInt32Array(30, 28, 31), PackedInt32Array(32, 35, 33), PackedInt32Array(33, 35, 34)]
 cell_size = 0.1
 agent_radius = 0.4
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_hihtd"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_pk4oo"]
 vertices = PackedVector3Array(-5.4377, 0.553128, 0.00376511, -4.9377, 0.553128, 0.00376511, -4.9377, 0.553128, -0.596235, -5.4377, 0.553128, -2.49623, 4.9623, 0.553128, -0.596235, 4.9623, 0.553128, 0.00376511, 5.4623, 0.553128, 0.00376511, 5.4623, 0.553128, -2.49623, -5.4377, 0.553128, -2.49623, -4.9377, 0.553128, -0.596235, -4.5377, 0.553128, -0.996235, 4.5623, 0.553128, -0.996235, 4.9623, 0.553128, -0.596235, 5.4623, 0.553128, -2.49623, -4.5377, 0.553128, -0.996235, 4.5623, 0.553128, -0.996235, 5.4623, 0.553128, -2.49623, -5.4377, 0.553128, -2.49623, 5.4623, 0.553128, 0.00376511, 4.9623, 0.553128, 0.00376511, 4.9623, 0.553128, 0.603765, 5.4623, 0.553128, 2.50377, -4.9377, 0.553128, 0.603765, -4.9377, 0.553128, 0.00376511, -5.4377, 0.553128, 0.00376511, -5.4377, 0.553128, 2.50377, 5.4623, 0.553128, 2.50377, 4.9623, 0.553128, 0.603765, 4.5623, 0.553128, 1.00377, -4.5377, 0.553128, 1.00377, -4.9377, 0.553128, 0.603765, -5.4377, 0.553128, 2.50377, 4.5623, 0.553128, 1.00377, -4.5377, 0.553128, 1.00377, -5.4377, 0.553128, 2.50377, 5.4623, 0.553128, 2.50377)
 polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(10, 9, 8), PackedInt32Array(13, 12, 11), PackedInt32Array(14, 17, 15), PackedInt32Array(15, 17, 16), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 21), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 25), PackedInt32Array(28, 27, 26), PackedInt32Array(31, 30, 29), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35)]
 cell_size = 0.1
@@ -178,24 +176,24 @@ player_spawn_point = NodePath("PlayerSpawnPoint")
 
 [node name="Cube_004_001" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.0102731, 0, 0)
-mesh = SubResource("ArrayMesh_q55qe")
+mesh = SubResource("ArrayMesh_gq8wk")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_004_001"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_004_001/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_5l6a7")
+shape = SubResource("ConvexPolygonShape3D_hxnvt")
 
 [node name="Level_007" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_a4ojb")
+mesh = SubResource("ArrayMesh_nr7yv")
 skeleton = NodePath("")
 
 [node name="OverlappingNavRegion" type="NavigationRegion3D" parent="."]
-navigation_mesh = SubResource("NavigationMesh_uifls")
+navigation_mesh = SubResource("NavigationMesh_fp62t")
 script = ExtResource("8_ioqbj")
 
 [node name="OverlappingNavRegion2" type="NavigationRegion3D" parent="."]
-navigation_mesh = SubResource("NavigationMesh_hihtd")
+navigation_mesh = SubResource("NavigationMesh_pk4oo")
 script = ExtResource("8_ioqbj")
 index = 1
 

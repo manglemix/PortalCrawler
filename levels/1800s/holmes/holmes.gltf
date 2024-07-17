@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.1.63",
+		"generator":"Khronos glTF Blender I/O v4.2.57",
 		"version":"2.0"
 	},
 	"scene":0,
@@ -46,9 +46,8 @@
 	],
 	"materials":[
 		{
-			"alphaMode":"BLEND",
 			"doubleSided":true,
-			"name":"StoneBricksSplitface001_1K.004",
+			"name":"ConcretePrecastPlates004_1K.001",
 			"normalTexture":{
 				"index":0
 			},
@@ -64,8 +63,7 @@
 		},
 		{
 			"doubleSided":true,
-			"name":"Material.002",
-			"pbrMetallicRoughness":{}
+			"name":"Material.002"
 		},
 		{
 			"alphaMode":"BLEND",
@@ -175,18 +173,18 @@
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"Middle Ages Wall Normal.png",
-			"uri":"Middle%20Ages%20Wall%20Normal_png.png"
+			"name":"all Normal",
+			"uri":"all%20Normal.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"Middle Ages Wall Color.png",
-			"uri":"Middle%20Ages%20Wall%20Color_png.png"
+			"name":"Present Day Wall Color",
+			"uri":"Present%20Day%20Wall%20Color.png"
 		},
 		{
 			"mimeType":"image/png",
-			"name":"Middle Ages Wall Roughness.png",
-			"uri":"Middle%20Ages%20Wall%20Roughness_png.png"
+			"name":"ughness",
+			"uri":"ughness.png"
 		},
 		{
 			"mimeType":"image/png",
@@ -507,7 +505,7 @@
 	"buffers":[
 		{
 			"byteLength":1844,
-			"uri":"lab.bin"
+			"uri":"holmes.bin"
 		}
 	]
 }
