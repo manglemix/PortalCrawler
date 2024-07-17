@@ -861,4 +861,3 @@ bus = &"SFX"
 [connection signal="timeout" from="Windup" to="." method="_on_windup_timeout"]
 [connection signal="death_animation_finished" from="Billboard/CharacterSprite" to="." method="_on_death_animation_finished"]
 [connection signal="death_animation_finished" from="Billboard/CharacterSprite2" to="." method="_on_death_animation_finished"]
-[connection signal="timeout" from="RayDelay" to="." method="_on_ray_delay_timeout"]

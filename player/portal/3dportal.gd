@@ -11,6 +11,7 @@ extends StaticBody3D
 # holds the portals partner for easy reference
 var p
 var facing
+var skip_close_anim := false
 
 @onready var deletable = false:
 	set(x):
@@ -28,6 +29,7 @@ func _ready():
 	await get_tree().physics_frame
 	for body: CollisionObject3D in collider.get_overlapping_bodies():
 		if body.collision_layer & 16 > 0:
+			skip_close_anim = true
 			queue_free()
 # obviously could grab these values without storing them, but for
 # code readability and performance we store them after they are updated 1 time
@@ -106,10 +108,11 @@ func _on_mouse_area_mouse_exited():
 
 
 func _exit_tree() -> void:
-	var out := preload("res://player/portal/portal_out.tscn").instantiate()
-	out.get_node("Sprite3D").modulate = $Sprite3D.modulate
-	out.get_node("Sprite3D/AnimatedSprite3D").modulate = $Sprite3D.modulate
-	out.transform = transform
-	get_parent().add_child.call_deferred(out)
+	if !skip_close_anim:
+		var out := preload("res://player/portal/portal_out.tscn").instantiate()
+		out.get_node("Sprite3D").modulate = $Sprite3D.modulate
+		out.get_node("Sprite3D/AnimatedSprite3D").modulate = $Sprite3D.modulate
+		out.transform = transform
+		get_parent().add_child.call_deferred(out)
 	# Triggers the setter
 	deletable = false

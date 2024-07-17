@@ -1,4 +1,4 @@
-[gd_scene load_steps=203 format=3 uid="uid://ce1ouvngdq8h5"]
+[gd_scene load_steps=204 format=3 uid="uid://ce1ouvngdq8h5"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0fj1p"]
 [ext_resource type="PackedScene" uid="uid://cvkxr44q05aed" path="res://levels/special/intro/intro.tscn" id="1_bxhde"]
@@ -1388,6 +1388,9 @@ func _physics_process(_delta: float) -> void:
 	_last_origin = new_origin
 "
 
+[sub_resource type="Environment" id="Environment_s2x3b"]
+background_energy_multiplier = 0.0
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -1460,6 +1463,9 @@ bus = &"Music"
 environment = ExtResource("7_j8djq")
 script = SubResource("GDScript_dpa23")
 
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = ExtResource("7_j8djq")
+
 [node name="CollectibleDisplay" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -1488,6 +1494,9 @@ fov = 3.8
 size = 9.37
 near = 20.0
 far = 150.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CollectibleDisplay/SubViewport"]
+environment = SubResource("Environment_s2x3b")
 
 [node name="HUD" type="SubViewportContainer" parent="."]
 process_mode = 3

@@ -1,18 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfu18pxxse41g"]
+[gd_scene load_steps=3 format=3 uid="uid://cfu18pxxse41g"]
 
 [ext_resource type="Script" path="res://player/PortalBullet.gd" id="1_n7l26"]
 [ext_resource type="Texture2D" uid="uid://dm437cgy2tio2" path="res://player/portal/portal_orb.png" id="2_yxs3q"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_sq72s"]
-radius = 0.0664747
-
-[node name="PortalBullet" type="CharacterBody3D"]
-collision_layer = 0
+[node name="PortalBullet" type="Node3D"]
 script = ExtResource("1_n7l26")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_sq72s")
-disabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 light_color = Color(1, 0.172549, 0.180392, 1)
@@ -27,3 +19,7 @@ render_priority = 127
 texture = ExtResource("2_yxs3q")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+exclude_parent = false
+target_position = Vector3(0, 0, -1)

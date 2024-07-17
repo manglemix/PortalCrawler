@@ -1,14 +1,14 @@
-extends CharacterBody3D
+extends Node3D
 
 @export var speed := 25
 
-@onready var first = true
+@onready var raycast: RayCast3D = $RayCast3D
+
+func _ready() -> void:
+	raycast.target_position *= get_physics_process_delta_time() * speed
 
 func _physics_process(delta: float) -> void:
-	var data := move_and_collide(global_transform.basis.z * - speed * delta)
+	global_position -= global_transform.basis.z * speed * delta
 	
-	if (first):
-		first = false
-		$CollisionShape3D.disabled = false
-	if (data != null && data.get_collider().name != "Player"):
+	if raycast.is_colliding():
 		queue_free()

@@ -24,10 +24,6 @@ var p_bullet = preload("res://player/portal/portal_bullet.tscn")
 @onready var secondplaced = false
 
 
-var storedNormal
-var storedPosition
-var storedCollider
-
 # general vars
 var firstPortal
 var secondPortal
@@ -122,23 +118,26 @@ func _input(event):
 		aim_at_mouse()
 		ray.force_raycast_update()
 		if (ray.is_colliding() && raydelay.is_stopped()):
-			var value = ray.get_collider().global_position.distance_to(global_position)
-			var bullet = p_bullet.instantiate()
+			var storedPosition = ray.get_collision_point()
+			var value = storedPosition.distance_to(global_position)
+			var bullet: Node3D = p_bullet.instantiate()
 			get_viewport().add_child(bullet)
-			bullet.set_global_position(position)
-			bullet.position.y += 2
-			bullet.rotation.y = rotation.y
+			#bullet.global_transform = ray.global_transform
+			bullet.look_at_from_position(ray.global_position, storedPosition)
+			#bullet.rotation.y = rotation.y
 			raydelay.set_wait_time(value / bullet.speed)
 			raydelay.start()
-			storedCollider = ray.get_collider()
-			storedNormal = ray.get_collision_normal()
-			storedPosition = ray.get_collision_point()
+			var storedCollider = ray.get_collider()
+			var storedNormal = ray.get_collision_normal()
 			$Swing.play()
 			sprite.attack()
+			await raydelay.timeout
+			_create_portal(storedPosition, storedNormal, storedCollider)
 
 	elif event.is_action_pressed("kill_all"):
-		if !has_kill_all_spell or is_level_finished:
-			return
+		if !OS.has_feature("editor") or !ProjectSettings.get_setting("global/cheats"):
+			if !has_kill_all_spell or is_level_finished:
+				return
 		has_kill_all_spell = false
 		for enemy: Enemy in get_tree().get_nodes_in_group(&"Enemies"):
 			if !&"Boss" in enemy.get_groups():
@@ -219,7 +218,7 @@ func _on_died() -> void:
 # function that creates the portals when the player presses the button to do so
 # the reason why the player is handling this code is because all player inputs
 # should be handled by the player script when possible
-func _create_portal():
+func _create_portal(storedPosition, storedNormal, storedCollider):
 	var hitobject = storedCollider
 	if (!is_instance_valid(hitobject)):
 		return
@@ -265,6 +264,7 @@ func _create_portal():
 			newportal.position.z -= -0.06180000305176
 	# make sure the portal updates its stored position
 	if (!newportal.update_position()):
+		newportal.skip_close_anim = true
 		newportal.queue_free()
 		return
 		
@@ -334,10 +334,6 @@ func set_input_change(g_switch: bool, g_xneg: bool, g_zneg: bool):
 	neg_z = g_zneg
 
 
-func _on_ray_delay_timeout():
-	_create_portal()
-
-
 func _on_level_advanced() -> void:
 	is_level_finished = false
 	$MeshInstance3D.hide()
@@ -366,10 +362,12 @@ func _on_level_finished() -> void:
 func _on_can_move_on() -> void:
 	if (firstplaced):
 		firstplaced = false
-		firstPortal.queue_free()
+		if firstPortal != null:
+			firstPortal.queue_free()
 	if (secondplaced):
 		secondplaced = false
-		secondPortal.queue_free()
+		if secondPortal != null:
+			secondPortal.queue_free()
 	set_process_input(false)
 	if "idle" not in sprite.animation and "walk" not in sprite.animation:
 		await sprite.animation_finished
