@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://dpmfr1b26ccye"]
+[gd_scene load_steps=95 format=3 uid="uid://dpmfr1b26ccye"]
 
 [ext_resource type="Script" path="res://enemies/bosses/mage/mage_boss.gd" id="1_hwhin"]
 [ext_resource type="Script" path="res://components/health.gd" id="2_7y35l"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cgxp7g2v46a6l" path="res://enemies/bosses/mage/mage_south_east_swing-Sheet.png" id="22_uus1r"]
 [ext_resource type="Texture2D" uid="uid://bmt8hegyecdyt" path="res://enemies/bosses/mage/mage_north_swing-Sheet.png" id="23_yajh7"]
 [ext_resource type="Script" path="res://components/ysort.gd" id="26_yldkk"]
+[ext_resource type="Texture2D" uid="uid://cb5kbji6j2u6t" path="res://enemies/bosses/healthbar.png" id="28_bmd6x"]
 [ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="28_l2ro3"]
 [ext_resource type="Script" path="res://enemies/spawners/chain_spawner.gd" id="28_r4khc"]
 [ext_resource type="PackedScene" uid="uid://dy0uaej4flf11" path="res://enemies/projectiles/magic01.tscn" id="30_tci0l"]
@@ -515,6 +516,105 @@ func damage_flash(_damage: int):
 height = 2.53098
 radius = 0.630724
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysowr"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(0, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njnvc"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(100, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thg6p"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(200, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb3ya"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(300, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihcbp"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(400, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbl61"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(500, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hbhv"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(600, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jphdr"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(700, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_biejn"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(800, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7ig1"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(900, 0, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w1cl"]
+atlas = ExtResource("28_bmd6x")
+region = Rect2(1000, 0, 100, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u38mw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysowr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njnvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thg6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb3ya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihcbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbl61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hbhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jphdr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_biejn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7ig1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w1cl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_o8cw8"]
+script/source = "extends AnimatedSprite3D
+
+
+@onready var health: Health = $\"../../Health\"
+
+
+func _ready() -> void:
+	health.health_changed.connect(
+		func(new_health: int):
+			frame = ceili(float(new_health) / health.max_health * 10)
+	)
+"
+
 [sub_resource type="GDScript" id="GDScript_jx6vt"]
 script/source = "extends Node3D
 
@@ -627,6 +727,18 @@ script = ExtResource("3_g2a4m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Billboard/Hurtbox"]
 shape = SubResource("CylinderShape3D_splg6")
+
+[node name="HealthBar" type="AnimatedSprite3D" parent="Billboard"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.18384, 0)
+pixel_size = 0.02
+no_depth_test = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_u38mw")
+frame = 10
+script = SubResource("GDScript_o8cw8")
+
+[node name="YSort" type="Node" parent="Billboard/HealthBar"]
+script = ExtResource("26_yldkk")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
