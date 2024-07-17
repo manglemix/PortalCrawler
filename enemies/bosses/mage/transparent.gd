@@ -21,7 +21,7 @@ func _enter() -> void:
 	get_tree().create_timer(DURATION, false).timeout.connect(exit.bind(transparency_finished))
 	shadow.hide()
 	sprite.create_tween().tween_property(sprite, "modulate:a", TRANSPARENCY, TWEEN_DURATION)
-	healthbar.create_tween().tween_property(healthbar, "modulate:a", TRANSPARENCY, TWEEN_DURATION)
+	healthbar.create_tween().tween_property(healthbar, "modulate:a", 0, TWEEN_DURATION)
 
 
 func _exit() -> void:
