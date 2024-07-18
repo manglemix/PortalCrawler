@@ -1577,6 +1577,10 @@ var _shop: Shop
 
 func _ready() -> void:
 	set_process_input(false)
+	$Esc.pressed.connect(
+		func():
+			closed.emit()
+	)
 
 
 func set_player(player: Player) -> void:
@@ -1972,6 +1976,7 @@ texture = ExtResource("8_1ig04")
 expand_mode = 2
 stretch_mode = 5
 script = SubResource("GDScript_fa6n2")
+metadata/_edit_use_anchors_ = true
 
 [node name="Slot1" type="Button" parent="ShopUI"]
 layout_mode = 1
@@ -2080,6 +2085,20 @@ anchor_right = 0.864583
 anchor_bottom = 0.81893
 text = "100"
 horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Esc" type="Button" parent="ShopUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.880498
+anchor_top = 0.039609
+anchor_right = 0.961516
+anchor_bottom = 0.139918
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 32
+text = "Esc"
 metadata/_edit_use_anchors_ = true
 
 [node name="Cursor" type="Node2D" parent="."]
