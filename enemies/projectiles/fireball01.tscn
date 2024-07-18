@@ -42,3 +42,4 @@ bus = &"Level SFX"
 script = ExtResource("5_gm2qg")
 
 [connection signal="teleported" from="Teleportable" to="." method="attack_enemies"]
+[connection signal="teleported" from="Teleportable" to="Sprite3D" method="set_modulate" binds= [Color(1, 1, 0, 1)]]

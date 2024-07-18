@@ -42,5 +42,8 @@ func _physics_process(delta: float) -> void:
 
 func attack_enemies() -> void:
 	if !_attacking_enemies:
+		# Don't attack player
+		collision_mask -= 2
+		# Attack enemies
 		collision_mask += 4
 		_attacking_enemies = true
