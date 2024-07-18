@@ -2,16 +2,13 @@
 extends EnemyState
 
 
+signal teleporting
+signal teleported
 signal attack_finished
 signal attacked
 
 const DURATION := 4.0
 
-#@onready var areas: Node3D = $Node3D
-#@onready var area1: Area3D = $Node3D/Area3D1
-#@onready var area2: Area3D = $Node3D/Area3D2
-#@onready var area3: Area3D = $Node3D/Area3D3
-#@onready var area4: Area3D = $Node3D/Area3D4
 @onready var sprite: AnimatedSprite3D = $"../../Billboard/AnimatedSprite3D"
 
 
@@ -22,6 +19,7 @@ func _enter() -> void:
 	
 	var count := randi_range(2, 4)
 	for _i in range(count):
+		teleporting.emit()
 		sprite.play("start_teleport")
 		sprite.set_process(false)
 		await sprite.animation_finished
@@ -30,6 +28,7 @@ func _enter() -> void:
 		transform.origin = Vector3(lerpf(-5.5, 5.5, randf()), 0, lerpf(-2.6, 2.6, randf()))
 		sprite.play("end_teleport")
 		await sprite.animation_finished
+		teleported.emit()
 		if !is_active():
 			return
 		

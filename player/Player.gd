@@ -45,6 +45,7 @@ var poison_count := 0:
 		sprite.show()
 		poison_count = x
 var has_kill_all_spell := false
+var has_ranged_spell := false
 
 @onready var leftheld = false
 @onready var rightheld = false
