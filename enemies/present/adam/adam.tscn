@@ -372,30 +372,22 @@ pullable_from = [NodePath("../DeathState"), NodePath("../Damaged")]
 [node name="ChaseLineOfSight" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("6_vav7k")
 chase_speed = 0.0
-fov = 190.0
-min_distance = 1.0
-line_of_sight_check = true
 pullable_from = [NodePath("../DeathState"), NodePath("../PermaWander"), NodePath("../Damaged")]
 
 [node name="ChaseLastPosition" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("7_7fgi7")
 chase_speed = 1.7
-fov = 190.0
-min_distance = 1.0
 pullable_from = [NodePath("../DeathState"), NodePath("../PermaWander"), NodePath("../Damaged")]
 
 [node name="Damaged" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
 script = ExtResource("8_86l5i")
 pullable_from = [NodePath("../DeathState"), NodePath("../PermaWander")]
 
-[node name="DeathState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
+[node name="DeathState" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("9_7hx0q")
-pullable_from = []
 
-[node name="PermaWander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("pullable_from")]
+[node name="PermaWander" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("10_nr5rr")
-wander_speed = 0.75
-pullable_from = []
 
 [node name="InitialAttackTimer" type="Timer" parent="."]
 wait_time = 0.5

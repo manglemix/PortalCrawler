@@ -19,8 +19,8 @@ func _physics_process(delta: float) -> void:
 "
 
 [node name="WizardHat" type="Sprite3D"]
-offset = Vector2(0, 47.09)
-pixel_size = 0.02
+offset = Vector2(0.335, 31.385)
+pixel_size = 0.0165
 billboard = 1
 double_sided = false
 no_depth_test = true
