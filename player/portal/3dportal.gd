@@ -1,6 +1,8 @@
 class_name Portal
 extends StaticBody3D
 
+signal placed
+
 # some nodes for easy access later
 @onready var collider = $PortalArea
 @onready var cooldown = $cooldown
@@ -31,6 +33,8 @@ func _ready():
 		if body.collision_layer & 16 > 0:
 			skip_close_anim = true
 			queue_free()
+			return
+	placed.emit()
 # obviously could grab these values without storing them, but for
 # code readability and performance we store them after they are updated 1 time
 var cZOffset

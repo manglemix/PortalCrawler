@@ -102,16 +102,19 @@ animations = [{
 script/source = "extends AnimatedSprite3D
 
 
-enum Type { YELLOW, PURPLE }
+enum Type { YELLOW, PURPLE, UNPLACED }
 
-static var yellow = false
-static var purple = false
+static var yellow := false
+static var purple := false
 
-var type: Type
+var type := Type.UNPLACED
 
 
 func _ready() -> void:
+	await get_parent().placed
+	show()
 	var spiral: AnimatedSprite3D = $AnimatedSprite3D
+	prints(\"a\", yellow, purple, type)
 	while true:
 		if !yellow:
 			type = Type.YELLOW
@@ -125,6 +128,8 @@ func _ready() -> void:
 			break
 		else:
 			await get_tree().process_frame
+			continue
+	prints(\"b\", yellow, purple, type)
 	spiral.modulate = modulate
 	spiral.modulate.a = 0
 	$\"../OmniLight3D\".light_color = modulate
@@ -356,6 +361,7 @@ shape = SubResource("BoxShape3D_2rly3")
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(6.80889e-08, 0.281638, -0.959521, -7.92709e-08, -0.959521, -0.281638, -1, 9.52385e-08, -4.3007e-08, -0.147489, 0.101801, 0)
+visible = false
 pixel_size = 0.048
 no_depth_test = true
 texture_filter = 0
