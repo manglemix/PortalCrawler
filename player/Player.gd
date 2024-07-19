@@ -22,6 +22,7 @@ var p_bullet = preload("res://player/portal/portal_bullet.tscn")
 # these are some simple flags for the portal placement code
 @onready var firstplaced = false
 @onready var secondplaced = false
+@onready var damageable: Damageable = $Damageable
 
 
 # general vars
@@ -198,6 +199,10 @@ func _get_movement():
 
 func _on_damaged(_health_change: int) -> void:
 	Shake.shake_node(get_viewport().get_camera_3d(), 0.25, 0.2, 5)
+	if !damageable.invincible:
+		damageable.invincible = true
+		await get_tree().create_timer(1.0, false).timeout
+		damageable.invincible = false
 
 
 func _on_died() -> void:

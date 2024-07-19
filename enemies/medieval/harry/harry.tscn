@@ -591,6 +591,7 @@ script = ExtResource("11_tkv1g")
 [node name="AnimationStateMachine" type="Node3D" parent="Billboard"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("12_54s2x")
+damage_flash_duration = null
 
 [node name="Walk" type="AnimatedSprite3D" parent="Billboard/AnimationStateMachine" node_paths=PackedStringArray("rotation_source")]
 offset = Vector2(0.335, 31.385)
@@ -673,8 +674,8 @@ shape = SubResource("CylinderShape3D_f3srr")
 [connection signal="stun_finished" from="EnemyStateMachine/Damaged" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
 [connection signal="entered" from="EnemyStateMachine/PermaWander" to="Billboard/AnimationStateMachine/Walk" method="enter"]
 [connection signal="entered" from="EnemyStateMachine/DeathState" to="Billboard/AnimationStateMachine/Death" method="enter"]
-[connection signal="timeout" from="AttackTimer" to="Billboard/AnimationStateMachine/Shoot" method="enter"]
 [connection signal="timeout" from="AttackTimer" to="AttackTimer/Windup" method="start"]
+[connection signal="timeout" from="AttackTimer" to="Billboard/AnimationStateMachine/Shoot" method="enter"]
 [connection signal="timeout" from="AttackTimer/Windup" to="Billboard/ProjectileSpawner" method="spawn"]
 [connection signal="exited" from="Billboard/AnimationStateMachine/Death" to="." method="_on_die"]
 [connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Health" method="change_health"]

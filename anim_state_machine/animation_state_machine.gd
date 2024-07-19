@@ -2,6 +2,7 @@
 class_name AnimationStateMachine
 extends Node3D
 
+@export var damage_flash_duration := 0.2
 @export var modulate := Color.WHITE:
 	set=set_modulate
 
@@ -50,7 +51,6 @@ func _ready() -> void:
 		get_child(0).enter()
 
 
-func damage_flash(_damage: int):
+func damage_flash(_damage:=0):
 	modulate = Color.RED
-	await get_tree().create_timer(0.1, false).timeout
-	modulate = Color.WHITE
+	create_tween().tween_property(self, "modulate", Color.WHITE, damage_flash_duration)

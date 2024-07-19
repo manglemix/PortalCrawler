@@ -5,6 +5,7 @@ signal death_animation_finished
 
 enum Direction { LEFT, RIGHT, UP, DOWN }
 
+@export var damage_flash_duration := 0.2
 @export var character: CharacterBody3D
 @export var death = &"death"
 
@@ -121,9 +122,8 @@ func reset() -> void:
 	set_process(true)
 
 
-func damage_flash(_damage: int):
+func damage_flash(_damage:=0):
 	if _dying:
 		return
 	modulate = Color.RED
-	await get_tree().create_timer(0.1, false).timeout
-	modulate = Color.WHITE
+	create_tween().tween_property(self, "modulate", Color.WHITE, damage_flash_duration)
