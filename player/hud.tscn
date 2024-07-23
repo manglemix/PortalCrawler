@@ -1,4 +1,4 @@
-[gd_scene load_steps=196 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=193 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
 [ext_resource type="FontFile" uid="uid://dhsjp4frr3cjb" path="res://fonts/Pixelify_Sans/static/PixelifySans-Bold.ttf" id="3_dplwm"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://b0gr36oxtbq6j" path="res://player/coin.png" id="5_iavf7"]
 [ext_resource type="FontFile" uid="uid://5fqp282we4x2" path="res://fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="5_lipyx"]
 [ext_resource type="Texture2D" uid="uid://ds6siicrhahi8" path="res://player/delete_portal.png" id="5_uk65h"]
-[ext_resource type="Texture2D" uid="uid://p0hbynlugb2f" path="res://player/wizard_hat.png" id="6_gtsf6"]
 [ext_resource type="Texture2D" uid="uid://bjllashvnd5ww" path="res://levels/special/shop/shop ui.png" id="8_1ig04"]
 [ext_resource type="Texture2D" uid="uid://ebwjernenu5x" path="res://player/upgrade icons/fortune cookie icon.png" id="8_5s7ip"]
 [ext_resource type="Texture2D" uid="uid://iuv4kbwss6ke" path="res://player/upgrade icons/fortune cookie opened.png" id="9_kcx3t"]
@@ -1249,22 +1248,6 @@ func _ready() -> void:
 	)
 "
 
-[sub_resource type="LabelSettings" id="LabelSettings_nklj2"]
-font = ExtResource("5_lipyx")
-font_size = 30
-
-[sub_resource type="GDScript" id="GDScript_t1ar8"]
-script/source = "extends Label
-
-
-func _ready() -> void:
-	text = str(Wallet.wizard_hats)
-	Wallet.wallet_instance.wizard_hats_changed.connect(
-		func():
-			text = str(Wallet.wizard_hats)
-	)
-"
-
 [sub_resource type="GDScript" id="GDScript_n8btn"]
 script/source = "extends Panel
 
@@ -1626,6 +1609,7 @@ func select_slot1() -> void:
 	slot1.icon = _shop.slot1_texture
 	slot1_price_type.texture = price_type_to_texture(_shop.slot1_price_type)
 	slot1_price.text = str(_shop.slot1_price)
+	slot1.tooltip_text = _shop.slot1_tooltip
 
 
 func select_slot2() -> void:
@@ -1633,6 +1617,7 @@ func select_slot2() -> void:
 	slot2.icon = _shop.slot2_texture
 	slot2_price_type.texture = price_type_to_texture(_shop.slot2_price_type)
 	slot2_price.text = str(_shop.slot2_price)
+	slot2.tooltip_text = _shop.slot2_tooltip
 
 
 func select_slot3() -> void:
@@ -1640,6 +1625,7 @@ func select_slot3() -> void:
 	slot3.icon = _shop.slot3_texture
 	slot3_price_type.texture = price_type_to_texture(_shop.slot3_price_type)
 	slot3_price.text = str(_shop.slot3_price)
+	slot3.tooltip_text = _shop.slot3_tooltip
 
 
 func price_type_to_texture(type: Shop.PriceType) -> Texture2D:
@@ -1872,12 +1858,6 @@ texture = ExtResource("5_iavf7")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer2"]
-layout_mode = 2
-texture = ExtResource("6_gtsf6")
-expand_mode = 4
-stretch_mode = 5
-
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 1
@@ -1894,24 +1874,6 @@ vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
 script = SubResource("GDScript_xgkjs")
-
-[node name="Label2" type="Label" parent="."]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.889
-anchor_top = 0.115
-anchor_right = 0.929
-anchor_bottom = 0.173
-size_flags_vertical = 6
-theme_override_font_sizes/font_size = 16
-text = "0"
-label_settings = SubResource("LabelSettings_nklj2")
-horizontal_alignment = 2
-vertical_alignment = 1
-autowrap_mode = 3
-clip_text = true
-script = SubResource("GDScript_t1ar8")
 
 [node name="FortuneCookies" type="Panel" parent="."]
 modulate = Color(1, 1, 1, 0)

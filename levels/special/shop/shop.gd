@@ -47,9 +47,9 @@ func _on_body_entered(player: Player) -> void:
 			slot_tooltips.append("Adds poison to your sword")
 		if !player.has_kill_all_spell:
 			slot_textures.append(KILL_ALL)
-			slot_price_types.append(PriceType.WIZARD_HATS)
-			slot_prices.append(35)
-			slot_tooltips.append("Kills all enemies. Single Use")
+			slot_price_types.append(PriceType.COINS)
+			slot_prices.append(30)
+			slot_tooltips.append("Kills all enemies (except boss). Single Use")
 		if Health.get_health_component(player).shield < 3:
 			slot_textures.append(SHIELD)
 			slot_price_types.append(PriceType.COINS)

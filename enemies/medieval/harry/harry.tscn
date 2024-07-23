@@ -29,21 +29,21 @@
 script/source = "extends Enemy
 
 
-var _player: Player
+#var _player: Player
 
 
-func set_player(player: Player) -> void:
-	_player = player
-	super(player)
+#func set_player(player: Player) -> void:
+	#_player = player
+	#super(player)
 
 
 func _on_die() -> void:
-	if _player !=  null:
-		var hat: Sprite3D = preload(\"res://enemies/medieval/harry/wizard_hat.tscn\").instantiate()
-		hat.flip_h = $Billboard/AnimationStateMachine/Walk.flip_h
-		hat.player = _player
-		get_viewport().add_child(hat)
-		hat.global_position = global_position
+	#if _player !=  null:
+		#var hat: Sprite3D = preload(\"res://enemies/medieval/harry/wizard_hat.tscn\").instantiate()
+		#hat.flip_h = $Billboard/AnimationStateMachine/Walk.flip_h
+		#hat.player = _player
+		#get_viewport().add_child(hat)
+		#hat.global_position = global_position
 	queue_free()
 "
 
@@ -591,7 +591,6 @@ script = ExtResource("11_tkv1g")
 [node name="AnimationStateMachine" type="Node3D" parent="Billboard"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("12_54s2x")
-damage_flash_duration = null
 
 [node name="Walk" type="AnimatedSprite3D" parent="Billboard/AnimationStateMachine" node_paths=PackedStringArray("rotation_source")]
 offset = Vector2(0.335, 31.385)
