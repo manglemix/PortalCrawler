@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bk1hs0ucrbyot"]
+[gd_scene load_steps=11 format=3 uid="uid://bk1hs0ucrbyot"]
 
 [ext_resource type="PackedScene" uid="uid://d3estyfagpb7m" path="res://collectibles/aseprite/aseprite.gltf" id="1_t2ov4"]
 [ext_resource type="Script" path="res://collectibles/scale_up.gd" id="2_03n8y"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://collectibles/beta_collectible_label.gd" id="4_633hu"]
 [ext_resource type="Script" path="res://collectibles/fade_in.gd" id="4_jpj30"]
 [ext_resource type="Script" path="res://collectibles/fade_out.gd" id="5_x858o"]
+[ext_resource type="AudioStream" uid="uid://ceobmiofmsps6" path="res://player/collectible pickup.ogg" id="7_6mvhq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_epunk"]
 bounce = 0.7
@@ -75,7 +76,13 @@ duration = 1.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.57764e-05, -0.00457764)
 shape = SubResource("BoxShape3D_nrqlu")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6mvhq")
+volume_db = 24.0
+bus = &"SFX"
+
 [connection signal="clearing_display" from="." to="WithLights/CanvasLayer/Label/FadeOut" method="fade_out"]
 [connection signal="contacted_player" from="." to="WithLights/SpotLight3D" method="show"]
 [connection signal="contacted_player" from="." to="WithLights/CanvasLayer/Label/Timer" method="start"]
+[connection signal="contacted_player" from="." to="AudioStreamPlayer" method="play"]
 [connection signal="timeout" from="WithLights/CanvasLayer/Label/Timer" to="WithLights/CanvasLayer/Label/FadeIn" method="fade_in"]

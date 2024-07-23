@@ -1,13 +1,56 @@
-[gd_scene load_steps=7 format=3 uid="uid://5eneakjbyq1l"]
+[gd_scene load_steps=13 format=3 uid="uid://5eneakjbyq1l"]
 
 [ext_resource type="Script" path="res://enemies/projectiles/basic_projectile.gd" id="1_i57xl"]
-[ext_resource type="Texture2D" uid="uid://corsgd42piluv" path="res://enemies/projectiles/magic_ball.png" id="2_xkqyp"]
+[ext_resource type="Texture2D" uid="uid://bp7h0yvldekg3" path="res://enemies/projectiles/fireball.png" id="2_6k8t6"]
 [ext_resource type="Script" path="res://components/teleportable.gd" id="3_klsvw"]
 [ext_resource type="AudioStream" uid="uid://crrm0r8t3jgcl" path="res://enemies/medieval/harry/laser_bullet.wav" id="4_bk1nh"]
 [ext_resource type="Script" path="res://scripts/persistent_sound.gd" id="5_gm2qg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sq72s"]
 radius = 0.173872
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgbo7"]
+atlas = ExtResource("2_6k8t6")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro2jh"]
+atlas = ExtResource("2_6k8t6")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ypl8"]
+atlas = ExtResource("2_6k8t6")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyvq4"]
+atlas = ExtResource("2_6k8t6")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f28es"]
+atlas = ExtResource("2_6k8t6")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_16r3l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgbo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ro2jh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ypl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyvq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f28es")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="Basic" type="CharacterBody3D"]
 collision_layer = 8
@@ -23,13 +66,16 @@ shape = SubResource("SphereShape3D_sq72s")
 light_color = Color(1, 0.172549, 0.180392, 1)
 omni_range = 2.0
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 0, 0)
-pixel_size = 0.03
+offset = Vector2(0.595, -6.37)
+pixel_size = 0.015
 no_depth_test = true
 texture_filter = 0
 render_priority = 127
-texture = ExtResource("2_xkqyp")
+sprite_frames = SubResource("SpriteFrames_16r3l")
+autoplay = "default"
+frame_progress = 0.0270443
 
 [node name="Teleportable" type="Node" parent="."]
 script = ExtResource("3_klsvw")
@@ -42,4 +88,4 @@ bus = &"Level SFX"
 script = ExtResource("5_gm2qg")
 
 [connection signal="teleported" from="Teleportable" to="." method="attack_enemies"]
-[connection signal="teleported" from="Teleportable" to="Sprite3D" method="set_modulate" binds= [Color(1, 1, 0, 1)]]
+[connection signal="teleported" from="Teleportable" to="Sprite3D" method="set_modulate"]

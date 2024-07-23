@@ -1,10 +1,11 @@
-[gd_scene load_steps=42 format=3 uid="uid://cq8phymen32ep"]
+[gd_scene load_steps=43 format=3 uid="uid://cq8phymen32ep"]
 
 [ext_resource type="Script" path="res://collectibles/scale_up.gd" id="2_u51nf"]
 [ext_resource type="Script" path="res://collectibles/beta_collectible_label.gd" id="3_rgyeg"]
 [ext_resource type="FontFile" uid="uid://5fqp282we4x2" path="res://fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="3_t8ob1"]
 [ext_resource type="Script" path="res://collectibles/fade_in.gd" id="4_6f2du"]
 [ext_resource type="Script" path="res://collectibles/fade_out.gd" id="5_t0qxf"]
+[ext_resource type="AudioStream" uid="uid://ceobmiofmsps6" path="res://player/collectible pickup.ogg" id="6_fy2fx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_epunk"]
 bounce = 0.7
@@ -574,8 +575,14 @@ duration = 1.0
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, -0.653956, -0.00162947, 0.947155)
 shape = SubResource("ConvexPolygonShape3D_7dnjt")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_fy2fx")
+volume_db = 24.0
+bus = &"SFX"
+
 [connection signal="clearing_display" from="." to="WithLights/CanvasLayer/Label/FadeOut" method="fade_out"]
 [connection signal="contacted_player" from="." to="WithLights/SpotLight3D" method="show"]
 [connection signal="contacted_player" from="." to="WithLights/SpotLight3D2" method="show"]
 [connection signal="contacted_player" from="." to="WithLights/CanvasLayer/Label/Timer" method="start"]
+[connection signal="contacted_player" from="." to="AudioStreamPlayer" method="play"]
 [connection signal="timeout" from="WithLights/CanvasLayer/Label/Timer" to="WithLights/CanvasLayer/Label/FadeIn" method="fade_in"]

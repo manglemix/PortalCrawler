@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://q7ehavjgr16c"]
+[gd_scene load_steps=24 format=3 uid="uid://q7ehavjgr16c"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_caxu8"]
 [ext_resource type="Texture2D" uid="uid://b0xxyfgos2y5w" path="res://levels/special/shop/Middle Ages Wall Color_png.png" id="2_w66pn"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://levels/special/shop/shop.gd" id="9_l6v1h"]
 [ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="10_83btw"]
 [ext_resource type="AudioStream" uid="uid://drmeg5fnbd5o" path="res://music/MysteriousBG_sound.mp3" id="11_70uh3"]
+[ext_resource type="AudioStream" uid="uid://cudxbgflmbo8m" path="res://player/purchased item.ogg" id="11_toeb2"]
 [ext_resource type="Texture2D" uid="uid://cr6whonsplasx" path="res://levels/special/shop/exit.png" id="12_3jvmg"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="14_6d4d7"]
 [ext_resource type="Script" path="res://scripts/encountered_setter.gd" id="15_wlvly"]
@@ -162,6 +163,12 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0836175, 0, 0)
 shape = SubResource("BoxShape3D_mij2a")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sprite3D"]
+stream = ExtResource("11_toeb2")
+volume_db = 3.014
+pitch_scale = 1.19
+bus = &"SFX"
+
 [node name="PlayerSpawnPoint" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97007, 0, 2.11122)
 
@@ -169,7 +176,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97007, 0, 2.11122)
 stream = ExtResource("11_70uh3")
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4.35125, 0.00205141, 1.78289)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4.35125, 0.00205141, 2.00327)
 pixel_size = 0.0466
 shaded = true
 texture_filter = 0
@@ -187,5 +194,6 @@ script = SubResource("GDScript_ohkpo")
 script = ExtResource("15_wlvly")
 encounter_name = &"shop"
 
+[connection signal="purchased" from="Sprite3D" to="Sprite3D/AudioStreamPlayer" method="play"]
 [connection signal="body_entered" from="Sprite3D/Area3D" to="Sprite3D" method="_on_body_entered"]
 [connection signal="move_on" from="Sprite3D2/RayCast3D" to="." method="_on_can_move_on"]

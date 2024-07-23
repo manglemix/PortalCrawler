@@ -1312,7 +1312,7 @@ var locations := [
 	],
 	[
 		\"Near Future - 1800s\",
-		\"The sword has brought me to yet another time period. This time I’m in a building made of red mortar material (tablet tells me it's called “brick”)with a wooden floor. The room was lit with what looked like oil lamps but it seemed that's not what it used to produce light. I spooked a bunch of soldiers dressed in a red uniform. They held sticks with a knife stuck to the end of it that shot flashes of death. They spoke in a language similar to my own but in a slightly different dialect. I could make out a few words here and there like “Enemy!” and “Attack!” but everything else was unknown to me. The tablet told me these soldiers were called “Redcoats” and they are this time period’s version of knights like me.\"
+		\"The sword has brought me to yet another time period. This time I’m in a building made of red mortar material (tablet tells me it's called “brick”) with a wooden floor. The room was lit with what looked like oil lamps but it seemed that's not what it used to produce light. I spooked a bunch of soldiers dressed in a red uniform. They held sticks with a knife stuck to the end of it that shot flashes of death. They spoke in a language similar to my own but in a slightly different dialect. I could make out a few words here and there like “Enemy!” and “Attack!” but everything else was unknown to me. The tablet told me these soldiers were called “Redcoats” and they are this time period’s version of knights like me.\"
 	]
 ]
 
@@ -1349,14 +1349,6 @@ var type := Type.ENEMIES:
 		update()
 var index := 0:
 	set(x):
-		var arr: Array
-		match type:
-			Type.ENEMIES:
-				arr = enemies
-			Type.LOCATIONS:
-				arr = locations
-			Type.ITEMS:
-				arr = items
 		index = x % max_size
 		update()
 var max_size := 1

@@ -2,6 +2,7 @@ class_name Shop
 extends Sprite3D
 
 
+signal purchased
 signal force_close
 
 enum PriceType { COINS, WIZARD_HATS }
@@ -128,3 +129,5 @@ func _on_texture_pressed(texture: Texture2D) -> void:
 		slot3_price_type = PriceType.COINS
 		slot3_price = 5
 		slot3_tooltip = FORTUNE_TOOLTIP
+	
+	purchased.emit()
