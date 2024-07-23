@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c5pkdtfupew0e"]
+[gd_scene load_steps=34 format=3 uid="uid://c5pkdtfupew0e"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_47a1a"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="2_t6hfu"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://scripts/nav/overlapping_nav_region_3d.gd" id="8_3yjj7"]
 [ext_resource type="AudioStream" uid="uid://dtludju15pidf" path="res://music/quiet_underground_sound_BG.mp3" id="8_ng0pv"]
 [ext_resource type="Script" path="res://levels/collectible_spawner.gd" id="9_t66sk"]
+[ext_resource type="Script" path="res://scripts/encountered_setter.gd" id="17_wapkr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3l4y"]
 resource_name = "StoneBricksSplitface001_1K.001"
@@ -440,6 +441,10 @@ stream = ExtResource("8_ng0pv")
 [node name="CollectibleSpawner" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21164, 0.504632, -1.03665)
 script = ExtResource("9_t66sk")
+
+[node name="EncounterSetter" type="Node" parent="."]
+script = ExtResource("17_wapkr")
+encounter_name = &"middle_ages"
 
 [connection signal="level_complete" from="." to="CollectibleSpawner" method="spawn"]
 [connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]

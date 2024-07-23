@@ -1,12 +1,15 @@
-[gd_scene load_steps=193 format=3 uid="uid://cpg817r11rxxe"]
+[gd_scene load_steps=199 format=3 uid="uid://cpg817r11rxxe"]
 
 [ext_resource type="Texture2D" uid="uid://jkh3db66e5w3" path="res://player/Health indicator (full).webp" id="1_h1oyn"]
 [ext_resource type="FontFile" uid="uid://dhsjp4frr3cjb" path="res://fonts/Pixelify_Sans/static/PixelifySans-Bold.ttf" id="3_dplwm"]
 [ext_resource type="Texture2D" uid="uid://8qlefdmikbgv" path="res://player/pause_open.png" id="3_jid7s"]
 [ext_resource type="Texture2D" uid="uid://dqu3pr727nh85" path="res://player/pause_close.png" id="4_k8qjx"]
+[ext_resource type="Texture2D" uid="uid://kxstn7546awy" path="res://player/codex/Big Codex - Enemy Tab.webp" id="5_au44g"]
 [ext_resource type="Texture2D" uid="uid://b0gr36oxtbq6j" path="res://player/coin.png" id="5_iavf7"]
 [ext_resource type="FontFile" uid="uid://5fqp282we4x2" path="res://fonts/Pixelify_Sans/static/PixelifySans-Regular.ttf" id="5_lipyx"]
 [ext_resource type="Texture2D" uid="uid://ds6siicrhahi8" path="res://player/delete_portal.png" id="5_uk65h"]
+[ext_resource type="FontFile" uid="uid://dniag53xm4vlt" path="res://fonts/Pixelify_Sans/static/PixelifySans-SemiBold.ttf" id="6_747wx"]
+[ext_resource type="Texture2D" uid="uid://b1fapls50cqhm" path="res://player/codex/next page arrow.webp" id="7_wu5b1"]
 [ext_resource type="Texture2D" uid="uid://bjllashvnd5ww" path="res://levels/special/shop/shop ui.png" id="8_1ig04"]
 [ext_resource type="Texture2D" uid="uid://ebwjernenu5x" path="res://player/upgrade icons/fortune cookie icon.png" id="8_5s7ip"]
 [ext_resource type="Texture2D" uid="uid://iuv4kbwss6ke" path="res://player/upgrade icons/fortune cookie opened.png" id="9_kcx3t"]
@@ -1232,6 +1235,218 @@ func _on_pressed() -> void:
 	#get_tree().change_scene_to_file(\"res://main.tscn\")
 "
 
+[sub_resource type="GDScript" id="GDScript_iwwmg"]
+script/source = "extends Button
+
+
+func _on_pressed() -> void:
+	$\"../Codex\".visible = !$\"../Codex\".visible
+"
+
+[sub_resource type="Theme" id="Theme_54smy"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 32
+Label/colors/font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_8wv4g"]
+script/source = "extends TextureRect
+
+
+enum Type { ENEMIES, LOCATIONS, ITEMS }
+
+
+var enemies := [
+	[
+		\"Wizard Mirages\",
+		\"Through my travels, when I go through a portal there is a chance that I meet these mirages of the wizard whom I took the magic sword from. Sometimes they are nothing more than figments of time energy created by the portals but other times they are constructed enough that they will attack me and even hurt me. I learned to deal with them quickly otherwise they would overpower me very quickly if they were the ones that could interact with me. They use wands to blast balls of magic at me. Wearing the blue robes and hat just like how I remember before I fell through that first damned portal.\"
+	],
+	[
+		\"Green Soldiers - Soldiers\",
+		\"These humans are dressed in a uniform that is a multitude of shades of green. It looks like they are wearing a type of armor but I have no idea what the material is. All I know is it takes a few more wacks than normal to cut them down. They are holding many different sticks made of metal that also shoot flashes of death. Their reloading appears to be much more efficient and they can shoot different weapons in quick succession. They speak a language similar to the red soldiers but I can make out even fewer words.\"
+	],
+	[
+		\"Metal Golems - Automatons\",
+		\"The first creature I encountered after exiting a portal. I first thought they were golems that ran on magic but they actually run on something called “electricity” and are called “automatons”. They are completely made of metal and they carry small metal cannons that fire bolts of energy at me. They are slow and clunky. Thankfully the sword is able to cut through them like butter and I can quickly deal with them.\"
+	],
+	[
+		\"Hooded Beggar - The Wizard\",
+		\"The version of the Wizard I met after going through the portals multiple times and ending up near my original time. It appears that he had lost all of his belongings and was left with nothing apart from the last bits of magic he had left and his staff. He wore a blue hooded cloak that covered his face completely. Was not aggressive at all until he recognized me. Through a journal I found, I discovered that the Wizard had obsessed over me all these years and was hoping that I would return so he could kill me for ruining him. Apparently, the sword I took was going to be his way out and escape fro mus when we came to defeat him. With his staff he would shoot balls of energy at me and summon lasers that tracked me. He also has the ability to turn translucent and teleport.\"
+	],
+	[
+		\"Dinosaur - Dilophosaurus\",
+		\"The first animal I encountered. They were the size of bears easily towering over any human they came across. They spit a black liquid that induces severe pain to anything living thing it touches. It also appears to have a slight acidic effect and can slightly eat away at metal or inorganic things. Somehow they were tamed by the Neanderthal humans of the time period these things are from. They are a yellow and black patterned animal with lots of lizard features. 
+
+Note: try and befriend one of these things in the future. Having one as a pet could prove to be useful
+\"
+	],
+	[
+		\"Red Soldiers - Redcoats\",
+		\"These are humans dressed in a distinct red uniform. They carry sticks with a knife at the end that shoots flashes of death. They speak a language similar to my own but it's hard to make out words most of the time. It takes them a long time to fire their weapon but they sure pack a punch. It doesn’t take too many hits before my armor is shot through. The moment they are reloading or taking aim is my perfect time to strike but I have to be careful of their knives at the end because they can switch to using them to attack me instead if I get too close and am too slow.\"
+	]
+]
+
+var locations := [
+	[
+		\"Traveling in the Portal - ????\",
+		\"This is the place that I go to every time I travel through a portal. In battles or going to another time period. I am surrounded by purple energy that begins and ends in spiral patterns. I am simultaneously at every point in time and not. There are times when mirages of enemies I have encountered show up. They aren’t real but I still fight them off because I have discovered they can still hurt me. This is also where I do most of my writing on this tablet to record all my discoveries and knowledge about all the new things I’ve encountered.\"
+	],
+	[
+		\"Almost back home - Middle Ages\",
+		\"The sword brings me to a time period that feels VERY familiar. I check my tablet immediately for the time. At this point, the tablet has triangulated my original time that I came from. It says that I arrived 70 years away from my original time in the future direction. I have a moment of joy but then despair grips me as I realize all my family and friends are dead at this point. I crumple to the ground, put my hands up to my face, and start crying. The sound of my cries wakes up the inhabitant of this place which I hadn’t noticed yet. Once it had noticed me it cried out in rage and started towards me. The rage cry shook me out of my spiral of despair and I turned towards the sound. It was a hooded beggar with what appeared to be a magical staff. “Sir Jax!” yelled the beggar “I will have my vengeance!”. That's when I realized the pathetic beggar in front of me was the Wizard, no one else would know my name and have a reason to say it with such spite. A fierce fight ensued which I came out victorious but just barely. Even with the Wizard weakened after these years he was still a force to be reckoned with.\"
+	],
+	[
+		\"Future - 2024\",
+		\"The sword has brought me to another time period that isn’t my own. The walls are made of a material I have no knowledge of and I quickly check my tablet to find out the name of it. It tells me that the material is called “plaster” something that in this time period uses to build houses. Once again there are soldiers but they are wearing gear that is a multitude of different shades of green. They too have sticks that shoot flashes of death but these sticks were made of metal and they didn’t have the knives sticking at the end of them. After checking the tablet it only labeled these soldiers as simply “soldiers”.\"
+	],
+	[
+		\"Far Future - 6000 AD\",
+		\"This is the first time period that the mysterious sword brought me to. The walls and floors were completely made of metal. The room was lit up with orbs of light that produced a bright white glow. I was met with metal golems that somehow didn’t run on magic. They used small metal cannons that fired bolts of energy at me. Once I dispatched the enemies in the area, I was finally able to explore my surroundings. I found a magical tablet on one of the golems that revealed to me that I was transported to the year 6000 AD. I also discovered the tablet could store written records into it, so I took it with me, to keep logs of all my discoveries on my journey back home.\"
+	],
+	[
+		\"The Shop - ????\",
+		\"This place randomly shows up during my travels. All it sells is magical and defense items. This must be where the Wizard got all of his magical items from. It happens to accept the coins I’ve collected from my enemies. It looks like a basic wooden shack shop from back home. My tablet can’t tell me what time this place resides. This must be a creation from the portal energy like the mirages I see.\"
+	],
+	[
+		\"Far in the Past - 67 million BC\",
+		\"The sword has brought me to another time period. This time I’m in what appears to be a shelter made up entirely of mud-dried blocks with the bare ground as the floor. There was a campfire in the middle. The inhabitants of this shelter and their pets were not too happy with me appearing out of nowhere from a portal. They were savage humans from what I could gather. Their pets were these large lizard creatures, which had lots of sharp teeth and claws. The humans threw rocks at me while the lizards spewed a black liquid towards me. The rocks barely dented my armor but that black liquid started to hiss when it came into contact. I dealt with the lizards first and then the humans. I learned that the tablet I took could scan creatures and tell me what they were. By using the scan function I learned that the savage humans were actually Neanderthals our human ancestors and the lizards were Dilophosaurus a kind of dinosaur.\"
+	],
+	[
+		\"Near Future - 1800s\",
+		\"The sword has brought me to yet another time period. This time I’m in a building made of red mortar material (tablet tells me it's called “brick”)with a wooden floor. The room was lit with what looked like oil lamps but it seemed that's not what it used to produce light. I spooked a bunch of soldiers dressed in a red uniform. They held sticks with a knife stuck to the end of it that shot flashes of death. They spoke in a language similar to my own but in a slightly different dialect. I could make out a few words here and there like “Enemy!” and “Attack!” but everything else was unknown to me. The tablet told me these soldiers were called “Redcoats” and they are this time period’s version of knights like me.\"
+	]
+]
+
+var items := [
+	[
+		\"The Sword\",
+		\"The whole reason I’m here in the first place, the damned thing. I still don’t know how it makes the portals. I just know how to make it create them. It looks like a normal sword apart from the guard where it glows yellow when making portals. After so much time I have a hunch that the portal that transports me through time is powered by souls. So it needs me to “sacrifice” things to its blade in order for it to recharge. If that’s what it takes to get home I will gladly continue.\"
+	],
+	[
+		\"Coins\",
+		\"These are dropped by every enemy I defeat. They are small little gold coins. I have no idea their origin but somehow the mysterious shop that appears every once in a while accepts them. So I have a reason to continue to collect them. I think they may be some type of manifestation of the portal energy.\"
+	],
+	[
+		\"Shield\",
+		\"An item that the shop sells. It is a basic wooden leather shield with no knight's crest on it. I can use it to block enemy attacks a limited amount of times. One thing I’ve noticed though is every time I buy it from the shop, if I still have one with me the current one gets transformed into a tougher material like iron and steel. Comes in handy when I’ve taken too many hits already in my travels.\"
+	],
+	[
+		\"Poison Aspect\",
+		\"A magical item that the shop sells. It is a sword that has its blade covered in a thorny vine. When I buy it, the sword merges with my sword and adds its effect to it. This allows my sword to inflict my enemies with a fast acting deadly poison. This is very useful against the more tougher enemies as I can just poison them and run away and watch them contort in pain and die.\"
+	],
+	[
+		\"Death Book\",
+		\"A magical item that the shop sells. It is a black magical book that can apparently kill anything in a room except the user and enemies with protections against its magic. Once its been used the book turns into dust but it seems the shop sells and unlimited amount of this book. I get a weird feeling everytime I use this book like my soul is screaming but it’s probably nothing.\"
+	],
+	[
+		\"Fortune Cookie\",
+		\"This is an item that the shop sells. It does nothing of value but give obscure prophecies that don’t ever come true. The cookie part does taste good though and is a good snack for my travels. I personally think these should be free with every purchase.\"
+	]
+]
+
+var type := Type.ENEMIES:
+	set(x):
+		type = x
+		update()
+var index := 0:
+	set(x):
+		var arr: Array
+		match type:
+			Type.ENEMIES:
+				arr = enemies
+			Type.LOCATIONS:
+				arr = locations
+			Type.ITEMS:
+				arr = items
+		index = x % max_size
+		update()
+var max_size := 1
+
+
+func update() -> void:
+	var arr: Array
+	match type:
+		Type.ENEMIES:
+			texture = preload(\"res://player/codex/Big Codex - Enemy Tab.webp\")
+			arr = enemies
+		Type.LOCATIONS:
+			texture = preload(\"res://player/codex/Big Codex - Location Tab.webp\")
+			arr = locations
+		Type.ITEMS:
+			texture = preload(\"res://player/codex/Big Codex - Item Tab.webp\")
+			arr = items
+	if index >= max_size:
+		# reinvoke the setter
+		index = index
+		return
+	$Title.text = arr[index][0]
+	$ScrollContainer/VBoxContainer/Text.text = arr[index][1]
+
+
+func _ready() -> void:
+	update()
+
+
+func _on_right_pressed() -> void:
+	index += 1
+
+
+func _on_left_pressed() -> void:
+	index -= 1
+
+
+func _on_location_pressed() -> void:
+	if Encountered.redcoats:
+		max_size = 7
+	elif Encountered.far_past:
+		max_size = 6
+	elif Encountered.shop:
+		max_size = 5
+	elif Encountered.future:
+		max_size = 4
+	elif Encountered.present:
+		max_size = 3
+	elif Encountered.middle_ages:
+		max_size = 2
+	else:
+		max_size = 1
+	type = Type.LOCATIONS
+
+
+func _on_enemy_pressed() -> void:
+	if Encountered.redcoats:
+		max_size = 6
+	elif Encountered.far_past:
+		max_size = 5
+	elif Encountered.boss:
+		max_size = 4
+	elif Encountered.future:
+		max_size = 3
+	elif Encountered.present:
+		max_size = 2
+	else:
+		max_size = 1
+	type = Type.ENEMIES
+
+
+func _on_item_pressed() -> void:
+	if Encountered.shop:
+		max_size = 6
+	else:
+		max_size = 2
+	type = Type.ITEMS
+
+
+func _on_visibility_changed() -> void:
+	# Re invoke setters to check encounters
+	match type:
+		Type.ENEMIES:
+			_on_enemy_pressed()
+		Type.LOCATIONS:
+			_on_location_pressed()
+		Type.ITEMS:
+			_on_item_pressed()
+"
+
 [sub_resource type="LabelSettings" id="LabelSettings_yloxr"]
 font = ExtResource("5_lipyx")
 font_size = 30
@@ -1841,6 +2056,143 @@ icon_alignment = 1
 expand_icon = true
 script = SubResource("GDScript_adouf")
 
+[node name="CodexButton" type="Button" parent="Pause"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.431424
+anchor_top = 0.833333
+anchor_right = 0.561424
+anchor_bottom = 0.936728
+grow_vertical = 2
+focus_mode = 0
+text = "Codex
+"
+icon_alignment = 1
+expand_icon = true
+script = SubResource("GDScript_iwwmg")
+metadata/_edit_use_anchors_ = true
+
+[node name="Codex" type="TextureRect" parent="Pause"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_54smy")
+texture = ExtResource("5_au44g")
+stretch_mode = 5
+script = SubResource("GDScript_8wv4g")
+
+[node name="Title" type="Label" parent="Pause/Codex"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.279
+anchor_top = 0.162
+anchor_right = 0.719
+anchor_bottom = 0.229
+theme_override_fonts/font = ExtResource("6_747wx")
+theme_override_font_sizes/font_size = 24
+text = "Wizard Mirages"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Pause/Codex"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.279
+anchor_top = 0.229
+anchor_right = 0.719
+anchor_bottom = 0.867
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/Codex/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Text" type="Label" parent="Pause/Codex/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Through my travels, when I go through a portal there is a chance that I meet these mirages of the wizard whom I took the magic sword from. Sometimes they are nothing more than figments of time energy created by the portals but other times they are constructed enough that they will attack me and even hurt me. I learned to deal with them quickly otherwise they would overpower me very quickly if they were the ones that could interact with me. They use wands to blast balls of magic at me. Wearing the blue robes and hat just like how I remember before I fell through that first damned portal"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Location" type="Button" parent="Pause/Codex"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.271583
+anchor_top = 0.0723684
+anchor_right = 0.41277
+anchor_bottom = 0.136513
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+text = "Locations"
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Enemy" type="Button" parent="Pause/Codex"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.438849
+anchor_top = 0.0723684
+anchor_right = 0.551259
+anchor_bottom = 0.136513
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+text = "Enemies"
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Item" type="Button" parent="Pause/Codex"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.597122
+anchor_top = 0.0723684
+anchor_right = 0.709532
+anchor_bottom = 0.136513
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+text = "Items"
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Right" type="Button" parent="Pause/Codex"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.67
+anchor_top = 0.872
+anchor_right = 0.719
+anchor_bottom = 0.949
+focus_mode = 0
+icon = ExtResource("7_wu5b1")
+flat = true
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Left" type="Button" parent="Pause/Codex"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.331835
+anchor_top = 0.952303
+anchor_right = 0.380834
+anchor_bottom = 1.0293
+rotation = 3.14159
+focus_mode = 0
+icon = ExtResource("7_wu5b1")
+flat = true
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -1881,6 +2233,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -5.0
+offset_right = -8.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -2133,6 +2489,14 @@ vertical_alignment = 2
 script = SubResource("GDScript_viv43")
 metadata/_edit_use_anchors_ = true
 
+[connection signal="visibility_changed" from="Pause" to="Pause/Codex" method="hide"]
 [connection signal="pressed" from="Pause/Fullscreen" to="Pause/Fullscreen" method="_on_pressed"]
 [connection signal="pressed" from="Pause/Restart" to="Pause/Restart" method="_on_pressed"]
+[connection signal="pressed" from="Pause/CodexButton" to="Pause/CodexButton" method="_on_pressed"]
+[connection signal="visibility_changed" from="Pause/Codex" to="Pause/Codex" method="_on_visibility_changed"]
+[connection signal="pressed" from="Pause/Codex/Location" to="Pause/Codex" method="_on_location_pressed"]
+[connection signal="pressed" from="Pause/Codex/Enemy" to="Pause/Codex" method="_on_enemy_pressed"]
+[connection signal="pressed" from="Pause/Codex/Item" to="Pause/Codex" method="_on_item_pressed"]
+[connection signal="pressed" from="Pause/Codex/Right" to="Pause/Codex" method="_on_right_pressed"]
+[connection signal="pressed" from="Pause/Codex/Left" to="Pause/Codex" method="_on_left_pressed"]
 [connection signal="closed" from="ShopUI" to="." method="_on_shop_ui_closed"]

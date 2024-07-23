@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://i8o4vpybofdi"]
+[gd_scene load_steps=12 format=3 uid="uid://i8o4vpybofdi"]
 
 [ext_resource type="PackedScene" uid="uid://b4b167iws1oba" path="res://levels/far_future/cerium/cerium.gltf" id="1_yccob"]
 [ext_resource type="Script" path="res://levels/level.gd" id="2_en1m3"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bhm7iyo3h1igw" path="res://music/roboticBG_sound.mp3" id="9_a55ge"]
 [ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="9_hty2g"]
 [ext_resource type="Script" path="res://levels/collectible_spawner.gd" id="10_6v6cd"]
+[ext_resource type="Script" path="res://scripts/encountered_setter.gd" id="11_g1ay3"]
 
 [node name="Cerium" node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("1_yccob")]
 script = ExtResource("2_en1m3")
@@ -128,6 +129,10 @@ stream = ExtResource("9_a55ge")
 [node name="CollectibleSpawner" type="Marker3D" parent="." index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.09589, 0.757184, 2.19351)
 script = ExtResource("10_6v6cd")
+
+[node name="EncounterSetter" type="Node" parent="." index="12"]
+script = ExtResource("11_g1ay3")
+encounter_name = &"future"
 
 [connection signal="level_complete" from="." to="CollectibleSpawner" method="spawn"]
 [connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]

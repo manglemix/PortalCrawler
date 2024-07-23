@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://gqopyictx6fc"]
+[gd_scene load_steps=34 format=3 uid="uid://gqopyictx6fc"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_3hosn"]
 [ext_resource type="Texture2D" uid="uid://ce0g2iulb3am5" path="res://levels/far_past/sid/Far in the Past Wall Color.png" id="2_81ugp"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dcetufd2kgutc" path="res://music/level_music_player.tscn" id="14_jds2y"]
 [ext_resource type="AudioStream" uid="uid://dtludju15pidf" path="res://music/quiet_underground_sound_BG.mp3" id="15_jaj8o"]
 [ext_resource type="Script" path="res://levels/collectible_spawner.gd" id="16_gmfxj"]
+[ext_resource type="Script" path="res://scripts/encountered_setter.gd" id="16_ihy3m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b885a"]
 resource_name = "MetalCastRusted001_1K.001"
@@ -423,6 +424,10 @@ stream = ExtResource("15_jaj8o")
 [node name="CollectibleSpawner" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21164, 0.504632, -1.03665)
 script = ExtResource("16_gmfxj")
+
+[node name="EncounterSetter" type="Node" parent="."]
+script = ExtResource("16_ihy3m")
+encounter_name = &"far_past"
 
 [connection signal="level_complete" from="." to="CollectibleSpawner" method="spawn"]
 [connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]

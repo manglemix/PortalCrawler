@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://q7ehavjgr16c"]
+[gd_scene load_steps=23 format=3 uid="uid://q7ehavjgr16c"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_caxu8"]
 [ext_resource type="Texture2D" uid="uid://b0xxyfgos2y5w" path="res://levels/special/shop/Middle Ages Wall Color_png.png" id="2_w66pn"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://drmeg5fnbd5o" path="res://music/MysteriousBG_sound.mp3" id="11_70uh3"]
 [ext_resource type="Texture2D" uid="uid://cr6whonsplasx" path="res://levels/special/shop/exit.png" id="12_3jvmg"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="14_6d4d7"]
+[ext_resource type="Script" path="res://scripts/encountered_setter.gd" id="15_wlvly"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paddx"]
 resource_name = "StoneBricksSplitface001_1K.004"
@@ -181,6 +182,10 @@ collision_mask = 2
 script = SubResource("GDScript_ohkpo")
 
 [node name="LevelBounds" parent="." instance=ExtResource("14_6d4d7")]
+
+[node name="EncounterSetter" type="Node" parent="."]
+script = ExtResource("15_wlvly")
+encounter_name = &"shop"
 
 [connection signal="body_entered" from="Sprite3D/Area3D" to="Sprite3D" method="_on_body_entered"]
 [connection signal="move_on" from="Sprite3D2/RayCast3D" to="." method="_on_can_move_on"]

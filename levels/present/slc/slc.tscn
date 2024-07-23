@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://b77y4p2jf1vb1"]
+[gd_scene load_steps=12 format=3 uid="uid://b77y4p2jf1vb1"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_jwdw5"]
 [ext_resource type="PackedScene" uid="uid://dficpwsu7ns6a" path="res://levels/present/slc/slc.gltf" id="1_udit2"]
 [ext_resource type="PackedScene" uid="uid://dqicakipsq6eq" path="res://levels/level_bounds.tscn" id="10_hkt7d"]
+[ext_resource type="Script" path="res://scripts/encountered_setter.gd" id="11_5v7ap"]
 [ext_resource type="Script" path="res://scripts/difficulty_range.gd" id="11_046gy"]
 [ext_resource type="Script" path="res://scripts/signal_barrier.gd" id="12_w76t8"]
 [ext_resource type="PackedScene" uid="uid://dvpbee1aireck" path="res://enemies/present/adam/adam.tscn" id="13_isd53"]
@@ -146,6 +147,10 @@ stream = ExtResource("15_n0q5f")
 [node name="CollectibleSpawner" type="Marker3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.97819, 0.558934, 0)
 script = ExtResource("16_tvrck")
+
+[node name="EncounterSetter" type="Node" parent="." index="11"]
+script = ExtResource("11_5v7ap")
+encounter_name = &"present"
 
 [connection signal="level_complete" from="." to="CollectibleSpawner" method="spawn"]
 [connection signal="passed" from="DifficultyRange/SignalBarrier" to="." method="_on_finished"]
