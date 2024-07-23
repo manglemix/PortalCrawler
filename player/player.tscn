@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://bqa1jm5brrlgo"]
+[gd_scene load_steps=120 format=3 uid="uid://bqa1jm5brrlgo"]
 
 [ext_resource type="Script" path="res://player/Player.gd" id="1_ynmwp"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="3_3cd08"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://5go2atgv45d2" path="res://player/poison/Knight_south_walk_sword_poison-Sheet.png" id="27_bn6sg"]
 [ext_resource type="Texture2D" uid="uid://4rci8jturmmy" path="res://player/poison/Knight_south_east_walk_poison-Sheet.png" id="28_7n5in"]
 [ext_resource type="Texture2D" uid="uid://p613shfnav4g" path="res://player/poison/Knight_west_walk_sword_poison-Sheet.png" id="29_ftp7n"]
+[ext_resource type="AudioStream" uid="uid://clfmqsil3fuv4" path="res://player/697240__mandaki__running.mp3" id="33_pyl6g"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_idk1l"]
 height = 0.875
@@ -852,6 +853,13 @@ script = SubResource("GDScript_2qstk")
 stream = ExtResource("20_yefx7")
 max_polyphony = 4
 bus = &"SFX"
+
+[node name="Run" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("33_pyl6g")
+volume_db = 3.0
+autoplay = true
+mix_target = 2
+bus = &"Level SFX"
 
 [connection signal="damaged" from="Damageable" to="." method="_on_damaged"]
 [connection signal="damaged" from="Damageable" to="Health" method="change_health"]

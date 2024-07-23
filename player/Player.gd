@@ -60,6 +60,7 @@ var has_ranged_spell := false
 
 # hotfix for making sure the node is named properly, remove later
 func _ready():
+	$Run.stream_paused = true
 	name = "Player"
 	$MeshInstance3D.hide()
 	set_physics_process(false)
@@ -149,6 +150,8 @@ func _input(event):
 
 func _physics_process(_delta):
 	_get_movement()
+	#$Run.playing = velocity.length() != 0
+	$Run.stream_paused = velocity.length() == 0
 	move_and_slide()
 
 func _get_movement():
@@ -184,7 +187,6 @@ func _get_movement():
 	else:
 		upheld = false
 	
-
 		
 	# applying movement
 	if direction != Vector3.ZERO:
