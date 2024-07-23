@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bibktjriydchd"
-path="res://.godot/imported/wizard_west_walk-Sheet.png-4f026a9432c0603aeff49f8b67d42376.ctex"
+path="res://.godot/imported/wizard_west_walk-Sheet.png-590239ddf30fe0c1258ecc056c04ebad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/medieval/wizard_west_walk-Sheet.png"
-dest_files=["res://.godot/imported/wizard_west_walk-Sheet.png-4f026a9432c0603aeff49f8b67d42376.ctex"]
+source_file="res://enemies/medieval/harry/wizard_west_walk-Sheet.png"
+dest_files=["res://.godot/imported/wizard_west_walk-Sheet.png-590239ddf30fe0c1258ecc056c04ebad.ctex"]
 
 [params]
 

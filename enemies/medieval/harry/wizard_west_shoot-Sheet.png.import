@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsdgfi0f07hyc"
-path="res://.godot/imported/wizard_south_east_shoot-Sheet.png-4aeb20e4301bb09cd6bcda96fa7550aa.ctex"
+uid="uid://bbp54w12tdbyg"
+path="res://.godot/imported/wizard_west_shoot-Sheet.png-50be2a6385fc5c8ad3ac4a38da5b7b4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/medieval/wizard_south_east_shoot-Sheet.png"
-dest_files=["res://.godot/imported/wizard_south_east_shoot-Sheet.png-4aeb20e4301bb09cd6bcda96fa7550aa.ctex"]
+source_file="res://enemies/medieval/harry/wizard_west_shoot-Sheet.png"
+dest_files=["res://.godot/imported/wizard_west_shoot-Sheet.png-50be2a6385fc5c8ad3ac4a38da5b7b4b.ctex"]
 
 [params]
 

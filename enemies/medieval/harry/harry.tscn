@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://bawgcpe4clkdo"]
+[gd_scene load_steps=92 format=3 uid="uid://bawgcpe4clkdo"]
 
 [ext_resource type="Script" path="res://components/health.gd" id="2_rntsd"]
 [ext_resource type="Script" path="res://scripts/nav/overlapping_nav_agent_3d.gd" id="3_rijuc"]
@@ -12,18 +12,19 @@
 [ext_resource type="Script" path="res://scripts/billboard.gd" id="11_tkv1g"]
 [ext_resource type="Script" path="res://anim_state_machine/animation_state_machine.gd" id="12_54s2x"]
 [ext_resource type="Texture2D" uid="uid://ghow4axy4yue" path="res://enemies/medieval/harry/wizard_death.png" id="12_f8sd4"]
-[ext_resource type="Texture2D" uid="uid://bofoh8kjuq08j" path="res://enemies/medieval/wizard_south_walk-Sheet.png" id="13_o15hp"]
-[ext_resource type="Texture2D" uid="uid://mt3thxiptdn1" path="res://enemies/medieval/wizard_south_east_walk-Sheet.png" id="14_1bjaw"]
-[ext_resource type="Texture2D" uid="uid://bibktjriydchd" path="res://enemies/medieval/wizard_west_walk-Sheet.png" id="15_037iy"]
+[ext_resource type="Texture2D" uid="uid://bofoh8kjuq08j" path="res://enemies/medieval/harry/wizard_south_walk-Sheet.png" id="13_o15hp"]
+[ext_resource type="Texture2D" uid="uid://mt3thxiptdn1" path="res://enemies/medieval/harry/wizard_south_east_walk-Sheet.png" id="14_1bjaw"]
+[ext_resource type="Texture2D" uid="uid://bibktjriydchd" path="res://enemies/medieval/harry/wizard_west_walk-Sheet.png" id="15_037iy"]
 [ext_resource type="Script" path="res://collectibles/scale_up.gd" id="16_r8i2o"]
 [ext_resource type="Script" path="res://anim_state_machine/cardinal_animation_state.gd" id="16_yfq7b"]
 [ext_resource type="Script" path="res://enemies/spawners/projectile_spawner.gd" id="17_dj4k7"]
-[ext_resource type="Texture2D" uid="uid://drmxb6o02r37b" path="res://enemies/medieval/wizard_south_shoot-Sheet.png" id="17_e54ej"]
-[ext_resource type="Texture2D" uid="uid://bsdgfi0f07hyc" path="res://enemies/medieval/wizard_south_east_shoot-Sheet.png" id="18_d3pnw"]
+[ext_resource type="Texture2D" uid="uid://drmxb6o02r37b" path="res://enemies/medieval/harry/wizard_south_shoot-Sheet.png" id="17_e54ej"]
+[ext_resource type="Texture2D" uid="uid://bsdgfi0f07hyc" path="res://enemies/medieval/harry/wizard_south_east_shoot-Sheet.png" id="18_d3pnw"]
 [ext_resource type="PackedScene" uid="uid://dy0uaej4flf11" path="res://enemies/projectiles/magic01.tscn" id="18_kad3b"]
 [ext_resource type="Script" path="res://components/damageable.gd" id="19_avhgi"]
-[ext_resource type="Texture2D" uid="uid://bbp54w12tdbyg" path="res://enemies/medieval/wizard_west_shoot-Sheet.png" id="19_udqcx"]
+[ext_resource type="Texture2D" uid="uid://bbp54w12tdbyg" path="res://enemies/medieval/harry/wizard_west_shoot-Sheet.png" id="19_udqcx"]
 [ext_resource type="Script" path="res://anim_state_machine/animation_state.gd" id="24_kraxv"]
+[ext_resource type="AudioStream" uid="uid://dmd4h361kra0s" path="res://enemies/medieval/harry/Elemental - Fireball Throw_2 (mp3cut.net).mp3" id="25_xcem2"]
 
 [sub_resource type="GDScript" id="GDScript_0dpa3"]
 script/source = "extends Enemy
@@ -658,6 +659,12 @@ script = ExtResource("19_avhgi")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Billboard/Hurtbox"]
 shape = SubResource("CylinderShape3D_f3srr")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("25_xcem2")
+attenuation_model = 3
+volume_db = -2.0
+bus = &"Level SFX"
+
 [connection signal="died" from="Health" to="EnemyStateMachine/DeathState" method="_on_died"]
 [connection signal="entered" from="EnemyStateMachine/Wander" to="Billboard/AnimationStateMachine/Walk" method="enter"]
 [connection signal="player_spotted" from="EnemyStateMachine/Wander" to="EnemyStateMachine/ChaseLineOfSight" method="enter"]
@@ -676,6 +683,7 @@ shape = SubResource("CylinderShape3D_f3srr")
 [connection signal="timeout" from="AttackTimer" to="AttackTimer/Windup" method="start"]
 [connection signal="timeout" from="AttackTimer" to="Billboard/AnimationStateMachine/Shoot" method="enter"]
 [connection signal="timeout" from="AttackTimer/Windup" to="Billboard/ProjectileSpawner" method="spawn"]
+[connection signal="timeout" from="AttackTimer/Windup" to="AudioStreamPlayer3D" method="play"]
 [connection signal="exited" from="Billboard/AnimationStateMachine/Death" to="." method="_on_die"]
 [connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Health" method="change_health"]
 [connection signal="damaged" from="Billboard/Hurtbox/Damageable" to="Billboard/AnimationStateMachine" method="damage_flash"]
