@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemies/projectiles/basic_projectile.gd" id="1_gklsc"]
 [ext_resource type="Texture2D" uid="uid://btftjw14lb2s7" path="res://enemies/projectiles/laser projectile.webp" id="2_0smde"]
 [ext_resource type="Script" path="res://components/teleportable.gd" id="3_srx3o"]
-[ext_resource type="AudioStream" uid="uid://crrm0r8t3jgcl" path="res://enemies/projectiles/laser_bullet.wav" id="4_e7ios"]
+[ext_resource type="AudioStream" uid="uid://dgbt2tbhlmata" path="res://enemies/far_future/niacin/Cheezed_Ricochets_Space_Sci-Fi_Weapon_Blast_ODY-1472-060-01 (mp3cut.net).wav" id="4_c57fo"]
 [ext_resource type="Script" path="res://scripts/persistent_sound.gd" id="5_3xo2e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sq72s"]
@@ -33,7 +33,7 @@ texture = ExtResource("2_0smde")
 script = ExtResource("3_srx3o")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_e7ios")
+stream = ExtResource("4_c57fo")
 attenuation_model = 3
 volume_db = 80.0
 bus = &"Level SFX"

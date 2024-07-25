@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody3D
 
+signal unsitting
+signal sitting
 signal advancing_level
 signal reset_game
 signal appeared
@@ -66,6 +68,7 @@ func _ready():
 	set_physics_process(false)
 	set_process_input(false)
 	sprite.set_process(false)
+	unsitting.emit()
 	sprite.play(&"unsit")
 	await sprite.animation_finished
 	$MeshInstance3D.show()
@@ -346,6 +349,7 @@ func set_input_change(g_switch: bool, g_xneg: bool, g_zneg: bool):
 func _on_level_advanced() -> void:
 	is_level_finished = false
 	$MeshInstance3D.hide()
+	unsitting.emit()
 	sprite.play(&"unsit")
 	await sprite.animation_finished
 	is_teleporting = false
@@ -382,6 +386,7 @@ func _on_can_move_on() -> void:
 		await sprite.animation_finished
 	sprite.set_process(false)
 	$MeshInstance3D.hide()
+	sitting.emit()
 	sprite.play(&"sit")
 	is_teleporting = true
 	velocity = Vector3.ZERO

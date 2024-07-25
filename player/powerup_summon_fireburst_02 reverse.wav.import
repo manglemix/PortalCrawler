@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://br5bhtght3wdq"
+path="res://.godot/imported/powerup_summon_fireburst_02 reverse.wav-9b238b8c0af492620a339aff8a8a3c5a.sample"
+
+[deps]
+
+source_file="res://player/powerup_summon_fireburst_02 reverse.wav"
+dest_files=["res://.godot/imported/powerup_summon_fireburst_02 reverse.wav-9b238b8c0af492620a339aff8a8a3c5a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
