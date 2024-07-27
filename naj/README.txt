@@ -1,0 +1,1 @@
+These files were not tracked during development as they may not be conducive to git versioning. Since the game is practically complete, they are being tracked for posterity.
