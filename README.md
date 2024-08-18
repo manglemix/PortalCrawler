@@ -101,7 +101,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 The full license (SIL Open Font License 1.1) is quite long and can be viewed [here](https://github.com/eifetx/Pixelify-Sans/blob/main/OFL.txt).
 
 ## Sound Effects
-All sounds were collected from [ProSoundEffects](https://library-prosoundeffects-com.ezproxy.lib.utah.edu/tracks) which maintains the following statement:
+All sound effects and music were collected from [ProSoundEffects](https://library-prosoundeffects-com.ezproxy.lib.utah.edu/tracks) which maintains the following statement:
 ```
 Can I use these sounds in my music/Youtube video/TikTok etc.? Even if the project is monetized?
 
